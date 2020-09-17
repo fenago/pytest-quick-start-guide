@@ -1,63 +1,60 @@
+**APPENDIX 5**
 
-APPENDIX 5
-
-xUnit Fixtures
+### xUnit Fixtures
 
 In addition to the fixture model described in Chapter 3, pytest Fixtures, on
-
 page 51, pytest also supports xUnit style fixtures, which are similar to jUnit
-
 for Java, cppUnit for C++, and so on.
 
 Generally, xUnit frameworks use a flow of control that looks something
-
 like this:
 
+```
 setup()
 test_function()
 teardown()
+```
 
 This is repeated for every test that will run. pytest fixtures can do anything you
-
 need this type of configuration for and more, but if you really want to have setup()
-
 and teardown() functions, pytest allows that, too, with some limitations.
 
 ### Syntax of xUnit Fixtures
 
 xUnit fixtures include setup()/teardown() functions for module, function, class,
-
 and method scope:
 
-_setup_module()/teardown_module()_
-
 ```
+_setup_module()/teardown_module()_
+```
+
 These run at the beginning and end of a module of tests. They run once
 each. The module parameter is optional.
+
 ```
 _setup_function()/teardown_function()_
-
 ```
 These run before and after top-level test functions that are not methods
 of a test class. They run multiple times, once for every test function. The
 function parameter is optional.
+
 ```
 _setup_class()/teardown_class()_
-
 ```
 These run before and after a class of tests. They run only once. The class
 parameter is optional.
+
 ```
-
 _setup_method()/teardown_method()_
-
 ```
 These run before and after test methods that are part of a test class. They
 run multiple times, once for every test method. The method parameter is
 optional.
-```
+
+
 Here is an example of all the xUnit fixtures along with a few test functions:
 
+```
 **appendices/xunit/test_xUnit_fixtures.py
 def setup_module** (module):
 **print** (f _'\nsetup_module()for {module.__name__}'_ )
@@ -82,12 +79,11 @@ def setup_module** (module):
 **def setup_class** (cls):
 **print** (f _'setup_class()for class{cls.__name__}'_ )
 
-```
+
 @classmethod
 def teardown_class (cls):
 print (f 'teardown_class()for {cls.__name__}' )
-```
-```
+
 def setup_method (self,method):
 print (f 'setup_method()for {method.__name__}' )
 def teardown_method (self,method):
@@ -97,17 +93,15 @@ print ( 'test_3()' )
 def test_4 (self):
 print ( 'test_4()' )
 ```
+
 I used the parameters to the fixture functions to get the name of the module/func-
-
 tion/class/method to pass to the print statement. You don’t have to use the
-
 parameter names module, function, cls, and method, but that’s the convention.
-
-Appendix 5. xUnit Fixtures • 184
 
 
 Here’s the test session to help visualize the control flow:
 
+```
 **$ cd /path/to/code/appendices/xunit
 $ pytest-s test_xUnit_fixtures.py**
 ============testsessionstarts=============
@@ -133,11 +127,13 @@ teardown_class()for TestClass
 teardown_module()for test_xUnit_fixtures
 
 ==========4 passedin 0.01seconds==========
+```
 
 ### Mixing pytest Fixtures and xUnit Fixtures
 
 You can mix pytest fixtures and xUnit fixtures:
 
+```
 **appendices/xunit/test_mixed_fixtures.py
 importpytest**
 
@@ -152,10 +148,10 @@ importpytest**
 
 **def teardown_function** ():
 **print** ( _'teardown_function()- xUnit\n'_ )
+```
 
-Mixing pytest Fixtures and xUnit Fixtures • 185
 
-
+```
 @pytest.fixture(scope= _'module'_ )
 **def module_fixture** ():
 **print** ( _'module_fixture()setup- pytest'_ )
@@ -173,9 +169,11 @@ print** ( _'function_fixture()teardown- pytest'_ )
 
 **def test_2** (module_fixture,function_fixture):
 **print** ( _'test_2()'_ )
+```
 
 You _can_ do it. But please don’t. It gets confusing. Take a look at this:
 
+```
 **$ cd /path/to/code/appendices/xunit
 $ pytest-s test_mixed_fixtures.py**
 ============testsessionstarts=============
@@ -201,14 +199,11 @@ module_fixture()teardown- pytest
 teardown_module()- xUnit
 
 ==========2 passedin 0.01seconds==========
+```
 
 In this example, I’ve also shown that the module, function, and method parameters
-
 to the xUnit fixture functions are optional. I left them out of the function
-
 definition, and it still runs fine.
-
-Appendix 5. xUnit Fixtures • 186
 
 
 ### Limitations of xUnit Fixtures
@@ -218,19 +213,22 @@ Following are a few of the limitations of xUnit fixtures:
 - xUnit fixtures don’t show up in -setup-show and -setup-plan. This might seem
     like a small thing, but when you start writing a bunch of fixtures and
     debugging them, you’ll love these flags.
+
 - There are no session scope xUnit fixtures. The largest scope is module.
+
 - Picking and choosing which fixtures a test needs is more difficult with
     xUnit fixtures. If a test is in a class that has fixtures defined, the test will
     use them, even if it doesn’t need to.
+
 - Nesting is at most three levels: module, class, and method.
+
 - The only way to optimize fixture usage is to create modules and classes
     with common fixture requirements for all the tests in them.
+
 - No parametrization is supported at the fixture level. You can still use
     parametrized tests, but xUnit fixtures cannot be parametrized.
 
 There are enough limitations of xUnit fixtures that I strongly encourage you
-
 to forget you even saw this appendix and stick with normal pytest fixtures.
 
-Limitations of xUnit Fixtures • 187
 
