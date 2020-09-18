@@ -179,12 +179,12 @@ The best way to allow the tests to be able to importtasks or fromtasksimportsome
 is to install tasks locally using pip. This is possible because there’s a setup.py
 file present to direct pip.
 
-Install tasks either by running pip install. or pip install -e. from the tasks_proj direc-
+Install tasks either by running pip install . or pip install -e. from the tasks_proj direc-
 tory. Or you can run pip install -e tasks_proj from one directory up:
 
 ```
 $ cd /path/to/code
-$ pip install./tasks_proj/**
+$ pip install ./tasks_proj/**
 Processing./tasks_proj
 Collectingclick(fromtasks==0.1.0)
 ```
@@ -205,7 +205,7 @@ to be able to modify the source code while tasks is installed, you need to insta
 it with the -e option (for “editable”):
 
 ```
-$ pip install-e ./tasks_proj/**
+$ pip install -e ./tasks_proj/**
 Obtainingfile:///path/to/code/tasks_proj
 Requirementalreadysatisfied:clickin
 /path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
@@ -221,7 +221,7 @@ Successfullyinstalledtasks
 We also need to install pytest (if you haven’t already done so):
 
 ```
-$ pip installpytest**
+$ pip install pytest**
 ```
 
 Now let’s try running tests:

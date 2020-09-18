@@ -6,7 +6,7 @@
 
 pip is the tool used to install Python packages, and it is installed as part of
 your Python installation. pip supposedly is a recursive acronym that stands
-for _Pip Installs Python_ or _Pip Installs Packages._ (Programmers can be pretty
+for _pip install s Python_ or _pip install s Packages._ (Programmers can be pretty
 nerdy with their humor.) If you have more than one version of Python installed
 on your system, each version has its own pip package manager.
 
@@ -49,7 +49,7 @@ Package Version
 -----------------
 pip 18.0
 setuptools39.0.1
-(my_env)$ pip installpytest
+(my_env)$ pip install pytest
 ...
 
 Installingcollectedpackages:six,more-itertools,atomicwrites,
@@ -72,7 +72,7 @@ setuptools 39.0.1
 six 1.11.0
 ```
 
-As shown in this example, pip installs the package you want and also any
+As shown in this example, pip install s the package you want and also any
 dependencies that aren’t already installed.
 
 pip is pretty flexible. It can install things from other places, such as GitHub,
@@ -84,14 +84,14 @@ You can use pip to install packages with version numbers from pypi.python.org
 if it’s a release version PyPI knows about:
 
 ```
-$ pip installpytest==3.2.1**
+$ pip install pytest==3.2.1**
 ```
 
 You can use pip to install a local package that has a setup.py file in it:
 
 
 ```
-$ pip install/path/to/package**
+$ pip install /path/to/package**
 ```
 
 Use ./package_name if you are in the same directory as the package to install it
@@ -99,8 +99,8 @@ locally:
 
 ```
 $ cd /path/just/above/package
-$ pip installmy_package** _# pip is lookingin PyPIfor "my_package"_
-$ pip install./my_package** _# now pip lookslocally_
+$ pip install my_package** _# pip is lookingin PyPIfor "my_package"_
+$ pip install ./my_package** _# now pip lookslocally_
 ```
 
 You can use pip to install packages that have been downloaded as zip files or
@@ -112,7 +112,7 @@ You can also use pip to download a lot of files at once using a requirements.txt
 (my_env)$ cat requirements.txt
 pytest==3.8.1
 pytest-xdist==1.23.2
-(my_env)$ pip install-r requirements.txt
+(my_env)$ pip install -r requirements.txt
 ...
 
 ```
@@ -138,7 +138,7 @@ more-itertoolssetuptoolspy six attrs
 Later, even if you’re offline, you can install from the cache:
 
 ```
-(my_env)$ pip install--no-index--find-links=~/pipcachepytest
+(my_env)$ pip install --no-index--find-links=~/pipcachepytest
 Lookingin links:/Users/okken/pipcache
 Collectingpytest
 ...

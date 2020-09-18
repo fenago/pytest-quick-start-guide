@@ -74,7 +74,7 @@ As PyPI is the default location for pip, installing plugins from PyPI is the eas
 method. Let’s install the pytest-cov plugin:
 
 ```
-$ pip installpytest-cov**
+$ pip install pytest-cov**
 ```
 
 This installs the latest stable version from PyPI.
@@ -85,7 +85,7 @@ If you want a particular version of a plugin, you can specify the version
 after ‘==‘:
 
 ```
-$ pip installpytest-cov==2.5.1**
+$ pip install pytest-cov==2.5.1**
 ```
 
 **Install from a .tar.gz or .whl File**
@@ -102,10 +102,10 @@ or the .whl and install from that.
 You don’t have to unzip or anything; just point pip at it:
 
 ```
-$ pip installpytest-cov-2.5.1.tar.gz**
+$ pip install pytest-cov-2.5.1.tar.gz**
 _# or_
 
-$ pip installpytest_cov-2.5.1-py2.py3-none-any.whl**
+$ pip install pytest_cov-2.5.1-py2.py3-none-any.whl**
 ```
 
 **Install from a Local Directory**
@@ -117,7 +117,7 @@ installing plugins:
 ```
 $ mkdirsome_plugins
 $ cp pytest_cov-2.5.1-py2.py3-none-any.whlsome_plugins/
-$ pip install--no-index--find-links=./some_plugins/pytest-cov**
+$ pip install --no-index--find-links=./some_plugins/pytest-cov**
 ```
 
 The --no-index tells pip to not connect to PyPI. The --find-links=./some_plugins/ tells
@@ -132,7 +132,7 @@ versions and specify which version you want by adding == and the version
 number:
 
 ```
-$ pip install--no-index--find-links=./some_plugins/pytest-cov==2.5.1**
+$ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1**
 ```
 
 **Install from a Git Repository**
@@ -140,19 +140,19 @@ $ pip install--no-index--find-links=./some_plugins/pytest-cov==2.5.1**
 You can install plugins directly from a Git repository—in this case, GitHub:
 
 ```
-$ pip installgit+https://github.com/pytest-dev/pytest-cov**
+$ pip install git+https://github.com/pytest-dev/pytest-cov**
 ```
 
 You can also specify a version tag:
 
 ```
-$ pip installgit+https://github.com/pytest-dev/pytest-cov@v2.5.1**
+$ pip install git+https://github.com/pytest-dev/pytest-cov@v2.5.1**
 ```
 
 Or you can specify a branch:
 
 ```
-$ pip installgit+https://github.com/pytest-dev/pytest-cov@master**
+$ pip install git+https://github.com/pytest-dev/pytest-cov@master**
 ```
 
 Installing from a Git repository is especially useful if you’re storing your own
@@ -568,8 +568,8 @@ shareddirectoryPATH,theninstalllikethis:
 ::
 
 
-$ pip installPATH/pytest-nice-0.1.0.tar.gz
-$ pip install--no-index--find-linksPATHpytest-nice
+$ pip install PATH/pytest-nice-0.1.0.tar.gz
+$ pip install --no-index--find-linksPATHpytest-nice
 
 Usage
 -----
@@ -735,7 +735,7 @@ rent directory in editable mode:
 
 ```
 $ cd /path/to/code/ch5/pytest-nice/
-$ pip install.**
+$ pip install .**
 Processing/path/to/code/ch5/pytest-nice
 ...
 
@@ -814,7 +814,7 @@ Within pytest-nice, a dist directory contains a new file called pytest-nice-0.1.
 This file can now be used anywhere to install our plugin, even in place:
 
 ```
-$ pip installdist/pytest-nice-0.1.0.tar.gz**
+$ pip install dist/pytest-nice-0.1.0.tar.gz**
 Processing./dist/pytest-nice-0.1.0.tar.gz
 ...
 
@@ -835,7 +835,7 @@ put pytest-nice-0.1.0.tar.gz into a directory called myplugins.
 To install pytest-nice from myplugins:
 
 ```
-$ pip install--no-index--find-linksmypluginspytest-nice**
+$ pip install --no-index--find-linksmypluginspytest-nice**
 ```
 
 The --no-index tells pip to not go out to PyPI to look for what you want to install.
@@ -846,7 +846,7 @@ If you’ve done some bug fixes and there are newer versions in myplugins, you
 can upgrade by adding --upgrade:
 
 ```
-$ pip install--upgrade--no-index--find-linksmypluginspytest-nice**
+$ pip install --upgrade--no-index--find-linksmypluginspytest-nice**
 ```
 
 This is just like any other use of pip, but with the --no-index --find-linksmyplugins
@@ -864,7 +864,7 @@ When you are contributing a pytest plugin, another great place to start is by
 using the cookiecutter-pytest-plugin^7 :
 
 ```
-$ pip installcookiecutter
+$ pip install cookiecutter
 $ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin**
 ```
 

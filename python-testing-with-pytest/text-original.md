@@ -870,7 +870,7 @@ into the virtual environment you’re using for testing:
 
 $ python3-m venvvenv
 $ sourcevenv/bin/activate
-$ pip installpytest
+$ pip install pytest
 
 If you are not familiar with virtualenv or pip, I have got you covered. Check
 
@@ -884,10 +884,10 @@ on page 159.
 The example for venv and pip should work on many POSIX systems, such as Linux
 and macOS, and many versions of Python, including Python 3.4 and later. With
 Python 2.7 and with some distributions of Linux, you will need to use virtualenv:
-$ python-m pip installvirtualenv
+$ python-m pip install virtualenv
 $ python-m virtualenvvenv
 $ sourcevenv/bin/activate
-$ pip installpytest
+$ pip install pytest
 ```
 ```
 The sourcevenv/bin/activate line won’t work for Windows, use venv\Scripts\activate.bat instead.
@@ -896,7 +896,7 @@ Do this:
 ```
 C:\>python3-m venvvenv
 C:\>venv\Scripts\activate.bat
-C:\>pip installpytest
+C:\>pip install pytest
 ```
 ### Running pytest
 
@@ -2170,12 +2170,12 @@ is to install tasks locally using pip. This is possible because there’s a setu
 
 file present to direct pip.
 
-Install tasks either by running pip install. or pip install -e. from the tasks_proj direc-
+Install tasks either by running pip install . or pip install -e. from the tasks_proj direc-
 
 tory. Or you can run pip install -e tasks_proj from one directory up:
 
 **$ cd /path/to/code
-$ pip install./tasks_proj/**
+$ pip install ./tasks_proj/**
 Processing./tasks_proj
 Collectingclick(fromtasks==0.1.0)
 
@@ -2197,7 +2197,7 @@ to be able to modify the source code while tasks is installed, you need to insta
 
 it with the -e option (for “editable”):
 
-**$ pip install-e ./tasks_proj/**
+**$ pip install -e ./tasks_proj/**
 Obtainingfile:///path/to/code/tasks_proj
 Requirementalreadysatisfied:clickin
 /path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
@@ -2211,7 +2211,7 @@ Successfullyinstalledtasks
 
 We also need to install pytest (if you haven’t already done so):
 
-**$ pip installpytest**
+**$ pip install pytest**
 
 Now let’s try running tests:
 
@@ -3761,7 +3761,7 @@ If you run the test from the last section, you don’t get to see what fixtures
 are run:
 
 **$ cd /path/to/code/
-$ pip install./tasks_proj/** _# if not installedyet_
+$ pip install ./tasks_proj/** _# if not installedyet_
 **$ cd /path/to/code/ch3/a/tasks_proj/tests/func
 $ pytest-v test_add.py-k valid_id**
 ===================testsessionstarts===================
@@ -4769,7 +4769,7 @@ this example and in a debugger example in Lab 7.
 Here’s what we have so far:
 
 **$ cd /path/to/code/ch3/c/tasks_proj
-$ pip installpymongo
+$ pip install pymongo
 $ pytest-v --tb=no**
 ===================testsessionstarts===================
 collected96 items
@@ -6354,7 +6354,7 @@ As PyPI is the default location for pip, installing plugins from PyPI is the eas
 
 method. Let’s install the pytest-cov plugin:
 
-**$ pip installpytest-cov**
+**$ pip install pytest-cov**
 
 This installs the latest stable version from PyPI.
 
@@ -6364,7 +6364,7 @@ If you want a particular version of a plugin, you can specify the version
 
 after ‘==‘:
 
-**$ pip installpytest-cov==2.5.1**
+**$ pip install pytest-cov==2.5.1**
 
 **Install from a .tar.gz or .whl File**
 
@@ -6383,9 +6383,9 @@ or the .whl and install from that.
 
 You don’t have to unzip or anything; just point pip at it:
 
-**$ pip installpytest-cov-2.5.1.tar.gz**
+**$ pip install pytest-cov-2.5.1.tar.gz**
 _# or_
-**$ pip installpytest_cov-2.5.1-py2.py3-none-any.whl**
+**$ pip install pytest_cov-2.5.1-py2.py3-none-any.whl**
 
 **Install from a Local Directory**
 
@@ -6397,7 +6397,7 @@ installing plugins:
 
 **$ mkdirsome_plugins
 $ cp pytest_cov-2.5.1-py2.py3-none-any.whlsome_plugins/
-$ pip install--no-index--find-links=./some_plugins/pytest-cov**
+$ pip install --no-index--find-links=./some_plugins/pytest-cov**
 
 The --no-index tells pip to not connect to PyPI. The --find-links=./some_plugins/ tells
 
@@ -6417,21 +6417,21 @@ versions and specify which version you want by adding == and the version
 
 number:
 
-**$ pip install--no-index--find-links=./some_plugins/pytest-cov==2.5.1**
+**$ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1**
 
 **Install from a Git Repository**
 
 You can install plugins directly from a Git repository—in this case, GitHub:
 
-**$ pip installgit+https://github.com/pytest-dev/pytest-cov**
+**$ pip install git+https://github.com/pytest-dev/pytest-cov**
 
 You can also specify a version tag:
 
-**$ pip installgit+https://github.com/pytest-dev/pytest-cov@v2.5.1**
+**$ pip install git+https://github.com/pytest-dev/pytest-cov@v2.5.1**
 
 Or you can specify a branch:
 
-**$ pip installgit+https://github.com/pytest-dev/pytest-cov@master**
+**$ pip install git+https://github.com/pytest-dev/pytest-cov@master**
 
 Installing from a Git repository is especially useful if you’re storing your own
 
@@ -6903,8 +6903,8 @@ shareddirectoryPATH,theninstalllikethis:
 ::
 
 ```
-$ pip installPATH/pytest-nice-0.1.0.tar.gz
-$ pip install--no-index--find-linksPATHpytest-nice
+$ pip install PATH/pytest-nice-0.1.0.tar.gz
+$ pip install --no-index--find-linksPATHpytest-nice
 ```
 Usage
 -----
@@ -7086,7 +7086,7 @@ is installed. We do this either by installing the .zip.gz file or installing the
 rent directory in editable mode:
 
 **$ cd /path/to/code/ch5/pytest-nice/
-$ pip install.**
+$ pip install .**
 Processing/path/to/code/ch5/pytest-nice
 **...**
 Runningsetup.pybdist_wheelfor pytest-nice... done
@@ -7157,7 +7157,7 @@ Within pytest-nice, a dist directory contains a new file called pytest-nice-0.1.
 
 This file can now be used anywhere to install our plugin, even in place:
 
-**$ pip installdist/pytest-nice-0.1.0.tar.gz**
+**$ pip install dist/pytest-nice-0.1.0.tar.gz**
 Processing./dist/pytest-nice-0.1.0.tar.gz
 **...**
 Installingcollectedpackages:pytest-nice
@@ -7179,7 +7179,7 @@ put pytest-nice-0.1.0.tar.gz into a directory called myplugins.
 
 To install pytest-nice from myplugins:
 
-**$ pip install--no-index--find-linksmypluginspytest-nice**
+**$ pip install --no-index--find-linksmypluginspytest-nice**
 
 The --no-index tells pip to not go out to PyPI to look for what you want to install.
 
@@ -7191,7 +7191,7 @@ If you’ve done some bug fixes and there are newer versions in myplugins, you
 
 can upgrade by adding --upgrade:
 
-**$ pip install--upgrade--no-index--find-linksmypluginspytest-nice**
+**$ pip install --upgrade--no-index--find-linksmypluginspytest-nice**
 
 This is just like any other use of pip, but with the --no-index --find-linksmyplugins
 
@@ -7214,7 +7214,7 @@ When you are contributing a pytest plugin, another great place to start is by
 
 using the cookiecutter-pytest-plugin^7 :
 
-**$ pip installcookiecutter
+**$ pip install cookiecutter
 $ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin**
 
 This project first asks you some questions about your plugin. Then it creates
@@ -8151,7 +8151,7 @@ with some extra pytest options. Since coverage is one of the dependencies of
 
 pytest-cov, it is sufficient to install pytest-cov, as it will pull in coverage.py:
 
-**$ pip installpytest-cov
+**$ pip install pytest-cov
 ...**
 Installingcollectedpackages:coverage,pytest-cov
 Successfullyinstalledcoverage-4.5.1 pytest-cov-2.5.1
@@ -8166,7 +8166,7 @@ Uninstallingtasks-0.1.0:
 Proceed(y/n)?y
 Successfullyuninstalledtasks-0.1.0
 **$ cd /path/to/code/ch7/tasks_proj_v2
-$ pip install-e.**
+$ pip install -e.**
 Obtainingfile:///path/to/code/ch7/tasks_proj_v2
 **...**
 Installingcollectedpackages:tasks
@@ -8384,7 +8384,7 @@ Lab 7. Using pytest with Other Tools • 136
 Let’s pause and install version 2 of Tasks:
 
 **$ cd /path/to/code/
-$ pip install-e ch7/tasks_proj_v2
+$ pip install -e ch7/tasks_proj_v2
 ...**
 Successfullyinstalledtasks
 
@@ -8715,8 +8715,8 @@ source distribution of your package. It looks in tox.ini for a list of environme
 and then for each environment...
 
 1. tox creates a virtual environment in a .tox directory.
-2. tox pip installs some dependencies.
-3. tox pip installs your package from the sdist in step 1.
+2. tox pip install s some dependencies.
+3. tox pip install s your package from the sdist in step 1.
 4. tox runs your tests.
 
 After all of the environments are tested, tox reports a summary of how they
@@ -8816,7 +8816,7 @@ the markers are declared.
 
 Before running tox, you have to make sure you install it:
 
-**$ pip installtox**
+**$ pip install tox**
 
 This can be done within a virtual environment.
 
@@ -9543,7 +9543,7 @@ pip is the tool used to install Python packages, and it is installed as part of
 
 your Python installation. pip supposedly is a recursive acronym that stands
 
-for _Pip Installs Python_ or _Pip Installs Packages._ (Programmers can be pretty
+for _pip install s Python_ or _pip install s Packages._ (Programmers can be pretty
 
 nerdy with their humor.) If you have more than one version of Python installed
 
@@ -9599,7 +9599,7 @@ Package Version
 -----------------
 pip 18.0
 setuptools39.0.1
-(my_env)$ pip installpytest
+(my_env)$ pip install pytest
 **...**
 Installingcollectedpackages:six,more-itertools,atomicwrites,
 pluggy,attrs,py, pytest
@@ -9620,7 +9620,7 @@ pytest 3.8.1
 setuptools 39.0.1
 six 1.11.0
 
-As shown in this example, pip installs the package you want and also any
+As shown in this example, pip install s the package you want and also any
 
 dependencies that aren’t already installed.
 
@@ -9636,22 +9636,22 @@ You can use pip to install packages with version numbers from pypi.python.org
 
 if it’s a release version PyPI knows about:
 
-**$ pip installpytest==3.2.1**
+**$ pip install pytest==3.2.1**
 
 You can use pip to install a local package that has a setup.py file in it:
 
 Appendix 2. pip • 160
 
 
-**$ pip install/path/to/package**
+**$ pip install /path/to/package**
 
 Use ./package_name if you are in the same directory as the package to install it
 
 locally:
 
 **$ cd /path/just/above/package
-$ pip installmy_package** _# pip is lookingin PyPIfor "my_package"_
-**$ pip install./my_package** _# now pip lookslocally_
+$ pip install my_package** _# pip is lookingin PyPIfor "my_package"_
+**$ pip install ./my_package** _# now pip lookslocally_
 
 You can use pip to install packages that have been downloaded as zip files or
 
@@ -9662,7 +9662,7 @@ You can also use pip to download a lot of files at once using a requirements.txt
 (my_env)$ cat requirements.txt
 pytest==3.8.1
 pytest-xdist==1.23.2
-(my_env)$ pip install-r requirements.txt
+(my_env)$ pip install -r requirements.txt
 **...**
 Successfullyinstalledapipkg-1.5execnet-1.5.0pytest-3.8.1pytest-xdist-1.23.2
 
@@ -9683,7 +9683,7 @@ more-itertoolssetuptoolspy six attrs
 
 Later, even if you’re offline, you can install from the cache:
 
-(my_env)$ pip install--no-index--find-links=~/pipcachepytest
+(my_env)$ pip install --no-index--find-links=~/pipcachepytest
 Lookingin links:/Users/okken/pipcache
 Collectingpytest
 **...**
@@ -9745,8 +9745,8 @@ Following is a normal test run of tests that start with test_list from ch7/tasks
 _proj_v2:
 
 **$ cd /path/to/code/ch7/tasks_proj_v2
-$ pip install.
-$ pip installpytest-repeat
+$ pip install .
+$ pip install pytest-repeat
 $ cd tests
 $ pytest-v -k test_list
 $ pytest-v -k test_list**
@@ -9827,7 +9827,7 @@ time.sleep(1)
 
 Notice that it takes over ten seconds to run normally:
 
-**$ pip installpytest-xdist
+**$ pip install pytest-xdist
 $ cd /path/to/code/appendices/xdist
 $ pytest test_parallel.py**
 ===================testsessionstarts===================
@@ -9893,7 +9893,7 @@ Let’s run the tests from the previous example (with one-second sleeps) with
 a half-second timeout:
 
 **$ cd /path/to/code/appendices/xdist
-$ pip installpytest-timeout
+$ pip install pytest-timeout
 $ pytest--timeout=0.5-x test_parallel.py**
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
@@ -9966,7 +9966,7 @@ test_parallel.pyFF
 
 Here’s the same test with --instafail:
 
-**$ pip installpytest-instafail
+**$ pip install pytest-instafail
 $ pytest--instafail --timeout=0.5 --tb=line--maxfail=2test_parallel.py**
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, instafail-0.4.0,forked-0.2
@@ -10297,7 +10297,7 @@ One directory with one module and a setup.py file is enough to make it instal-
 lable via pip:
 
 **$ cd /path/to/code/appendices/packaging
-$ pip install./some_module_proj**
+$ pip install ./some_module_proj**
 Processing./some_module_proj
 Installingcollectedpackages:some-module
 Runningsetup.pyinstallfor some-module... done
@@ -10384,7 +10384,7 @@ Instead of using py_modules, we specify packages.
 This is now installable:
 
 **$ cd /path/to/code/appendices/packaging
-$ pip install./some_package_proj/**
+$ pip install ./some_package_proj/**
 Processing./some_package_proj
 Installingcollectedpackages:some-package
 Runningsetup.pyinstallfor some-package... done
@@ -10422,7 +10422,7 @@ For personal use, the configuration shown in the previous section is enough
 to create a source distribution and a wheel. Let’s try it:
 
 **$ cd /path/to/code/appendices/packaging/some_package_proj/
-$ pip installwheel
+$ pip install wheel
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
 **...**
@@ -10601,11 +10601,11 @@ install to our heart’s content:
 $ mkdir~/packages/
 $ cp dist/some_package-1.0-py3-none-any.whl~/packages
 $ cp dist/some_package-1.0.tar.gz~/packages
-$ pip install--no-index--find-links=~/packagessome_package**
+$ pip install --no-index--find-links=~/packagessome_package**
 Collectingsome_package
 Installingcollectedpackages:some-package
 Successfullyinstalledsome-package-1.0
-**$ pip install--no-index--find-links=./distsome_package==1.0**
+**$ pip install --no-index--find-links=./distsome_package==1.0**
 Requirementalreadysatisfied:some_package==1.0in
 /path/to/venv/lib/python3.6/site-packages
 **$**

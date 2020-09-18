@@ -59,7 +59,7 @@ lable via pip:
 
 ```
 $ cd /path/to/code/appendices/packaging
-$ pip install./some_module_proj**
+$ pip install ./some_module_proj**
 Processing./some_module_proj
 Installingcollectedpackages:some-module
 Runningsetup.pyinstallfor some-module... done
@@ -150,7 +150,7 @@ This is now installable:
 
 ```
 $ cd /path/to/code/appendices/packaging
-$ pip install./some_package_proj/**
+$ pip install ./some_package_proj/**
 Processing./some_package_proj
 Installingcollectedpackages:some-package
 Runningsetup.pyinstallfor some-package... done
@@ -185,7 +185,7 @@ to create a source distribution and a wheel. Let’s try it:
 
 ```
 $ cd /path/to/code/appendices/packaging/some_package_proj/
-$ pip installwheel
+$ pip install wheel
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
 ...
@@ -358,11 +358,11 @@ $ cd /path/to/code/appendices/packaging/some_package_proj_v2
 $ mkdir~/packages/
 $ cp dist/some_package-1.0-py3-none-any.whl~/packages
 $ cp dist/some_package-1.0.tar.gz~/packages
-$ pip install--no-index--find-links=~/packagessome_package**
+$ pip install --no-index--find-links=~/packagessome_package**
 Collectingsome_package
 Installingcollectedpackages:some-package
 Successfullyinstalledsome-package-1.0
-$ pip install--no-index--find-links=./distsome_package==1.0**
+$ pip install --no-index--find-links=./distsome_package==1.0**
 Requirementalreadysatisfied:some_package==1.0in
 /path/to/venv/lib/python3.6/site-packages
 $**

@@ -169,7 +169,7 @@ are run:
 
 ```
 $ cd /path/to/code/
-$ pip install./tasks_proj/** _# if not installedyet_
+$ pip install ./tasks_proj/** _# if not installedyet_
 $ cd /path/to/code/ch3/a/tasks_proj/tests/func
 $ pytest-v test_add.py-k valid_id**
 ===================testsessionstarts===================
@@ -1116,7 +1116,7 @@ Here’s what we have so far:
 
 ```
 $ cd /path/to/code/ch3/c/tasks_proj
-$ pip installpymongo
+$ pip install pymongo
 $ pytest-v --tb=no**
 ===================testsessionstarts===================
 collected96 items

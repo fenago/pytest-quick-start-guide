@@ -28,8 +28,8 @@ _proj_v2:
 
 ```
 $ cd /path/to/code/ch7/tasks_proj_v2
-$ pip install.
-$ pip installpytest-repeat
+$ pip install .
+$ pip install pytest-repeat
 $ cd tests
 $ pytest-v -k test_list
 $ pytest-v -k test_list**
@@ -106,7 +106,7 @@ time.sleep(1)
 Notice that it takes over ten seconds to run normally:
 
 ```
-$ pip installpytest-xdist
+$ pip install pytest-xdist
 $ cd /path/to/code/appendices/xdist
 $ pytest test_parallel.py
 ===================testsessionstarts===================
@@ -162,7 +162,7 @@ a half-second timeout:
 
 ```
 $ cd /path/to/code/appendices/xdist
-$ pip installpytest-timeout
+$ pip install pytest-timeout
 $ pytest--timeout=0.5-x test_parallel.py
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
@@ -232,7 +232,7 @@ test_parallel.pyFF
 Here’s the same test with --instafail:
 
 ```
-$ pip installpytest-instafail
+$ pip install pytest-instafail
 $ pytest--instafail --timeout=0.5 --tb=line--maxfail=2test_parallel.py
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, instafail-0.4.0,forked-0.2
