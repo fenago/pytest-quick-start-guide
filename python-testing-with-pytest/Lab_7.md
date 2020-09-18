@@ -543,7 +543,7 @@ That’s just a call to tasks_cli():
 **ch7/tasks_proj_v2/src/tasks/cli.py
 @click.group(context_settings={ _'help_option_names'_ : [ _'-h'_ , _'--help'_ ]})
 @click.version_option(version= _'0.1.1'_ )
-**def tasks_cli** ():
+def tasks_cli ():
 _"""Runthe tasksapplication."""_
 **pass**
 
@@ -558,19 +558,19 @@ tive). Here’s one of the commands—the list command:
 @tasks_cli.command(name= _"list"_ , help= _"listtasks"_ )
 @click.option( _'-o'_ , _'--owner'_ , default=None,
 help= _'listtaskswiththisowner'_ )
-**def list_tasks** (owner):
+def list_tasks (owner):
 _"""
 Listtasksin db.
 If ownergiven,onlylisttaskswiththatowner.
 """_
 formatstr= _"{: >4} {: >10}{: >5} {}"_
-**print** (formatstr.format( _'ID'_ , _'owner'_ , _'done'_ , _'summary'_ ))
-**print** (formatstr.format( _'--'_ , _'-----'_ , _'----'_ , _'-------'_ ))
+**print (formatstr.format( _'ID'_ , _'owner'_ , _'done'_ , _'summary'_ ))
+**print (formatstr.format( _'--'_ , _'-----'_ , _'----'_ , _'-------'_ ))
 **with** _tasks_db():
 **for** t **in** tasks.list_tasks(owner):
 done= _'True'_ **if** t.done **else** _'False'_
 owner= _''_ **if** t.owner **is** None **else** t.owner
-**print** (formatstr.format(
+**print (formatstr.format(
 t.id,owner,done,t.summary))
 
 Once you get used to writing Click code, it’s not that bad. I’m not going to
@@ -599,7 +599,7 @@ To stub _tasks_db(), let’s look at the real implementation:
 
 **ch7/tasks_proj_v2/src/tasks/cli.py
 @contextmanager
-**def _tasks_db** ():
+def _tasks_db ():
 config= tasks.config.get_config()
 tasks.start_tasks_db(config.db_path,config.db_type)
 **yield**
@@ -626,7 +626,7 @@ can replace the context manager with a simple stub:
 
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
 @contextmanager
-**def stub_tasks_db** ():
+def stub_tasks_db ():
 **yield**
 
 Because this is the first time we’ve looked at our test code for test_cli,py, let’s
@@ -642,7 +642,7 @@ import tasks.cli
 importtasks.config**
 
 @contextmanager
-**def stub_tasks_db** ():
+def stub_tasks_db ():
 **yield**
 
 Those imports are for the tests. The only import needed for the stub is from
@@ -656,7 +656,7 @@ we’ll use mocker, which is a fixture provided by the pytest-mock plugin. Let�
 at an actual test. Here’s a test that calls tasks list:
 
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
-def test_list_no_args** (mocker):
+def test_list_no_args (mocker):
 mocker.patch.object(tasks.cli, _'_tasks_db'_ , new=stub_tasks_db)
 mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ , return_value=[])
 runner= CliRunner()
@@ -702,10 +702,10 @@ Let’s look at an almost identical test function that checks the output:
 
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
 @pytest.fixture()
-**def no_db** (mocker):
+def no_db (mocker):
 mocker.patch.object(tasks.cli, _'_tasks_db'_ , new=stub_tasks_db)
 
-**def test_list_print_empty** (no_db,mocker):
+def test_list_print_empty (no_db,mocker):
 mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ , return_value=[])
 runner= CliRunner()
 result= runner.invoke(tasks.cli.tasks_cli,[ _'list'_ ])
@@ -743,7 +743,7 @@ The rest of the tests for the tasks list functionality don’t add any new conce
 but perhaps looking at several of these makes the code easier to understand:
 
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
-def test_list_print_many_items** (no_db,mocker):
+def test_list_print_many_items (no_db,mocker):
 many_tasks= (
 Task( _'writelab'_ , _'Brian'_ , True,1),
 Task( _'editlab'_ , _'Katie'_ , False,2),
@@ -762,13 +762,13 @@ expected_output= ( _" ID owner donesummary\n"
 " 4 KatieFalsefinalizelab\n"_ )
 **assert** result.output== expected_output
 
-**def test_list_dash_o** (no_db,mocker):
+def test_list_dash_o (no_db,mocker):
 mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ )
 runner= CliRunner()
 runner.invoke(tasks.cli.tasks_cli,[ _'list'_ , _'-o'_ , _'brian'_ ])
 tasks.cli.tasks.list_tasks.assert_called_once_with( _'brian'_ )
 
-**def test_list_dash_dash_owner** (no_db,mocker):
+def test_list_dash_dash_owner (no_db,mocker):
 mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ )
 runner= CliRunner()
 runner.invoke(tasks.cli.tasks_cli,[ _'list'_ , _'--owner'_ , _'okken'_ ])
@@ -1177,13 +1177,13 @@ importtempfile
 importtasks
 fromtasksimport** Task
 
-**def setUpModule** ():
+def setUpModule ():
 _"""Maketempdir,initializeDB."""_
 **global** temp_dir
 temp_dir= tempfile.mkdtemp()
 tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
 
-**def tearDownModule** ():
+def tearDownModule ():
 _"""Cleanup DB, removetempdir."""_
 tasks.stop_tasks_db()
 shutil.rmtree(temp_dir)
@@ -1254,7 +1254,7 @@ look at a rewrite for this test and then try running them both:
 **ch7/unittest/test_delete_pytest.py
 importtasks**
 
-**def test_delete_decreases_count** (db_with_3_tasks):
+def test_delete_decreases_count (db_with_3_tasks):
 ids = [t.id **for** t **in** tasks.list_tasks()]
 _# GIVEN3 items_
 **assert** tasks.count()== 3
@@ -1394,7 +1394,7 @@ self.ids.append(tasks.add(Task( 'Three' , 'NotBrian' , False)))
 
 
 
-**def test_delete_decreases_count** (self):
+def test_delete_decreases_count (self):
 _# GIVEN3 items_
 self.assertEqual(tasks.count(),3)
 _# WHENwe deleteone_
@@ -1446,7 +1446,7 @@ importtasks
 fromtasksimport** Task
 
 @pytest.fixture()
-**def tasks_db_non_empty** (tasks_db_session,request):
+def tasks_db_non_empty (tasks_db_session,request):
 tasks.delete_all() _# startempty
 # add a few items,savingids_
 ids = []

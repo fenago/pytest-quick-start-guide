@@ -59,28 +59,28 @@ Here is an example of all the xUnit fixtures along with a few test functions:
 
 ```
 **appendices/xunit/test_xUnit_fixtures.py
-def setup_module** (module):
-**print** (f _'\nsetup_module()for {module.__name__}'_ )
+def setup_module (module):
+**print (f _'\nsetup_module()for {module.__name__}'_ )
 
-**def teardown_module** (module):
-**print** (f _'teardown_module()for {module.__name__}'_ )
+def teardown_module (module):
+**print (f _'teardown_module()for {module.__name__}'_ )
 
-**def setup_function** (function):
-**print** (f _'setup_function()for {function.__name__}'_ )
+def setup_function (function):
+**print (f _'setup_function()for {function.__name__}'_ )
 
-**def teardown_function** (function):
-**print** (f _'teardown_function()for {function.__name__}'_ )
+def teardown_function (function):
+**print (f _'teardown_function()for {function.__name__}'_ )
 
-**def test_1** ():
-**print** ( _'test_1()'_ )
+def test_1 ():
+**print ( _'test_1()'_ )
 
-**def test_2** ():
-**print** ( _'test_2()'_ )
+def test_2 ():
+**print ( _'test_2()'_ )
 
 **class** TestClass:
 @classmethod
-**def setup_class** (cls):
-**print** (f _'setup_class()for class{cls.__name__}'_ )
+def setup_class (cls):
+**print (f _'setup_class()for class{cls.__name__}'_ )
 
 
 @classmethod
@@ -140,38 +140,38 @@ You can mix pytest fixtures and xUnit fixtures:
 **appendices/xunit/test_mixed_fixtures.py
 import pytest
 
-**def setup_module** ():
-**print** ( _'\nsetup_module()- xUnit'_ )
+def setup_module ():
+**print ( _'\nsetup_module()- xUnit'_ )
 
-**def teardown_module** ():
-**print** ( _'teardown_module()- xUnit'_ )
+def teardown_module ():
+**print ( _'teardown_module()- xUnit'_ )
 
-**def setup_function** ():
-**print** ( _'setup_function()- xUnit'_ )
+def setup_function ():
+**print ( _'setup_function()- xUnit'_ )
 
-**def teardown_function** ():
-**print** ( _'teardown_function()- xUnit\n'_ )
+def teardown_function ():
+**print ( _'teardown_function()- xUnit\n'_ )
 ```
 
 
 ```
 @pytest.fixture(scope= _'module'_ )
-**def module_fixture** ():
-**print** ( _'module_fixture()setup- pytest'_ )
+def module_fixture ():
+**print ( _'module_fixture()setup- pytest'_ )
 **yield
-print** ( _'module_fixture()teardown- pytest'_ )
+print ( _'module_fixture()teardown- pytest'_ )
 
 @pytest.fixture(scope= _'function'_ )
-**def function_fixture** ():
-**print** ( _'function_fixture()setup- pytest'_ )
+def function_fixture ():
+**print ( _'function_fixture()setup- pytest'_ )
 **yield
-print** ( _'function_fixture()teardown- pytest'_ )
+print ( _'function_fixture()teardown- pytest'_ )
 
-**def test_1** (module_fixture,function_fixture):
-**print** ( _'test_1()'_ )
+def test_1 (module_fixture,function_fixture):
+**print ( _'test_1()'_ )
 
-**def test_2** (module_fixture,function_fixture):
-**print** ( _'test_2()'_ )
+def test_2 (module_fixture,function_fixture):
+**print ( _'test_2()'_ )
 ```
 
 You _can_ do it. But please don’t. It gets confusing. Take a look at this:

@@ -47,7 +47,7 @@ Here’s a simple example using tmpdir:
 
 ```
 **ch4/test_tmpdir.py
-def test_tmpdir** (tmpdir):
+def test_tmpdir (tmpdir):
 _# tmpdiralreadyhas a pathnameassociatedwithit
 # join()extendsthe pathto includea filename
 # the fileis createdwhenit'swrittento_
@@ -88,7 +88,7 @@ just enough to use tmpdir_factory instead:
 
 ```
 **ch4/test_tmpdir.py
-def test_tmpdir_factory** (tmpdir_factory):
+def test_tmpdir_factory (tmpdir_factory):
 _# you shouldstartwithmakinga directory
 # a_diractslikethe objectreturnedfromthe tmpdirfixture_
 a_dir= tmpdir_factory.mktemp( _'mydir'_ )
@@ -96,7 +96,7 @@ _# base_tempwillbe the parentdir of 'mydir'
 # you don'thaveto use getbasetemp()
 # usingit herejustto showthatit'savailable_
 base_temp= tmpdir_factory.getbasetemp()
-**print** ( _'base:'_ , base_temp)
+**print ( _'base:'_ , base_temp)
 _# the restof thistestlooksthe sameas the 'test_tmpdir()'
 # exampleexceptI'm usinga_dirinsteadof tmpdir_
 a_file= a_dir.join( _'something.txt'_ )
@@ -156,7 +156,7 @@ import json
 import pytest
 
 @pytest.fixture(scope= _'module'_ )
-**def author_file_json** (tmpdir_factory):
+def author_file_json (tmpdir_factory):
 _"""Writesomeauthorsto a datafile."""_
 python_author_data= {
 _'Ned'_ : { _'City'_ : _'Boston'_ },
@@ -184,7 +184,7 @@ the json file will only be created once per module that has a test using it:
 _"""Someteststhatuse tempdatafiles."""_
 import json**
 
-**def test_brian_in_portland** (author_file_json):
+def test_brian_in_portland (author_file_json):
 _"""Atestthatusesa datafile."""_
 **with** author_file_json.open() **as** f:
 authors= json.load(f)
@@ -192,7 +192,7 @@ authors= json.load(f)
 ```
 
 ```
-**def test_all_have_cities** (author_file_json):
+def test_all_have_cities (author_file_json):
 _"""Samefileis usedfor bothtests."""_
 **with** author_file_json.open() **as** f:
 authors= json.load(f)
@@ -225,7 +225,7 @@ options already available in the pytest command line:
 
 ```
 **ch4/pytestconfig/conftest.py
-def pytest_addoption** (parser):
+def pytest_addoption (parser):
 parser.addoption( _"--myopt"_ , action= _"store_true"_ ,
 help= _"some booleanoption"_ )
 parser.addoption( _"--foo"_ , action= _"store"_ , default= _"bar"_ ,
@@ -260,9 +260,9 @@ Now we can access those options from a test:
 **ch4/pytestconfig/test_config.py
 import pytest
 
-**def test_option** (pytestconfig):
-**print** ( _'"foo"set to:'_ , pytestconfig.getoption( _'foo'_ ))
-**print** ( _'"myopt"set to:'_ , pytestconfig.getoption( _'myopt'_ ))
+def test_option (pytestconfig):
+**print ( _'"foo"set to:'_ , pytestconfig.getoption( _'foo'_ ))
+**print ( _'"myopt"set to:'_ , pytestconfig.getoption( _'myopt'_ ))
 
 Let’s see how this works:
 
@@ -291,16 +291,16 @@ You can make fixtures for the option names, if you like, like this:
 ```
 **ch4/pytestconfig/test_config.py
 @pytest.fixture()
-**def foo** (pytestconfig):
-**return** pytestconfig.option.foo
+def foo (pytestconfig):
+    return pytestconfig.option.foo
 
 @pytest.fixture()
-**def myopt** (pytestconfig):
-**return** pytestconfig.option.myopt
+def myopt (pytestconfig):
+    return pytestconfig.option.myopt
 
-**def test_fixtures_for_options** (foo, myopt):
-**print** ( _'"foo"set to:'_ , foo)
-**print** ( _'"myopt"set to:'_ , myopt)
+def test_fixtures_for_options (foo, myopt):
+**print ( _'"foo"set to:'_ , foo)
+**print ( _'"myopt"set to:'_ , myopt)
 ```
 
 You can also access builtin options, not just options you add, as well as
@@ -314,16 +314,16 @@ Here’s an example of a few configuration values and options:
 
 ```
 **ch4/pytestconfig/test_config.py
-def test_pytestconfig** (pytestconfig):
-**print** ( _'args :'_ , pytestconfig.args)
-**print** ( _'inifile :'_ , pytestconfig.inifile)
-**print** ( _'invocation_dir :'_ , pytestconfig.invocation_dir)
-**print** ( _'rootdir :'_ , pytestconfig.rootdir)
-**print** ( _'-k EXPRESSION :'_ , pytestconfig.getoption( _'keyword'_ ))
-**print** ( _'-v,--verbose :'_ , pytestconfig.getoption( _'verbose'_ ))
-**print** ( _'-q,--quiet :'_ , pytestconfig.getoption( _'quiet'_ ))
-**print** ( _'-l,--showlocals:'_ , pytestconfig.getoption( _'showlocals'_ ))
-**print** ( _'--tb=style :'_ , pytestconfig.getoption( _'tbstyle'_ ))
+def test_pytestconfig (pytestconfig):
+**print ( _'args :'_ , pytestconfig.args)
+**print ( _'inifile :'_ , pytestconfig.inifile)
+**print ( _'invocation_dir :'_ , pytestconfig.invocation_dir)
+**print ( _'rootdir :'_ , pytestconfig.rootdir)
+**print ( _'-k EXPRESSION :'_ , pytestconfig.getoption( _'keyword'_ ))
+**print ( _'-v,--verbose :'_ , pytestconfig.getoption( _'verbose'_ ))
+**print ( _'-q,--quiet :'_ , pytestconfig.getoption( _'quiet'_ ))
+**print ( _'-l,--showlocals:'_ , pytestconfig.getoption( _'showlocals'_ ))
+**print ( _'--tb=style :'_ , pytestconfig.getoption( _'tbstyle'_ ))
 ```
 
 You’ll use pytestconfig again when I demonstrate ini files in Lab 6, Config-
@@ -369,10 +369,10 @@ To see these in action, we’ll use these two tests:
 
 ```
 **ch4/cache/test_pass_fail.py
-def test_this_passes** ():
+def test_this_passes ():
 **assert** 1 == 1
 
-**def test_this_fails** ():
+def test_this_fails ():
 **assert** 1 == 2
 ```
 
@@ -445,7 +445,7 @@ _# x, y, expected_
 ]
 
 @pytest.mark.parametrize( _"x,y,expected"_ , testdata)
-**def test_a** (x, y, expected):
+def test_a (x, y, expected):
 _"""Demoapprox()."""_
 sum_= x + y
 **assert** sum_== approx(expected)
@@ -573,7 +573,7 @@ Here’s our fixture used to time tests:
 ```
 **ch4/cache/test_slower.py
 @pytest.fixture(autouse=True)
-**def check_duration** (request,cache):
+def check_duration (request,cache):
 key = _'duration/'_ + request.node.nodeid.replace( _':'_ , _'_'_ )
 _# nodeid'scan havecolons
 # keysbecomefilenameswithin.cache
@@ -600,7 +600,7 @@ Now we need some tests that take different amounts of time:
 ```
 **ch4/cache/test_slower.py
 @pytest.mark.parametrize( _'i'_ , range(5))
-**def test_slow_stuff** (i):
+def test_slow_stuff (i):
 time.sleep(random.random())
 ```
 
@@ -674,14 +674,14 @@ Here’s one possible refactoring of the same functionality:
 Duration= namedtuple( _'Duration'_ , [ _'current'_ , _'last'_ ])
 
 @pytest.fixture(scope= _'session'_ )
-**def duration_cache** (request):
+def duration_cache (request):
 key = _'duration/testdurations'_
 d = Duration({},request.config.cache.get(key,{}))
 **yield** d
 request.config.cache.set(key,d.current)
 
 @pytest.fixture(autouse=True)
-**def check_duration** (request,duration_cache):
+def check_duration (request,duration_cache):
 d = duration_cache
 nodeid= request.node.nodeid
 start_time= datetime.datetime.now()
@@ -747,8 +747,8 @@ Suppose you have a function to print a greeting to stdout:
 
 ```
 **ch4/cap/test_capsys.py
-def greeting** (name):
-**print** ( _'Hi,{}'_ .format(name))
+def greeting (name):
+**print ( _'Hi,{}'_ .format(name))
 ```
 
 You can’t test it by checking the return value. You have to test stdout somehow.
@@ -756,7 +756,7 @@ You can test the output by using capsys:
 
 ```
 **ch4/cap/test_capsys.py
-def test_greeting** (capsys):
+def test_greeting (capsys):
 greeting( _'Earthling'_ )
 out,err = capsys.readouterr()
 **assert** out == _'Hi,Earthling\n'_
@@ -776,10 +776,10 @@ The previous example only used stdout. Let’s look at an example using stderr:
 
 ```
 **ch4/cap/test_capsys.py
-def yikes** (problem):
-**print** ( _'YIKES!{}'_ .format(problem),file=sys.stderr)
+def yikes (problem):
+**print ( _'YIKES!{}'_ .format(problem),file=sys.stderr)
 
-**def test_yikes** (capsys):
+def test_yikes (capsys):
 yikes( _'Outof coffee!'_ )
 out,err = capsys.readouterr()
 **assert** out == _''_
@@ -801,10 +801,10 @@ Here’s an example:
 
 ```
 **ch4/cap/test_capsys.py
-def test_capsys_disabled** (capsys):
+def test_capsys_disabled (capsys):
 **with** capsys.disabled():
-**print** ( _'\nalwaysprintthis'_ )
-**print** ( _'normalprint,usuallycaptured'_ )
+**print ( _'\nalwaysprintthis'_ )
+**print ( _'normalprint,usuallycaptured'_ )
 ```
 
 Now, 'alwaysprint this' will always be output:
@@ -871,18 +871,18 @@ reads and writes a cheese preferences file:
 importos
 importjson**
 
-**def read_cheese_preferences** ():
+def read_cheese_preferences ():
 full_path= os.path.expanduser( _'~/.cheese.json'_ )
 **with** open(full_path, _'r'_ ) **as** f:
 prefs= json.load(f)
-**return** prefs
+    return prefs
 
-**def write_cheese_preferences** (prefs):
+def write_cheese_preferences (prefs):
 full_path= os.path.expanduser( _'~/.cheese.json'_ )
 **with** open(full_path, _'w'_ ) **as** f:
 json.dump(prefs,f, indent=4)
 
-**def write_default_cheese_preferences** ():
+def write_default_cheese_preferences ():
 write_cheese_preferences(_default_prefs)
 ```
 
@@ -907,7 +907,7 @@ them in the testing of write_default_cheese_preferences():
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_full** ():
+def test_def_prefs_full ():
 cheese.write_default_cheese_preferences()
 expected= cheese._default_prefs
 actual= cheese.read_cheese_preferences()
@@ -923,7 +923,7 @@ HOME to point to that new temporary directory:
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_change_home** (tmpdir,monkeypatch):
+def test_def_prefs_change_home (tmpdir,monkeypatch):
 monkeypatch.setenv( _'HOME'_ , tmpdir.mkdir( _'home'_ ))
 cheese.write_default_cheese_preferences()
 expected= cheese._default_prefs
@@ -946,7 +946,7 @@ Instead of patching the HOME environmental variable, let’s patch expanduser:
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_change_expanduser** (tmpdir,monkeypatch):
+def test_def_prefs_change_expanduser (tmpdir,monkeypatch):
 fake_home_dir= tmpdir.mkdir( _'home'_ )
 monkeypatch.setattr(cheese.os.path, _'expanduser'_ ,
 ( **lambda** x: x.replace( _'~'_ , str(fake_home_dir))))
@@ -967,7 +967,7 @@ ences() is called:
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_change_defaults** (tmpdir,monkeypatch):
+def test_def_prefs_change_defaults (tmpdir,monkeypatch):
 _# writethe fileonce_
 fake_home_dir= tmpdir.mkdir( _'home'_ )
 monkeypatch.setattr(cheese.os.path, _'expanduser'_ ,
@@ -1053,7 +1053,7 @@ _>>> um.divide(10,5)
 2.0
 """_
 
-**def multiply** (a, b):
+def multiply (a, b):
 _"""
 Returnsa multipliedby b.
 >>> um.multiply(4,3)
@@ -1061,15 +1061,15 @@ Returnsa multipliedby b.
 >>> um.multiply('a',3)
 'aaa'
 """_
-**return** a * b
+    return a * b
 
-**def divide** (a, b):
+def divide (a, b):
 _"""
 Returnsa dividedby b.
 >>> um.divide(10,5)
 2.0
 """_
-**return** a / b
+    return a / b
 ```
 
 Since the name unnecessary_math is long, we decide to use um instead by using
@@ -1128,7 +1128,7 @@ One way to fix it is to put the import statement in each docstring:
 
 ```
 **ch4/dt/2/unnecessary_math.py
-def multiply** (a, b):
+def multiply (a, b):
 _"""
 Returnsa multipliedby b.
 >>> importunnecessary_mathas um
@@ -1137,16 +1137,16 @@ Returnsa multipliedby b.
 >>> um.multiply('a',3)
 'aaa'
 """_
-**return** a * b
+    return a * b
 
-**def divide** (a, b):
+def divide (a, b):
 _"""
 Returnsa dividedby b.
 >>> importunnecessary_mathas um
 >>> um.divide(10,5)
 2.0
 """_
-**return** a / b
+    return a / b
 ```
 
 This definitely fixes the problem:
@@ -1178,7 +1178,7 @@ importpytest
 importunnecessary_math**
 
 @pytest.fixture(autouse=True)
-**def add_um** (doctest_namespace):
+def add_um (doctest_namespace):
 doctest_namespace[ _'um'_ ] = unnecessary_math
 ```
 
@@ -1204,7 +1204,7 @@ and leave it there for a release or two:
 importwarnings
 import pytest
 
-**def lame_function** ():
+def lame_function ():
 warnings.warn( _"Pleasestopusingthis"_ , DeprecationWarning)
 _# restof function_
 ```
@@ -1213,7 +1213,7 @@ We can make sure the warning is getting issued correctly with a test:
 
 ```
 **ch4/test_warnings.py
-def test_lame_function** (recwarn):
+def test_lame_function (recwarn):
 lame_function()
 **assert** len(recwarn)== 1
 w = recwarn.pop()
@@ -1234,7 +1234,7 @@ In addition to recwarn, pytest can check for warnings with pytest.warns():
 
 ```
 **ch4/test_warnings.py
-def test_lame_function_2** ():
+def test_lame_function_2 ():
 **with** pytest.warns(None) **as** warning_list:
 lame_function()
 **assert** len(warning_list)== 1

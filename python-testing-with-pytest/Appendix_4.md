@@ -37,8 +37,8 @@ The code we want to share is in some_module.py:
 
 ```
 **appendices/packaging/some_module_proj/some_module.py
-def some_func** ():
-**return** 42
+def some_func ():
+    return 42
 ```
 
 To make it installable with pip, we need a setup.py file. This is about as bare

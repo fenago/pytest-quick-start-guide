@@ -138,7 +138,7 @@ Here is test_task.py:
 _"""Testthe Taskdatatype."""_
 **fromtasksimport** Task
 
-**def test_asdict** ():
+def test_asdict ():
 _"""_asdict()shouldreturna dictionary."""_
 t_task= Task( _'do something'_ , _'okken'_ , True,21)
 t_dict= t_task._asdict()
@@ -148,25 +148,25 @@ _'done'_ : True,
 _'id'_ : 21}
 **assert** t_dict== expected
 
-**def test_replace** ():
+def test_replace ():
 _"""replace()shouldchangepassedin fields."""_
 t_before= Task( _'finishbook'_ , _'brian'_ , False)
 t_after= t_before._replace(id=10,done=True)
 t_expected= Task( _'finishbook'_ , _'brian'_ , True,10)
 **assert** t_after== t_expected
 
-**def test_defaults** ():
+def test_defaults ():
 _"""Usingno parametersshouldinvokedefaults."""_
 t1 = Task()
 t2 = Task(None,None,False,None)
 **assert** t1 == t2
 
-**def test_member_access** ():
+def test_member_access ():
 _"""Check.fieldfunctionalityof namedtuple."""_
 t = Task( _'buymilk'_ , _'brian'_ )
 **assert** t.summary== _'buymilk'_
 **assert** t.owner== _'brian'_
-**assert** (t.done,t.id)== (False,None)
+**assert (t.done,t.id)== (False,None)
 ```
 
 The test_task.py file has this import statement:
@@ -274,13 +274,13 @@ failures:
 _"""Usethe Tasktypeto showtestfailures."""_
 **fromtasksimport** Task
 
-**def test_task_equality** ():
+def test_task_equality ():
 _"""Differenttasksshouldnot be equal."""_
 t1 = Task( _'sitthere'_ , _'brian'_ )
 t2 = Task( _'do something'_ , _'okken'_ )
 **assert** t1 == t2
 
-**def test_dict_equality** ():
+def test_dict_equality ():
 _"""Differenttaskscomparedas dicts shouldnot be equal."""_
 t1_dict= Task( _'makesandwich'_ , _'okken'_ )._asdict()
 t2_dict= Task( _'makesandwich'_ , _'okkem'_ )._asdict()
@@ -384,16 +384,16 @@ Exceptions may be raised in a few places in the Tasks API. Let’s take a quick
 peek at the functions found in tasks/api.py:
 
 ```
-**def add** (task): _# type:(Task)-> int_
-**def get** (task_id): _# type:(int)-> Task_
-**def list_tasks** (owner=None): _# type:(str|None)-> listof Task_
-**def count** (): _# type:(None)-> int_
-**def update** (task_id,task): _# type:(int,Task)-> None_
-**def delete** (task_id): _# type:(int)-> None_
-**def delete_all** (): _# type:() -> None_
-**def unique_id** (): _# type:() -> int_
-**def start_tasks_db** (db_path,db_type): _# type:(str,str)-> None_
-**def stop_tasks_db** (): _# type:() -> None_
+def add (task): _# type:(Task)-> int_
+def get (task_id): _# type:(int)-> Task_
+def list_tasks (owner=None): _# type:(str|None)-> listof Task_
+def count (): _# type:(None)-> int_
+def update (task_id,task): _# type:(int,Task)-> None_
+def delete (task_id): _# type:(int)-> None_
+def delete_all (): _# type:() -> None_
+def unique_id (): _# type:() -> int_
+def start_tasks_db (db_path,db_type): _# type:(str,str)-> None_
+def stop_tasks_db (): _# type:() -> None_
 ```
 
 There’s an agreement between the CLI code in cli.py and the API code in api.py
@@ -409,7 +409,7 @@ and use with pytest.raises(<expectedexception>), like this:
 importpytest
 importtasks**
 
-**def test_add_raises** ():
+def test_add_raises ():
 _"""add()shouldraisean exceptionwithwrongtypeparam."""_
 **with** pytest.raises(TypeError):
 tasks.add(task= _'nota Taskobject'_ )
@@ -429,7 +429,7 @@ check to make sure the exception message is correct by adding as excinfo:
 
 ```
 **ch2/tasks_proj/tests/func/test_api_exceptions.py
-def test_start_tasks_db_raises** ():
+def test_start_tasks_db_raises ():
 _"""Makesureunsupporteddb raisesan exception."""_
 **with** pytest.raises(ValueError) **as** excinfo:
 tasks.start_tasks_db( _'some/great/path'_ , _'mysql'_ )
@@ -465,14 +465,14 @@ that the markers smoke and get aren’t built into pytest; I just made them up):
 ```
 **ch2/tasks_proj/tests/func/test_api_exceptions.py
 @pytest.mark.smoke
-**def test_list_raises** ():
+def test_list_raises ():
 _"""list()shouldraisean exceptionwithwrongtypeparam."""_
 **with** pytest.raises(TypeError):
 tasks.list_tasks(owner=123)
 
 @pytest.mark.get
 @pytest.mark.smoke
-**def test_get_raises** ():
+def test_get_raises ():
 _"""get()shouldraisean exceptionwithwrongtypeparam."""_
 ```
 
@@ -552,7 +552,7 @@ importpytest
 importtasks
 fromtasksimport** Task
 
-**def test_add_returns_valid_id** ():
+def test_add_returns_valid_id ():
 _"""tasks.add(<validtask>)shouldreturnan integer."""
 # GIVENan initializedtasksdb
 # WHENa new taskis added
@@ -562,7 +562,7 @@ task_id= tasks.add(new_task)
 **assert** isinstance(task_id,int)
 
 @pytest.mark.smoke
-**def test_added_task_has_id_set** ():
+def test_added_task_has_id_set ():
 _"""Makesurethe task_idfield is set by tasks.add()."""
 # GIVENan initializedtasksdb
 # AND a new taskis added_
@@ -582,7 +582,7 @@ initialized before the test and cleaned up after the test:
 ```
 **ch2/tasks_proj/tests/func/test_add.py
 @pytest.fixture(autouse=True)
-**def initialized_tasks_db** (tmpdir):
+def initialized_tasks_db (tmpdir):
 _"""Connectto db beforetesting,disconnectafter."""
 # Setup: startdb_
 tasks.start_tasks_db(str(tmpdir), _'tiny'_ )
@@ -643,7 +643,7 @@ it’s just not shown here):
 importpytest
 importtasks**
 
-**def test_unique_id** ():
+def test_unique_id ():
 ```
 
 ```
@@ -685,13 +685,13 @@ skipped for now:
 ```
 **ch2/tasks_proj/tests/func/test_unique_id_2.py
 @pytest.mark.skip(reason= _'misunderstoodthe API'_ )
-**def test_unique_id_1** ():
+def test_unique_id_1 ():
 _"""Callingunique_id()twiceshouldreturndifferentnumbers."""_
 id_1= tasks.unique_id()
 id_2= tasks.unique_id()
 **assert** id_1!= id_2
 
-**def test_unique_id_2** ():
+def test_unique_id_2 ():
 _"""unique_id()shouldreturnan unusedid."""_
 ids = []
 ids.append(tasks.add(Task( _'one'_ )))
@@ -728,7 +728,7 @@ can leave the test in place and use skipif instead:
 **ch2/tasks_proj/tests/func/test_unique_id_3.py
 @pytest.mark.skipif(tasks.__version__< _'0.2.0'_ ,
 reason= _'notsupporteduntilversion0.2.0'_ )
-**def test_unique_id_1** ():
+def test_unique_id_1 ():
 _"""Callingunique_id()twiceshouldreturndifferentnumbers."""_
 id_1= tasks.unique_id()
 id_2= tasks.unique_id()
@@ -809,20 +809,20 @@ it to fail. Let’s modify our unique_id() test again to use xfail:
 **ch2/tasks_proj/tests/func/test_unique_id_4.py
 @pytest.mark.xfail(tasks.__version__< _'0.2.0'_ ,
 reason= _'notsupporteduntilversion0.2.0'_ )
-**def test_unique_id_1** ():
+def test_unique_id_1 ():
 _"""Callingunique_id()twiceshouldreturndifferentnumbers."""_
 id_1= tasks.unique_id()
 id_2= tasks.unique_id()
 **assert** id_1!= id_2
 
 @pytest.mark.xfail()
-**def test_unique_id_is_a_duck** ():
+def test_unique_id_is_a_duck ():
 _"""Demonstratexfail."""_
 uid = tasks.unique_id()
 **assert** uid == _'a duck'_
 
 @pytest.mark.xfail()
-**def test_unique_id_not_a_duck** ():
+def test_unique_id_not_a_duck ():
 _"""Demonstratexpass."""_
 uid = tasks.unique_id()
 **assert** uid != _'a duck'_
@@ -979,7 +979,7 @@ Here’s an example:
 **ch2/tasks_proj/tests/func/test_api_exceptions.py
 class** TestUpdate():
 _"""Testexpectedexceptionswithtasks.update()."""_
-**def test_bad_id** (self):
+def test_bad_id (self):
 _"""Anon-intid shouldraisean excption."""_
 **with** pytest.raises(TypeError):
 tasks.update(task_id={ _'dictinstead'_ : 1},
@@ -1089,7 +1089,7 @@ importpytest
 importtasks
 fromtasksimport** Task
 
-**def test_add_1** ():
+def test_add_1 ():
 _"""tasks.get()usingid returnedfromadd()works."""_
 task= Task( _'breathe'_ , _'BRIAN'_ , True)
 task_id= tasks.add(task)
@@ -1097,15 +1097,15 @@ t_from_db= tasks.get(task_id)
 _# everythingbut the id should be the same_
 **assert** equivalent(t_from_db,task)
 
-**def equivalent** (t1,t2):
+def equivalent (t1,t2):
 _"""Checktwo tasksfor equivalence."""
 # Compareeverythingbut the id field_
-**return** ((t1.summary== t2.summary) **and**
+**return ((t1.summary== t2.summary) **and**
 (t1.owner== t2.owner) **and**
 (t1.done== t2.done))
 
 @pytest.fixture(autouse=True)
-**def initialized_tasks_db** (tmpdir):
+def initialized_tasks_db (tmpdir):
 _"""Connectto db beforetesting,disconnectafter."""_
 ```
 
@@ -1145,7 +1145,7 @@ test, like this:
 Task( _'wake'_ , _'brian'_ ),
 Task( _'breathe'_ , _'BRIAN'_ , True),
 Task( _'exercise'_ , _'BrIaN'_ , False)])
-**def test_add_2** (task):
+def test_add_2 (task):
 _"""Demonstrateparametrizewithone parameter."""_
 task_id= tasks.add(task)
 t_from_db= tasks.get(task_id)
@@ -1183,7 +1183,7 @@ tasks as tuples to see how multiple test parameters would work:
 ( _'breathe'_ , _'BRIAN'_ , True),
 ( _'eateggs'_ , _'BrIaN'_ , False),
 ])
-**def test_add_3** (summary,owner,done):
+def test_add_3 (summary,owner,done):
 _"""Demonstrateparametrizewithmultipleparameters."""_
 task= Task(summary,owner,done)
 task_id= tasks.add(task)
@@ -1248,7 +1248,7 @@ Task( _'breathe'_ , _'BRIAN'_ , True),
 Task( _'exercise'_ , _'BrIaN'_ , False))
 
 @pytest.mark.parametrize( _'task'_ , tasks_to_try)
-**def test_add_4** (task):
+def test_add_4 (task):
 _"""Slightlydifferenttake."""_
 task_id= tasks.add(task)
 t_from_db= tasks.get(task_id)
@@ -1287,7 +1287,7 @@ task_ids= [ _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
 **for** t **in** tasks_to_try]
 
 @pytest.mark.parametrize( _'task'_ , tasks_to_try,ids=task_ids)
-**def test_add_5** (task):
+def test_add_5 (task):
 _"""Demonstrateids."""_
 task_id= tasks.add(task)
 t_from_db= tasks.get(task_id)
@@ -1337,7 +1337,7 @@ sets will be sent to all test methods in the class:
 @pytest.mark.parametrize( _'task'_ , tasks_to_try,ids=task_ids)
 **class** TestAdd():
 _"""Demonstrateparametrizeand testclasses."""_
-**def test_equivalent** (self,task):
+def test_equivalent (self,task):
 _"""Similartest,justwithina class."""_
 task_id= tasks.add(task)
 t_from_db= tasks.get(task_id)
@@ -1348,7 +1348,7 @@ t_from_db= tasks.get(task_id)
 ```
 
 ```
-**def test_valid_id** (self,task):
+def test_valid_id (self,task):
 _"""Wecan use the samedatafor multipletests."""_
 task_id= tasks.add(task)
 t_from_db= tasks.get(task_id)
@@ -1386,7 +1386,7 @@ decorator. You do this with pytest.param(<value>,id="something") syntax:
 pytest.param(Task( _'create'_ ), id= _'justsummary'_ ),
 pytest.param(Task( _'inspire'_ , _'Michelle'_ ), id= _'summary/owner'_ ),
 pytest.param(Task( _'encourage'_ , _'Michelle'_ , True),id= _'summary/owner/done'_ )])
-**def test_add_6** (task):
+def test_add_6 (task):
 _"""Demonstratepytest.paramand id."""_
 task_id= tasks.add(task)
 t_from_db= tasks.get(task_id)

@@ -7,8 +7,8 @@ This is a test:
 
 ```
 **ch1/test_one.py
-def test_passing** ():
-**assert** (1, 2, 3) == (1, 2, 3)
+def test_passing ():
+**assert (1, 2, 3) == (1, 2, 3)
 ```
 
 This is what it looks like when it’s run:
@@ -45,8 +45,8 @@ This is a failing test:
 
 ```
 **ch1/test_two.py
-def test_failing** ():
-**assert** (1, 2, 3) == (3, 2, 1)
+def test_failing ():
+**assert (1, 2, 3) == (3, 2, 1)
 ```
 
 The way pytest shows you test failures is one of the many reasons developers
@@ -217,18 +217,18 @@ _"""Testthe Taskdatatype."""_
 Task= namedtuple( _'Task'_ , [ _'summary'_ , _'owner'_ , _'done'_ , _'id'_ ])
 Task.__new__.__defaults__= (None, None,False,None)
 
-**def test_defaults** ():
+def test_defaults ():
 _"""Usingno parametersshouldinvokedefaults."""_
 t1 = Task()
 t2 = Task(None,None,False,None)
 **assert** t1 == t2
 
-**def test_member_access** ():
+def test_member_access ():
 _"""Check.fieldfunctionalityof namedtuple."""_
 t = Task( _'buymilk'_ , _'brian'_ )
 **assert** t.summary== _'buymilk'_
 **assert** t.owner== _'brian'_
-**assert** (t.done,t.id)== (False,None)
+**assert (t.done,t.id)== (False,None)
 ```
 
 You can use __new__.__defaults__ to create Task objects without having to specify
@@ -250,7 +250,7 @@ _"""Testthe Taskdatatype."""_
 Task= namedtuple( _'Task'_ , [ _'summary'_ , _'owner'_ , _'done'_ , _'id'_ ])
 Task.__new__.__defaults__= (None, None,False,None)
 
-**def test_asdict** ():
+def test_asdict ():
 _"""_asdict()shouldreturna dictionary."""_
 t_task= Task( _'do something'_ , _'okken'_ , True,21)
 t_dict= t_task._asdict()
@@ -260,7 +260,7 @@ _'done'_ : True,
 _'id'_ : 21}
 **assert** t_dict== expected
 
-**def test_replace** ():
+def test_replace ():
 _"""replace()shouldchangepassedin fields."""_
 t_before= Task( _'finishbook'_ , _'brian'_ , False)
 t_after= t_before._replace(id=10,done=True)
@@ -597,7 +597,7 @@ import pytest
 
 ...
 @pytest.mark.run_these_please
-**def test_member_access** ():
+def test_member_access ():
 ...
 ```
 

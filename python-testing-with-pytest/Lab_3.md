@@ -18,11 +18,11 @@ Here’s a simple fixture that returns a number:
 import pytest
 
 @pytest.fixture()
-**def some_data** ():
+def some_data ():
 _"""Returnanswerto ultimatequestion."""_
-**return** 42
+    return 42
 
-**def test_some_data** (some_data):
+def test_some_data (some_data):
 _"""Usefixturereturnvaluein a test."""_
 **assert** some_data== 42
 ```
@@ -109,7 +109,7 @@ importtasks
 fromtasksimport** Task
 
 @pytest.fixture()
-**def tasks_db** (tmpdir):
+def tasks_db (tmpdir):
 _"""Connectto db beforetests,disconnectafter."""
 # Setup: startdb_
 tasks.start_tasks_db(str(tmpdir), _'tiny'_ )
@@ -139,7 +139,7 @@ importpytest
 importtasks
 fromtasksimport** Task
 
-**def test_add_returns_valid_id** (tasks_db):
+def test_add_returns_valid_id (tasks_db):
 _"""tasks.add(<validtask>)shouldreturnan integer."""
 # GIVENan initializedtasksdb
 # WHENa new taskis added
@@ -219,11 +219,11 @@ anything. Here’s a fixture returning a tuple of mixed type:
 ```
 **ch3/test_fixtures.py
 @pytest.fixture()
-**def a_tuple** ():
+def a_tuple ():
 _"""Returnsomethingmoreinteresting."""_
-**return** (1, _'foo'_ , None,{ _'bar'_ : 23})
+**return (1, _'foo'_ , None,{ _'bar'_ : 23})
 
-**def test_a_tuple** (a_tuple):
+def test_a_tuple (a_tuple):
 _"""Demothe a_tuplefixture."""_
 **assert** a_tuple[3][ _'bar'_ ] == 32
 ```
@@ -302,7 +302,7 @@ _# Reminderof Taskconstructorinterface
 # id is set by database_
 
 @pytest.fixture()
-**def tasks_just_a_few** ():
+def tasks_just_a_few ():
 ```
 
 
@@ -314,9 +314,9 @@ Task( "CodereviewBrian'scode" , 'Katie' , False),
 Task( 'FixwhatBriandid' , 'Michelle' , False))
 
 @pytest.fixture()
-**def tasks_mult_per_owner** ():
+def tasks_mult_per_owner ():
 _"""Severalownerswithseveraltaskseach."""_
-**return** (
+**return (
 Task( _'Makea cookie'_ , _'Raphael'_ ),
 Task( _'Usean emoji'_ , _'Raphael'_ ),
 Task( _'Moveto Berlin'_ , _'Raphael'_ ),
@@ -340,13 +340,13 @@ for non-empty tasks databases:
 ```
 **ch3/a/tasks_proj/tests/conftest.py
 @pytest.fixture()
-**def db_with_3_tasks** (tasks_db,tasks_just_a_few):
+def db_with_3_tasks (tasks_db,tasks_just_a_few):
 _"""Connecteddb with3 tasks,all unique."""_
 **for** t **in** tasks_just_a_few:
 tasks.add(t)
 
 @pytest.fixture()
-**def db_with_multi_per_owner** (tasks_db,tasks_mult_per_owner):
+def db_with_multi_per_owner (tasks_db,tasks_mult_per_owner):
 _"""Connecteddb with9 tasks,3 owners,all with3 tasks."""_
 **for** t **in** tasks_mult_per_owner:
 tasks.add(t)
@@ -359,7 +359,7 @@ like this:
 
 ```
 **ch3/a/tasks_proj/tests/func/test_add.py
-def test_add_increases_count** (db_with_3_tasks):
+def test_add_increases_count (db_with_3_tasks):
 ```
 
 
@@ -460,25 +460,25 @@ _"""Demofixturescope."""_
 import pytest
 
 @pytest.fixture(scope= _'function'_ )
-**def func_scope** ():
+def func_scope ():
 _"""Afunctionscopefixture."""_
 
 @pytest.fixture(scope= _'module'_ )
-**def mod_scope** ():
+def mod_scope ():
 _"""Amodulescopefixture."""_
 
 @pytest.fixture(scope= _'session'_ )
-**def sess_scope** ():
+def sess_scope ():
 _"""Asessionscopefixture."""_
 
 @pytest.fixture(scope= _'class'_ )
-**def class_scope** ():
+def class_scope ():
 _"""Aclassscopefixture."""_
 
-**def test_1** (sess_scope,mod_scope,func_scope):
+def test_1 (sess_scope,mod_scope,func_scope):
 _"""Testusingsession,module,and functionscopefixtures."""_
 
-**def test_2** (sess_scope,mod_scope,func_scope):
+def test_2 (sess_scope,mod_scope,func_scope):
 _"""Demois morefun withmultiple tests."""_
 
 @pytest.mark.usefixtures( _'class_scope'_ )
@@ -560,7 +560,7 @@ importtasks
 fromtasksimport** Task
 
 @pytest.fixture(scope= _'session'_ )
-**def tasks_db_session** (tmpdir_factory):
+def tasks_db_session (tmpdir_factory):
 _"""Connectto db beforetests,disconnectafter."""_
 temp_dir= tmpdir_factory.mktemp( _'temp'_ )
 tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
@@ -568,7 +568,7 @@ tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
 tasks.stop_tasks_db()
 
 @pytest.fixture()
-**def tasks_db** (tasks_db_session):
+def tasks_db (tasks_db_session):
 _"""Anemptytasksdb."""_
 tasks.delete_all()
 ```
@@ -591,17 +591,17 @@ _# Reminderof Taskconstructorinterface
 
 ```
 @pytest.fixture(scope= _'session'_ )
-**def tasks_just_a_few** ():
+def tasks_just_a_few ():
 _"""Allsummariesand ownersare unique."""_
-**return** (
+**return (
 Task( _'Writesomecode'_ , _'Brian'_ , True),
 Task( _"CodereviewBrian'scode"_ , _'Katie'_ , False),
 Task( _'FixwhatBriandid'_ , _'Michelle'_ , False))
 
 @pytest.fixture(scope= _'session'_ )
-**def tasks_mult_per_owner** ():
+def tasks_mult_per_owner ():
 _"""Severalownerswithseveraltaskseach."""_
-**return** (
+**return (
 Task( _'Makea cookie'_ , _'Raphael'_ ),
 Task( _'Usean emoji'_ , _'Raphael'_ ),
 Task( _'Moveto Berlin'_ , _'Raphael'_ ),
@@ -714,28 +714,28 @@ import pytest
 importtime**
 
 @pytest.fixture(autouse=True,scope= _'session'_ )
-**def footer_session_scope** ():
+def footer_session_scope ():
 _"""Reportthe timeat the end of a session."""_
 **yield**
 now = time.time()
-**print** ( _'--'_ )
-**print** ( _'finished: {}'_ .format(time.strftime( _'%d %b %X'_ , time.localtime(now))))
-**print** ( _'-----------------'_ )
+**print ( _'--'_ )
+**print ( _'finished: {}'_ .format(time.strftime( _'%d %b %X'_ , time.localtime(now))))
+**print ( _'-----------------'_ )
 
 @pytest.fixture(autouse=True)
-**def footer_function_scope** ():
+def footer_function_scope ():
 _"""Reporttestdurationsafter eachfunction."""_
 start= time.time()
 **yield**
 stop= time.time()
 delta= stop- start
-**print** ( _'\ntestduration: {:0.3}seconds'_ .format(delta))
+**print ( _'\ntestduration: {:0.3}seconds'_ .format(delta))
 
-**def test_1** ():
+def test_1 ():
 _"""Simulatelong-ishrunningtest."""_
 time.sleep(1)
 
-**def test_2** ():
+def test_2 ():
 _"""Simulateslightlylongertest."""_
 time.sleep(1.23)
 ```
@@ -782,11 +782,11 @@ _"""Demonstratefixturerenaming."""_
 import pytest
 
 @pytest.fixture(name= _'lue'_ )
-**def ultimate_answer_to_life_the_universe_and_everything** ():
+def ultimate_answer_to_life_the_universe_and_everything ():
 _"""Returnultimateanswer."""_
-**return** 42
+    return 42
 
-**def test_everything** (lue):
+def test_everything (lue):
 _"""Usethe shortername."""_
 **assert** lue == 42
 ```
@@ -887,9 +887,9 @@ Task( _'exercise'_ , _'BrIaN'_ , False))
 task_ids= [ _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
 **for** t **in** tasks_to_try]
 
-**def equivalent** (t1,t2):
+def equivalent (t1,t2):
 _"""Checktwo tasksfor equivalence."""_
-**return** ((t1.summary== t2.summary) **and**
+**return ((t1.summary== t2.summary) **and**
 (t1.owner== t2.owner) **and**
 (t1.done== t2.done))
 ```
@@ -900,11 +900,11 @@ called a_task:
 ```
 **ch3/b/tasks_proj/tests/func/test_add_variety2.py
 @pytest.fixture(params=tasks_to_try)
-**def a_task** (request):
+def a_task (request):
 _"""Usingno ids."""_
-**return** request.param
+    return request.param
 
-**def test_add_a** (tasks_db,a_task):
+def test_add_a (tasks_db,a_task):
 _"""Usinga_taskfixture(no ids)."""_
 task_id= tasks.add(a_task)
 t_from_db= tasks.get(task_id)
@@ -942,11 +942,11 @@ we used when we parametrized our tests:
 ```
 **ch3/b/tasks_proj/tests/func/test_add_variety2.py
 @pytest.fixture(params=tasks_to_try,ids=task_ids)
-**def b_task** (request):
+def b_task (request):
 _"""Usinga listof ids."""_
-**return** request.param
+    return request.param
 
-**def test_add_b** (tasks_db,b_task):
+def test_add_b (tasks_db,b_task):
 _"""Usingb_taskfixture,withids."""_
 task_id= tasks.add(b_task)
 t_from_db= tasks.get(task_id)
@@ -974,17 +974,17 @@ identifiers:
 
 ```
 **ch3/b/tasks_proj/tests/func/test_add_variety2.py
-def id_func** (fixture_value):
+def id_func (fixture_value):
 _"""Afunctionfor generatingids."""_
 t = fixture_value
-**return** _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
+    return _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
 
 @pytest.fixture(params=tasks_to_try,ids=id_func)
-**def c_task** (request):
+def c_task (request):
 _"""Usinga function(id_func)to generateids."""_
-**return** request.param
+    return request.param
 
-**def test_add_c** (tasks_db,c_task):
+def test_add_c (tasks_db,c_task):
 _"""Usefixturewithgeneratedids."""_
 task_id= tasks.add(c_task)
 t_from_db= tasks.get(task_id)
@@ -1032,7 +1032,7 @@ importtasks
 fromtasksimport** Task
 
 @pytest.fixture(scope= _'session'_ )
-**def tasks_db_session** (tmpdir_factory):
+def tasks_db_session (tmpdir_factory):
 _"""Connectto db beforetests,disconnectafter."""_
 temp_dir= tmpdir_factory.mktemp( _'temp'_ )
 tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
@@ -1040,7 +1040,7 @@ tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
 tasks.stop_tasks_db()
 
 @pytest.fixture()
-**def tasks_db** (tasks_db_session):
+def tasks_db (tasks_db_session):
 _"""Anemptytasksdb."""_
 tasks.delete_all()
 ```
@@ -1053,7 +1053,7 @@ interactions:
 
 ```
 **tasks_proj/src/tasks/api.py
-def start_tasks_db** (db_path,db_type): _# type:(str,str)-> None
+def start_tasks_db (db_path,db_type): _# type:(str,str)-> None
 """ConnectAPI functionsto a db."""_
 **if not** isinstance(db_path,string_types):
 **raise** TypeError( _'db_pathmustbe a string'_ )
@@ -1079,7 +1079,7 @@ fromtasksimport** Task
 
 _#@pytest.fixture(scope='session',params=['tiny',])_
 @pytest.fixture(scope= _'session'_ , params=[ _'tiny'_ , _'mongo'_ ])
-**def tasks_db_session** (tmpdir_factory,request):
+def tasks_db_session (tmpdir_factory,request):
 _"""Connectto db beforetests,disconnectafter."""_
 temp_dir= tmpdir_factory.mktemp( _'temp'_ )
 tasks.start_tasks_db(str(temp_dir),request.param)
@@ -1087,7 +1087,7 @@ tasks.start_tasks_db(str(temp_dir),request.param)
 tasks.stop_tasks_db()
 
 @pytest.fixture()
-**def tasks_db** (tasks_db_session):
+def tasks_db (tasks_db_session):
 _"""Anemptytasksdb."""_
 tasks.delete_all()
 ```

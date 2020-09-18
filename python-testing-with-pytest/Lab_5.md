@@ -213,11 +213,11 @@ fromtasksimport** Task
 @pytest.mark.usefixtures( _'tasks_db'_ )
 **class** TestAdd():
 _"""Testsrelatedto tasks.add()."""_
-**def test_missing_summary** (self):
+def test_missing_summary (self):
 _"""Shouldraisean exceptionif summarymissing."""_
 **with** pytest.raises(ValueError):
 tasks.add(Task(owner= _'bob'_ ))
-**def test_done_not_bool** (self):
+def test_done_not_bool (self):
 _"""Shouldraisean exceptionif doneis not a bool."""_
 **with** pytest.raises(ValueError):
 tasks.add(Task(summary= _'summary'_ , done= _'True'_ ))
@@ -283,9 +283,9 @@ do with a pytest hook called pytest_report_header().
 
 ```
 **ch5/b/tasks_proj/tests/conftest.py
-def pytest_report_header** ():
+def pytest_report_header ():
 _"""Thanktesterfor runningtests."""_
-**return** _"Thanksfor runningthe tests."_
+    return _"Thanksfor runningthe tests."_
 ```
 
 Obviously, printing a thank-you message is rather silly. However, the ability
@@ -299,10 +299,10 @@ shenanigans: pytest_report_teststatus():
 
 ```
 **ch5/b/tasks_proj/tests/conftest.py
-def pytest_report_teststatus** (report):
+def pytest_report_teststatus (report):
 _"""Turnfailuresintoopportunities."""_
 **if** report.when== _'call'_ **and** report.failed:
-**return** (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
+**return (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
 ```
 
 And now we have just the output we were looking for. A test session with no
@@ -347,22 +347,22 @@ only have our status modifications occur if --nice is passed in:
 
 ```
 **ch5/c/tasks_proj/tests/conftest.py
-def pytest_addoption** (parser):
+def pytest_addoption (parser):
 _"""Turnnicefeatureson with--niceoption."""_
 group= parser.getgroup( _'nice'_ )
 group.addoption( _"--nice"_ , action= _"store_true"_ ,
 help= _"nice:turnfailuresintoopportunities"_ )
 
-**def pytest_report_header** (config):
+def pytest_report_header (config):
 _"""Thanktesterfor runningtests."""_
 **if** config.getoption( _'nice'_ ):
-**return** _"Thanksfor running the tests."_
+    return _"Thanksfor running the tests."_
 
-**def pytest_report_teststatus** (report,config):
+def pytest_report_teststatus (report,config):
 _"""Turnfailuresintoopportunities."""_
 **if** report.when== _'call'_ :
 **if** report.failed **and** config.getoption( _'nice'_ ):
-**return** (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
+**return (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
 ```
 
 This is a good place to note that for this plugin, we are using just a couple of
@@ -461,22 +461,22 @@ _"""Codefor pytest-niceplugin."""_
 
 import pytest
 
-**def pytest_addoption** (parser):
+def pytest_addoption (parser):
 _"""Turnnicefeatureson with--niceoption."""_
 group= parser.getgroup( _'nice'_ )
 group.addoption( _"--nice"_ , action= _"store_true"_ ,
 help= _"nice:turnFAILEDintoOPPORTUNITYfor improvement"_ )
 
-**def pytest_report_header** (config):
+def pytest_report_header (config):
 _"""Thanktesterfor runningtests."""_
 **if** config.getoption( _'nice'_ ):
-**return** _"Thanksfor running the tests."_
+    return _"Thanksfor running the tests."_
 
-**def pytest_report_teststatus** (report,config):
+def pytest_report_teststatus (report,config):
 _"""Turnfailuresintoopportunities."""_
 **if** report.when== _'call'_ :
 **if** report.failed **and** config.getoption( _'nice'_ ):
-**return** (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
+**return (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
 
 In setup.py, we need a very minimal call to setup():
 
@@ -617,7 +617,7 @@ Let’s look at one example:
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
-def test_pass_fail** (testdir):
+def test_pass_fail (testdir):
 
 
 # createa temporarypytesttestmodule
@@ -657,14 +657,14 @@ example file for more tests. Instead of duplicating that code, let’s make a fi
 ```
 **ch5/pytest-nice/tests/test_nice.py
 @pytest.fixture()
-**def sample_test** (testdir):
+def sample_test (testdir):
 testdir.makepyfile( _"""
 def test_pass():
 assert1 == 1
 def test_fail():
 assert1 == 2
 """_ )
-**return** testdir
+    return testdir
 ```
 
 5. https://docs.pytest.org/en/latest/writing_plugins.html#_pytest.pytester.RunResult
@@ -676,19 +676,19 @@ contains our sample test file. Here are the tests for the other option variants:
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
-def test_with_nice** (sample_test):
+def test_with_nice (sample_test):
 result= sample_test.runpytest( _'--nice'_ )
 result.stdout.fnmatch_lines([ _'*.O*'_ , ]) _#. for Pass,O for Fail_
 **assert** result.ret== 1
 
-**def test_with_nice_verbose** (sample_test):
+def test_with_nice_verbose (sample_test):
 result= sample_test.runpytest( _'-v'_ , _'--nice'_ )
 result.stdout.fnmatch_lines([
 _'*::test_failOPPORTUNITYfor improvement*'_ ,
 ])
 **assert** result.ret== 1
 
-**def test_not_nice_verbose** (sample_test):
+def test_not_nice_verbose (sample_test):
 result= sample_test.runpytest( _'-v'_ )
 result.stdout.fnmatch_lines([ _'*::test_failFAILED*'_ ])
 **assert** result.ret== 1
@@ -699,11 +699,11 @@ in the header:
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
-def test_header** (sample_test):
+def test_header (sample_test):
 result= sample_test.runpytest( _'--nice'_ )
 result.stdout.fnmatch_lines([ _'Thanksfor runningthe tests.'_ ])
 
-**def test_header_not_nice** (sample_test):
+def test_header_not_nice (sample_test):
 result= sample_test.runpytest()
 thanks_message= _'Thanksfor running the tests.'_
 **assert** thanks_message **not in** result.stdout.str()
@@ -716,7 +716,7 @@ Finally, let’s check the help text:
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
-def test_help_message** (testdir):
+def test_help_message (testdir):
 result= testdir.runpytest( _'--help'_ )
 _# fnmatch_linesdoesan assertioninternally_
 result.stdout.fnmatch_lines([

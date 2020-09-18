@@ -99,7 +99,7 @@ importtime**
 
 ```
 @pytest.mark.parametrize( _'x'_ , list(range(10)))
-**def test_something** (x):
+def test_something (x):
 time.sleep(1)
 ```
 

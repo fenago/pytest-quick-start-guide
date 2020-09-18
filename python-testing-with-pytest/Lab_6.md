@@ -437,9 +437,9 @@ Lab 6. Configuration • 122
 This enables us to name classes like this:
 
 **class** DeleteSuite():
-**def test_delete_1** ():
+def test_delete_1 ():
 ...
-**def test_delete_2** ():
+def test_delete_2 ():
 ...
 ....
 
@@ -507,11 +507,11 @@ Here’s an example. Directory a and b both have the file, test_foo.py. It doesn
 matter what these files have in them, but for this example, they look like this:
 
 **ch6/dups/a/test_foo.py
-def test_a** ():
+def test_a ():
 **pass**
 
 **ch6/dups/b/test_foo.py
-def test_b** ():
+def test_b ():
 **pass**
 
 With a directory structure like this:
