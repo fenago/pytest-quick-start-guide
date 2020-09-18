@@ -1,6 +1,6 @@
+<img align="right" src="../logo.png">
 
 
-**CHAPTER 2**
 
 ### Writing Test Functions
 
@@ -134,7 +134,7 @@ that really belongs in api.py.
 Here is test_task.py:
 
 ```
-**ch2/tasks_proj/tests/unit/test_task.py**
+**ch2/tasks_proj/tests/unit/test_task.py
 _"""Testthe Taskdatatype."""_
 **fromtasksimport** Task
 
@@ -183,7 +183,7 @@ Install tasks either by running pip install. or pip install -e. from the tasks_p
 tory. Or you can run pip install -e tasks_proj from one directory up:
 
 ```
-**$ cd /path/to/code
+$ cd /path/to/code
 $ pip install./tasks_proj/**
 Processing./tasks_proj
 Collectingclick(fromtasks==0.1.0)
@@ -205,7 +205,7 @@ to be able to modify the source code while tasks is installed, you need to insta
 it with the -e option (for “editable”):
 
 ```
-**$ pip install-e ./tasks_proj/**
+$ pip install-e ./tasks_proj/**
 Obtainingfile:///path/to/code/tasks_proj
 Requirementalreadysatisfied:clickin
 /path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
@@ -221,14 +221,14 @@ Successfullyinstalledtasks
 We also need to install pytest (if you haven’t already done so):
 
 ```
-**$ pip installpytest**
+$ pip installpytest**
 ```
 
 Now let’s try running tests:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/unit
-$ pytesttest_task.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/unit
+$ pytesttest_task.py
 ===================testsessionstarts===================
 collected4 items
 
@@ -270,7 +270,7 @@ tions failed. Let’s see how helpful this rewriting is by looking at a few asse
 failures:
 
 ```
-**ch2/tasks_proj/tests/unit/test_task_fail.py**
+**ch2/tasks_proj/tests/unit/test_task_fail.py
 _"""Usethe Tasktypeto showtestfailures."""_
 **fromtasksimport** Task
 
@@ -290,7 +290,7 @@ t2_dict= Task( _'makesandwich'_ , _'okkem'_ )._asdict()
 All of these tests fail, but what’s interesting is the traceback information:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/unit**
+$ cd /path/to/code/ch2/tasks_proj/tests/unit**
 venv)$ pytesttest_task_fail.py
 ===================testsessionstarts===================
 collected2 items
@@ -342,7 +342,7 @@ shown in the previous code. Let’s try it again with the -v flag, as suggested 
 the error message:
 
 ```
-**$ pytest-v test_task_fail.py::test_task_equality**
+$ pytest-v test_task_fail.py::test_task_equality**
 ===================testsessionstarts===================
 collected1 item
 
@@ -463,7 +463,7 @@ to some of the tests. Let’s add it to a couple of tests in test_api_exceptions
 that the markers smoke and get aren’t built into pytest; I just made them up):
 
 ```
-**ch2/tasks_proj/tests/func/test_api_exceptions.py**
+**ch2/tasks_proj/tests/func/test_api_exceptions.py
 @pytest.mark.smoke
 **def test_list_raises** ():
 _"""list()shouldraisean exceptionwithwrongtypeparam."""_
@@ -483,8 +483,8 @@ tasks.get(task_id= '123' )
 Now, let’s run just those tests that are marked with -m marker_name:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v -m smoketest_api_exceptions.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ pytest-v -m smoketest_api_exceptions.py
 ===================testsessionstarts===================
 collected7 items/ 5 deselected
 
@@ -493,7 +493,7 @@ test_api_exceptions.py::test_get_raisesPASSED [100%]
 
 =========2 passed,5 deselectedin 0.03seconds==========
 
-**$ pytest-v -m get test_api_exceptions.py**
+$ pytest-v -m get test_api_exceptions.py
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -511,7 +511,7 @@ It gets better. The expression after -m can use and, or, and not to combine
 multiple markers:
 
 ```
-**$ pytest-v -m** _"smokeand get"_ **test_api_exceptions.py**
+$ pytest-v -m** _"smokeand get"_ **test_api_exceptions.py
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -524,7 +524,7 @@ That time we only ran the test that had both smoke and get markers. We can
 use not as well:
 
 ```
-**$ pytest-v -m** _"smokeand not get"_ **test_api_exceptions.py**
+$ pytest-v -m** _"smokeand not get"_ **test_api_exceptions.py
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -580,7 +580,7 @@ is no database initialized in the test. We can define a fixture to get the datab
 initialized before the test and cleaned up after the test:
 
 ```
-**ch2/tasks_proj/tests/func/test_add.py**
+**ch2/tasks_proj/tests/func/test_add.py
 @pytest.fixture(autouse=True)
 **def initialized_tasks_db** (tmpdir):
 _"""Connectto db beforetesting,disconnectafter."""
@@ -609,7 +609,7 @@ Let’s set aside fixture discussion for now and go to the top of the project an
 run our smoke test suite:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest-v -m smoke**
 ===================testsessionstarts===================
 collected56 items/ 53 deselected
@@ -655,8 +655,8 @@ assert id_1!= id_2
 Then give it a run:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytesttest_unique_id_1.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ pytesttest_unique_id_1.py
 ===================testsessionstarts===================
 collected1 item
 
@@ -683,7 +683,7 @@ We could just change the test. But instead, let’s just mark the first one to g
 skipped for now:
 
 ```
-**ch2/tasks_proj/tests/func/test_unique_id_2.py**
+**ch2/tasks_proj/tests/func/test_unique_id_2.py
 @pytest.mark.skip(reason= _'misunderstoodthe API'_ )
 **def test_unique_id_1** ():
 _"""Callingunique_id()twiceshouldreturndifferentnumbers."""_
@@ -710,7 +710,7 @@ the test function.
 Let’s run again:
 
 ```
-**$ pytest-v test_unique_id_2.py**
+$ pytest-v test_unique_id_2.py
 ===================testsessionstarts===================
 collected2 items
 
@@ -725,7 +725,7 @@ also, and we intend to make that work in version 0.2.0 of the package. We
 can leave the test in place and use skipif instead:
 
 ```
-**ch2/tasks_proj/tests/func/test_unique_id_3.py**
+**ch2/tasks_proj/tests/func/test_unique_id_3.py
 @pytest.mark.skipif(tasks.__version__< _'0.2.0'_ ,
 reason= _'notsupporteduntilversion0.2.0'_ )
 **def test_unique_id_1** ():
@@ -744,7 +744,7 @@ required in skipif. I like to include a reason for every skip, skipif, or xfail.
 Here’s the output of the changed code:
 
 ```
-**$ pytesttest_unique_id_3.py**
+$ pytesttest_unique_id_3.py
 ===================testsessionstarts===================
 collected2 items
 
@@ -758,7 +758,7 @@ The s. shows that one test was skipped and one test passed.
 We can see which one with -v:
 
 ```
-**$ pytest-v test_unique_id_3.py**
+$ pytest-v test_unique_id_3.py
 ===================testsessionstarts===================
 collected2 items
 
@@ -772,7 +772,7 @@ test_unique_id_3.py::test_unique_id_2PASSED [100%]
 But we still don’t know why. We can see those reasons with -rs:
 
 ```
-**$ pytest-rs test_unique_id_3.py**
+$ pytest-rs test_unique_id_3.py
 ===================testsessionstarts===================
 collected2 items
 
@@ -786,7 +786,7 @@ SKIP[1] test_unique_id_3.py:9:not supporteduntilversion0.2.0
 The -r chars option has this help text:
 
 ```
-**$ pytest--help**
+$ pytest--help**
 ...
 
 -r chars
@@ -806,7 +806,7 @@ the xfail marker, we are telling pytest to run a test function, but that we expe
 it to fail. Let’s modify our unique_id() test again to use xfail:
 
 ```
-**ch2/tasks_proj/tests/func/test_unique_id_4.py**
+**ch2/tasks_proj/tests/func/test_unique_id_4.py
 @pytest.mark.xfail(tasks.__version__< _'0.2.0'_ ,
 reason= _'notsupporteduntilversion0.2.0'_ )
 **def test_unique_id_1** ():
@@ -834,8 +834,8 @@ as xfail, and differ only by == vs. !=. So one of them is bound to pass.
 Running this shows:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytesttest_unique_id_4.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ pytesttest_unique_id_4.py
 ===================testsessionstarts===================
 collected4 items
 
@@ -850,7 +850,7 @@ The x is for XFAIL, which means “expected to fail.” The capital X is for XPA
 --verbose lists longer descriptions:
 
 ```
-**$ pytest-v test_unique_id_4.py**
+$ pytest-v test_unique_id_4.py
 ===================testsessionstarts===================
 collected4 items
 
@@ -887,7 +887,7 @@ To run all the tests from one directory, use the directory as a parameter to
 pytest:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytesttests/func--tb=no**
 ===================testsessionstarts===================
 collected50 items
@@ -907,21 +907,24 @@ An important trick to learn is that using -v gives you the syntax for how to
 run a specific directory, class, and test.
 
 ```
-**$ pytest-v tests/func--tb=no**
+$ pytest-v tests/func--tb=no
 ===================testsessionstarts===================
 collected50 items
 
 tests/func/test_add.py::test_add_returns_valid_idPASSED[ 2%]
 tests/func/test_add.py::test_added_task_has_id_setPASSED[ 4%]
-**...**
+...
+
 tests/func/test_api_exceptions.py::test_add_raisesPASSED[ 70%]
 tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 72%]
 tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 74%]
-**...**
+...
+
 tests/func/test_unique_id_1.py::test_unique_idFAILED[ 84%]
 tests/func/test_unique_id_2.py::test_unique_id_1SKIPPED[ 86%]
 tests/func/test_unique_id_2.py::test_unique_id_2PASSED[ 88%]
-**...**
+...
+
 tests/func/test_unique_id_4.py::test_unique_id_1xfail[ 94%]
 tests/func/test_unique_id_4.py::test_unique_id_is_a_duckxfail[ 96%]
 tests/func/test_unique_id_4.py::test_unique_id_not_a_duckXPASS[ 98%]
@@ -938,8 +941,8 @@ To run a file full of tests, list the file with the relative path as a parameter
 pytest:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj
-$ pytesttests/func/test_add.py**
+$ cd /path/to/code/ch2/tasks_proj
+$ pytesttests/func/test_add.py
 ===================testsessionstarts===================
 collected2 items
 
@@ -955,7 +958,7 @@ We’ve been doing this for a while.
 To run a single test function, add :: and the test function name:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest-v tests/func/test_add.py::test_add_returns_valid_id**
 ===================testsessionstarts===================
 collected1 item
@@ -993,7 +996,7 @@ sonable to group them in a class. To run just this class, do like we did with
 functions and add ::, then the class name to the file parameter:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest-v tests/func/test_api_exceptions.py::TestUpdate**
 ===================testsessionstarts===================
 collected2 items
@@ -1010,7 +1013,7 @@ If you don’t want to run all of a test class—just one method—just add
 another :: and the method name:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest-v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id**
 ===================testsessionstarts===================
 collected1 item
@@ -1035,7 +1038,7 @@ You can use and, or, and not in your expression to create complex expressions.
 For example, we can run all of the functions that have _raises in their name:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest-v -k _raises**
 ===================testsessionstarts===================
 collected56 items/ 51 deselected
@@ -1052,7 +1055,7 @@ tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 We can use and and not to get rid of the test_delete_raises() from the session:
 
 ```
-**$ pytest-v -k** _"_raisesand not delete"_
+$ pytest-v -k** _"_raisesand not delete"_
 ===================testsessionstarts===================
 collected56 items/ 52 deselected
 
@@ -1120,7 +1123,7 @@ included to make sure the database is accessible. Let’s make sure the test
 passes:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::test_add_1**
 ===================testsessionstarts===================
 collected1 item
@@ -1136,7 +1139,7 @@ if we want to test lots of variations of a task? No problem. We can use
 test, like this:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
 @pytest.mark.parametrize( _'task'_ ,
 [Task( _'sleep'_ , done=True),
 Task( _'wake'_ , _'brian'_ ),
@@ -1155,7 +1158,7 @@ our case is a list of Task objects. pytest will run this test once for each task
 and report each as a separate test:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::test_add_2**
 ===================testsessionstarts===================
 collected4 items
@@ -1173,7 +1176,7 @@ This use of parametrize() works for our purposes. However, let’s pass in the
 tasks as tuples to see how multiple test parameters would work:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
 @pytest.mark.parametrize( _'summary,owner,done'_ ,
 [( _'sleep'_ , None,False),
 ( _'wake'_ , _'brian'_ , False),
@@ -1192,7 +1195,7 @@ When you use types that are easy for pytest to convert into strings, the test
 identifier uses the parameter values in the report to make it readable:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::test_add_3**
 ===================testsessionstarts===================
 collected4 items
@@ -1209,7 +1212,7 @@ You can use that whole test identifier—called a node in pytest terminology—t
 re-run the test if you want:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::test_add_3[sleep-None-False]**
 ===================testsessionstarts===================
 collected1 item
@@ -1223,7 +1226,7 @@ Be sure to use quotes if there are spaces in the identifier:
 
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v** _"test_add_variety.py::test_add_3[eateggs-BrIaN-False]"_
 ===================testsessionstarts===================
 collected1 item
@@ -1237,7 +1240,7 @@ Now let’s go back to the list of tasks version, but move the task list to a va
 able outside the function:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
 tasks_to_try= (Task( _'sleep'_ , done=True),
 Task( _'wake'_ , _'brian'_ ),
 Task( _'wake'_ , _'brian'_ ),
@@ -1256,7 +1259,7 @@ It’s convenient and the code looks nice. But the readability of the output is
 hard to interpret:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::test_add_4**
 ===================testsessionstarts===================
 collected5 items
@@ -1279,7 +1282,7 @@ can use it to generate ids:
 
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
 task_ids= [ _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
 **for** t **in** tasks_to_try]
 
@@ -1294,7 +1297,7 @@ t_from_db= tasks.get(task_id)
 Let’s run that and see how it looks:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::test_add_5**
 ===================testsessionstarts===================
 collected5 items
@@ -1313,7 +1316,7 @@ generate the same task id. To be able to tell them apart, pytest added a unique
 index to each, 0 and 1. The custom test identifiers can be used to run tests:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v** _"test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"_
 ===================testsessionstarts===================
 collected1 item
@@ -1330,7 +1333,7 @@ You can apply parametrize() to classes as well. When you do that, the same data
 sets will be sent to all test methods in the class:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
 @pytest.mark.parametrize( _'task'_ , tasks_to_try,ids=task_ids)
 **class** TestAdd():
 _"""Demonstrateparametrizeand testclasses."""_
@@ -1354,7 +1357,7 @@ t_from_db= tasks.get(task_id)
 Here it is in action:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::TestAdd**
 ===================testsessionstarts===================
 collected10 items
@@ -1378,7 +1381,7 @@ parameter value when passing in a list within the @pytest.mark.parametrize()
 decorator. You do this with pytest.param(<value>,id="something") syntax:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
 @pytest.mark.parametrize( _'task'_ , [
 pytest.param(Task( _'create'_ ), id= _'justsummary'_ ),
 pytest.param(Task( _'inspire'_ , _'Michelle'_ ), id= _'summary/owner'_ ),
@@ -1393,7 +1396,7 @@ t_from_db= tasks.get(task_id)
 In action:
 
 ```
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest-v test_add_variety.py::test_add_6**
 ===================testsessionstarts===================
 collected3 items

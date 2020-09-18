@@ -1,4 +1,5 @@
-CHAPTER 6
+<img align="right" src="../logo.png">
+
 
 Configuration
 
@@ -100,7 +101,7 @@ a sampling:
 Chapter 6. Configuration • 116
 
 
-**$ pytest--help
+$ pytest--help
 ...**
 [pytest]ini-optionsin the firstpytest.ini|tox.ini|setup.cfgfilefound:
 
@@ -118,7 +119,8 @@ whennot givenexplicitly(default:False)
 doctest_optionflags(args)optionflagsfor doctests
 addopts(args) extracommandlineoptions
 minversion(string) minimallyrequiredpytestversion
-**...**
+...
+
 
 You’ll look at all of these settings in this chapter, except doctest_optionflags, which
 
@@ -187,17 +189,19 @@ With these markers registered, you can now also see them with pytest--markers
 
 with their descriptions:
 
-**$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /path/to/code/ch6/b/tasks_proj/tests
 $ pytest--markers**
 @pytest.mark.smoke:Run the smoketesttestfunctions
 
 @pytest.mark.get:Run the testfunctionsthattesttasks.get()
 
-**...**
+...
+
 
 @pytest.mark.skip(reason=None):skipthe ...
 
-**...**
+...
+
 
 If markers aren’t registered, they won’t show up in the --markers list. With them
 
@@ -209,7 +213,7 @@ ch6/a/tasks_proj and ch6/b/tasks_proj is the contents of the pytest.ini file. It
 
 in ch6/a. Let’s try running the tests without registering any markers:
 
-**$ cd /path/to/code/ch6/a/tasks_proj/tests
+$ cd /path/to/code/ch6/a/tasks_proj/tests
 $ pytest--strict --tb=line**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -219,12 +223,14 @@ collected45 items/ 2 errors
 ____________ERRORcollectingfunc/test_add.py____________
 func/test_add.py:20:in <module>
 @pytest.mark.smoke
-**...**
+...
+
 E AttributeError:'smoke'not a registeredmarker
 ______ERRORcollectingfunc/test_api_exceptions.py_______
 func/test_api_exceptions.py:30:in <module>
 @pytest.mark.smoke
-**...**
+...
+
 
 Chapter 6. Configuration • 118
 
@@ -256,7 +262,7 @@ for the project.
 
 This should allow us to run tests, including the smoke tests:
 
-**$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /path/to/code/ch6/b/tasks_proj/tests
 $ pytest--strict-m smoke**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -522,7 +528,7 @@ ning them individually will be fine, but running pytest from the dups directory
 
 won’t work:
 
-**$ cd /path/to/code/ch6/dups
+$ cd /path/to/code/ch6/dups
 $ pytesta**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -531,7 +537,7 @@ collected1 item
 a/test_foo.py. [100%]
 
 ================1 passedin 0.01seconds=================
-**$ pytestb**
+$ pytestb**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item
@@ -539,7 +545,7 @@ collected1 item
 b/test_foo.py. [100%]
 
 ================1 passedin 0.01seconds=================
-**$ pytest**
+$ pytest**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item/ 1 errors
@@ -578,7 +584,7 @@ dups_fixed/
 
 Now, let’s try this again from the top level in dups_fixed:
 
-**$ cd /path/to/code/ch6/dups_fixed
+$ cd /path/to/code/ch6/dups_fixed
 $ pytest**
 ===================testsessionstarts===================
 plugins:cov-2.5.1

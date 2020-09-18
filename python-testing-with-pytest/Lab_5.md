@@ -1,5 +1,5 @@
+<img align="right" src="../logo.png">
 
-**CHAPTER 5**
 
 ### Plugins
 
@@ -74,7 +74,7 @@ As PyPI is the default location for pip, installing plugins from PyPI is the eas
 method. Let’s install the pytest-cov plugin:
 
 ```
-**$ pip installpytest-cov**
+$ pip installpytest-cov**
 ```
 
 This installs the latest stable version from PyPI.
@@ -85,7 +85,7 @@ If you want a particular version of a plugin, you can specify the version
 after ‘==‘:
 
 ```
-**$ pip installpytest-cov==2.5.1**
+$ pip installpytest-cov==2.5.1**
 ```
 
 **Install from a .tar.gz or .whl File**
@@ -102,10 +102,10 @@ or the .whl and install from that.
 You don’t have to unzip or anything; just point pip at it:
 
 ```
-**$ pip installpytest-cov-2.5.1.tar.gz**
+$ pip installpytest-cov-2.5.1.tar.gz**
 _# or_
 
-**$ pip installpytest_cov-2.5.1-py2.py3-none-any.whl**
+$ pip installpytest_cov-2.5.1-py2.py3-none-any.whl**
 ```
 
 **Install from a Local Directory**
@@ -115,7 +115,7 @@ or shared directory in .tar.gz or .whl format and use that instead of PyPI for
 installing plugins:
 
 ```
-**$ mkdirsome_plugins
+$ mkdirsome_plugins
 $ cp pytest_cov-2.5.1-py2.py3-none-any.whlsome_plugins/
 $ pip install--no-index--find-links=./some_plugins/pytest-cov**
 ```
@@ -132,7 +132,7 @@ versions and specify which version you want by adding == and the version
 number:
 
 ```
-**$ pip install--no-index--find-links=./some_plugins/pytest-cov==2.5.1**
+$ pip install--no-index--find-links=./some_plugins/pytest-cov==2.5.1**
 ```
 
 **Install from a Git Repository**
@@ -140,19 +140,19 @@ number:
 You can install plugins directly from a Git repository—in this case, GitHub:
 
 ```
-**$ pip installgit+https://github.com/pytest-dev/pytest-cov**
+$ pip installgit+https://github.com/pytest-dev/pytest-cov**
 ```
 
 You can also specify a version tag:
 
 ```
-**$ pip installgit+https://github.com/pytest-dev/pytest-cov@v2.5.1**
+$ pip installgit+https://github.com/pytest-dev/pytest-cov@v2.5.1**
 ```
 
 Or you can specify a branch:
 
 ```
-**$ pip installgit+https://github.com/pytest-dev/pytest-cov@master**
+$ pip installgit+https://github.com/pytest-dev/pytest-cov@master**
 ```
 
 Installing from a Git repository is especially useful if you’re storing your own
@@ -226,7 +226,7 @@ tasks.add(Task(summary= _'summary'_ , done= _'True'_ ))
 Let’s run them to see if they pass:
 
 ```
-**$ cd /path/to/code/ch5/a/tasks_proj
+$ cd /path/to/code/ch5/a/tasks_proj
 $ pytest**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -263,7 +263,7 @@ And now let’s focus on the new tests with -k TestAdd, which works because
 there aren’t any other tests with names that contain “TestAdd.”
 
 ```
-**$ cd /path/to/code/ch5/a/tasks_proj/tests/func
+$ cd /path/to/code/ch5/a/tasks_proj/tests/func
 $ pytest-v --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -309,7 +309,7 @@ And now we have just the output we were looking for. A test session with no
 --verbose flag shows an O for failures, er, improvement opportunities:
 
 ```
-**$ cd /path/to/code/ch5/b/tasks_proj/tests/func
+$ cd /path/to/code/ch5/b/tasks_proj/tests/func
 $ pytest--tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
@@ -329,7 +329,7 @@ test_api_exceptions.py.O
 And the -v or --verbose flag will be nicer also:
 
 ```
-**$ pytest-v --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest-v --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -373,7 +373,7 @@ We can manually test our plugin just by running it against our example file.
 First, with no --nice option, to make sure just the username shows up:
 
 ```
-**$ cd /path/to/code/ch5/c/tasks_proj/tests/func
+$ cd /path/to/code/ch5/c/tasks_proj/tests/func
 $ pytest--tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -391,7 +391,7 @@ test_api_exceptions.py.F [100%]
 
 Now with --nice:
 
-**$ pytest--nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest--nice--tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -403,7 +403,7 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
-**$ pytest-v --nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest-v --nice--tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -456,7 +456,7 @@ In pytest_nice.py, we’ll put the exact contents of our conftest.py that were r
 to this feature (and take it out of the tasks_proj/tests/conftest.py):
 
 ```
-**ch5/pytest-nice/pytest_nice.py**
+**ch5/pytest-nice/pytest_nice.py
 _"""Codefor pytest-niceplugin."""_
 
 **importpytest**
@@ -480,7 +480,7 @@ _"""Turnfailuresintoopportunities."""_
 
 In setup.py, we need a very minimal call to setup():
 
-**ch5/pytest-nice/setup.py**
+**ch5/pytest-nice/setup.py
 _"""Setupfor pytest-niceplugin."""_
 
 **fromsetuptoolsimport** setup
@@ -530,10 +530,12 @@ I haven’t talked about the README.rst file yet. Some form of README is a
 requirement by setuptools. If you leave it out, you’ll get this:
 
 ```
-**...**
+...
+
 warning:sdist:standardfilenot found:shouldhaveone of README,
 README.rst,README.txt,README.md
-**...**
+...
+
 ```
 
 Keeping a README around as a standard way to include some information
@@ -594,7 +596,7 @@ Our test directory for pytest-nice has two files: conftest.py and test_nice.py. 
 pytester, we need to add just one line to conftest.py:
 
 ```
-**ch5/pytest-nice/tests/conftest.py**
+**ch5/pytest-nice/tests/conftest.py
 _"""pytesteris neededfor testingplugins."""_
 pytest_plugins= _'pytester'_
 ```
@@ -653,7 +655,7 @@ The strings passed into fnmatch_lines can include glob wildcards. We can use our
 example file for more tests. Instead of duplicating that code, let’s make a fixture:
 
 ```
-**ch5/pytest-nice/tests/test_nice.py**
+**ch5/pytest-nice/tests/test_nice.py
 @pytest.fixture()
 **def sample_test** (testdir):
 testdir.makepyfile( _"""
@@ -732,12 +734,14 @@ is installed. We do this either by installing the .zip.gz file or installing the
 rent directory in editable mode:
 
 ```
-**$ cd /path/to/code/ch5/pytest-nice/
+$ cd /path/to/code/ch5/pytest-nice/
 $ pip install.**
 Processing/path/to/code/ch5/pytest-nice
-**...**
+...
+
 Runningsetup.pybdist_wheelfor pytest-nice... done
-**...**
+...
+
 Successfullybuiltpytest-nice
 Installingcollectedpackages:pytest-nice
 Successfullyinstalledpytest-nice-0.1.0
@@ -746,7 +750,7 @@ Successfullyinstalledpytest-nice-0.1.0
 Now that it’s installed, let’s run the tests:
 
 ```
-**$ pytest-v**
+$ pytest-v**
 ===================testsessionstarts===================
 plugins:nice-0.1.0,cov-2.5.1
 collected7 items
@@ -766,9 +770,10 @@ Yay! All the tests pass. We can uninstall it just like any other Python package
 or pytest plugin:
 
 ```
-**$ pip uninstallpytest-nice**
+$ pip uninstallpytest-nice**
 Uninstallingpytest-nice-0.1.0:
-**...**
+...
+
 Proceed(y/n)?y
 Successfullyuninstalledpytest-nice-0.1.0
 ```
@@ -782,7 +787,7 @@ Believe it or not, we are almost done with our plugin. From the command
 line, we can use this setup.py file to create a distribution:
 
 ```
-**$ cd /path/to/code/ch5/pytest-nice
+$ cd /path/to/code/ch5/pytest-nice
 $ pythonsetup.pysdist**
 runningsdist
 runningegg_info
@@ -790,10 +795,12 @@ runningegg_info
 
 ```
 creatingpytest_nice.egg-info
-**...**
+...
+
 runningcheck
 creatingpytest-nice-0.1.0
-**...**
+...
+
 creatingdist
 Creatingtar archive
 **...
@@ -807,9 +814,10 @@ Within pytest-nice, a dist directory contains a new file called pytest-nice-0.1.
 This file can now be used anywhere to install our plugin, even in place:
 
 ```
-**$ pip installdist/pytest-nice-0.1.0.tar.gz**
+$ pip installdist/pytest-nice-0.1.0.tar.gz**
 Processing./dist/pytest-nice-0.1.0.tar.gz
-**...**
+...
+
 Installingcollectedpackages:pytest-nice
 Successfullyinstalledpytest-nice-0.1.0
 ```
@@ -827,7 +835,7 @@ put pytest-nice-0.1.0.tar.gz into a directory called myplugins.
 To install pytest-nice from myplugins:
 
 ```
-**$ pip install--no-index--find-linksmypluginspytest-nice**
+$ pip install--no-index--find-linksmypluginspytest-nice**
 ```
 
 The --no-index tells pip to not go out to PyPI to look for what you want to install.
@@ -838,7 +846,7 @@ If you’ve done some bug fixes and there are newer versions in myplugins, you
 can upgrade by adding --upgrade:
 
 ```
-**$ pip install--upgrade--no-index--find-linksmypluginspytest-nice**
+$ pip install--upgrade--no-index--find-linksmypluginspytest-nice**
 ```
 
 This is just like any other use of pip, but with the --no-index --find-linksmyplugins
@@ -856,7 +864,7 @@ When you are contributing a pytest plugin, another great place to start is by
 using the cookiecutter-pytest-plugin^7 :
 
 ```
-**$ pip installcookiecutter
+$ pip installcookiecutter
 $ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin**
 ```
 

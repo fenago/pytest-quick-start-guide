@@ -1,6 +1,5 @@
+<img align="right" src="../logo.png">
 
-
-**CHAPTER 1**
 
 ### Getting Started with pytest
 
@@ -15,8 +14,8 @@ def test_passing** ():
 This is what it looks like when it’s run:
 
 ```
-**$ cd /path/to/code/ch
-$ pytesttest_one.py**
+$ cd /path/to/code/ch
+$ pytesttest_one.py
 =====================testsessionstarts======================
 collected1 item
 
@@ -32,7 +31,7 @@ If you have two tests, each would be 50%. If you need more information, you
 can use -v or --verbose:
 
 ```
-**$ pytest-v test_one.py**
+$ pytest-v test_one.py
 =====================testsessionstarts======================
 collected1 item
 
@@ -54,7 +53,7 @@ The way pytest shows you test failures is one of the many reasons developers
 love pytest. Let’s watch this fail:
 
 ```
-**$ pytesttest_two.py**
+$ pytesttest_two.py
 =====================testsessionstarts======================
 collected1 item
 
@@ -80,7 +79,7 @@ That’s already a lot of information, but there’s a line that says Use -v to 
 full diff. Let’s do that:
 
 ```
-**$ pytest-v test_two.py**
+$ pytest-v test_two.py
 =====================testsessionstarts======================
 collected1 item
 
@@ -162,9 +161,9 @@ Like other Python packages distributed through PyPI, use pip to install pytest
 into the virtual environment you’re using for testing:
 
 ```
-$ python3-m venvvenv
-$ sourcevenv/bin/activate
-$ pip installpytest
+python3 -m venv venv
+source venv/bin/activate
+pip install pytest
 ```
 
 If you are not familiar with virtualenv or pip, I have got you covered. Check
@@ -178,26 +177,27 @@ and macOS, and many versions of Python, including Python 3.4 and later. With
 Python 2.7 and with some distributions of Linux, you will need to use virtualenv:
 
 ```
-$ python-m pip installvirtualenv
-$ python-m virtualenvvenv
-$ sourcevenv/bin/activate
-$ pip installpytest
+$ python -m pip install virtualenv
+$ python -m virtualenv venv
+$ source venv/bin/activate
+$ pip install pytest
 ```
 
 The sourcevenv/bin/activate line won’t work for Windows, use venv\Scripts\activate.bat instead.
 Do this:
 
 ```
-C:\>python3-m venvvenv
-C:\>venv\Scripts\activate.bat
-C:\>pip installpytest
+C:\> python3 -m venv venv
+C:\> venv\Scripts\activate.bat
+C:\> pip install pytest
 ```
 ### Running pytest
 
 ```
-**$ pytest--help**
+$ pytest--help**
 usage:pytest[options][file_or_dir][file_or_dir][...]
-**...**
+...
+
 ```
 
 Given no arguments, pytest looks at your current directory and all subdirec-
@@ -209,7 +209,7 @@ to look for test code.
 For example, let’s create a subdirectory called tasks, and start with this test file:
 
 ```
-**ch1/tasks/test_three.py**
+**ch1/tasks/test_three.py
 _"""Testthe Taskdatatype."""_
 
 **fromcollectionsimport** namedtuple
@@ -242,7 +242,7 @@ Let’s put a couple more tests into a second file to demonstrate the _asdict() 
 _replace() functionality:
 
 ```
-**ch1/tasks/test_four.py**
+**ch1/tasks/test_four.py
 _"""Testthe Taskdatatype."""_
 
 **fromcollectionsimport** namedtuple
@@ -280,7 +280,7 @@ _test. From the ch1 directory, if you run pytest with no commands, you’ll run
 four files’ worth of tests:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest**
 =====================testsessionstarts======================
 collected6 items
@@ -308,7 +308,7 @@ you want run, or the directory, or call pytest from the directory where our
 tests are:
 
 ```
-**$ pytesttasks/test_three.pytasks/test_four.py**
+$ pytesttasks/test_three.pytasks/test_four.py
 =====================testsessionstarts======================
 collected4 items
 
@@ -317,7 +317,7 @@ tasks/test_four.py.. [100%]
 
 ===================4 passedin 0.02seconds===================
 
-**$ pytesttasks**
+$ pytesttasks**
 =====================testsessionstarts======================
 collected4 items
 
@@ -326,7 +326,7 @@ tasks/test_three.py.. [100%]
 
 ===================4 passedin 0.02seconds===================
 
-**$ cd tasks
+$ cd tasks
 $ pytest**
 =====================testsessionstarts======================
 ```
@@ -357,8 +357,8 @@ I’ll cover that in Chapter 6, Configuration, on page 115.
 Let’s take a closer look at the output of running just one file:
 
 ```
-**$ cd /path/to/code/ch1/tasks
-$ pytesttest_three.py**
+$ cd /path/to/code/ch1/tasks
+$ pytesttest_three.py
 =====================testsessionstarts======================
 platformdarwin-- Python3.x.y,pytest-3.x.y,py-1.x.y,pluggy-0.x.y
 rootdir:/path/to/code/ch1,inifile:
@@ -450,7 +450,7 @@ run just one. Specify the file directly, and add a ::test_name, like this:
 
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-v tasks/test_four.py::test_asdict**
 =====================testsessionstarts======================
 collected1 item
@@ -475,7 +475,7 @@ ular address some common early desires for controlling how pytest runs when
 you’re first getting started.
 
 ```
-**$ pytest--help
+$ pytest--help
 ... subsetof the list...**
 -k EXPRESSION onlyrun tests/classes whichmatchthe given
 substringexpression.
@@ -510,7 +510,7 @@ directory, you should see all of the test functions you’ve looked at so far in
 this chapter:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest--collect-only**
 ===================testsessionstarts===================
 collected6 items
@@ -540,7 +540,7 @@ suffix in their names. Let’s say you want to run the test_asdict() and test_de
 tests. You can test out the filter with --collect-only:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-k** _"asdictor defaults"_ **--collect-only**
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
@@ -557,7 +557,7 @@ Yep. That looks like what we want. Now you can run them by removing the
 
 
 ```
-**$ pytest-k** _"asdictor defaults"_
+$ pytest-k** _"asdictor defaults"_
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
 
@@ -571,7 +571,7 @@ Hmm. Just dots. So they passed. But were they the right tests? One way to
 find out is to use -v or --verbose:
 
 ```
-**$ pytest-v -k** _"asdictor defaults"_
+$ pytest-v -k** _"asdictor defaults"_
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
 
@@ -605,7 +605,7 @@ Then you’d do the same for test_replace(). You can then run all the tests with
 the same marker with pytest-m run_these_please:
 
 ```
-**$ cd /path/to/code/ch1/tasks
+$ cd /path/to/code/ch1/tasks
 $ pytest-m run_these_please**
 ===================testsessionstarts===================
 collected4 items/ 2 deselected
@@ -635,7 +635,7 @@ do. That’s what the -x option does.
 Let’s try it on the six tests we have so far:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-x**
 ===================testsessionstarts===================
 collected6 items
@@ -664,7 +664,7 @@ also use --tb=no to turn off the stack trace, since you’ve already seen it and
 don’t need to see it again:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest--tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -691,7 +691,7 @@ but let’s take a look anyway. Since there is only one failure, if we set --max
 all of the tests should run, and --maxfail=1 should act just like -x:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest--maxfail=2--tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -702,7 +702,7 @@ tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
 ===========1 failed,5 passedin 0.07seconds============
-**$ pytest--maxfail=1--tb=no**
+$ pytest--maxfail=1--tb=no**
 ===================testsessionstarts===================
 collected6 items
 
@@ -746,7 +746,7 @@ When one or more tests fails, having a convenient way to run just the failing
 tests is helpful for debugging. Just use --lf and you’re ready to debug:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest--lf**
 ===================testsessionstarts===================
 collected6 items/ 5 deselected
@@ -776,7 +776,7 @@ The --ff/--failed-first option will do the same as --last-failed, and then run t
 of the tests that passed last time:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest--ff--tb=no
 $ pytest--ff--tb=no**
 ===================testsessionstarts===================
@@ -808,7 +808,7 @@ We’ve used it quite a bit already, but let’s run it again for fun in conjunc
 with --ff and --tb=no:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-v --ff--tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -839,7 +839,7 @@ failing line of any failing tests.
 Let’s try -q by itself:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-q**
 .F.... [100%]
 ========================FAILURES=========================
@@ -884,7 +884,7 @@ cause a failure. But this is enough to demonstrate the command-line option
 --l/--showlocals:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-l tasks**
 ===================testsessionstarts===================
 collected4 items
@@ -933,7 +933,7 @@ ent traceback styles.
 --tb=no removes the traceback entirely:
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest--tb=notasks**
 ===================testsessionstarts===================
 collected4 items
@@ -949,7 +949,7 @@ failing tests, this option can help to show a pattern in the failures:
 
 
 ```
-**$ pytest--tb=linetasks**
+$ pytest--tb=linetasks
 ===================testsessionstarts===================
 collected4 items
 
@@ -964,7 +964,7 @@ Task(summary='...e=True,id=11)
 
 The next step up in verbose tracebacks is --tb=short:
 
-**$ pytest--tb=shorttasks**
+$ pytest--tb=shorttasks
 ===================testsessionstarts===================
 collected4 items
 
@@ -1004,7 +1004,7 @@ which one:
 
 
 ```
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest--durations=3tasks**
 ===================testsessionstarts===================
 collected4 items
@@ -1032,7 +1032,7 @@ The --version option shows the version of pytest and the directory where it’s
 installed:
 
 ```
-**$ pytest--version**
+$ pytest--version**
 Thisis pytestversion3.x.y,importedfrom
 /path/to/venv/lib/python3.x/site-packages/pytest.py
 ```

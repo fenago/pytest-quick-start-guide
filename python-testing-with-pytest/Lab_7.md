@@ -1,5 +1,5 @@
+<img align="right" src="../logo.png">
 
-CHAPTER 7
 
 Using pytest with Other Tools
 
@@ -26,7 +26,7 @@ In Parametrizing Fixtures, on page 66, we left the Tasks project with a few
 failures:
 
 ```
-**$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /path/to/code/ch3/c/tasks_proj
 $ pytest--tb=no-q**
 .........................................FF.FFFFFFF[ 53%]
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
@@ -66,7 +66,7 @@ backs, and we didn’t have --verbose turned on. Let’s re-run the failures (at
 three of them) with verbose:
 
 ```
-**$ pytest--tb=no--verbose--lf--maxfail=3**
+$ pytest--tb=no--verbose--lf--maxfail=3**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -85,7 +85,7 @@ Now we know which tests are failing. Let’s look at just one of them by using
 ables with -l:
 
 ```
-**$ pytest-v --lf-l -x**
+$ pytest-v --lf-l -x**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -107,7 +107,7 @@ def test_add_returns_valid_id(tasks_db):
 new_task= Task('dosomething')
 task_id= tasks.add(new_task)
 ```
-Chapter 7. Using pytest with Other Tools • 128
+
 
 
 **> assertisinstance(task_id,int)**
@@ -140,7 +140,7 @@ wasn’t obvious why this test failed. We can have pytest start a debugging
 session and start us right at the point of failure with --pdb:
 
 ```
-**$ pytest-v --lf-x --pdb**
+$ pytest-v --lf-x --pdb**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -224,7 +224,7 @@ is being tested by a test suite. When you run the tests for the Tasks project,
 
 1. https://docs.python.org/3/library/pdb.html
 
-Chapter 7. Using pytest with Other Tools • 130
+
 
 
 some of the Tasks functionality is executed with every test, but not all of it.
@@ -246,7 +246,7 @@ with some extra pytest options. Since coverage is one of the dependencies of
 pytest-cov, it is sufficient to install pytest-cov, as it will pull in coverage.py:
 
 ```
-**$ pip installpytest-cov
+$ pip installpytest-cov
 ...**
 Installingcollectedpackages:coverage,pytest-cov
 Successfullyinstalledcoverage-4.5.1 pytest-cov-2.5.1
@@ -256,24 +256,27 @@ Let’s run the coverage report on version 2 of Tasks. If you still have the fir
 version of the Tasks project installed, uninstall it and install version 2:
 
 ```
-**$ pip uninstalltasks**
+$ pip uninstalltasks**
 Uninstallingtasks-0.1.0:
-**...**
+...
+
 Proceed(y/n)?y
 Successfullyuninstalledtasks-0.1.0
 ```
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ pip install-e.**
 Obtainingfile:///path/to/code/ch7/tasks_proj_v2
-**...**
+...
+
 Installingcollectedpackages:tasks
 Runningsetup.pydevelopfor tasks
 Successfullyinstalledtasks
 ```
-**$ pip list
+$ pip list
 ...**
 tasks 0.1.1 /path/to/code/tasks_proj_v2/src
-**...**
+...
+
 
 Coverage.py: Determining How Much Code Is Tested • 131
 
@@ -283,7 +286,7 @@ Now that the next version of Tasks is installed, we can run our baseline cov-
 erage report:
 
 ```
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ pytest--cov=src**
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
@@ -337,11 +340,11 @@ the best way to do that is to use the HTML reports.
 If you run coverage.py again with --cov-report=html, an HTML report is generated:
 
 ```
-**$ pytest--cov=src--cov-report=html**
+$ pytest--cov=src--cov-report=html**
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 
-Chapter 7. Using pytest with Other Tools • 132
+
 
 
 collected62 items
@@ -373,7 +376,7 @@ how many are missing, as shown in the following screen:
 Coverage.py: Determining How Much Code Is Tested • 133
 
 
-Chapter 7. Using pytest with Other Tools • 134
+
 
 
 Scrolling down, you can see the missing lines, as shown in the next screen:
@@ -478,13 +481,13 @@ obvious.
 
 4. [http://click.pocoo.org](http://click.pocoo.org)
 
-Chapter 7. Using pytest with Other Tools • 136
+
 
 
 Let’s pause and install version 2 of Tasks:
 
 ```
-**$ cd /path/to/code/
+$ cd /path/to/code/
 $ pip install-e ch7/tasks_proj_v2
 ...**
 Successfullyinstalledtasks
@@ -494,13 +497,13 @@ In the rest of this section, you’ll develop some tests for the “list” func
 Let’s see it in action to understand what we’re going to test:
 
 ```
-**$ taskslist**
+$ taskslist**
 ID owner donesummary
 -- ----- -----------
 ```
-**$ tasksadd** _"do somethinggreat"_
+$ tasksadd** _"do somethinggreat"_
 ```
-**$ tasksadd** _"repeat"_ **-o Brian
+$ tasksadd** _"repeat"_ **-o Brian
 $ tasksadd** _"againand again"_ **--ownerOkken
 $ taskslist**
 ID owner donesummary
@@ -509,12 +512,12 @@ ID owner donesummary
 2 BrianFalserepeat
 3 OkkenFalseagainand again
 ```
-**$ taskslist-o Brian**
+$ taskslist-o Brian**
 ID owner donesummary
 -- ----- -----------
 2 BrianFalserepeat
 ```
-**$ taskslist--ownerBrian**
+$ taskslist--ownerBrian**
 ID owner donesummary
 -- ----- -----------
 2 BrianFalserepeat
@@ -537,7 +540,7 @@ tasks_cli()
 
 That’s just a call to tasks_cli():
 
-**ch7/tasks_proj_v2/src/tasks/cli.py**
+**ch7/tasks_proj_v2/src/tasks/cli.py
 @click.group(context_settings={ _'help_option_names'_ : [ _'-h'_ , _'--help'_ ]})
 @click.version_option(version= _'0.1.1'_ )
 **def tasks_cli** ():
@@ -551,7 +554,7 @@ Obvious? No. But hold on, it gets better (or worse, depending on your perspec-
 
 tive). Here’s one of the commands—the list command:
 
-**ch7/tasks_proj_v2/src/tasks/cli.py**
+**ch7/tasks_proj_v2/src/tasks/cli.py
 @tasks_cli.command(name= _"list"_ , help= _"listtasks"_ )
 @click.option( _'-o'_ , _'--owner'_ , default=None,
 help= _'listtaskswiththisowner'_ )
@@ -594,7 +597,7 @@ deals with the return value correctly.
 
 To stub _tasks_db(), let’s look at the real implementation:
 
-**ch7/tasks_proj_v2/src/tasks/cli.py**
+**ch7/tasks_proj_v2/src/tasks/cli.py
 @contextmanager
 **def _tasks_db** ():
 config= tasks.config.get_config()
@@ -608,7 +611,7 @@ from tasks.config.get_config(), another external dependency, and uses the config
 
 uration to start a connection with the database. The yield releases control to
 
-Chapter 7. Using pytest with Other Tools • 138
+
 
 
 the with block of list_tasks(), and after everything is done, the database connection
@@ -621,7 +624,7 @@ functions, we don’t need a connection to an actual database. Therefore, we
 
 can replace the context manager with a simple stub:
 
-**ch7/tasks_proj_v2/tests/unit/test_cli.py**
+**ch7/tasks_proj_v2/tests/unit/test_cli.py
 @contextmanager
 **def stub_tasks_db** ():
 **yield**
@@ -697,7 +700,7 @@ which are all listed in the Python documentation.^5
 
 Let’s look at an almost identical test function that checks the output:
 
-**ch7/tasks_proj_v2/tests/unit/test_cli.py**
+**ch7/tasks_proj_v2/tests/unit/test_cli.py
 @pytest.fixture()
 **def no_db** (mocker):
 mocker.patch.object(tasks.cli, _'_tasks_db'_ , new=stub_tasks_db)
@@ -732,7 +735,7 @@ two tests seems appropriate.
 
 5. https://docs.python.org/dev/library/unittest.mock.html
 
-Chapter 7. Using pytest with Other Tools • 140
+
 
 
 The rest of the tests for the tasks list functionality don’t add any new concepts,
@@ -774,8 +777,8 @@ tasks.cli.tasks.list_tasks.assert_called_once_with( _'okken'_ )
 Let’s make sure they all work:
 
 ```
-**$ cd /path/to/code/ch7/tasks_proj_v2
-$ pytest-v tests/unit/test_cli.py**
+$ cd /path/to/code/ch7/tasks_proj_v2
+$ pytest-v tests/unit/test_cli.py
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected5 items
@@ -851,7 +854,7 @@ Here’s the abbreviated code layout:
 6. https://docs.python.org/dev/library/unittest.mock.html
 7. https://pypi.python.org/pypi/pytest-mock
 
-Chapter 7. Using pytest with Other Tools • 142
+
 
 
 tasks_proj_v2/
@@ -924,14 +927,14 @@ the markers are declared.
 Before running tox, you have to make sure you install it:
 
 ```
-**$ pip installtox**
+$ pip installtox**
 
 This can be done within a virtual environment.
 
 Then to run tox, just run, well, tox:
 
 ```
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ tox**
 GLOBsdist-make:/path/to/code/ch7/tasks_proj_v2/setup.py
 py27inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
@@ -973,7 +976,7 @@ tests/func/test_unique_id.py. [ 85%]
 tests/unit/test_cli.py..... [ 93%]
 tests/unit/test_task.py.... [100%]
 
-Chapter 7. Using pytest with Other Tools • 144
+
 
 
 =====================62 passedin 0.46seconds=====================
@@ -1086,7 +1089,7 @@ Next, we’ll add a post-build action: Add post-buildaction->PublishJunit test r
 
 Fill in the Test report XMLs with results.xml, as shown in the next screen.
 
-Chapter 7. Using pytest with Other Tools • 146
+
 
 
 That’s it! Now we can run tests through Jenkins. Here are the steps:
@@ -1130,7 +1133,7 @@ but there are quite a few other topics to explore around using pytest and
 
 Jenkins together. You can test multiple environments with Jenkins by either
 
-Chapter 7. Using pytest with Other Tools • 148
+
 
 
 setting up separate Jenkins jobs for each environment, or by having Jenkins
@@ -1217,8 +1220,8 @@ The actual test is at the bottom, test_delete_decreases_count(). The rest of the
 is there for setup and teardown. This test runs fine in unittest:
 
 ```
-**$ cd /path/to/code/ch7/unittest
-$ python-m unittest-v test_delete_unittest.py**
+$ cd /path/to/code/ch7/unittest
+$ python-m unittest-v test_delete_unittest.py
 test_delete_decreases_count(test_delete_unittest.TestNonEmpty)... ok
 
 ----------------------------------------------------------------------
@@ -1229,7 +1232,7 @@ OK
 It also runs fine in pytest:
 
 ```
-**$ pytest-v test_delete_unittest.py**
+$ pytest-v test_delete_unittest.py
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected1 item
@@ -1260,7 +1263,7 @@ tasks.delete(ids[0])
 _# THENcountdecreasesby 1_
 **assert** tasks.count()== 2
 
-Chapter 7. Using pytest with Other Tools • 150
+
 
 
 The fixtures we’ve been using for the Tasks project, including db_with_3_tasks
@@ -1274,12 +1277,12 @@ is almost identical.
 Both tests pass individually:
 
 ```
-**$ pytest-q test_delete_pytest.py**
+$ pytest-q test_delete_pytest.py
 
 . [100%]
 1 passedin 0.02seconds
 ```
-**$ pytest-q test_delete_unittest.py**
+$ pytest-q test_delete_unittest.py
 . [100%]
 1 passedin 0.02seconds
 
@@ -1288,7 +1291,7 @@ You can even run them together if—and only if—you make sure the unittest
 version runs first:
 
 ```
-**$ pytest-v test_delete_unittest.pytest_delete_pytest.py**
+$ pytest-v test_delete_unittest.pytest_delete_pytest.py
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
@@ -1301,7 +1304,7 @@ test_delete_pytest.py::test_delete_decreases_countPASSED[100%]
 If you run the pytest version first, something goes haywire:
 
 ```
-**$ pytest-v test_delete_pytest.pytest_delete_unittest.py**
+$ pytest-v test_delete_pytest.pytest_delete_unittest.py
 ===================testsessionstarts===================
 collected2 items
 
@@ -1311,7 +1314,8 @@ test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countERROR[100%]
 
 =========================ERRORS==========================
 ERRORat teardownof TestNonEmpty.test_delete_decreases_count
-**...**
+...
+
 conftest.py:12:in tasks_db_session
 tasks.stop_tasks_db()
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
@@ -1335,7 +1339,7 @@ and passed.
 Let’s use --setup-show to investigate further:
 
 ```
-**$ pytest-q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py**
+$ pytest-q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
 
 SETUP S tmpdir_factory
 SETUP S tasks_db_session(fixturesused:tmpdir_factory)
@@ -1387,7 +1391,7 @@ self.ids.append(tasks.add(Task( 'One' , 'Brian' , True)))
 self.ids.append(tasks.add(Task( 'Two' , 'StillBrian' , False)))
 self.ids.append(tasks.add(Task( 'Three' , 'NotBrian' , False)))
 ```
-Chapter 7. Using pytest with Other Tools • 152
+
 
 
 **def test_delete_decreases_count** (self):
@@ -1401,7 +1405,7 @@ self.assertEqual(tasks.count(),2)
 Now both unittest and pytest can cooperate and not run into each other:
 
 ```
-**$ pytest-v test_delete_pytest.pytest_delete_unittest_fix.py**
+$ pytest-v test_delete_pytest.pytest_delete_unittest_fix.py
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
@@ -1525,7 +1529,7 @@ versions with tox.
 
 permutations in the chapters.
 
-Chapter 7. Using pytest with Other Tools • 154
+
 
 
 ### What’s Next

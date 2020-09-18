@@ -1,3 +1,5 @@
+<img align="right" src="../logo.png">
+
 **APPENDIX 2**
 
 ### pip
@@ -48,7 +50,8 @@ Package Version
 pip 18.0
 setuptools39.0.1
 (my_env)$ pip installpytest
-**...**
+...
+
 Installingcollectedpackages:six,more-itertools,atomicwrites,
 pluggy,attrs,py, pytest
 Successfullyinstalledatomicwrites-1.2.1attrs-18.2.0
@@ -81,23 +84,23 @@ You can use pip to install packages with version numbers from pypi.python.org
 if it’s a release version PyPI knows about:
 
 ```
-**$ pip installpytest==3.2.1**
+$ pip installpytest==3.2.1**
 ```
 
 You can use pip to install a local package that has a setup.py file in it:
 
 
 ```
-**$ pip install/path/to/package**
+$ pip install/path/to/package**
 ```
 
 Use ./package_name if you are in the same directory as the package to install it
 locally:
 
 ```
-**$ cd /path/just/above/package
+$ cd /path/just/above/package
 $ pip installmy_package** _# pip is lookingin PyPIfor "my_package"_
-**$ pip install./my_package** _# now pip lookslocally_
+$ pip install./my_package** _# now pip lookslocally_
 ```
 
 You can use pip to install packages that have been downloaded as zip files or
@@ -110,7 +113,8 @@ You can also use pip to download a lot of files at once using a requirements.txt
 pytest==3.8.1
 pytest-xdist==1.23.2
 (my_env)$ pip install-r requirements.txt
-**...**
+...
+
 ```
 
 Successfullyinstalledapipkg-1.5execnet-1.5.0pytest-3.8.1pytest-xdist-1.23.2
@@ -124,7 +128,8 @@ The following downloads pytest and all dependencies:
 (my_env)$ mkdir~/.pipcache
 (my_env)$ pip download-d ~/pipcachepytest
 Collectingpytest
-**...**
+...
+
 ```
 
 Successfullydownloadedpytestatomicwritespluggy
@@ -136,7 +141,8 @@ Later, even if you’re offline, you can install from the cache:
 (my_env)$ pip install--no-index--find-links=~/pipcachepytest
 Lookingin links:/Users/okken/pipcache
 Collectingpytest
-**...**
+...
+
 Installingcollectedpackages:attrs,six,more-itertools,atomicwrites,
 py, pluggy,pytest
 Successfullyinstalledatomicwrites-1.x.yattrs-18.x.y

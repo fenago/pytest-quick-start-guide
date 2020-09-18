@@ -1,3 +1,6 @@
+<img align="right" src="../logo.png">
+
+
 **APPENDIX 4**
 
 ### Packaging and Distributing Python Projects
@@ -55,7 +58,7 @@ One directory with one module and a setup.py file is enough to make it instal-
 lable via pip:
 
 ```
-**$ cd /path/to/code/appendices/packaging
+$ cd /path/to/code/appendices/packaging
 $ pip install./some_module_proj**
 Processing./some_module_proj
 Installingcollectedpackages:some-module
@@ -66,7 +69,7 @@ Successfullyinstalledsome-module-0.0.0
 And we can now use some_module from Python (or from a test):
 
 ```
-**$ python**
+$ python**
 Python3.7.0(v3.7.0:1bf9cc5093,Jun 26 2018,23:26:24)
 [Clang6.0 (clang-600.0.57)]on darwin
 Type"help","copyright","credits"or "license"for moreinformation.
@@ -86,7 +89,7 @@ Let’s make this code a package by adding an __init__.py and putting the __init
 file and module in a directory with a package name:
 
 ```
-**$ treesome_package_proj/**
+$ treesome_package_proj/**
 some_package_proj/
 ├──setup.py
 └──src
@@ -146,7 +149,7 @@ Instead of using py_modules, we specify packages.
 This is now installable:
 
 ```
-**$ cd /path/to/code/appendices/packaging
+$ cd /path/to/code/appendices/packaging
 $ pip install./some_package_proj/**
 Processing./some_package_proj
 Installingcollectedpackages:some-package
@@ -160,7 +163,7 @@ Successfullyinstalledsome-package-0.0.0
 and usable:
 
 ```
-**$ python**
+$ python**
 Python3.7.0(v3.7.0:1bf9cc5093,Jun 26 2018,23:26:24)
 [Clang6.0 (clang-600.0.57)]on darwin
 Type"help","copyright","credits"or "license"for moreinformation.
@@ -181,11 +184,12 @@ For personal use, the configuration shown in the previous section is enough
 to create a source distribution and a wheel. Let’s try it:
 
 ```
-**$ cd /path/to/code/appendices/packaging/some_package_proj/
+$ cd /path/to/code/appendices/packaging/some_package_proj/
 $ pip installwheel
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
-**...**
+...
+
 warning:sdist:standardfilenot found:
 shouldhaveone of README,README.rst, README.txt,README.md
 
@@ -323,7 +327,7 @@ into a CHANGELOG.rst file.
 Let’s see if this was enough to remove the warnings:
 
 ```
-**$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /path/to/code/appendices/packaging/some_package_proj_v2
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
 runningbuild
@@ -337,9 +341,10 @@ runningbuild_py
 creatingbuild
 creatingbuild/lib
 creatingbuild/lib/some_package
-**...**
+...
 
-**$ ls dist**
+
+$ ls dist**
 some_package-1.0-py3-none-any.whlsome_package-1.0.tar.gz
 ```
 
@@ -349,7 +354,7 @@ Now, we can put the .whl and/or .tar.gz files in a local shared directory and pi
 install to our heart’s content:
 
 ```
-**$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /path/to/code/appendices/packaging/some_package_proj_v2
 $ mkdir~/packages/
 $ cp dist/some_package-1.0-py3-none-any.whl~/packages
 $ cp dist/some_package-1.0.tar.gz~/packages
@@ -357,10 +362,10 @@ $ pip install--no-index--find-links=~/packagessome_package**
 Collectingsome_package
 Installingcollectedpackages:some-package
 Successfullyinstalledsome-package-1.0
-**$ pip install--no-index--find-links=./distsome_package==1.0**
+$ pip install--no-index--find-links=./distsome_package==1.0**
 Requirementalreadysatisfied:some_package==1.0in
 /path/to/venv/lib/python3.6/site-packages
-**$**
+$**
 ```
 
 Now you can create your own stash of local project packages from your team,

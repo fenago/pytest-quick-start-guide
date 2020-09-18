@@ -1,5 +1,5 @@
+<img align="right" src="../logo.png">
 
-**CHAPTER 4**
 
 ### Builtin Fixtures
 
@@ -117,7 +117,7 @@ the base directory used for this session. The print statement is in the example
 so you can see where the directory is on your system. Let’s see where it is:
 
 ```
-**$ cd /path/to/code/ch4
+$ cd /path/to/code/ch4
 $ pytest-q -s test_tmpdir.py::test_tmpdir_factory**
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 /T/pytest-of-okken/pytest-732
@@ -149,7 +149,7 @@ fixture in either the module itself, or in a conftest.py file that sets up the d
 file like this:
 
 ```
-**ch4/authors/conftest.py**
+**ch4/authors/conftest.py
 _"""Demonstratetmpdir_factory."""_
 
 **importjson
@@ -180,7 +180,7 @@ the json file will only be created once per module that has a test using it:
 
 
 ```
-**ch4/authors/test_authors.py**
+**ch4/authors/test_authors.py
 _"""Someteststhatuse tempdatafiles."""_
 **importjson**
 
@@ -240,17 +240,19 @@ The options --myopt and --foo <value> were added to the previous code, and the
 help string was modified, as shown here:
 
 ```
-**$ cd /path/to/code/ch4/pytestconfig
+$ cd /path/to/code/ch4/pytestconfig
 $ pytest--help**
 usage:pytest[options][file_or_dir][file_or_dir][...]
-**...**
+...
+
 ```
 
 ```
 customoptions:
 --myopt somebooleanoption
 --foo=FOO foo:bar or baz
-**...**
+...
+
 ```
 
 Now we can access those options from a test:
@@ -265,18 +267,18 @@ importpytest**
 Let’s see how this works:
 
 ```
-**$ pytest-s -q test_config.py::test_option**
+$ pytest-s -q test_config.py::test_option**
 "foo"set to: bar
 "myopt"set to: False
 .
 1 passedin 0.01seconds
-**$ pytest-s -q --myopttest_config.py::test_option**
+$ pytest-s -q --myopttest_config.py::test_option**
 "foo"set to: bar
 "myopt"set to: True
 .
 1 passedin 0.01seconds
 
-**$ pytest-s -q --myopt--foobaz test_config.py::test_option**
+$ pytest-s -q --myopt--foobaz test_config.py::test_option**
 "foo"set to: baz
 "myopt"set to: True
 .
@@ -287,7 +289,7 @@ Because pytestconfig is a fixture, it can also be accessed from other fixtures.
 You can make fixtures for the option names, if you like, like this:
 
 ```
-**ch4/pytestconfig/test_config.py**
+**ch4/pytestconfig/test_config.py
 @pytest.fixture()
 **def foo** (pytestconfig):
 **return** pytestconfig.option.foo
@@ -378,8 +380,8 @@ Let’s run them using --verbose to see the function names, and --tb=no to hide
 the stack trace:
 
 ```
-**$ cd /path/to/code/ch4/cache
-$ pytest--verbose--tb=notest_pass_fail.py**
+$ cd /path/to/code/ch4/cache
+$ pytest--verbose--tb=notest_pass_fail.py
 ===================testsessionstarts===================
 collected2 items
 
@@ -394,7 +396,7 @@ ously will be run first, followed by the rest of the session:
 
 
 ```
-**$ pytest--verbose--tb=no--fftest_pass_fail.py**
+$ pytest--verbose--tb=no--fftest_pass_fail.py
 ===================testsessionstarts===================
 collected2 items
 run-last-failure:rerunprevious1 failurefirst
@@ -427,7 +429,7 @@ Here’s a parametrized test with one failure:
 
 
 ```
-**ch4/cache/test_few_failures.py**
+**ch4/cache/test_few_failures.py
 _"""Demonstrate-lf and -ff withfailingtests."""_
 
 **importpytest
@@ -452,8 +454,8 @@ sum_= x + y
 And the output:
 
 ```
-**$ cd /path/to/code/ch4/cache
-$ pytest-q test_few_failures.py**
+$ cd /path/to/code/ch4/cache
+$ pytest-q test_few_failures.py
 .F... [100%]
 ========================FAILURES=========================
 _______________test_a[1e+25-1e+23-1.1e+25]_______________
@@ -478,7 +480,7 @@ the test again to see the failure again. You can specify the test case on the
 command line:
 
 ```
-**$ pytest-q** _"test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"_
+$ pytest-q** _"test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"_
 ```
 
 If you don’t want to copy/paste or there are multiple failed cases you’d like
@@ -487,7 +489,7 @@ another flag that might make things easier is --showlocals, or -l for short:
 
 
 ```
-**$ pytest-q --lf-l test_few_failures.py**
+$ pytest-q --lf-l test_few_failures.py
 run-last-failure:rerunprevious1 failure
 F [100%]
 ========================FAILURES=========================
@@ -519,7 +521,7 @@ test failure information from the last test session. You can see the stored
 information with --cache-show:
 
 ```
-**$ pytest--cache-show**
+$ pytest--cache-show**
 =====================testsessionstarts======================
 -------------------------cachevalues-------------------------
 cache/lastfailedcontains:
@@ -527,19 +529,20 @@ cache/lastfailedcontains:
 
 =================no testsran in 0.00seconds=================
 
-**$ pytest--cache-show**
+$ pytest--cache-show**
 ===================testsessionstarts===================
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
-**...**
+...
+
 ==============no testsran in 0.00seconds===============
 ```
 
 Or you can look in the cache dir:
 
 ```
-**$ cat .pytest_cache/v/cache/lastfailed**
+$ cat .pytest_cache/v/cache/lastfailed**
 {
 "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]":true
 }
@@ -568,7 +571,7 @@ how it’s represented in the .cache directory.
 Here’s our fixture used to time tests:
 
 ```
-**ch4/cache/test_slower.py**
+**ch4/cache/test_slower.py
 @pytest.fixture(autouse=True)
 **def check_duration** (request,cache):
 key = _'duration/'_ + request.node.nodeid.replace( _':'_ , _'_'_ )
@@ -595,7 +598,7 @@ function; the code after yield happens after the test function.
 Now we need some tests that take different amounts of time:
 
 ```
-**ch4/cache/test_slower.py**
+**ch4/cache/test_slower.py
 @pytest.mark.parametrize( _'i'_ , range(5))
 **def test_slow_stuff** (i):
 time.sleep(random.random())
@@ -607,11 +610,11 @@ random amount of time, all shorter than a second. Let’s see it run a couple
 of times:
 
 ```
-**$ cd /path/to/code/ch4/cache
-$ pytest-q --tb=linetest_slower.py**
+$ cd /path/to/code/ch4/cache
+$ pytest-q --tb=linetest_slower.py
 ..... [100%]
 5 passedin 1.40seconds
-**$ pytest-q --tb=linetest_slower.py**
+$ pytest-q --tb=linetest_slower.py
 ..E.E.. [100%]
 =========================ERRORS==========================
 _________ERRORat teardownof test_slow_stuff[1]_________
@@ -626,12 +629,13 @@ assert0.28841<= (0.086302* 2)
 Well, that was fun. Let’s see what’s in the cache:
 
 ```
-**$ pytest-q --cache-show**
+$ pytest-q --cache-show**
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower.py::test_slow_stuff[1]':True,
 'test_slower.py::test_slow_stuff[2]':True}
-**...**
+...
+
 duration/test_slower.py__test_slow_stuff[0]contains:
 0.958503
 duration/test_slower.py__test_slow_stuff[1]contains:
@@ -666,7 +670,7 @@ returning request.config.cache. This is available in any scope.
 Here’s one possible refactoring of the same functionality:
 
 ```
-**ch4/cache/test_slower_2.py**
+**ch4/cache/test_slower_2.py
 Duration= namedtuple( _'Duration'_ , [ _'current'_ , _'last'_ ])
 
 @pytest.fixture(scope= _'session'_ )
@@ -701,21 +705,22 @@ end of the test session, the collected current dictionary is saved in the cache.
 After running it a couple of times, let’s look at the saved cache:
 
 ```
-**$ pytest-q --cache-cleartest_slower_2.py**
+$ pytest-q --cache-cleartest_slower_2.py
 ..... [100%]
 5 passedin 2.27seconds
 
-**$ pytest-q --tb=notest_slower_2.py**
+$ pytest-q --tb=notest_slower_2.py
 .E.E...E [100%]
 5 passed,3 errorin 3.65seconds
 
-**$ pytest-q --cache-show**
+$ pytest-q --cache-show**
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower_2.py::test_slow_stuff[0]':True,
 'test_slower_2.py::test_slow_stuff[1]':True,
 'test_slower_2.py::test_slow_stuff[4]':True}
-**...**
+...
+
 duration/testdurationscontains:
 {'test_slower_2.py::test_slow_stuff[0]':0.701514,
 ```
@@ -805,7 +810,7 @@ def test_capsys_disabled** (capsys):
 Now, 'alwaysprint this' will always be output:
 
 ```
-**$ cd /path/to/code/ch4/cap
+$ cd /path/to/code/ch4/cap
 $ pytest-q test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
@@ -813,7 +818,7 @@ alwaysprintthis
 . [100%]
 1 passedin 0.02seconds
 
-**$ pytest-q -s test_capsys.py::test_capsys_disabled**
+$ pytest-q -s test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
 normalprint,usuallycaptured
@@ -1027,7 +1032,7 @@ everyone understands clearly. So we throw some usage examples in both the
 file docstring and the docstrings of the functions:
 
 ```
-**ch4/dt/1/unnecessary_math.py**
+**ch4/dt/1/unnecessary_math.py
 _"""
 Thismoduledefinesmultiply(a,b) and divide(a,b)._
 
@@ -1075,8 +1080,8 @@ different test. The import in the top docstring will allow the first part to pas
 but the code in the docstrings of the functions will fail:
 
 ```
-**$ cd /path/to/code/ch4/dt/1
-$ pytest-v --doctest-modules--tb=shortunnecessary_math.py**
+$ cd /path/to/code/ch4/dt/1
+$ pytest-v --doctest-modules--tb=shortunnecessary_math.py
 ===================testsessionstarts===================
 collected3 items
 
@@ -1092,7 +1097,8 @@ ____________[doctest]unnecessary_math.divide ____________
 037 >>> um.divide(10,5)
 UNEXPECTEDEXCEPTION:NameError("name'um'is not defined")
 Traceback(mostrecentcalllast):
-**...**
+...
+
 File"<doctestunnecessary_math.divide[0]>", line1, in <module>
 ```
 
@@ -1108,7 +1114,8 @@ ___________[doctest]unnecessary_math.multiply___________
 025 >>> um.multiply(4,3)
 UNEXPECTEDEXCEPTION:NameError("name'um'is not defined")
 Traceback(mostrecentcalllast):
-**...**
+...
+
 File"<doctestunnecessary_math.multiply[0]>",line1, in <module>
 
 NameError:name'um'is not defined
@@ -1145,8 +1152,8 @@ Returnsa dividedby b.
 This definitely fixes the problem:
 
 ```
-**$ cd /path/to/code/ch4/dt/2
-$ pytest-v --doctest-modules--tb=shortunnecessary_math.py**
+$ cd /path/to/code/ch4/dt/2
+$ pytest-v --doctest-modules--tb=shortunnecessary_math.py
 ===================testsessionstarts===================
 collected3 items
 

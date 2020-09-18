@@ -1,3 +1,5 @@
+<img align="right" src="../logo.png">
+
 **APPENDIX 3**
 
 ### Plugin Sampler Pack
@@ -25,7 +27,7 @@ Following is a normal test run of tests that start with test_list from ch7/tasks
 _proj_v2:
 
 ```
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ pip install.
 $ pip installpytest-repeat
 $ cd tests
@@ -51,7 +53,7 @@ unit/test_cli.py::test_list_dash_dash_ownerPASSED [100%]
 With the pytest-repeat plugin, you can use --count to run everything twice:
 
 ```
-**$ pytest--count=2-v -k test_list**
+$ pytest--count=2-v -k test_list**
 =====================testsessionstarts=====================
 plugins:repeat-0.7.0,mock-1.10.0
 collected124 items/ 112 deselected
@@ -104,9 +106,9 @@ time.sleep(1)
 Notice that it takes over ten seconds to run normally:
 
 ```
-**$ pip installpytest-xdist
+$ pip installpytest-xdist
 $ cd /path/to/code/appendices/xdist
-$ pytest test_parallel.py**
+$ pytest test_parallel.py
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,forked-0.2
 collected 10 items
@@ -121,7 +123,7 @@ subprocess, and use -n auto to automatically detect the number of CPUs on
 the system. Here’s the same test run on multiple processors:
 
 ```
-**$ pytest-n autotest_parallel.py**
+$ pytest-n autotest_parallel.py
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,forked-0.2
 gw0 [10]/ gw1 [10]/ gw2 [10]/ gw3 [10]
@@ -159,9 +161,9 @@ Let’s run the tests from the previous example (with one-second sleeps) with
 a half-second timeout:
 
 ```
-**$ cd /path/to/code/appendices/xdist
+$ cd /path/to/code/appendices/xdist
 $ pip installpytest-timeout
-$ pytest--timeout=0.5-x test_parallel.py**
+$ pytest--timeout=0.5-x test_parallel.py
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
 timeout:0.5s
@@ -210,8 +212,8 @@ appear right away.
 Here’s a test with normal failures at the end:
 
 ```
-**$ cd /path/to/code/appendices/xdist
-$ pytest --timeout=0.5 --tb=line--maxfail=2test_parallel.py**
+$ cd /path/to/code/appendices/xdist
+$ pytest --timeout=0.5 --tb=line--maxfail=2test_parallel.py
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
 timeout:0.5s
@@ -230,8 +232,8 @@ test_parallel.pyFF
 Here’s the same test with --instafail:
 
 ```
-**$ pip installpytest-instafail
-$ pytest--instafail --timeout=0.5 --tb=line--maxfail=2test_parallel.py**
+$ pip installpytest-instafail
+$ pytest--instafail --timeout=0.5 --tb=line--maxfail=2test_parallel.py
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, instafail-0.4.0,forked-0.2
 timeout:0.5s
@@ -323,7 +325,7 @@ pass vs. fail, be sure to try out pytest-html.
 The pytest-html plugin is really easy to start. Just add --html=report_name.html:
 
 ```
-**$ cd /path/to/code/appendices/outcomes
+$ cd /path/to/code/appendices/outcomes
 $ pytest--html=report.html**
 ======================testsessionstarts======================
 metadata:...
@@ -350,7 +352,7 @@ E assert1 == 2
 
 test_outcomes.py:8:AssertionError
 1 failed,1 passed,1 skipped,1 xfailed,1 xpassed,1 errorin 0.08seconds
-**$ openreport.html**
+$ openreport.html**
 ```
 
 This produces a report that includes the information about the test session

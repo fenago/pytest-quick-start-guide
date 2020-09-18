@@ -1,3 +1,5 @@
+<img align="right" src="../logo.png">
+
 **APPENDIX 1**
 
 ### Virtual Environments
@@ -18,7 +20,7 @@ instead. Just remember to pip install virtualenv first.
 Here’s how to set up a virtual environment in macOS and Linux:
 
 ```
-**$ python3-m venvenv_name
+$ python3-m venvenv_name
 $ sourceenv_name/bin/activate**
 (env_name)$
 **... do yourwork...**

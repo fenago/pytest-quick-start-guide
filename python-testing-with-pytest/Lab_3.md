@@ -1,6 +1,5 @@
+<img align="right" src="../logo.png">
 
-
-**CHAPTER 3**
 
 ### pytest Fixtures
 
@@ -169,9 +168,9 @@ If you run the test from the last section, you don’t get to see what fixtures
 are run:
 
 ```
-**$ cd /path/to/code/
+$ cd /path/to/code/
 $ pip install./tasks_proj/** _# if not installedyet_
-**$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /path/to/code/ch3/a/tasks_proj/tests/func
 $ pytest-v test_add.py-k valid_id**
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
@@ -186,7 +185,7 @@ nately, pytest provides a command-line flag, --setup-show, that does just that:
 
 
 ```
-**$ pytest--setup-showtest_add.py-k valid_id**
+$ pytest--setup-showtest_add.py-k valid_id**
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
 
@@ -218,7 +217,7 @@ Fixtures are a great place to store data to use for testing. You can return
 anything. Here’s a fixture returning a tuple of mixed type:
 
 ```
-**ch3/test_fixtures.py**
+**ch3/test_fixtures.py
 @pytest.fixture()
 **def a_tuple** ():
 _"""Returnsomethingmoreinteresting."""_
@@ -233,7 +232,7 @@ Since test_a_tuple() should fail (23 != 32), we can see what happens when a test
 with a fixture fails:
 
 ```
-**$ cd /path/to/code/ch3
+$ cd /path/to/code/ch3
 $ pytesttest_fixtures.py::test_a_tuple**
 ===================testsessionstarts===================
 collected1 item
@@ -266,7 +265,7 @@ What happens if the assert (or any exception) happens in the fixture?
 
 
 ```
-**$ pytest-v test_fixtures.py::test_other_data**
+$ pytest-v test_fixtures.py::test_other_data**
 ===================testsessionstarts===================
 collected1 item
 
@@ -295,7 +294,7 @@ But what about the Tasks project? For the Tasks project, we could probably
 use some data fixtures, perhaps different lists of tasks with various properties:
 
 ```
-**ch3/a/tasks_proj/tests/conftest.py**
+**ch3/a/tasks_proj/tests/conftest.py
 _# Reminderof Taskconstructorinterface
 # Task(summary=None,owner=None,done=False,id=None)
 # summaryis required
@@ -339,7 +338,7 @@ tasks_db fixture. Let’s keep the chain going and add some specialized fixtures
 for non-empty tasks databases:
 
 ```
-**ch3/a/tasks_proj/tests/conftest.py**
+**ch3/a/tasks_proj/tests/conftest.py
 @pytest.fixture()
 **def db_with_3_tasks** (tasks_db,tasks_just_a_few):
 _"""Connecteddb with3 tasks,all unique."""_
@@ -386,7 +385,7 @@ test_add_increases_count() to only be possible if add() really failed to alter t
 Let’s trace it and see all the fixtures run:
 
 ```
-**$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /path/to/code/ch3/a/tasks_proj/tests/func
 $ pytest--setup-showtest_add.py::test_add_increases_count**
 ===================testsessionstarts===================
 collected1 item
@@ -455,7 +454,7 @@ session scope share one setup and teardown call.
 Here’s how the scope values look in action:
 
 ```
-**ch3/test_scope.py**
+**ch3/test_scope.py
 _"""Demofixturescope."""_
 
 **importpytest**
@@ -500,8 +499,8 @@ Let’s use --setup-show to demonstrate that the number of times a fixture is ca
 and when the setup and teardown are run depend on the scope:
 
 ```
-**$ cd /path/to/code/ch3
-$ pytest--setup-showtest_scope.py**
+$ cd /path/to/code/ch3
+$ pytest--setup-showtest_scope.py
 ===================testsessionstarts===================
 collected4 items
 
@@ -582,7 +581,7 @@ The data fixtures just return a value, so there really is no reason to have them
 run all the time. Once per session is sufficient:
 
 ```
-**ch3/b/tasks_proj/tests/conftest.py**
+**ch3/b/tasks_proj/tests/conftest.py
 _# Reminderof Taskconstructorinterface
 # Task(summary=None,owner=None,done=False,id=None)
 # summaryis required
@@ -617,7 +616,7 @@ Task( _'Eatice cream'_ , _'Daniel'_ ))
 Now, let’s see if all of these changes work with our tests:
 
 ```
-**$ cd /path/to/code/ch3/b/tasks_proj
+$ cd /path/to/code/ch3/b/tasks_proj
 $ pytest**
 ===================testsessionstarts===================
 collected55 items
@@ -637,7 +636,7 @@ Looks like it’s all good. Let’s trace the fixtures for one test file to see 
 different scoping worked as expected:
 
 ```
-**$ pytest--setup-showtests/func/test_add.py**
+$ pytest--setup-showtests/func/test_add.py
 ===================testsessionstarts===================
 collected3 items
 
@@ -681,7 +680,7 @@ It doesn’t make sense to do this with test functions—it’s just more typing
 But it does work well for test classes:
 
 ```
-**ch3/test_scope.py**
+**ch3/test_scope.py
 @pytest.mark.usefixtures( _'class_scope'_ )
 **class** TestSomething():
 _"""Democlassscopefixtures."""_
@@ -708,7 +707,7 @@ want to run at certain times, but tests don’t really depend on any system
 state or data from the fixture. Here’s a rather contrived example:
 
 ```
-**ch3/test_autouse.py**
+**ch3/test_autouse.py
 _"""Demonstrateautousefixtures."""_
 
 **importpytest
@@ -745,8 +744,8 @@ We want to add test times after each test, and the date and current time at
 the end of the session. Here’s what these look like:
 
 ```
-**$ cd /path/to/code/ch3
-$ pytest-v -s test_autouse.py**
+$ cd /path/to/code/ch3
+$ pytest-v -s test_autouse.py
 =====================testsessionstarts======================
 collected2 items
 
@@ -777,7 +776,7 @@ using it, is usually the same as the function name of the fixture. However,
 pytest allows you to rename fixtures with a name parameter to @pytest.fixture():
 
 ```
-**ch3/test_rename_fixture.py**
+**ch3/test_rename_fixture.py
 _"""Demonstratefixturerenaming."""_
 
 **importpytest**
@@ -796,7 +795,7 @@ Here, lue is now the fixture name, instead of ultimate_answer_to_life_the_uni-
 verse_and_everything. That name even shows up if we run it with --setup-show:
 
 ```
-**$ pytest--setup-showtest_rename_fixture.py**
+$ pytest--setup-showtest_rename_fixture.py
 ===================testsessionstarts===================
 collected1 item
 
@@ -813,9 +812,10 @@ If you need to find out where lue is defined, you can add the pytest option
 for the test, including ones that have been renamed:
 
 ```
-**$ pytest--fixturestest_rename_fixture.py**
+$ pytest--fixturestest_rename_fixture.py
 ===================testsessionstarts===================
-**...**
+...
+
 ```
 
 
@@ -832,10 +832,11 @@ defined are at the bottom, along with where they are defined. We can use this
 to look up the definition of lue. Let’s use that in the Tasks project:
 
 ```
-**$ cd /path/to/code/ch3/b/tasks_proj
-$ pytest--fixturestests/func/test_add.py**
+$ cd /path/to/code/ch3/b/tasks_proj
+$ pytest--fixturestests/func/test_add.py
 ========================testsessionstarts========================
-**...**
+...
+
 tmpdir_factory
 Returna TempdirFactoryinstancefor the testsession.
 tmpdir
@@ -897,7 +898,7 @@ But now, instead of parametrizing the test, we will parametrize a fixture
 called a_task:
 
 ```
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py**
+**ch3/b/tasks_proj/tests/func/test_add_variety2.py
 @pytest.fixture(params=tasks_to_try)
 **def a_task** (request):
 _"""Usingno ids."""_
@@ -920,7 +921,7 @@ to the test using it. Since our task list has four tasks, the fixture will be ca
 four times, and then the test will get called four times:
 
 ```
-**$ cd /path/to/code/ch3/b/tasks_proj/tests/func
+$ cd /path/to/code/ch3/b/tasks_proj/tests/func
 $ pytest-v test_add_variety2.py::test_add_a**
 ===================testsessionstarts===================
 collected4 items
@@ -939,7 +940,7 @@ number to the name of the fixture. However, we can use the same string list
 we used when we parametrized our tests:
 
 ```
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py**
+**ch3/b/tasks_proj/tests/func/test_add_variety2.py
 @pytest.fixture(params=tasks_to_try,ids=task_ids)
 **def b_task** (request):
 _"""Usinga listof ids."""_
@@ -955,7 +956,7 @@ t_from_db= tasks.get(task_id)
 This gives us better identifiers:
 
 ```
-**$ pytest-v test_add_variety2.py::test_add_b**
+$ pytest-v test_add_variety2.py::test_add_b**
 ===================testsessionstarts===================
 collected4 items
 
@@ -998,7 +999,7 @@ single Task object to generate the identifier for one Task object at a time. It�
 cleaner than generating a full list ahead of time, and looks the same:
 
 ```
-**$ pytest-v test_add_variety2.py::test_add_c**
+$ pytest-v test_add_variety2.py::test_add_c**
 ===================testsessionstarts===================
 collected4 items
 
@@ -1114,7 +1115,7 @@ this example and in a debugger example in Chapter 7.
 Here’s what we have so far:
 
 ```
-**$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /path/to/code/ch3/c/tasks_proj
 $ pip installpymongo
 $ pytest-v --tb=no**
 ===================testsessionstarts===================
@@ -1126,14 +1127,16 @@ tests/func/test_add.py::test_add_increases_count[tiny]PASSED[ 3%]
 tests/func/test_add_variety.py::test_add_1[tiny]PASSED[ 4%]
 tests/func/test_add_variety.py::test_add_2[tiny-task0]PASSED[ 5%]
 tests/func/test_add_variety.py::test_add_2[tiny-task1]PASSED[ 6%]
-**...**
+...
+
 tests/func/test_add.py::test_add_returns_valid_id[mongo]FAILED[ 43%]
 tests/func/test_add.py::test_added_task_has_id_set[mongo]FAILED[ 44%]
 tests/func/test_add.py::test_add_increases_count[mongo]PASSED[ 45%]
 tests/func/test_add_variety.py::test_add_1[mongo]FAILED[ 46%]
 tests/func/test_add_variety.py::test_add_2[mongo-task0]FAILED[ 47%]
 tests/func/test_add_variety.py::test_add_2[mongo-task1]FAILED[ 48%]
-**...**
+...
+
 ==========42 failed,54 passedin 4.85seconds===========
 ```
 

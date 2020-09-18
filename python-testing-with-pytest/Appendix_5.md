@@ -1,3 +1,6 @@
+<img align="right" src="../logo.png">
+
+
 **APPENDIX 5**
 
 ### xUnit Fixtures
@@ -102,8 +105,8 @@ parameter names module, function, cls, and method, but that’s the convention.
 Here’s the test session to help visualize the control flow:
 
 ```
-**$ cd /path/to/code/appendices/xunit
-$ pytest-s test_xUnit_fixtures.py**
+$ cd /path/to/code/appendices/xunit
+$ pytest-s test_xUnit_fixtures.py
 ============testsessionstarts=============
 plugins:mock-1.6.0,cov-2.5.1
 collected4 items
@@ -174,8 +177,8 @@ print** ( _'function_fixture()teardown- pytest'_ )
 You _can_ do it. But please don’t. It gets confusing. Take a look at this:
 
 ```
-**$ cd /path/to/code/appendices/xunit
-$ pytest-s test_mixed_fixtures.py**
+$ cd /path/to/code/appendices/xunit
+$ pytest-s test_mixed_fixtures.py
 ============testsessionstarts=============
 plugins:mock-1.6.0,cov-2.5.1
 collected2 items
