@@ -1,23 +1,23 @@
 
 
-Chapter 2. Writing and Running Tests
+Lab 2. Writing and Running Tests
 ---------------------------------------------
 
 
 
-In the previous chapter, we discussed why testing is so important and
+In the previous lab, we discussed why testing is so important and
 looked at a brief overview of the `unittest` module. We also
 took a cursory look at pytest\'s features, but barely got a taste of
 them.
 
-In this chapter, we will start our journey with pytest. We will be
+In this lab, we will start our journey with pytest. We will be
 pragmatic, so this means that we will not take an exhaustive look at all
 of the things it\'s possible to do with pytest, but instead provide you
 with a quick overview of the basics to make you productive quickly. We
 will take a look at how to write tests, how to organize them into files
 and directories, and how to use pytest\'s command line effectively. 
 
-Here\'s what is covered in this chapter:
+Here\'s what is covered in this lab:
 
 
 -   Installing pytest
@@ -30,7 +30,7 @@ Here\'s what is covered in this chapter:
 
 ### Note
 
-In the chapter, there are a lot of examples typed into the command line.
+In the lab, there are a lot of examples typed into the command line.
 They are marked by the λ character. To avoid clutter and to focus on the
 important parts, the pytest header (which normally displays the pytest
 version, the Python version, installed plugins, and so on) will be
@@ -223,10 +223,10 @@ classes to group tests you can do so:
 
 Grouping tests can be useful when you want to put a number of tests
 under the same scope: you can execute tests based on the class they are
-in, apply markers to all of the tests in a class ([Chapter
+in, apply markers to all of the tests in a class ([Lab
 3](https://subscription.packtpub.com/book/web_development/9781789347562/3){.link},
 [*Markers and Parametrization*]), and create fixtures bound
-to a class ([Chapter
+to a class ([Lab
 4](https://subscription.packtpub.com/book/web_development/9781789347562/4){.link},
 [*Fixtures*]).
 
@@ -242,7 +242,7 @@ to a class ([Chapter
 
 Pytest can run your tests in a number of
 ways. Let\'s quickly get into the basics now and, later on in the
-chapter, we will move on to more advanced options.
+lab, we will move on to more advanced options.
 
 You can start by just simply executing the `pytest` command:
 
@@ -1192,7 +1192,7 @@ Useful command-line options
 
 Now we will take a look at command-line
 options that will make you more productive in your daily work. As stated
-at the beginning of the chapter, this is not a complete list of all of
+at the beginning of the lab, this is not a complete list of all of
 the command-line features; just the ones that you will use (and love)
 the most.
 
@@ -1877,11 +1877,11 @@ single-character arguments:
 -   `f` (failed): `assert` failed
 -   `e` (error): raised an unexpected exception
 -   `s` (skipped): skipped (we will get to this in the next
-    chapter)
+    lab)
 -   `x` (xfailed): expected to fail, did fail (we will get to
-    this in the next chapter)
+    this in the next lab)
 -   `X` (xpassed): expected to fail, but passed (!) (we will
-    get to this in the next chapter)
+    get to this in the next lab)
 -   `p` (passed): test passed
 -   `P` (passed with output): displays captured output even
     for passing tests (careful -- this usually produces a lot of output)
@@ -2189,7 +2189,7 @@ This is useful to avoid cluttering your repository root with too many
 files, but it is really a matter of preference.
 
 Now, we will take a look at more common configuration options. More
-options will be introduced in the coming chapters as we cover new
+options will be introduced in the coming labs as we cover new
 features.
 
 
@@ -2407,7 +2407,7 @@ Summary
 
 
 
-In this chapter, we covered how to use `virtualenv` and
+In this lab, we covered how to use `virtualenv` and
 `pip` to install pytest. After that, we jumped into how to
 write tests, and the different ways to run them so that we can execute
 just the tests we are interested in. We had an overview of how pytest
@@ -2421,7 +2421,7 @@ more useful command-line options so that we can get productive right
 away. Finally, we covered how `pytest.ini` files are used for
 persistent command-line options and other configuration.
 
-In the next chapter, we will learn how to use marks to help us skip
+In the next lab, we will learn how to use marks to help us skip
 tests on certain platforms, how to let our test suite know when a bug is
 fixed in our code or in external libraries, and how to group sets of
 tests so that we can execute them selectively in the command line. After

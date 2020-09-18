@@ -4,11 +4,11 @@
 
 ### Writing Test Functions
 
-In the last chapter, you got pytest up and running. You saw how to run i
+In the last lab, you got pytest up and running. You saw how to run i
 against files and directories and how many of the options worked. In this
-chapter, you’ll learn how to write test functions in the context of testing a
+lab, you’ll learn how to write test functions in the context of testing a
 Python package. If you’re using pytest to test something other than a Python
-package, most of this chapter still applies.
+package, most of this lab still applies.
 
 We’re going to write tests for the Tasks package. Before we do that, I’ll talk
 about the structure of a distributable Python package and the tests for it,
@@ -101,7 +101,7 @@ This is discussed in full in Avoiding Filename Collisions, on page 123.
 The pytest.ini file is optional. It contains project-wide pytest configuration. There
 should be at most only one of these in your project. It can contain directives
 that change the behavior of pytest, such as setting up a list of options that
-will always be used. You’ll learn all about pytest.ini in Chapter 6, Configuration,
+will always be used. You’ll learn all about pytest.ini in Lab 6, Configuration,
 on page 115.
 
 The conftest.py file is also optional. It is considered by pytest as a “local plugin”
@@ -109,9 +109,9 @@ and can contain hook functions and fixtures. Hook functions are a way to
 insert code into part of the pytest execution process to alter how pytest works.
 Fixtures are setup and teardown functions that run before and after test
 functions, and can be used to represent resources and data used by the
-tests. (Fixtures are discussed in Chapter 3, pytest Fixtures, on page 51 and
-Chapter 4, Builtin Fixtures, on page 73, and hook functions are discussed
-in Chapter 5, Plugins, on page 97.) Hook functions and fixtures that are used
+tests. (Fixtures are discussed in Lab 3, pytest Fixtures, on page 51 and
+Lab 4, Builtin Fixtures, on page 73, and hook functions are discussed
+in Lab 5, Plugins, on page 97.) Hook functions and fixtures that are used
 by tests in multiple subdirectories should be contained in tests/conftest.py. You
 can have multiple conftest.py files; for example, you can have one at tests and
 one for each subdirectory under tests.
@@ -592,14 +592,14 @@ tasks.stop_tasks_db()
 ```
 
 The fixture, tmpdir, used in this example is a builtin fixture. You’ll learn all
-about builtin fixtures in Chapter 4, Builtin Fixtures, on page 73, and you’ll
-learn about writing your own fixtures and how they work in Chapter 3, pytest
+about builtin fixtures in Lab 4, Builtin Fixtures, on page 73, and you’ll
+learn about writing your own fixtures and how they work in Lab 3, pytest
 Fixtures, on page 51, including the autouse parameter used here.
 
 autouse as used in our test indicates that all tests in this file will use the fixture.
 The code before the yield runs before each test; the code after the yield runs
 after the test. The yield can return data to the test if desired. You’ll look at all
-that and more in later chapters, but here we need some way to set up the
+that and more in later labs, but here we need some way to set up the
 database for testing, so I couldn’t wait any longer to show you a fixture. (pytest
 also supports old-fashioned setup and teardown functions, like what is used
 in unittest and nose, but they are not nearly as fun. However, if you are
@@ -786,7 +786,7 @@ SKIP[1] test_unique_id_3.py:9:not supporteduntilversion0.2.0
 The -r chars option has this help text:
 
 ```
-$ pytest--help**
+$ pytest --help
 ...
 
 -r chars
@@ -870,7 +870,7 @@ xfail to be reported as FAIL. This is done in a pytest.ini file:
 xfail_strict=true
 ```
 
-I’ll discuss pytest.ini more in Chapter 6, Configuration, on page 115.
+I’ll discuss pytest.ini more in Lab 6, Configuration, on page 115.
 
 ### Running a Subset of Tests
 
@@ -1413,7 +1413,7 @@ This is useful when the id cannot be derived from the parameter value.
 
 ### Exercises
 
-1. Download the project for this chapter, tasks_proj, from the book’s webpage^3
+1. Download the project for this lab, tasks_proj, from the book’s webpage^3
 and make sure you can install it locally with pip install /path/to/tasks_proj.
 2. Explore the tests directory.
 3. Run pytest with a single file.
@@ -1431,12 +1431,12 @@ the missing exceptions. (It’s okay to look at api.py for this exercise.)
 
 ### What’s Next
 
-You’ve run through a lot of the power of pytest in this chapter. Even with just
+You’ve run through a lot of the power of pytest in this lab. Even with just
 what’s covered here, you can start supercharging your test suites. In many
 of the examples, you used a fixture called initialized_tasks_db. Fixtures can sepa-
 rate retrieving and/or generating test data from the real guts of a test function.
 They can also separate common code so that multiple test functions can use
-the same setup. In the next chapter, you’ll take a deep dive into the wonderful
+the same setup. In the next lab, you’ll take a deep dive into the wonderful
 world of pytest fixtures.
 
 3. https://pragprog.com/titles/bopytest/source_code

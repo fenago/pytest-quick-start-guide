@@ -106,7 +106,7 @@ focuses primarily on subcutaneous functional testing. Following are some
 helpful definitions:
 
 - **Unit test:** A test that checks a small bit of code, like a function or a class,
-in isolation of the rest of the system. I consider the tests in Chapter 1,
+in isolation of the rest of the system. I consider the tests in Lab 1,
 Getting Started with pytest, on page 1, to be unit tests run against the
 Tasks data structure.
 - **Integration test:** A test that checks a larger bit of the code, maybe several
@@ -124,7 +124,7 @@ as subcutaneous tests.
 
 **How This Book Is Organized**
 
-In Chapter 1, Getting Started with pytest, on page 1, you’ll install pytest
+In Lab 1, Getting Started with pytest, on page 1, you’ll install pytest
 and get it ready to use. You’ll then take one piece of the Tasks project—the
 data structure representing a single task (a namedtuple called Task)—and use it
 to test examples. You’ll learn how to run pytest with a handful of test files.
@@ -132,11 +132,11 @@ You’ll look at many of the popular and hugely useful command-line options
 for pytest, such as being able to re-run test failures, stop execution after the
 first failure, control the stack trace and test run verbosity, and much more.
 
-In Chapter 2, Writing Test Functions, on page 23, you’ll install Tasks locally
+In Lab 2, Writing Test Functions, on page 23, you’ll install Tasks locally
 using pip and look at how to structure tests within a Python project. You’ll do
 this so that you can get to writing tests against a real application. All the
-examples in this chapter run tests against the installed application, including
-writing to the database. The actual test functions are the focus of this chapter,
+examples in this lab run tests against the installed application, including
+writing to the database. The actual test functions are the focus of this lab,
 and you’ll learn how to use assert effectively in your tests. You’ll also learn
 about markers, a feature that allows you to mark many tests to be run at one
 time, mark tests to be skipped, or tell pytest that we already know some tests
@@ -144,7 +144,7 @@ will fail. And I’ll cover how to run just some of the tests, not just with mar
 but by structuring our test code into directories, modules, and classes, and
 how to run these subsets of tests.
 
-Not all of your test code goes into test functions. In Chapter 3, pytest Fixtures,
+Not all of your test code goes into test functions. In Lab 3, pytest Fixtures,
 on page 51, you’ll learn how to put test data into test fixtures, as well as set
 up and tear down code. Setting up system state (or subsystem or unit state)
 is an important part of software testing. You’ll explore this aspect of pytest
@@ -155,29 +155,29 @@ duplication and help make your test code incredibly readable and maintainable. p
 you’ll use this feature to be able to run all of your tests against both TinyDB
 and MongoDB, the database back ends supported by Tasks.
 
-In Chapter 4, Builtin Fixtures, on page 73, you will look at some builtin fixtures provided out-of-the-box by pytest. You will learn how pytest builtin
+In Lab 4, Builtin Fixtures, on page 73, you will look at some builtin fixtures provided out-of-the-box by pytest. You will learn how pytest builtin
 fixtures can keep track of temporary directories and files for you, help you
 test output from your code under test, use monkey patches, check for
 warnings, and more.
 
-In Chapter 5, Plugins, on page 97, you’ll learn how to add command-line
+In Lab 5, Plugins, on page 97, you’ll learn how to add command-line
 options to pytest, alter the pytest output, and share pytest customizations,
 including fixtures, with others through writing, packaging, and distributing
-your own plugins. The plugin we develop in this chapter is used to make the
+your own plugins. The plugin we develop in this lab is used to make the
 test failures we see while testing Tasks just a little bit nicer. You’ll also look
 at how to properly test your test plugins. How’s that for meta? And just in
-case you’re not inspired enough by this chapter to write some plugins of your
+case you’re not inspired enough by this lab to write some plugins of your
 own, I’ve hand-picked a bunch of great plugins to show off what’s possible
 in Appendix 3, Plugin Sampler Pack, on page 163.
 
-Speaking of customization, in Chapter 6, Configuration, on page 115, you’ll
+Speaking of customization, in Lab 6, Configuration, on page 115, you’ll
 learn how you can customize how pytest runs by default for your project with
 configuration files. With a pytest.ini file, you can do things like store command line options so you don’t have to type them all the time, tell pytest to not look
 into certain directories for test files, specify a minimum pytest version your
 tests are written for, and more. These configuration elements can be put in
 tox.ini or setup.cfg as well.
 
-In the final chapter, Chapter 7, Using pytest with Other Tools, on page 127,
+In the final lab, Lab 7, Using pytest with Other Tools, on page 127,
 you’ll look at how you can take the already powerful pytest and supercharge
 your testing with complementary tools. You’ll run the Tasks project on multiple
 versions of Python with tox. You’ll test the Tasks CLI while not having to run

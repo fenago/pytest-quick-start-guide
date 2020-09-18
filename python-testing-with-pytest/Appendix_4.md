@@ -107,12 +107,12 @@ sections of the Python documentation^1 that cover this topic.
 If we do something like this in __init__.py:
 
 ```
-**importsome_package.some_module**
+import some_package.some_module**
 ```
 the client code will have to specify some_module:
 
 ```
-**importsome_package**
+import some_package**
 some_package.some_module.some_func()
 ```
 However, I’m thinking that some_module.py is really our API for the package,
@@ -127,7 +127,7 @@ fromsome_package.some_moduleimport** *
 Now the client code can do this instead:
 
 ```
-**importsome_package**
+import some_package**
 some_package.some_func()
 ```
 

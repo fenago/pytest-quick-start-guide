@@ -7,7 +7,7 @@ So far in this book, I’ve talked about the various non-test files that affect
 
 pytest mostly in passing, with the exception of conftest.py, which I covered quite
 
-thoroughly in Chapter 5, Plugins, on page 97. In this chapter, we’ll take a
+thoroughly in Lab 5, Plugins, on page 97. In this lab, we’ll take a
 
 look at the configuration files that affect pytest, discuss how pytest changes
 
@@ -25,11 +25,11 @@ Everyone should know about these:
 
 - _pytest.ini_ : This is the primary pytest configuration file that allows you to
     change default behavior. Since there are quite a few configuration changes
-    you can make, a big chunk of this chapter is about the settings you can
+    you can make, a big chunk of this lab is about the settings you can
     make in pytest.ini.
 - _conftest.py_ : This is a local plugin to allow hook functions and fixtures for
     the directory where the conftest.py file exists and all subdirectories. conftest.py
-    files are covered Chapter 5, Plugins, on page 97.
+    files are covered Lab 5, Plugins, on page 97.
 - ___init__.py_ : When put into every test subdirectory, this file allows you to
     have identical test filenames in multiple test directories. We’ll look at an
     example of what can go wrong without __init__.py files in test directories in
@@ -42,7 +42,7 @@ If you use tox, you’ll be interested in:
 
 
 ```
-saving you one configuration file. Tox is covered in Chapter 7, Using pytest
+saving you one configuration file. Tox is covered in Lab 7, Using pytest
 with Other Tools, on page 127.
 ```
 If you want to distribute a Python package (like Tasks), this file will be of
@@ -98,7 +98,7 @@ You can get a list of all the valid settings for pytest.ini from pytest--help. T
 
 a sampling:
 
-Chapter 6. Configuration • 116
+Lab 6. Configuration • 116
 
 
 $ pytest--help
@@ -122,9 +122,9 @@ minversion(string) minimallyrequiredpytestversion
 ...
 
 
-You’ll look at all of these settings in this chapter, except doctest_optionflags, which
+You’ll look at all of these settings in this lab, except doctest_optionflags, which
 
-is covered in Chapter 7, Using pytest with Other Tools, on page 127.
+is covered in Lab 7, Using pytest with Other Tools, on page 127.
 
 **Plugins Can Add ini-file Options**
 
@@ -232,7 +232,7 @@ func/test_api_exceptions.py:30:in <module>
 ...
 
 
-Chapter 6. Configuration • 118
+Lab 6. Configuration • 118
 
 
 E AttributeError:'smoke'not a registeredmarker
@@ -356,7 +356,7 @@ tasks_proj/
 ├──__init__.py
 ├──test_task.py
 
-Chapter 6. Configuration • 120
+Lab 6. Configuration • 120
 
 
 #### └──...
@@ -431,7 +431,7 @@ function. But what if we want to name our test classes <something>Test or
 **[pytest]**
 python_classes= _*TestTest**Suite_
 
-Chapter 6. Configuration • 122
+Lab 6. Configuration • 122
 
 
 This enables us to name classes like this:
@@ -545,7 +545,7 @@ collected1 item
 b/test_foo.py. [100%]
 
 ================1 passedin 0.01seconds=================
-$ pytest**
+$ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item/ 1 errors
@@ -555,7 +555,7 @@ _____________ERRORcollectingb/test_foo.py______________
 importfilemismatch:
 importedmodule'test_foo'has this__file__attribute:
 
-Chapter 6. Configuration • 124
+Lab 6. Configuration • 124
 
 
 /path/to/code/ch6/dups/a/test_foo.py
@@ -585,7 +585,7 @@ dups_fixed/
 Now, let’s try this again from the top level in dups_fixed:
 
 $ cd /path/to/code/ch6/dups_fixed
-$ pytest**
+$ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected2 items
@@ -607,7 +607,7 @@ again.
 
 ### Exercises
 
-In Chapter 5, Plugins, on page 97, you created a plugin called pytest-nice that
+In Lab 5, Plugins, on page 97, you created a plugin called pytest-nice that
 
 included a --nice command-line option. Let’s extend that to include a pytest.ini
 
@@ -640,11 +640,11 @@ While pytest is extremely powerful on its own—especially so with plugins—it
 
 also integrates well with other software development and software testing
 
-tools. In the next chapter, you’ll look at using pytest in conjunction with
+tools. In the next lab, you’ll look at using pytest in conjunction with
 
 other powerful testing tools.
 
 1. https://docs.pytest.org/en/latest/_modules/_pytest/pytester.html#Testdir
 
-Chapter 6. Configuration • 126
+Lab 6. Configuration • 126
 

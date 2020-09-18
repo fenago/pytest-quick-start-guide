@@ -1,27 +1,27 @@
 
 
-Chapter 6. Converting unittest suites to pytest
+Lab 6. Converting unittest suites to pytest
 --------------------------------------------------------
 
 
 
-In the previous chapter, we have seen how the flexible pytest
+In the previous lab, we have seen how the flexible pytest
 architecture has created a rich plugin ecosystem, with hundreds of
 plugins available. We learned how easy it is to find and install
 plugins, and had an overview of a number of interesting plugins.
 
 Now that you are proficient with pytest, you might be in a situation
 where you have one or more `unittest`-based test suites and
-want to start using pytest with them. In this chapter, we will discuss
+want to start using pytest with them. In this lab, we will discuss
 the best approaches to start doing just that, ranging from simple test
 suites that might require little to no modification, to large
 in-house-grown test suites that contain all kinds of customizations
 grown organically over the years. Most of the tips and advice in this
-chapter come from my own experience when migrating our[]{#id324673405
+lab come from my own experience when migrating our[]{#id324673405
 .indexterm} massive `unittest`-style test suite at ESSS
 ([https://wwww.esss.co](https://www.esss.co/){.ulink}), where I work.
 
-Here is what we will cover in this chapter:
+Here is what we will cover in this lab:
 
 
 -   Using pytest as a test runner
@@ -717,7 +717,7 @@ class GUITesting(unittest.TestCase):
 Our `DatabaseTesting` and `GUITesting` classes
 obtain the fixture values by declaring an autouse `_setup`
 fixture, a trick we have learned early in
-this chapter. We can get rid of the
+this lab. We can get rid of the
 `tearDown` method because the fixture will take care of
 cleaning up after itself after each test, and the utility methods become
 simple proxies for the methods implemented in the fixture.
@@ -947,9 +947,9 @@ introspection features. Then, we learned a few techniques on how to
 migrate `unittest`-based
 `setUp`/`tearDown` code to pytest-style in test
 classes, manage functionality spread in test hierarchies, and general
-utilities. Finally, we wrapped up the chapter with an overview of the
+utilities. Finally, we wrapped up the lab with an overview of the
 possible migration strategies that you can take for test suites of
 various sizes.
 
-In the next chapter, we will see a quick summary of what we have learned
+In the next lab, we will see a quick summary of what we have learned
 in this book, and discuss what else might be in store for us.

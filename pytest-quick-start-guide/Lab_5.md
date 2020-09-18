@@ -1,10 +1,10 @@
 
-Chapter 5. Plugins
+Lab 5. Plugins
 ---------------------------
 
 
 
-In the previous chapter, we explored one of the most important features
+In the previous lab, we explored one of the most important features
 of pytest: fixtures. We learned how we can use fixtures to manage
 resources and make our lives easier when writing tests.
 
@@ -15,7 +15,7 @@ things, from simply providing a new fixture, all the way to adding
 command line options, changing how tests are executed, and even running
 tests written in other languages.
 
-In this chapter, we will do the following:
+In this lab, we will do the following:
 
 
 -   Learn how to find and install plugins
@@ -28,7 +28,7 @@ Finding and installing plugins
 
 
 
-As mentioned at the beginning of the chapter,
+As mentioned at the beginning of the lab,
 pytest is written from the ground up with
 customization and flexibility in mind. The plugin mechanism is at the
 core of the pytest architecture, so much so that many of pytest\'s
@@ -221,7 +221,7 @@ and with which arguments.
 
 The plugin provides a `mocker` fixture that can be used for
 patching classes and methods. Using the `getpass` example from
-the last chapter, here is how you could write it using this plugin:
+the last lab, here is how you could write it using this plugin:
 
 
 ``` {.programlisting .language-markup}
@@ -240,7 +240,7 @@ returning the same value, we can also ensure that the
 `getpass` function has been called with the correct arguments.
 
 The same advice on how and where to patch the `monkeypatch`
-fixture from the previous chapter also applies when using this plugin.
+fixture from the previous lab also applies when using this plugin.
 
 ### pytest-django
 
@@ -759,7 +759,7 @@ random state before each test.
 
 Often, tests need a supporting file, for
 example a CSV file containing data about
-comedy series, as we saw in the last chapter. `pytest-datadir`
+comedy series, as we saw in the last lab. `pytest-datadir`
 allows you to save files alongside your tests and easily access them
 from the tests in a safe manner.
 
@@ -952,7 +952,7 @@ Honorable mentions
 
 
 
-There are just too many good plugins to fit into this chapter. The
+There are just too many good plugins to fit into this lab. The
 previous sample is really just a small taste, where I tried to strike a
 balance between useful, interesting, and showing the flexibility of the
 plugin architecture.
@@ -1026,7 +1026,7 @@ Summary
 
 
 
-In this chapter, we looked at how easy it is to find and install
+In this lab, we looked at how easy it is to find and install
 plugins. We also have been shown some plugins that I use daily and find
 interesting. I hope this has given you a taste of what\'s possible in
 pytest, but please explore the vast number of plugins to see whether you
@@ -1040,9 +1040,9 @@ but if you are interested, here are some resources to get you started:
     (<https://docs.pytest.org/en/latest/writing_plugins.html>).
 -   Brian Okken\'s wonderful book about pytest Python testing with
     pytest, which delves deeper than this book does, has an excellent
-    chapter on how to write your own plugins. 
+    lab on how to write your own plugins. 
 
 
-In the next chapter, we will learn how to use pytest with existing
+In the next lab, we will learn how to use pytest with existing
 `unittest`-based test suites, including tips and suggestions
 on how to migrate them and incrementally use more of pytest\'s features.

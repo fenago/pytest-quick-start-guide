@@ -1,5 +1,5 @@
 
-Chapter 1. Introducing pytest
+Lab 1. Introducing pytest
 --------------------------------------
 
 
@@ -13,7 +13,7 @@ your testing framework.
 
 This book will introduce you to various key features and will teach how
 to use pytest effectively in your day-to-day coding tasks right from the
-first chapter, focusing on making you productive as quickly as possible.
+first lab, focusing on making you productive as quickly as possible.
 Writing tests should then become a joy, rather than a boring part of the
 job.
 
@@ -40,7 +40,7 @@ order to take advantage of its many benefits in existing code bases.
 
  
 
-In this chapter, we will take a quick look at why we should be testing,
+In this lab, we will take a quick look at why we should be testing,
 the built-in `unittest` module, and an overview of pytest.
 Here is what will be covered:
 
@@ -320,7 +320,7 @@ GUI. Using pytest, those complex test resources can be managed by a
 powerful mechanism called
 [**fixtures**]. Fixtures are simple to use but very powerful at
 the same time, and many people refer to them as [*pytest\'s killer
-feature.*] They will be shown in detail in [Chapter
+feature.*] They will be shown in detail in [Lab
 4](https://subscription.packtpub.com/book/web_development/9781789347562/4){.link},
 [*Fixtures*].
 
@@ -370,7 +370,7 @@ Summary
 
 
 
-In this chapter, we covered why writing tests is important in order to
+In this lab, we covered why writing tests is important in order to
 produce high-quality software and to give you the confidence to
 introduce changes without fear. After that, we took a look at the
 built-in `unittest` module and how it can be used to write
@@ -379,6 +379,6 @@ simple it is to write tests with it, looked at its key features, and
 also looked at the vast quantity of third-party plugins that cover a
 wide range of use cases and frameworks.
 
-In the next chapter, we will learn how to install pytest, how to write
+In the next lab, we will learn how to install pytest, how to write
 simple tests, how to better organize them into files and directories
 within your project, and how to use the command line effectively.

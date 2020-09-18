@@ -1,11 +1,11 @@
 
 
-Chapter 4. Fixtures
+Lab 4. Fixtures
 ----------------------------
 
 
 
-In the previous chapter, we learned how to use marks and parametrization
+In the previous lab, we learned how to use marks and parametrization
 effectively to skip tests, mark them as expected to fail, and
 parameterize them, to avoid repetition.
 
@@ -26,7 +26,7 @@ it, only being destroyed when the last test that needs them finishes. 
 All of the previous requirements and more are covered by one of the most
 important of pytest\'s features: [**fixtures**].
 
-Here\'s what we will cover in this chapter:
+Here\'s what we will cover in this lab:
 
 
 -   Introducing fixtures
@@ -398,7 +398,7 @@ function requests them, by declaring them on the parameter list, as
 we\'ve seen already. By default, each fixture is destroyed when each
 test finishes.
 
-As mentioned at the beginning of this chapter, some fixtures can be
+As mentioned at the beginning of this lab, some fixtures can be
 costly to create or set up, and it would be helpful to be able to create
 as few instances of it as possible, to save time. Here are some
 examples:
@@ -444,7 +444,7 @@ session-scoped fixtures are not necessarily created at the start of the
 session, but only when the first test that requests it is about to be
 called. This makes sense when you consider that not all tests might need
 a session-scoped fixture, and there are various forms to run only a
-subset of tests, as we have seen in previous chapters.
+subset of tests, as we have seen in previous labs.
 
 
 
@@ -631,7 +631,7 @@ run multiple times, once for each parameter. This is an excellent tool
 to use when we have variants of a fixture and each test that uses the
 fixture should also run with all variants.
 
-In the previous chapter, we saw an example of parametrization using
+In the previous lab, we saw an example of parametrization using
 multiple implementations of a serializer:
 
 
@@ -696,7 +696,7 @@ Note the following:
     object. This built-in fixture provides access to the requesting test
     function and the parameter when the fixture is parametrized. We will
     see more about the `request` fixture later in this
-    chapter.
+    lab.
 -   In this case, we instantiate the serializer inside the fixture,
     instead of explicitly in each test.
 
@@ -1466,7 +1466,7 @@ Summary
 
 
 
-In this chapter, we delved into one of pytest\'s most famous features:
+In this lab, we delved into one of pytest\'s most famous features:
 fixtures. We have seen how they can be used to provide resources and
 test functionality, and how to concisely express setup/teardown code. We
 learned how to share fixtures, using `conftest.py` files; to
@@ -1474,8 +1474,8 @@ use fixture scopes, to avoid creating expensive resources for every
 test; and to autouse fixtures that are executed for all tests in the
 same module or hierarchy. Then, we learned how to parametrize
 fixtures and use marks from them. We took an overview of various
-built-in fixtures, and closed the chapter with some short discussions
+built-in fixtures, and closed the lab with some short discussions
 about fixtures in general. I hope you enjoyed the ride!
 
-In the next chapter, we will explore a little of the vast pytest plugin
+In the next lab, we will explore a little of the vast pytest plugin
 ecosystem that is at your disposal.

@@ -15,7 +15,7 @@ Here’s a simple fixture that returns a number:
 
 ```
 **ch3/test_fixtures.py
-importpytest**
+import pytest
 
 @pytest.fixture()
 **def some_data** ():
@@ -42,7 +42,7 @@ Before we start our exploration of fixtures (and the conftest.py file), I need t
 address the fact that the term _fixture_ has many meanings in the programming
 and test community, and even in the Python community. I use “fixture,”
 “fixture function,” and “fixture method” interchangeably to refer to the
-@pytest.fixture() decorated functions discussed in this chapter. _Fixture_ can also
+@pytest.fixture() decorated functions discussed in this lab. _Fixture_ can also
 be used to refer to the resource that is being set up by the fixture functions.
 Fixture functions often set up or retrieve some data that the test can work
 with. Sometimes this data is considered a fixture. For example, the Django
@@ -81,7 +81,7 @@ tasks_proj/tests, makes the most sense.
 Although conftest.py is a Python module, it should not be imported by test files.
 Don’t importconftest from anywhere. The conftest.py file gets read by pytest, and
 is considered a local _plugin_ , which will make sense once we start talking about
-plugins in Chapter 5, Plugins, on page 97. For now, think of tests/conftest.py as
+plugins in Lab 5, Plugins, on page 97. For now, think of tests/conftest.py as
 a place where we can put fixtures used by all tests under the tests directory.
 Next, let’s rework some of our tests for tasks_proj to properly use fixtures.
 
@@ -159,8 +159,8 @@ ture for the test.
 ```
 Make Sure Tasks Is Installed
 We’re still writing tests to be run against the Tasks project in this
-chapter, which was first installed in Chapter 2. If you skipped that
-chapter, be sure to install tasks with cd code; pip install ./tasks_proj/.
+lab, which was first installed in Lab 2. If you skipped that
+lab, be sure to install tasks with cd code; pip install ./tasks_proj/.
 ```
 ### Tracing Fixture Execution with –setup-show
 
@@ -457,7 +457,7 @@ Here’s how the scope values look in action:
 **ch3/test_scope.py
 _"""Demofixturescope."""_
 
-**importpytest**
+import pytest
 
 @pytest.fixture(scope= _'function'_ )
 **def func_scope** ():
@@ -617,7 +617,7 @@ Now, let’s see if all of these changes work with our tests:
 
 ```
 $ cd /path/to/code/ch3/b/tasks_proj
-$ pytest**
+$ pytest
 ===================testsessionstarts===================
 collected55 items
 
@@ -698,7 +698,7 @@ ture due to usefixtures cannot use the fixture’s return value.
 
 ### Using autouse for Fixtures That Always Get Used
 
-So far in this chapter, all of the fixtures used by tests were named by the
+So far in this lab, all of the fixtures used by tests were named by the
 tests (or used usefixtures for that one class example). However, you can use
 autouse=True to get a fixture to run all of the time. This works well for code you
 
@@ -710,7 +710,7 @@ state or data from the fixture. Here’s a rather contrived example:
 **ch3/test_autouse.py
 _"""Demonstrateautousefixtures."""_
 
-**importpytest
+import pytest
 importtime**
 
 @pytest.fixture(autouse=True,scope= _'session'_ )
@@ -764,7 +764,7 @@ The autouse feature is good to have around. But it’s more of an exception than
 a rule. Opt for named fixtures unless you have a really great reason not to.
 
 Now that you’ve seen autouse in action, you may be wondering why we didn’t
-use it for tasks_db in this chapter. In the Tasks project, I felt it was important
+use it for tasks_db in this lab. In the Tasks project, I felt it was important
 to keep the ability to test what happens if we try to use an API function before
 db initialization. It should raise an appropriate exception. But we can’t test
 this if we force good initialization on every test.
@@ -779,7 +779,7 @@ pytest allows you to rename fixtures with a name parameter to @pytest.fixture():
 **ch3/test_rename_fixture.py
 _"""Demonstratefixturerenaming."""_
 
-**importpytest**
+import pytest
 
 @pytest.fixture(name= _'lue'_ )
 **def ultimate_answer_to_life_the_universe_and_everything** ():
@@ -912,7 +912,7 @@ t_from_db= tasks.get(task_id)
 ```
 
 The request listed in the fixture parameter is another builtin fixture that repre-
-sents the calling state of the fixture. You’ll explore it more in the next chapter.
+sents the calling state of the fixture. You’ll explore it more in the next lab.
 It has a field param that is filled in with one element from the list assigned to
 params in @pytest.fixture(params=tasks_to_try).
 
@@ -1059,10 +1059,10 @@ def start_tasks_db** (db_path,db_type): _# type:(str,str)-> None
 **raise** TypeError( _'db_pathmustbe a string'_ )
 **global** _tasksdb
 **if** db_type== _'tiny'_ :
-**importtasks.tasksdb_tinydb**
+import tasks.tasksdb_tinydb**
 _tasksdb= tasks.tasksdb_tinydb.start_tasks_db(db_path)
 **elif** db_type== _'mongo'_ :
-**importtasks.tasksdb_pymongo**
+import tasks.tasksdb_pymongo**
 _tasksdb= tasks.tasksdb_pymongo.start_tasks_db(db_path)
 **else** :
 **raise** ValueError( _"db_typemustbe a 'tiny'or 'mongo'"_ )
@@ -1109,7 +1109,7 @@ pymongo are installed. I’ve been testing with the community edition
 of MongoDB, found at https://www.mongodb.com/download-center. pymongo
 is installed with pip—pip install pymongo. However, using MongoDB is
 not necessary to follow along with the rest of the book; it’s used in
-this example and in a debugger example in Chapter 7.
+this example and in a debugger example in Lab 7.
 ```
 
 Here’s what we have so far:
@@ -1166,6 +1166,6 @@ different chunks of the system (like swapping in Mongo for TinyDB). Because
 fixtures are so flexible, I use them heavily to push as much of the setup of
 my tests into fixtures as I can.
 
-In this chapter, you looked at pytest fixtures you write yourself, as well as a
+In this lab, you looked at pytest fixtures you write yourself, as well as a
 couple of builtin fixtures, tmpdir and tmpdir_factory. You’ll take a closer look at
-the builtin fixtures in the next chapter.
+the builtin fixtures in the next lab.

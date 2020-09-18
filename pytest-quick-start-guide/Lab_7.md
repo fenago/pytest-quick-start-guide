@@ -1,16 +1,16 @@
 
 
-Chapter 7. Wrapping Up
+Lab 7. Wrapping Up
 -------------------------------
 
 
 
-In the previous chapter, we learned a number of techniques that can be
+In the previous lab, we learned a number of techniques that can be
 used to convert `unittest`-based suites to pytest, ranging
 from simply starting using it as a runner, all the way to porting
 complex existing functionality to a more pytest-friendly style.
 
-This is the final chapter in this quick-start guide, and we will discuss
+This is the final lab in this quick-start guide, and we will discuss
 the following topics:
 
 

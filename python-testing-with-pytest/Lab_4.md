@@ -3,10 +3,10 @@
 
 ### Builtin Fixtures
 
-In the previous chapter, you looked at what fixtures are, how to write them, and
+In the previous lab, you looked at what fixtures are, how to write them, and
 how to use them for test data as well as setup and teardown code. You also
 used conftest.py for sharing fixtures between tests in multiple test files. By the
-end of Chapter 3, pytest Fixtures, on page 51, the Tasks project had these fix-
+end of Lab 3, pytest Fixtures, on page 51, the Tasks project had these fix-
 tures: tasks_db_session, tasks_just_a_few, tasks_mult_per_owner, tasks_db, db_with_3_tasks, and
 db_with_multi_per_owner defined in conftest.py to be used by any test function in the
 Tasks project that needed them.
@@ -14,7 +14,7 @@ Tasks project that needed them.
 Reusing common fixtures is such a good idea that the pytest developers
 included some commonly needed fixtures with pytest. You’ve already seen tmpdir
 and tmpdir_factory in use by the Tasks project in Changing Scope for Tasks Project
-Fixtures, on page 61. You’ll take a look at them in more detail in this chapter.
+Fixtures, on page 61. You’ll take a look at them in more detail in this lab.
 
 The builtin fixtures that come prepackaged with pytest can help you do some
 pretty useful things in your tests easily and consistently. For example, in
@@ -152,8 +152,8 @@ file like this:
 **ch4/authors/conftest.py
 _"""Demonstratetmpdir_factory."""_
 
-**importjson
-importpytest**
+import json
+import pytest
 
 @pytest.fixture(scope= _'module'_ )
 **def author_file_json** (tmpdir_factory):
@@ -182,7 +182,7 @@ the json file will only be created once per module that has a test using it:
 ```
 **ch4/authors/test_authors.py
 _"""Someteststhatuse tempdatafiles."""_
-**importjson**
+import json**
 
 **def test_brian_in_portland** (author_file_json):
 _"""Atestthatusesa datafile."""_
@@ -215,7 +215,7 @@ To see how pytestconfig works, you’ll look at how to add a custom command-
 line option and read the option value from within a test. You can read the
 value of command-line options directly from pytestconfig, but to add the option
 and have pytest parse it, you need to add a hook function. _Hook functions_ ,
-which I cover in more detail in Chapter 5, Plugins, on page 97, are another
+which I cover in more detail in Lab 5, Plugins, on page 97, are another
 way to control how pytest behaves and are used frequently in plugins. How-
 ever, adding a custom command-line option and reading it from pytestconfig is
 common enough that I want to cover it here.
@@ -241,7 +241,7 @@ help string was modified, as shown here:
 
 ```
 $ cd /path/to/code/ch4/pytestconfig
-$ pytest--help**
+$ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 ...
 
@@ -258,7 +258,7 @@ customoptions:
 Now we can access those options from a test:
 
 **ch4/pytestconfig/test_config.py
-importpytest**
+import pytest
 
 **def test_option** (pytestconfig):
 **print** ( _'"foo"set to:'_ , pytestconfig.getoption( _'foo'_ ))
@@ -326,7 +326,7 @@ def test_pytestconfig** (pytestconfig):
 **print** ( _'--tb=style :'_ , pytestconfig.getoption( _'tbstyle'_ ))
 ```
 
-You’ll use pytestconfig again when I demonstrate ini files in Chapter 6, Config-
+You’ll use pytestconfig again when I demonstrate ini files in Lab 6, Config-
 uration, on page 115.
 
 ### Using cache
@@ -432,7 +432,7 @@ Here’s a parametrized test with one failure:
 **ch4/cache/test_few_failures.py
 _"""Demonstrate-lf and -ff withfailingtests."""_
 
-**importpytest
+import pytest
 frompytestimport** approx
 
 testdata= [
@@ -1011,7 +1011,7 @@ patch.chdir(the_tmpdir).
 
 You can also use the monkeypatch fixture functions in conjunction with
 unittest.mock to temporarily replace attributes with mock objects. You’ll look at
-that in Chapter 7, Using pytest with Other Tools, on page 127.
+that in Lab 7, Using pytest with Other Tools, on page 127.
 
 ### Using doctest_namespace
 
@@ -1187,7 +1187,7 @@ be the value of the imported unnecessary_math module. With this in place in the
 conftest.py file, any doctests found within the scope of this conftest.py file will
 have the um symbol defined.
 
-I’ll cover running doctest from pytest more in Chapter 7, Using pytest with
+I’ll cover running doctest from pytest more in Lab 7, Using pytest with
 Other Tools, on page 127.
 
 ### Using recwarn
@@ -1202,7 +1202,7 @@ and leave it there for a release or two:
 ```
 **ch4/test_warnings.py
 importwarnings
-importpytest**
+import pytest
 
 **def lame_function** ():
 warnings.warn( _"Pleasestopusingthis"_ , DeprecationWarning)
@@ -1252,14 +1252,14 @@ decision of which to use is purely a matter of taste.
 
 1. In ch4/cache/test_slower.py, there is an autouse fixture called check_duration(). Copy
 it into ch3/tasks_proj/tests/conftest.py.
-2. Run the tests in Chapter 3.
+2. Run the tests in Lab 3.
 3. For tests that are really fast, 2x really fast is still really fast. Instead of
 2x, change the fixture to check for 0.1 second plus 2x the last duration.
 4. Run pytest with the modified fixture. Do the results seem reasonable?
 
 ### What’s Next
 
-In this chapter, you looked at many of pytest’s builtin fixtures. Next, you’ll
+In this lab, you looked at many of pytest’s builtin fixtures. Next, you’ll
 take a closer look at plugins. The nuance of writing large plugins could be a
 book in itself; however, small custom plugins are a regular part of the pytest
 ecosystem.

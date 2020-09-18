@@ -5,7 +5,7 @@ Using pytest with Other Tools
 
 You don’t usually use pytest on its own, but rather in a testing environment
 
-with other tools. This chapter looks at other tools that are often used in
+with other tools. This lab looks at other tools that are often used in
 
 combination with pytest for effective and efficient testing. While this is by no
 
@@ -48,7 +48,7 @@ first looked at in Using Options, on page 10:
 
 ```
 Installing MongoDB
-As mentioned in Chapter 3, pytest Fixtures, on page 51, running
+As mentioned in Lab 3, pytest Fixtures, on page 51, running
 the MongoDB tests requires installing MongoDB and pymongo.
 I’ve been testing with the Community Server edition found at
 https://www.mongodb.com/download-center. pymongo is installed with pip:
@@ -636,9 +636,9 @@ look at this with all of the import statements:
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
 fromclick.testingimport** CliRunner
 **fromcontextlibimport** contextmanager
-**importpytest
+import pytest
 fromtasks.apiimport** Task
-**importtasks.cli
+import tasks.cli
 importtasks.config**
 
 @contextmanager
@@ -745,10 +745,10 @@ but perhaps looking at several of these makes the code easier to understand:
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
 def test_list_print_many_items** (no_db,mocker):
 many_tasks= (
-Task( _'writechapter'_ , _'Brian'_ , True,1),
-Task( _'editchapter'_ , _'Katie'_ , False,2),
-Task( _'modifychapter'_ , _'Brian'_ , False,3),
-Task( _'finalizechapter'_ , _'Katie'_ , False,4),
+Task( _'writelab'_ , _'Brian'_ , True,1),
+Task( _'editlab'_ , _'Katie'_ , False,2),
+Task( _'modifylab'_ , _'Brian'_ , False,3),
+Task( _'finalizelab'_ , _'Katie'_ , False,4),
 )
 mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ ,
 return_value=many_tasks)
@@ -756,10 +756,10 @@ runner= CliRunner()
 result= runner.invoke(tasks.cli.tasks_cli,[ _'list'_ ])
 expected_output= ( _" ID owner donesummary\n"
 " -- ----- -----------\n"
-" 1 Brian Truewritechapter\n"
-" 2 KatieFalseeditchapter\n"
-" 3 BrianFalsemodifychapter\n"
-" 4 KatieFalsefinalizechapter\n"_ )
+" 1 Brian Truewritelab\n"
+" 2 KatieFalseeditlab\n"
+" 3 BrianFalsemodifylab\n"
+" 4 KatieFalsefinalizelab\n"_ )
 **assert** result.output== expected_output
 
 **def test_list_dash_o** (no_db,mocker):
@@ -909,7 +909,7 @@ The commands=pytest line tells tox to run pytest in each environment.
 
 Under [pytest], we can put whatever we normally would want to put into pytest.ini
 
-to configure pytest, as discussed in Chapter 6, Configuration, on page 115. In
+to configure pytest, as discussed in Lab 6, Configuration, on page 115. In
 
 this case, addopts is used to turn on extra summary information for skips,
 
@@ -1527,7 +1527,7 @@ versions with tox.
 
 7. Try using Jenkins to graph all the different tasks_proj versions and test
 
-permutations in the chapters.
+permutations in the labs.
 
 
 
@@ -1542,7 +1542,7 @@ you no longer need help with pip or virtual environments. However, you may
 
 not have looked at Appendix 3, Plugin Sampler Pack, on page 163. If you
 
-enjoyed this chapter, it deserves your time to at least skim through it. Then,
+enjoyed this lab, it deserves your time to at least skim through it. Then,
 
 Appendix 4, Packaging and Distributing Python Projects, on page 175 provides
 

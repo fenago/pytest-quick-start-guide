@@ -110,9 +110,9 @@ well, you ain’t seen nothing yet. There’s lots more where that came from. St
 around and let me show you why I think pytest is the absolute best test
 framework available.
 
-In the rest of this chapter, you’ll install pytest, look at different ways to run
+In the rest of this lab, you’ll install pytest, look at different ways to run
 it, and run through some of the most often used command-line options. In
-future chapters, you’ll learn how to write test functions that maximize the
+future labs, you’ll learn how to write test functions that maximize the
 power of pytest, how to pull setup code into setup and teardown sections
 called fixtures, and how to use fixtures and plugins to really supercharge
 your software testing.
@@ -132,7 +132,7 @@ of third-party modules and packages, and even builtin Python data structures.
 The Tasks project uses a structure called Task, which is based on the named-
 tuple factory method, which is part of the standard library. The Task structure
 is used as a data structure to pass information between the UI and the API.
-For the rest of this chapter, I’ll use Task to demonstrate running pytest and
+For the rest of this lab, I’ll use Task to demonstrate running pytest and
 using some frequently used command-line options.
 
 Here’s Task:
@@ -194,7 +194,7 @@ C:\> pip install pytest
 ### Running pytest
 
 ```
-$ pytest--help**
+$ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 ...
 
@@ -281,7 +281,7 @@ four files’ worth of tests:
 
 ```
 $ cd /path/to/code/ch1
-$ pytest**
+$ pytest
 =====================testsessionstarts======================
 collected6 items
 
@@ -308,7 +308,7 @@ you want run, or the directory, or call pytest from the directory where our
 tests are:
 
 ```
-$ pytesttasks/test_three.pytasks/test_four.py
+$ pytest tasks/test_three.py tasks/test_four.py
 =====================testsessionstarts======================
 collected4 items
 
@@ -317,7 +317,7 @@ tasks/test_four.py.. [100%]
 
 ===================4 passedin 0.02seconds===================
 
-$ pytesttasks**
+$ pytest tasks**
 =====================testsessionstarts======================
 collected4 items
 
@@ -327,7 +327,7 @@ tasks/test_three.py.. [100%]
 ===================4 passedin 0.02seconds===================
 
 $ cd tasks
-$ pytest**
+$ pytest
 =====================testsessionstarts======================
 ```
 
@@ -352,7 +352,7 @@ coverable by pytest:
 
 Since our test files and functions start with test_, we’re good. There are ways
 to alter these discovery rules if you have a bunch of tests named differently.
-I’ll cover that in Chapter 6, Configuration, on page 115.
+I’ll cover that in Lab 6, Configuration, on page 115.
 
 Let’s take a closer look at the output of running just one file:
 
@@ -394,7 +394,7 @@ _rootdir:/path/to/code/ch1/tasks,inifile:_
 The rootdir is the topmost common directory to all of the directories being
 searched for test code. The inifile (blank here) lists the configuration file being
 used. Configuration files could be pytest.ini, tox.ini, or setup.cfg. You’ll look at
-configuration files in more detail in Chapter 6, Configuration, on page 115.
+configuration files in more detail in Lab 6, Configuration, on page 115.
 
 ```
 _collected2 items_
@@ -438,8 +438,8 @@ Here are the possible outcomes of a test function:
     discussed in Marking Tests as Expecting to Fail, on page 37.
 - XPASS (X): The test was not supposed to pass, ran, and passed.
 - ERROR (E): An exception happened outside of the test function, in either
-    a fixture, discussed in Chapter 3, pytest Fixtures, on page 51, or in a
-    hook function, discussed in Chapter 5, Plugins, on page 97.
+    a fixture, discussed in Lab 3, pytest Fixtures, on page 51, or in a
+    hook function, discussed in Lab 5, Plugins, on page 97.
 
 
 ### Running Only One Test
@@ -507,7 +507,7 @@ The --collect-only option shows you which tests will be run with the given optio
 and configuration. It’s convenient to show this option first so that the output
 can be used as a reference for the rest of the examples. If you start in the ch1
 directory, you should see all of the test functions you’ve looked at so far in
-this chapter:
+this lab:
 
 ```
 $ cd /path/to/code/ch1
@@ -593,7 +593,7 @@ You can use any marker name. Let’s say you want to use run_these_please. You�
 mark a test using the decorator @pytest.mark.run_these_please, like so:
 
 ```
-**importpytest**
+import pytest
 
 ...
 @pytest.mark.run_these_please
@@ -1024,15 +1024,15 @@ followed by setup and teardown. Every test essentially has three phases: call,
 setup, and teardown. Setup and teardown are also called _fixtures_ and are a
 chance for you to add code to get data or the software system under test into
 a precondition state before the test runs, as well as clean up afterwards if
-necessary. I cover fixtures in depth in Chapter 3, pytest Fixtures, on page 51.
+necessary. I cover fixtures in depth in Lab 3, pytest Fixtures, on page 51.
 
-**--version**
+**-- version
 
 The --version option shows the version of pytest and the directory where it’s
 installed:
 
 ```
-$ pytest--version**
+$ pytest-- version
 Thisis pytestversion3.x.y,importedfrom
 /path/to/venv/lib/python3.x/site-packages/pytest.py
 ```
@@ -1054,16 +1054,16 @@ The -h option shows:
     via plugins
 
 - A list of options available to ini style configuration files, which I’ll discuss
-    more in Chapter 6, Configuration, on page 115
+    more in Lab 6, Configuration, on page 115
 
 - A list of environmental variables that can affect pytest behavior (also
-    discussed in Chapter 6, Configuration, on page 115 )
+    discussed in Lab 6, Configuration, on page 115 )
 
 - A reminder that pytest--markers can be used to see available markers,
-    discussed in Chapter 2, Writing Test Functions, on page 23
+    discussed in Lab 2, Writing Test Functions, on page 23
 
 - A reminder that pytest--fixtures can be used to see available fixtures, dis-
-    cussed in Chapter 3, pytest Fixtures, on page 51
+    cussed in Lab 3, pytest Fixtures, on page 51
 
 The last bit of information the help text displays is this note:
 
@@ -1080,7 +1080,7 @@ marker definitions.
 
 The ability to customize the behavior of pytest in conftest.py files and test files
 allows customized behavior local to a project or even a subset of the tests for
-a project. You’ll learn about conftest.py and ini files such as pytest.ini in Chapter
+a project. You’ll learn about conftest.py and ini files such as pytest.ini in Lab
 6, Configuration, on page 115.
 
 ### Exercises
@@ -1108,7 +1108,7 @@ page 159 if you have any trouble. Even if you thought you already had
 pytest installed, you’ll need to install it into the virtual environment you
 just created.
 
-4. Create a few test files. You can use the ones we used in this chapter or
+4. Create a few test files. You can use the ones we used in this lab or
 make up your own. Practice running pytest against these files.
 
 5. Change the assert statements. Don’t just use assertsomething==something_else;
@@ -1120,9 +1120,9 @@ try things like:
 
 ### What’s Next
 
-In this chapter, we looked at where to get pytest and the various ways to run
+In this lab, we looked at where to get pytest and the various ways to run
 it. However, we didn’t discuss what goes into test functions. In the next
-chapter, we’ll look at writing test functions, parametrizing them so they get
+lab, we’ll look at writing test functions, parametrizing them so they get
 called with different data, and grouping tests into classes, modules, and
 packages.
 

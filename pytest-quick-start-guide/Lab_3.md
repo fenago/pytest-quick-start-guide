@@ -1,6 +1,6 @@
 
 
-Chapter 3. Markers and Parametrization
+Lab 3. Markers and Parametrization
 -----------------------------------------------
 
 
@@ -21,7 +21,7 @@ test function to a set of input values. This greatly avoids duplicating
 test code and makes it easy to add new test cases that may appear as our
 software evolves.
 
-In summary, here is what we will be covering in this chapter:
+In summary, here is what we will be covering in this lab:
 
 
 -   Mark basics
@@ -85,7 +85,7 @@ which case it should be terminated using the `thread` method.
 Assigning arguments to marks is a very powerful feature, providing
 plugins and fixtures with a lot of flexibility. We will explore those
 capabilities and the `pytest-timeout` plugin in the next
-chapters.
+labs.
 
 You can add more than one mark to a test by applying the
 `@pytest.mark` decorator multiple times--- for example:
@@ -266,7 +266,7 @@ decorator to a class means that all its subclasses will inherit the
 mark. Subclassing test classes is not common, but it is sometimes a
 useful technique to avoid repeating test code, or to ensure that
 implementations comply with a certain interface. We will see more
-examples of this later in this chapter and in [Chapter
+examples of this later in this lab and in [Lab
 4](https://subscription.packtpub.com/book/web_development/9781789347562/4){.link},
 [*Fixtures*].
 
@@ -1487,7 +1487,7 @@ Summary
 
 
 
-In this chapter, we learned how to use marks to organize our code and
+In this lab, we learned how to use marks to organize our code and
 help us run the test suite in flexible ways. We then looked at how to
 use the `@pytest.mark.skipif` to conditionally skip tests, and
 how to use the `@pytest.mark.xfail` mark to deal with expected
@@ -1497,5 +1497,5 @@ of using `@pytest.mark.parametrize` to avoid repeating our
 testing code and to make it easy for ourselves and others to add new
 input cases to existing tests.
 
-In the next chapter, we will finally get to one of pytest\'s most loved
+In the next lab, we will finally get to one of pytest\'s most loved
 and powerful features: [**fixtures**].

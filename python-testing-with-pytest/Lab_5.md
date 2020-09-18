@@ -9,22 +9,22 @@ and extensions, and there are hooks available to allow modifications and
 improvements through plugins.
 
 It might surprise you to know that you’ve already written some plugins if
-you’ve worked through the previous chapters in this book. Any time you put
+you’ve worked through the previous labs in this book. Any time you put
 fixtures and/or hook functions into a project’s top-level conftest.py file, you
 created a local conftest plugin. It’s just a little bit of extra work to convert
 these conftest.py files into installable plugins that you can share between
 projects, with other people, or with the world.
 
-We will start this chapter looking at where to look for third-party plugins.
+We will start this lab looking at where to look for third-party plugins.
 Quite a few plugins are available, so there’s a decent chance someone has
 already written the change you want to make to pytest. Since we will be
 looking at open source plugins, if a plugin does almost what you want to
 do but not quite, you can fork it, or use it as a reference for creating your
-own plugin. While this chapter is about creating your own plugins, Appendix
+own plugin. While this lab is about creating your own plugins, Appendix
 3, Plugin Sampler Pack, on page 163 is included to give you a taste of what’s
 possible.
 
-In this chapter, you’ll learn how to create plugins, and I’ll point you in the
+In this lab, you’ll learn how to create plugins, and I’ll point you in the
 right direction to test, package, and distribute them. The full topic of Python
 packaging and distribution is probably a book of its own, so we won’t cover
 everything. But you’ll get far enough to be able to share plugins with your
@@ -125,7 +125,7 @@ pip to look in the directory called some_plugins. This technique is especially
 useful if you have both third-party and your own custom plugins stored
 locally, and also if you’re creating new virtual environments for continuous
 integration or with tox. (We’ll talk about both tox and continuous integration
-in Chapter 7, Using pytest with Other Tools, on page 127 .)
+in Lab 7, Using pytest with Other Tools, on page 127 .)
 
 Note that with the local directory install method, you can install multiple
 versions and specify which version you want by adding == and the version
@@ -227,7 +227,7 @@ Let’s run them to see if they pass:
 
 ```
 $ cd /path/to/code/ch5/a/tasks_proj
-$ pytest**
+$ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected57 items
@@ -459,7 +459,7 @@ to this feature (and take it out of the tasks_proj/tests/conftest.py):
 **ch5/pytest-nice/pytest_nice.py
 _"""Codefor pytest-niceplugin."""_
 
-**importpytest**
+import pytest
 
 **def pytest_addoption** (parser):
 _"""Turnnicefeatureson with--niceoption."""_
@@ -877,7 +877,7 @@ stays up to date.
 ### Exercises
 
 In ch4/cache/test_slower.py, there is an autouse fixture called check_duration(). You
-used it in the Chapter 4 exercises as well. Now, let’s make a plugin out of it.
+used it in the Lab 4 exercises as well. Now, let’s make a plugin out of it.
 
 1. Create a directory named pytest-slower that will hold the code for the new
 plugin, similar to the directory described in Creating an Installable Plugin,
@@ -891,7 +891,7 @@ a pytest plugin that looks interesting to you.
 ### What’s Next
 
 You’ve used conftest.py a lot so far in this book. There are also configuration
-files that affect how pytest runs, such as pytest.ini. In the next chapter, you’ll
+files that affect how pytest runs, such as pytest.ini. In the next lab, you’ll
 run through the different configuration files and learn what you can do there
 to make your testing life easier.
 

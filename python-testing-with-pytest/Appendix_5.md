@@ -5,7 +5,7 @@
 
 ### xUnit Fixtures
 
-In addition to the fixture model described in Chapter 3, pytest Fixtures, on
+In addition to the fixture model described in Lab 3, pytest Fixtures, on
 page 51, pytest also supports xUnit style fixtures, which are similar to jUnit
 for Java, cppUnit for C++, and so on.
 
@@ -138,7 +138,7 @@ You can mix pytest fixtures and xUnit fixtures:
 
 ```
 **appendices/xunit/test_mixed_fixtures.py
-importpytest**
+import pytest
 
 **def setup_module** ():
 **print** ( _'\nsetup_module()- xUnit'_ )
