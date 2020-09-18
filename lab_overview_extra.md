@@ -25,7 +25,7 @@
 Labs for this course are available at path shared below. Elev8ed Notecourses (powered by Jupyter) will be accessible at the port given to you by your instructor.
 
 1. ##### Introducing pytest
-		* <host-ip>:<port>/lab/workspaces/lab1_Introducion
+		* <host-ip>:<port>/lab/workspaces/lab1_Introduction
 2. ##### Writing and Running Tests
 		* <host-ip>:<port>/lab/workspaces/lab2_Tests
 3. ##### Markers and Parametrization
