@@ -271,9 +271,7 @@ decorator to a class means that all its subclasses will inherit the
 mark. Subclassing test classes is not common, but it is sometimes a
 useful technique to avoid repeating test code, or to ensure that
 implementations comply with a certain interface. We will see more
-examples of this later in this lab and in [Lab
-4](https://subscription.packtpub.com/book/web_development/9781789347562/4){.link},
-[*Fixtures*].
+examples of this later in this lab and in Lab 4 *Fixtures*.
 
 Like test functions, decorators can be applied multiple times:
 

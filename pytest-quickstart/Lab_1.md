@@ -330,9 +330,7 @@ GUI. Using pytest, those complex test resources can be managed by a
 powerful mechanism called
 [**fixtures**]. Fixtures are simple to use but very powerful at
 the same time, and many people refer to them as [*pytest\'s killer
-feature.*] They will be shown in detail in [Lab
-4](https://subscription.packtpub.com/book/web_development/9781789347562/4){.link},
-[*Fixtures*].
+feature.*] They will be shown in detail in Lab 4 *Fixtures*
 
 Customization is important, and pytest goes a step further by defining a
 very powerful [**plugin**] system. Plugins can change several

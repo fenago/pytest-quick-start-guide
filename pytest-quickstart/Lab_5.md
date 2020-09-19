@@ -501,7 +501,7 @@ session.
 Because pictures speak louder than words, here is an example:
 
 
-![](./images/e79f3c6e-41c4-4d27-bc8c-ec1c455b913d.PNG)
+![](./images/e79f3c6e-41c4-4d27-bc8c-ec1c455b913d.png)
 
 
  
