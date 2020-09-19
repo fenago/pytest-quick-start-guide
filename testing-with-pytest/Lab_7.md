@@ -1384,26 +1384,3 @@ permutations in the labs.
 
 
 
-
-### What’s Next
-
-You are definitely ready to go out and try pytest with your own projects. And
-check out the appendixes that follow. If you’ve made it this far, I’ll assume
-you no longer need help with pip or virtual environments. However, you may
-not have looked at Appendix 3, Plugin Sampler Pack If you
-enjoyed this lab, it deserves your time to at least skim through it. Then,
-Appendix 4, Packaging and Distributing Python Projectsprovides
-a quick look at how to share code through various levels of packaging, and
-Appendix 5, xUnit Fixturescovers an alternative style of pytest
-fixtures that closer resembles traditional xUnit testing tools.
-
-Also, keep in touch! Check out the book’s webpage^11 and use the discussion
-forum^12 and errata^13 pages to help me keep the book lean, relevant, and easy
-to follow. This course is intended to be a living document. I want to keep it up
-to date and relevant for every wave of new pytest users.
-
-11.https://pragprog.com/titles/bopytest
-12.https://forums.pragprog.com/forums/438
-13.https://pragprog.com/titles/bopytest/errata
-
-

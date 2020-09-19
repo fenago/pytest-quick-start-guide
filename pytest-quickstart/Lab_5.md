@@ -1030,9 +1030,6 @@ but if you are interested, here are some resources to get you started:
 
 -   The pytest documentation: writing plugins
     (<https://docs.pytest.org/en/latest/writing_plugins.html>).
--   Brian Okken\'s wonderful book about pytest Python testing with
-    pytest, which delves deeper than this course does, has an excellent
-    lab on how to write your own plugins. 
 
 
 In the next lab, we will learn how to use pytest with existing

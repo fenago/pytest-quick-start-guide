@@ -137,13 +137,13 @@ to something that makes more sense for what it’s testing and copied everything
 into one file. I also removed the definition of the Task data structure, because
 that really belongs in api.py.
 
-1. https://pragprog.com/titles/bopytest/source_code
+1. https://github.com/fenago/test-automation-with-python/tree/master/testing-with-pytest
 
 
 Here is test_task.py:
 
 ```
-**ch2/tasks_proj/tests/unit/test_task.py
+ch2/tasks_proj/tests/unit/test_task.py
 
 """Test the Task data type."""
 from tasks import Task
@@ -1512,6 +1512,3 @@ rate retrieving and/or generating test data from the real guts of a test functio
 They can also separate common code so that multiple test functions can use
 the same setup. In the next lab, you’ll take a deep dive into the wonderful
 world of pytest fixtures.
-
-3. https://pragprog.com/titles/bopytest/source_code
-

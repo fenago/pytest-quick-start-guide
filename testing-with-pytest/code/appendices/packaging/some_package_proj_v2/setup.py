@@ -5,7 +5,7 @@ setup(
     description='Demonstrate packaging and distribution',
 
     version='1.0',
-    author='Brian Okken',
+    author='Fenago',
     author_email='brian@pythontesting.net',
     url='https://pragprog.com/book/bopytest/python-testing-with-pytest',
 

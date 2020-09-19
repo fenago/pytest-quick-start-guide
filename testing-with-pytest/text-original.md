@@ -17,7 +17,7 @@ Systematic software testing, especially in the Python community, is often either
 
 completely overlooked or done in an ad hoc way. Many Python programmers are
 
-completely unaware of the existence of pytest. Brian Okken takes the trouble to
+completely unaware of the existence of pytest. Fenago takes the trouble to
 show that software testing with pytest is easy, natural, and even exciting.
 
 ➤ Dmitry Zinoviev
@@ -46,7 +46,7 @@ Python Testing with pytest
 
 Simple, Rapid, Effective, and Scalable
 
-Brian Okken
+Fenago
 
 ```
 The Pragmatic Bookshelf
@@ -290,7 +290,7 @@ ally people email to let me know how what I’ve written saved them time and
 
 made their jobs easier. That’s awesome, and pleases me to no end. Thank you.
 
-Brian Okken
+Fenago
 
 September 2017
 

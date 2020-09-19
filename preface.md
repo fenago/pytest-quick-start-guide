@@ -203,22 +203,9 @@ used to run unittest tests, as well as share pytest style fixtures with unittest
 
 #### What You Need to Know
 
-**Python**
-You don’t need to know a lot of Python. The examples don’t do anything
+**Python** You don’t need to know a lot of Python. The examples don’t do anything
 super weird or fancy.
-**pip**
-You should use pip to install pytest and pytest plugins. If you want a
+
+**pip** You should use pip to install pytest and pytest plugins. If you want a
 refresher on pip, check out Appendix 2, pip
 
-
-**Example Code and Online Resources**
-
-The examples in this course were written and tested using Python 3 and pytest 3. pytest 3 supports Python 2.7, and Python 3.4+.
-
-The source code for the Tasks project, as well as for all of the tests shown in
-this course, is available through a link1 on the book’s web page at pragprog.com.2
-You don’t need to download the source code to understand the test code; the
-test code is presented in usable form in the examples. But to follow along
-with the Tasks project, or to adapt the testing examples to test your own
-project (more power to you!), you must go to the book’s web page to download
-the Tasks project.

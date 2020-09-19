@@ -8,7 +8,7 @@ setup(
     license='proprietary', 
     description='Minimal Project Task Management',
 
-    author='Brian Okken',
+    author='Fenago',
     author_email='Please use pythontesting.net contact form.',
     url='https://pragprog.com/book/bopytest',
 

@@ -233,38 +233,29 @@ The setup.py:
 
 ```
 appendices/packaging/some_package_proj_v2/setup.py
+
 from setuptools import setup, find_packages
+
 setup(
 name='some_package',
 description='Demonstrate packaging and distribution',
 version='1.0',
-author='Brian Okken',
+author='Fenago',
 author_email='brian@pythontesting.net',
 url='https://pragprog.com/book/bopytest/python-testing-with-pytest',
 packages=find_packages(where='src'),
 package_dir={'': 'src'},
 )
-```
-
-You should put the terms of the licensing in a LICENSE file. All of the code in
-this course follows the following license:
 
 ```
-appendices/packaging/some_package_proj_v2/LICENSE
-Copyright (c) 2017 The Pragmatic Programmers, LLC
-All rights reserved.
-Copyrights apply to this source code.
-```
 
-You may use the sourcecodein yourown projects,howeverthe sourcecode
-may not be usedto createcommercialtrainingmaterial,courses,books,
-articles,and the like.We makeno guaranteesthatthissourcecodeis fit
-for any purpose.
 
 Here’s the README.rst:
 
 ```
 appendices/packaging/some_package_proj_v2/README.rst
+
+
 ====================================================
 some_package: Demonstrate packaging and distribution
 ====================================================
@@ -275,9 +266,9 @@ It does contain one function, called ``some_func()``.
 >>> import some_package
 >>> some_package.some_func()
 42
-That's it, really.
 ```
 
+That's it, really.
 
 The README.rst is formatted in reStructuredText.^2 I’ve done what many have
 done before me: I copied a README.rst from an open source project, removed
@@ -290,6 +281,7 @@ I recommend also adding a change log. Here’s the start of one:
 
 ```
 appendices/packaging/some_package_proj_v2/CHANGELOG.rst
+
 Changelog
 =========
 ------------------------------------------------------
@@ -308,6 +300,7 @@ Let’s see if this was enough to remove the warnings:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
 $ python setup.py sdist bdist_wheel
+
 running sdist
 running build
 ```
@@ -336,13 +329,18 @@ $ mkdir ~/packages/
 $ cp dist/some_package-1.0-py3-none-any.whl ~/packages
 $ cp dist/some_package-1.0.tar.gz ~/packages
 $ pip install --no-index --find-links=~/packages some_package
+
+
 Collecting some_package
 Installing collected packages: some-package
 Successfully installed some-package-1.0
+
+
 $ pip install --no-index --find-links=./dist some_package==1.0
+
+
 Requirement already satisfied: some_package==1.0 in
 /path/to/venv/lib/python3.6/site-packages
-$
 ```
 
 Now you can create your own stash of local project packages from your team,
