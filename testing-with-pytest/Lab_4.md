@@ -57,7 +57,7 @@ directory or file that should be recreated for each test function.
 Here’s a simple example using tmpdir:
 
 ```
-**ch4/test_tmpdir.py
+ch4/test_tmpdir.py
 
 def test_tmpdir(tmpdir):
     # tmpdir already has a path name associated with it
@@ -82,7 +82,7 @@ def test_tmpdir(tmpdir):
     assert another_file.read() == 'something different'
 ```
 
-The value returned from tmpdir is an object of type py.path.local.^1 This seems like
+The value returned from tmpdir is an object of type py.path.local. This seems like
 everything we need for temporary directories and files. However, there’s one
 gotcha. Because the tmpdir fixture is defined as function scope, you can’t use
 tmpdir to create folders or files that should stay in place longer than one test
@@ -103,7 +103,7 @@ To see how similar tmpdir and tmpdir_factory are, I’ll modify the tmpdir examp
 just enough to use tmpdir_factory instead:
 
 ```
-**ch4/test_tmpdir.py
+ch4/test_tmpdir.py
 
 def test_tmpdir_factory(tmpdir_factory):
     # you should start with making a directory
@@ -172,7 +172,7 @@ fixture in either the module itself, or in a conftest.py file that sets up the d
 file like this:
 
 ```
-**ch4/authors/conftest.py
+ch4/authors/conftest.py
 
 """Demonstrate tmpdir_factory."""
 
@@ -204,7 +204,7 @@ the json file will only be created once per module that has a test using it:
 
 
 ```
-**ch4/authors/test_authors.py
+ch4/authors/test_authors.py
 
 """Some tests that use temp data files."""
 import json
@@ -249,7 +249,7 @@ We’ll use the pytest hook pytest_addoption to add a couple of options to the
 options already available in the pytest command line:
 
 ```
-**ch4/pytestconfig/conftest.py
+ch4/pytestconfig/conftest.py
 
 def pytest_addoption(parser):
     parser.addoption("--myopt", action="store_true",
@@ -268,6 +268,8 @@ help string was modified, as shown here:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/pytestconfig
 $ pytest --help
+
+
 usage:pytest[options][file_or_dir][file_or_dir][...]
 ...
 
@@ -284,7 +286,7 @@ customoptions:
 Now we can access those options from a test:
 
 ```
-**ch4/pytestconfig/test_config.py
+ch4/pytestconfig/test_config.py
 
 import pytest
 
@@ -297,18 +299,26 @@ def test_option(pytestconfig):
 Let’s see how this works:
 
 ```
-$ pytest-s -q test_config.py::test_option**
+$ pytest-s -q test_config.py::test_option
+
+
 "foo"set to: bar
 "myopt"set to: False
 .
 1 passed in 0.01seconds
-$ pytest-s -q --myopttest_config.py::test_option**
+
+
+$ pytest-s -q --myopttest_config.py::test_option
+
+
 "foo"set to: bar
 "myopt"set to: True
 .
 1 passed in 0.01seconds
 
-$ pytest-s -q --myopt--foobaz test_config.py::test_option**
+$ pytest-s -q --myopt--foobaz test_config.py::test_option
+
+
 "foo"set to: baz
 "myopt"set to: True
 .
@@ -319,7 +329,7 @@ Because pytestconfig is a fixture, it can also be accessed from other fixtures.
 You can make fixtures for the option names, if you like, like this:
 
 ```
-**ch4/pytestconfig/test_config.py
+ch4/pytestconfig/test_config.py
 
 @pytest.fixture()
 def foo(pytestconfig):
@@ -346,7 +356,7 @@ so on).
 Here’s an example of a few configuration values and options:
 
 ```
-**ch4/pytestconfig/test_config.py
+ch4/pytestconfig/test_config.py
 
 def test_pytestconfig(pytestconfig):
     print('args            :', pytestconfig.args)
@@ -403,7 +413,7 @@ tests sorted by file mtime
 To see these in action, we’ll use these two tests:
 
 ```
-**ch4/cache/test_pass_fail.py
+ch4/cache/test_pass_fail.py
 
 def test_this_passes():
     assert 1 == 1
@@ -424,9 +434,9 @@ $ pytest --verbose --tb=no test_pass_fail.py
 collected2 items
 
 test_pass_fail.py::test_this_passes PASSED            [ 50%]
-test_pass_fail.py::test_this_failsFAILED [100%]
+test_pass_fail.py::test_this_fails FAILED [100%]
 
-===========1 failed,1 passed in 0.06 seconds============
+=========== 1 failed, 1 passed in 0.06 seconds ============
 ```
 
 If you run them again with the --ff or --failed-first flag, the tests that failed previ-
@@ -440,10 +450,10 @@ $ pytest --verbose --tb=no --fftest_pass_fail.py
 collected2 items
 run-last-failure:rerunprevious1 failurefirst
 
-test_pass_fail.py::test_this_failsFAILED [ 50%]
+test_pass_fail.py::test_this_fails FAILED [ 50%]
 test_pass_fail.py::test_this_passes PASSED            [100%]
 
-===========1 failed,1 passed in 0.06 seconds============
+===========1 failed, 1 passed in 0.06 seconds============
 ```
 
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
@@ -455,9 +465,9 @@ venv)$ pytest --verbose --tb=no --lftest_pass_fail.py
 collected2 items/ 1 deselected
 run-last-failure:rerunprevious1 failure
 
-test_pass_fail.py::test_this_failsFAILED [100%]
+test_pass_fail.py::test_this_fails FAILED [100%]
 
-=========1 failed,1 deselectedin 0.06 seconds==========
+=========1 failed, 1 deselectedin 0.06 seconds==========
 ```
 
 Before we look at how the failure data is being saved and how you can use
@@ -469,7 +479,7 @@ Here’s a parametrized test with one failure:
 
 
 ```
-**ch4/cache/test_few_failures.py
+ch4/cache/test_few_failures.py
 
 """Demonstrate -lf and -ff with failing tests."""
 
@@ -515,7 +525,7 @@ E assert1.01e+25== 1.1e+25± 1.1e+19
 E + where1.1e+25± 1.1e+19= approx(1.1e+25)
 
 test_few_failures.py:21:AssertionError
-1 failed,4 passed in 0.10seconds
+1 failed, 4 passed in 0.10seconds
 ```
 
 Maybe you can spot the problem right off the bat. But let’s pretend the test
@@ -556,7 +566,7 @@ x = 1e+25
 y = 1e+23
 
 test_few_failures.py:21:AssertionError
-1 failed,4 deselectedin 0.06seconds
+1 failed, 4 deselectedin 0.06seconds
 ```
 
 The reason for the failure should be more obvious now.
@@ -618,7 +628,7 @@ how it’s represented in the .cache directory.
 Here’s our fixture used to time tests:
 
 ```
-**ch4/cache/test_slower.py
+ch4/cache/test_slower.py
 
 @pytest.fixture(autouse=True)
 def check_duration(request, cache):
@@ -646,7 +656,7 @@ function; the code after yield happens after the test function.
 Now we need some tests that take different amounts of time:
 
 ```
-**ch4/cache/test_slower.py
+ch4/cache/test_slower.py
 
 @pytest.mark.parametrize('i', range(5))
 def test_slow_stuff(i):
@@ -661,6 +671,8 @@ of times:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest -q --tb=linetest_slower.py
+
+
 ..... [100%]
 5 passed in 1.40seconds
 $ pytest -q --tb=linetest_slower.py
@@ -711,7 +723,7 @@ We are reading and writing to the cache for every test. We could split up the
 fixture into a function scope fixture to measure durations and a session scope
 fixture to read and write to the cache. However, if we do this, we can’t use
 the cache fixture because it has function scope. Fortunately, a quick peek at
-the implementation on GitHub^2 reveals that the cache fixture is simply
+the implementation on GitHub reveals that the cache fixture is simply
 returning request.config.cache. This is available in any scope.
 
 2. https://github.com/pytest-dev/pytest/blob/master/_pytest/cacheprovider.py
@@ -721,7 +733,7 @@ returning request.config.cache. This is available in any scope.
 Here’s one possible refactoring of the same functionality:
 
 ```
-**ch4/cache/test_slower_2.py
+ch4/cache/test_slower_2.py
 
 @pytest.fixture(scope='session')
 def duration_cache(request):
@@ -757,16 +769,19 @@ After running it a couple of times, let’s look at the saved cache:
 
 ```
 $ pytest -q --cache-cleartest_slower_2.py
+
 ..... [100%]
 5 passed in 2.27seconds
 
+
 $ pytest -q --tb=no test_slower_2.py
+
 .E.E...E [100%]
 5 passed,3 errorin 3.65seconds
 
 $ pytest -q --cache-show
 
-----------------------cachevalues-----------------------
+---------------------- cache values -----------------------
 cache/lastfailedcontains:
 {'test_slower_2.py::test_slow_stuff[0]':True,
 'test_slower_2.py::test_slow_stuff[1]':True,
@@ -798,7 +813,7 @@ porarily. Let’s take a look at retrieving stdout and stderr.
 Suppose you have a function to print a greeting to stdout:
 
 ```
-**ch4/cap/test_capsys.py
+ch4/cap/test_capsys.py
 
 def greeting(name):
     print('Hi, {}'.format(name))
@@ -808,7 +823,7 @@ You can’t test it by checking the return value. You have to test stdout someho
 You can test the output by using capsys:
 
 ```
-**ch4/cap/test_capsys.py
+ch4/cap/test_capsys.py
 
 def test_greeting(capsys):
     greeting('Earthling')
@@ -830,7 +845,7 @@ from the last time it was called.
 The previous example only used stdout. Let’s look at an example using stderr:
 
 ```
-**ch4/cap/test_capsys.py
+ch4/cap/test_capsys.py
 
 def yikes(problem):
     print('YIKES! {}'.format(problem), file=sys.stderr)
@@ -857,7 +872,7 @@ to temporarily let output get past the capture mechanism.
 Here’s an example:
 
 ```
-**ch4/cap/test_capsys.py
+ch4/cap/test_capsys.py
 def test_capsys_disabled (capsys):
 **with** capsys.disabled():
 **print ( _'\nalwaysprintthis'_ )
@@ -924,7 +939,7 @@ values set in a dot file in a user’s home directory. Here’s a bit of code th
 reads and writes a cheese preferences file:
 
 ```
-**ch4/monkey/cheese.py
+ch4/monkey/cheese.py
 
 import os
 import json
@@ -964,7 +979,7 @@ I already have tests for read_cheese_preferences() and I trust them, so I can us
 them in the testing of write_default_cheese_preferences():
 
 ```
-**ch4/monkey/test_cheese.py
+ch4/monkey/test_cheese.py
 
 def test_def_prefs_full():
     cheese.write_default_cheese_preferences()
@@ -981,7 +996,7 @@ HOME environmental variable. Let’s create a temporary directory and redirect
 HOME to point to that new temporary directory:
 
 ```
-**ch4/monkey/test_cheese.py
+ch4/monkey/test_cheese.py
 
 def test_def_prefs_change_home(tmpdir, monkeypatch):
     monkeypatch.setenv('HOME', tmpdir.mkdir('home'))
@@ -994,7 +1009,7 @@ def test_def_prefs_change_home(tmpdir, monkeypatch):
 This is a pretty good test, but relying on HOME seems a little operating-system
 dependent. And a peek into the documentation online for expanduser() has some
 troubling information, including “On Windows, HOME and USERPROFILE
-will be used if set, otherwise a combination of....”^3 Dang. That may not be
+will be used if set, otherwise a combination of....” Dang. That may not be
 good for someone running the test on Windows. Maybe we should take a dif-
 ferent approach.
 
@@ -1005,7 +1020,7 @@ ferent approach.
 Instead of patching the HOME environmental variable, let’s patch expanduser:
 
 ```
-**ch4/monkey/test_cheese.py
+ch4/monkey/test_cheese.py
 
 def test_def_prefs_change_expanduser(tmpdir, monkeypatch):
     fake_home_dir = tmpdir.mkdir('home')
@@ -1027,7 +1042,7 @@ to be sure it gets overwritten with the defaults when write_default_cheese_prefe
 ences() is called:
 
 ```
-**ch4/monkey/test_cheese.py
+ch4/monkey/test_cheese.py
 
 def test_def_prefs_change_defaults(tmpdir, monkeypatch):
     # write the file once
@@ -1097,7 +1112,7 @@ everyone understands clearly. So we throw some usage examples in both the
 file docstring and the docstrings of the functions:
 
 ```
-**ch4/dt/1/unnecessary_math.py
+ch4/dt/1/unnecessary_math.py
 
 """
 This module defines multiply(a, b) and divide(a, b).
@@ -1156,8 +1171,8 @@ $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 collected3 items
 
 unnecessary_math.py::unnecessary_math PASSED            [ 33%]
-unnecessary_math.py::unnecessary_math.divideFAILED[ 66%]
-unnecessary_math.py::unnecessary_math.multiplyFAILED[100%]
+unnecessary_math.py::unnecessary_math.divide FAILED[ 66%]
+unnecessary_math.py::unnecessary_math.multiply FAILED[100%]
 
 ========================FAILURES=========================
 ____________[doctest]unnecessary_math.divide ____________
@@ -1193,13 +1208,13 @@ NameError:name'um'is not defined
 
 /home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
 
-===========2 failed,1 passed in 0.12 seconds============
+===========2 failed, 1 passed in 0.12 seconds============
 ```
 
 One way to fix it is to put the import statement in each docstring:
 
 ```
-**ch4/dt/2/unnecessary_math.py
+ch4/dt/2/unnecessary_math.py
 
 def multiply(a, b):
     """
@@ -1250,7 +1265,7 @@ The builtin fixture doctest_namespace, used in an autouse fixture at a top-level
 conftest.py file, will fix the problem without changing the source code:
 
 ```
-**ch4/dt/3/conftest.py
+ch4/dt/3/conftest.py
 
 import pytest
 import unnecessary_math
@@ -1279,7 +1294,7 @@ package but was released for others to use. We can put a warning in the code
 and leave it there for a release or two:
 
 ```
-**ch4/test_warnings.py
+ch4/test_warnings.py
 
 import warnings
 import pytest
@@ -1293,7 +1308,7 @@ def lame_function():
 We can make sure the warning is getting issued correctly with a test:
 
 ```
-**ch4/test_warnings.py
+ch4/test_warnings.py
 
 def test_lame_function(recwarn):
     lame_function()
@@ -1315,7 +1330,7 @@ where you do care about collecting warnings.
 In addition to recwarn, pytest can check for warnings with pytest.warns():
 
 ```
-**ch4/test_warnings.py
+ch4/test_warnings.py
 
 def test_lame_function_2():
     with pytest.warns(None) as warning_list:

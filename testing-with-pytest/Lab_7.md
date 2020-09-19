@@ -35,7 +35,7 @@ $ pytest --tb=no -q
 .........................................FF.FFFFFFF[ 53%]
 
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
-42 failed,54 passed in 5.51seconds
+42 failed, 54 passed in 5.51seconds
 
 Before we look at how pdb can help us debug this test, let’s take a look at the
 
@@ -75,11 +75,11 @@ plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo]FAILED[ 2%]
-tests/func/test_add.py::test_added_task_has_id_set[mongo]FAILED[ 4%]
-tests/func/test_add_variety.py::test_add_1[mongo]FAILED[ 7%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
+tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED[ 4%]
+tests/func/test_add_variety.py::test_add_1[mongo] FAILED[ 7%]
 
-=========3 failed,54 deselectedin 3.12 seconds=========
+=========3 failed, 54 deselectedin 3.12 seconds=========
 ```
 
 Now we know which tests are failing. Let’s look at just one of them by using
@@ -95,7 +95,7 @@ plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo]FAILED[ 2%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
 
 ========================FAILURES=========================
 ____________test_add_returns_valid_id[mongo]_____________
@@ -122,7 +122,7 @@ task_id = ObjectId('5b8c12dccb02981dc226d897')
 tasks_db = None
 
 tests/func/test_add.py:16:AssertionError
-=========1 failed,54 deselectedin 2.91 seconds=========
+=========1 failed, 54 deselectedin 2.91 seconds=========
 ```
 
 Quite often this is enough to understand the test failure. In this particular
@@ -144,7 +144,7 @@ plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo]FAILED[ 2%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
 **>>>>>>>>>>>>>>>>>>>>>>>>traceback>>>>>>>>>>>>>>>>>>>>>>>>**
 
 tasks_db= None
@@ -211,12 +211,12 @@ Now you can quit the debugger and continue on with testing.
 ```
 (Pdb)q
 
-========1 failed,54 deselectedin 87.51 seconds=========
+========1 failed, 54 deselectedin 87.51 seconds=========
 ```
 
 If we hadn’t used -x, pytest would have opened pdb again at the next failed
 test. More information about using the pdb module is available in the Python
-documentation.^1
+documentation.
 
 ### Coverage.py: Determining How Much Code Is Tested
 
@@ -355,17 +355,17 @@ CoverageHTMLwrittento dir htmlcov
 You can then open htmlcov/index.html in a browser, which shows the output in
 the following screen:
 
-![](./images/133/33.png)
+![](./images/133-33.png)
 
 Clicking on tasksdb_tinydb.py shows a report for the one file. The top of the report
 shows the percentage of lines covered, plus how many lines were covered and
 how many are missing, as shown in the following screen:
 
-![](./images/134/34.png)
+![](./images/134-34.png)
 
 Scrolling down, you can see the missing lines, as shown in the next screen:
 
-![](./images/135/35.png)
+![](./images/135-35.png)
 
 Even though this screen isn’t the complete page for this file, it’s enough to
 tell us that:
@@ -384,7 +384,7 @@ that isn’t needed and could be removed. Like all software development tools,
 code coverage analysis does not replace thinking.
 
 Quite a few more options and features of both coverage.py and pytest-cov are
-available. More information can be found in the coverage.py^2 and pytest-cov^3
+available. More information can be found in the coverage.py and pytest-cov
 documentation.
 
 2. https://coverage.readthedocs.io
@@ -427,7 +427,7 @@ mock the API layer during CLI testing. It’s also a convenient decision, allowi
 us to look at mocks in this section.
 
 The implementation of the Tasks CLI uses the Click third-party command-
-line interface package.^4 There are many alternatives for implementing a CLI,
+line interface package. There are many alternatives for implementing a CLI,
 including Python’s builtin argparse module. One of the reasons I chose Click
 is because it includes a test runner to help us test Click applications. However,
 the code in cli.py, although hopefully typical of Click applications, is not
@@ -495,7 +495,7 @@ Tests that use mocks are necessarily white-box tests, and we have to look
 into the code to decide what to mock and where. The main entry point is here:
 
 ```
-**ch7/tasks_proj_v2/src/tasks/cli.py
+ch7/tasks_proj_v2/src/tasks/cli.py
 
 if __name__ == '__main__':
     tasks_cli()
@@ -503,7 +503,8 @@ if __name__ == '__main__':
 
 That’s just a call to tasks_cli():
 
-**ch7/tasks_proj_v2/src/tasks/cli.py
+```
+ch7/tasks_proj_v2/src/tasks/cli.py
 
 @click.group(context_settings={'help_option_names': ['-h', '--help']})
 @click.version_option(version='0.1.1')
@@ -516,7 +517,7 @@ Obvious? No. But hold on, it gets better (or worse, depending on your perspec-
 tive). Here’s one of the commands—the list command:
 
 ```
-**ch7/tasks_proj_v2/src/tasks/cli.py
+ch7/tasks_proj_v2/src/tasks/cli.py
 
 @tasks_cli.command(name="list", help="list tasks")
 @click.option('-o', '--owner', default=None,
@@ -554,7 +555,7 @@ deals with the return value correctly.
 To stub _tasks_db(), let’s look at the real implementation:
 
 ```
-**ch7/tasks_proj_v2/src/tasks/cli.py
+ch7/tasks_proj_v2/src/tasks/cli.py
 
 @contextmanager
 def _tasks_db():
@@ -577,7 +578,7 @@ functions, we don’t need a connection to an actual database. Therefore, we
 can replace the context manager with a simple stub:
 
 ```
-**ch7/tasks_proj_v2/tests/unit/test_cli.py
+ch7/tasks_proj_v2/tests/unit/test_cli.py
 
 @contextmanager
 def stub_tasks_db():
@@ -588,7 +589,7 @@ Because this is the first time we’ve looked at our test code for test_cli,py, 
 look at this with all of the import statements:
 
 ```
-**ch7/tasks_proj_v2/tests/unit/test_cli.py
+ch7/tasks_proj_v2/tests/unit/test_cli.py
 
 from click.testing import CliRunner
 from contextlib import contextmanager
@@ -611,7 +612,7 @@ we’ll use mocker, which is a fixture provided by the pytest-mock plugin. Let�
 at an actual test. Here’s a test that calls tasks list:
 
 ```
-**ch7/tasks_proj_v2/tests/unit/test_cli.py
+ch7/tasks_proj_v2/tests/unit/test_cli.py
 
 def test_list_no_args(mocker):
     mocker.patch.object(tasks.cli, '_tasks_db', new=stub_tasks_db)
@@ -640,12 +641,12 @@ same thing as calling tasks list on the command line.
 
 The final line uses the mock object to make sure the API call was called cor-
 rectly. The assert_called_once_with() method is part of unittest.mock.Mock objects,
-which are all listed in the Python documentation.^5
+which are all listed in the Python documentation.
 
 Let’s look at an almost identical test function that checks the output:
 
 ```
-**ch7/tasks_proj_v2/tests/unit/test_cli.py
+ch7/tasks_proj_v2/tests/unit/test_cli.py
 
 @pytest.fixture()
 def no_db(mocker):
@@ -682,7 +683,7 @@ The rest of the tests for the tasks list functionality don’t add any new conce
 but perhaps looking at several of these makes the code easier to understand:
 
 ```
-**ch7/tasks_proj_v2/tests/unit/test_cli.py
+ch7/tasks_proj_v2/tests/unit/test_cli.py
 
 def test_list_print_many_items(no_db, mocker):
     many_tasks = (
@@ -743,8 +744,8 @@ Yay! They pass.
 
 This was an extremely fast fly-through of using test doubles and mocks. If
 you want to use mocks in your testing, I encourage you to read up on
-unittest.mock in the standard library documentation,^6 and about pytest-mock at
-pypi.python.org.^7
+unittest.mock in the standard library documentation, and about pytest-mock at
+pypi.python.org.
 
 ### tox: Testing Multiple Configurations
 
@@ -810,7 +811,7 @@ tasks_proj_v2/
 ```
 Now, here’s what the tox.ini file looks like:
 
-**ch7/tasks_proj_v2/tox.ini
+ch7/tasks_proj_v2/tox.ini
 
 # tox.ini , put in same dir as setup.py
 
@@ -930,11 +931,11 @@ _and_ a smiley face.
 
 tox is much more powerful than what I’m showing here and deserves your
 attention if you are using pytest to test packages intended to be run in multiple
-environments. For more detailed information, check out the tox documentation.^8
+environments. For more detailed information, check out the tox documentation.
 
 ### Jenkins CI: Automating Your Automated Tests
 
-Jenkins^9 is an open source automation server that is frequently used for
+Jenkins is an open source automation server that is frequently used for
 continuous integration. Continuous integration (CI) systems such as Jenkins
 are frequently used to launch test suites after each code commit. pytest
 includes options to generate junit.xml-formatted files required by Jenkins and
@@ -976,7 +977,7 @@ or Unix-like systems, select Add build step->Execute shell. On Windows, select A
 buildstep->ExecuteWindowsbatchcommand. Since I’m on a Mac, I used an Executeshell
 block, as shown here:
 
-![](./images/146/36.png)
+![](./images/146-36.png)
 
 The content of the text box is:
 
@@ -998,7 +999,7 @@ Next, we’ll add a post-build action: Add post-buildaction->PublishJunit test r
 Fill in the Test report XMLs with results.xml, as shown in the next screen.
 
 
-![](./images/147/37.png)
+![](./images/147-37.png)
 
 That’s it! Now we can run tests through Jenkins. Here are the steps:
 
@@ -1007,13 +1008,13 @@ That’s it! Now we can run tests through Jenkins. Here are the steps:
 3. When it’s done, hover over the number next to the ball in Build History
 and select Console Output jrom the drop-down menu that appears. (Or
 click the build number and select Console Output.)
-4. If the build failed, try to figure out what went wrong from the console
+4. If the build failed,  try to figure out what went wrong from the console
 output.
 
 Before running the tests a second time, I’ve added a failure to one of the tests.
 After a refresh of the top project view, we see the following overview:
 
-![](./images/148/38.png)
+![](./images/148-38.png)
 
 You can zoom in to the failure information by clicking inside the graph or on
 the “Latest Test Result” link to see an overview of the test session. Click on
@@ -1025,7 +1026,7 @@ information.
 Going back to Jenkins > tasks, you can click on Test Results Analyzer to see
 a table view of test results:
 
-![](./images/148/39.png)
+![](./images/148-39.png)
 
 You’ve seen how to run pytest suites with virtual environments from Jenkins,
 but there are quite a few other topics to explore around using pytest and
@@ -1036,7 +1037,7 @@ Jenkins together. You can test multiple environments with Jenkins by either
 
 setting up separate Jenkins jobs for each environment, or by having Jenkins
 call tox directly. There’s also a nice plugin called Cobertura that is able to
-display coverage data from coverage.py. Check out the Jenkins documentation^10
+display coverage data from coverage.py. Check out the Jenkins documentation0
 for more information.
 
 ### unittest: Running Legacy Tests with pytest
@@ -1056,7 +1057,7 @@ are a couple of issues that might trip you up in the migration, however, and I�
 address some of those here. First, let’s look at a test written for unittest:
 
 ```
-**ch7/unittest/test_delete_unittest.py
+ch7/unittest/test_delete_unittest.py
 
 import unittest
 import shutil
@@ -1140,7 +1141,7 @@ versions at the same time until we are confident in the pytest versions. Let’s
 look at a rewrite for this test and then try running them both:
 
 ```
-**ch7/unittest/test_delete_pytest.py
+ch7/unittest/test_delete_pytest.py
 
 import tasks
 
@@ -1255,7 +1256,7 @@ tests. This is possible by adding @pytest.mark.usefixtures() decorators at the c
 or method level:
 
 ```
-**ch7/unittest/test_delete_unittest_fix.py
+ch7/unittest/test_delete_unittest_fix.py
 
 import pytest
 import unittest
@@ -1317,7 +1318,7 @@ In the next example, setUp() code has been moved into a function scope fixture
 that passes the ids through request.cls.ids:
 
 ```
-**ch7/unittest/test_delete_unittest_fix2.py
+ch7/unittest/test_delete_unittest_fix2.py
 
 import pytest
 import unittest

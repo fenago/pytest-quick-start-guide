@@ -158,7 +158,7 @@ suites without needing to grab packages from PyPI. I also use this method to
 grab a bunch of packages before taking a trip so that I can code on the plane.
 
 
-The Python Packaging Authority documentation^1 is a great resource for more
+The Python Packaging Authority documentation is a great resource for more
 information on pip.
 
 1. https://pip.pypa.io

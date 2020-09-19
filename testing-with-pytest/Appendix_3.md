@@ -20,7 +20,7 @@ The following plugins in some way change how pytest runs your tests.
 
 **pytest-repeat: Run Tests More Than Once**
 
-To run tests more than once per session, use the pytest-repeat plugin.^1 This
+To run tests more than once per session, use the pytest-repeat plugin. This
 plugin is useful if you have an intermittent failure in a test.
 
 Following is a normal test run of tests that start with test_list from ch7/tasks
@@ -137,7 +137,7 @@ may as well let them run in parallel to speed up your test time.
 
 The pytest-xdist plugin does a lot more than we’ve covered here, including the
 ability to offload tests to different computers altogether, so be sure to read
-more about the pytest-xdist plugin^2 on PyPI.
+more about the pytest-xdist plugin on PyPI.
 
 **pytest-timeout: Put Time Limits on Your Tests**
 
@@ -145,7 +145,7 @@ There are no normal timeout periods for tests in pytest. However, if you’re
 working with resources that may occasionally disappear, such as web services,
 it’s a good idea to put some time restrictions on your tests.
 
-The pytest-timeout plugin^3 does just that. It allows you pass a timeout period
+The pytest-timeout plugin does just that. It allows you pass a timeout period
 on the command line or mark individual tests with timeout periods in seconds.
 
 2. https://pypi.python.org/pypi/pytest-xdist
@@ -195,7 +195,7 @@ are finished, pytest displays the tracebacks of the failed or errored tests. If
 your test suite is relatively fast, that might be just fine. But if your test suite
 takes quite a bit of time, you may want to see the tracebacks as they happen,
 rather than wait until the end. This is the functionality of the pytest-instafail
-plugin.^4 When tests are run with the --instafail flag, the failures and errors
+plugin. When tests are run with the --instafail flag, the failures and errors
 appear right away.
 
 4. https://pypi.python.org/pypi/pytest-instafail
@@ -248,7 +248,7 @@ including the stack trace, without stopping the test suite.
 
 **pytest-sugar: Instafail + Colors + Progress Bar**
 
-The pytest-sugar plugin^5 lets you see status not just as characters, but also in
+The pytest-sugar plugin lets you see status not just as characters, but also in
 color. It also shows failure and error tracebacks during execution, and has
 a cool progress bar to the right of the shell.
 
@@ -267,7 +267,7 @@ bars grow in real time, too. It’s quite satisfying to watch.
 
 **pytest-emoji: Add Some Fun to Your Tests**
 
-The pytest-emoji plugin^6 allows you to replace all of the test status characters
+The pytest-emoji plugin allows you to replace all of the test status characters
 with emojis. You can also change the emojis if you don’t like the ones picked
 by the plugin author. Although this project is perhaps an example of silliness,
 it’s included in this list because it’s a small plugin and is a good example on
@@ -303,7 +303,7 @@ that demonstrates how to add hook functions to plugin code.
 The pytest-html plugin is quite useful in conjunction with continuous integra-
 tion, or in systems with large, long-running test suites. It creates a webpage
 to view the test results for a pytest session. The HTML report created includes
-the ability to filter for type of test result: passed, skipped, failed, errors,
+the ability to filter for type of test result: passed, skipped, failed,  errors,
 expected failures, and unexpected passes. You can also sort by test name,
 duration, or status. And you can include extra metadata in the report,
 including screenshots or data sets. If you have reporting needs greater than
@@ -338,7 +338,7 @@ def test_fail():
 > assert 1 == 2
 E assert 1 == 2
 test_outcomes.py:8: AssertionError
-1 failed, 1 passed, 1 skipped, 1 xfailed, 1 xpassed, 1 error in 0.08 seconds
+1 failed,  1 passed, 1 skipped, 1 xfailed,  1 xpassed, 1 error in 0.08 seconds
 $ open report.htm
 ```
 
@@ -367,25 +367,25 @@ themselves in the same session. Static analysis failures show up as test failure
 
 **pytest-pycodestyle, pytest-pep8: Comply with Python’s Style Guide**
 
-PEP 8 is a style guide for Python code.^8 It is enforced for standard library
+PEP 8 is a style guide for Python code. It is enforced for standard library
 code, and is used by many—if not most—Python developers, open source or
-otherwise. The pycodestyle^9 command-line tool can be used to check Python
-source code to see if it complies with PEP 8. Use the pytest-pycodestyle plugin^10
+otherwise. The pycodestyle command-line tool can be used to check Python
+source code to see if it complies with PEP 8. Use the pytest-pycodestyle plugin0
 to run pycodestyle on code in your project, including test code, with the --pep8
-flag. The pycodestyle tool used to be called pep8,^11 and pytest-pep8^12 is available if
+flag. The pycodestyle tool used to be called pep8,1 and pytest-pep82 is available if
  want to run the legacy tool.
 
 **pytest-flake8: Check for Style Plus Linting**
 
 While pep8 checks for style, flake8 is a full linter that also checks for PEP 8
-style. The flake8 package^13 is a collection of different style and static analysis
+style. The flake8 package3 is a collection of different style and static analysis
 tools all rolled into one. It includes lots of options, but has reasonable default
-behavior. With the pytest-flake8 plugin,^14 you can run all of your source code
+behavior. With the pytest-flake8 plugin,4 you can run all of your source code
 and test code through flake8 and get a failure if something isn’t right. It checks
 for PEP 8, as well as for logic errors. Use the --flake8 option to run flake8 during
 a pytest session. You can extend flake8 with plugins that offer even more
-checks, such as flake8-docstrings,^15 which adds pydocstyle checks for PEP 257,
-Python’s docstring conventions.^16
+checks, such as flake8-docstrings,5 which adds pydocstyle checks for PEP 257,
+Python’s docstring conventions.6
 
 ### Plugins for Web Development
 
@@ -396,7 +396,7 @@ pytest plugins help make it easier.
 **pytest-selenium: Test with a Web Browser**
 
 Selenium is a project that is used to automate control of a web browser. The
-pytest-selenium plugin^17 is the Python binding for it. With it, you can launch a
+pytest-selenium plugin7 is the Python binding for it. With it, you can launch a
 web browser and use it to open URLs, exercise web applications, and fill out
 
 8. https://www.python.org/dev/peps/pep-0008
@@ -421,14 +421,14 @@ or web application.
 Django is a popular Python-based web development framework. It comes with
 testing hooks that allow you to test different parts of a Django application
 without having to use browser-based testing. By default, the builtin testing
-support in Django is based on unittest. The pytest-django plugin^18 allows you
+support in Django is based on unittest. The pytest-django plugin8 allows you
 to use pytest instead of unittest to gain all the benefits of pytest. The plugin
 also includes helper functions and fixtures to speed up test implementation.
 
 **pytest-flask: Test Flask Applications**
 
 Flask is another popular framework that is sometimes referred to as a
-microframework. The pytest-flask plugin^19 provides a handful of fixtures to assist
+microframework. The pytest-flask plugin9 provides a handful of fixtures to assist
 in testing Flask applications.
 
 18.https://pypi.python.org/pypi/pytest-django

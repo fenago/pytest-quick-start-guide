@@ -197,8 +197,7 @@ you’ll look at how you can take the already powerful pytest and supercharge
 your testing with complementary tools. You’ll run the Tasks project on multiple
 versions of Python with tox. You’ll test the Tasks CLI while not having to run
 the rest of the system with mock. You’ll use coverage.py to see if any of the
-Tasks project source code isn’t being tested. You’ll use Jenkins to run test
-suites and display results over time. And finally, you’ll see how pytest can be
+Tasks project source code isn’t being tested. You’ll see how pytest can be
 used to run unittest tests, as well as share pytest style fixtures with unittestbased tests.
 
 #### What You Need to Know

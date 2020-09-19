@@ -67,7 +67,7 @@ mostly be the same.
 For pytest.ini:
 
 ```
-**ch6/format/pytest.ini
+ch6/format/pytest.ini
 
 [pytest]
 addopts = -rsxX -l --tb=short --strict
@@ -79,7 +79,7 @@ For tox.ini:
 
 ```
 
-**ch6/format/tox.ini**
+ch6/format/tox.ini**
 
 ;... tox specific stuff ...
 
@@ -92,7 +92,7 @@ xfail_strict = true
 For setup.cfg:
 
 ```
-**ch6/format/setup.cfg**
+ch6/format/setup.cfg**
 
 ;... packaging specific stuff ...
 
@@ -142,7 +142,7 @@ you want, you don’t have to type them in anymore. Here’s a set I like:
 addopts= _-rsxX-l --tb=short--strict_
 ```
 
-The -rsxX tells pytest to report the reasons for all tests that skipped, xfailed, or
+The -rsxX tells pytest to report the reasons for all tests that skipped, xfailed,  or
 xpassed. The -l tells pytest to report the local variables for every failure with
 the stacktrace. The --tb=short removes a lot of the stack trace. It leaves the file
 and line number, though. The --strict option disallows markers to be used if they
@@ -220,7 +220,7 @@ If you use markers in pytest.ini to register your markers, you may as well add
 and add a pytest.ini file to the tasks project:
 
 ```
-**ch6/b/tasks_proj/tests/pytest.ini
+ch6/b/tasks_proj/tests/pytest.ini
 
 [pytest]
 addopts = -rsxX -l --tb=short --strict
@@ -230,7 +230,7 @@ markers =
 ```
 
 This has a combination of flags I prefer over the defaults: -rsxX to report which
-tests skipped, xfailed, or xpassed, --tb=short for a shorter traceback for failures,
+tests skipped, xfailed,  or xpassed, --tb=short for a shorter traceback for failures,
 and --strict to only allow declared markers. And then a list of markers to allow
 for the project.
 
@@ -447,14 +447,14 @@ Here’s an example. Directory a and b both have the file, test_foo.py. It doesn
 matter what these files have in them, but for this example, they look like this:
 
 ```
-**ch6/dups/a/test_foo.py
+ch6/dups/a/test_foo.py
 
 def test_a():
     pass
 ```
 
 ```
-**ch6/dups/b/test_foo.py
+ch6/dups/b/test_foo.py
 
 def test_b():
     pass
@@ -576,7 +576,7 @@ Make those changes.
 from pytest.ini works correctly.
 
 5. Add the tests to the plugin tests directory. You’ll need to look up some
-extra pytester functionality.^1
+extra pytester functionality.
 
 ### What’s Next
 

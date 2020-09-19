@@ -101,7 +101,7 @@ some_package_proj/
 The content of some_module.py doesn’t change. The __init__.py needs to be written
 to expose the module functionality to the outside world through the package
 namespace. There are lots of choices for this. I recommend skimming the two
-sections of the Python documentation^1 that cover this topic.
+sections of the Python documentation that cover this topic.
 
 If we do something like this in __init__.py:
 
@@ -270,7 +270,7 @@ It does contain one function, called ``some_func()``.
 
 That's it, really.
 
-The README.rst is formatted in reStructuredText.^2 I’ve done what many have
+The README.rst is formatted in reStructuredText. I’ve done what many have
 done before me: I copied a README.rst from an open source project, removed
 everything I didn’t like, and changed everything else to reflect this project.
 
@@ -350,14 +350,14 @@ packages from PyPI.
 ### Creating a PyPI-Installable Package
 
 You need to add more metadata to your setup.py to get a package ready to
-distribute on PyPI. You also need to use a tool such as Twine^3 to push pack-
+distribute on PyPI. You also need to use a tool such as Twine to push pack-
 ages to PyPI. (Twine is a collection of utilities to help make interacting with
 PyPI easy and secure. It handles authentication over HTTPS to keep your PyPI
 credentials secure, and handles the uploading of packages to PyPI.)
 
 This is now beyond the scope of this course. However, for information about
 how to start contributing through PyPI, take a look at the Python Packaging
-User Guide^4 and the the PyPI^5 section of the Python documentation.
+User Guide and the the PyPI section of the Python documentation.
 
 3. https://pypi.python.org/pypi/twine
 4. https://python-packaging-user-guide.readthedocs.io

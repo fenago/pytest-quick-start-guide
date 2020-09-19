@@ -98,7 +98,7 @@ $ pytest -v test_two.py
 ===================== test session starts ======================
 collected1 item
 
-test_two.py::test_failingFAILED [100%]
+test_two.py::test_failing FAILED [100%]
 
 ===========================FAILURES===========================
 _________________________test_failing_________________________
@@ -325,7 +325,7 @@ E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-==============1 failed,5 passed in 0.17 seconds==============
+==============1 failed, 5 passed in 0.17 seconds==============
 ```
 
 To get just our new task tests to run, you can give pytest all the filenames
@@ -343,7 +343,8 @@ tasks/test_four.py.. [100%]
 
 ===================4 passed in 0.02 seconds===================
 
-$ pytest tasks**
+$ pytest tasks
+
 ===================== test session starts ======================
 collected4 items
 
@@ -354,6 +355,8 @@ tasks/test_three.py.. [100%]
 
 $ cd tasks
 $ pytest
+
+
 ===================== test session starts ======================
 ```
 
@@ -660,7 +663,7 @@ E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-===========1 failed,1 passed in 0.13 seconds============
+===========1 failed, 1 passed in 0.13 seconds============
 ```
 
 Near the top of the output you see that all six tests (or “items”) were collected,
@@ -681,7 +684,7 @@ test_two.pyF [ 33%]
 tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
-===========1 failed,5 passed in 0.07 seconds============
+===========1 failed, 5 passed in 0.07 seconds============
 ```
 
 This demonstrates that without the -x, pytest notes failure in test_two.py and
@@ -707,13 +710,13 @@ test_one.py . [ 16%]
 test_two.py F [ 33%]
 tasks/test_four.py .. [ 66%]
 tasks/test_three.py .. [100%]
-=========== 1 failed, 5 passed in 0.07 seconds ============
+=========== 1 failed,  5 passed in 0.07 seconds ============
 $ pytest --maxfail=1 --tb=no 
 =================== test session starts ===================
 collected 6 items
 test_one.py . [ 16%]
 test_two.py F
-=========== 1 failed, 1 passed in 0.07 seconds ============
+=========== 1 failed,  1 passed in 0.07 seconds ============
 
 ```
 
@@ -767,7 +770,7 @@ E       assert (1, 2, 3) == (3, 2, 1)
 E       At index 0 diff: 1 != 3
 E       Use -v to get the full diff
 test_two.py:2: AssertionError
-========= 1 failed, 5 deselected in 0.07 seconds ==========
+========= 1 failed,  5 deselected in 0.07 seconds ==========
 ```
 
 This is great if you’ve been using a --tb option that hides some information
@@ -775,7 +778,7 @@ and you want to re-run the failures with a different traceback option.
 
 **--ff, --failed-first**
 
-The --ff/--failed-first option will do the same as --last-failed, and then run the rest
+The --ff/--failed-first option will do the same as --last-failed,  and then run the rest
 of the tests that passed last time:
 
 ```
@@ -823,7 +826,7 @@ tasks/test_four.py::test_asdict PASSED            [ 50%]
 tasks/test_four.py::test_replace PASSED            [ 66%]
 tasks/test_three.py::test_defaults PASSED            [ 83%]
 tasks/test_three.py::test_member_access PASSED            [100%]
-=========== 1 failed, 5 passed in 0.08 seconds ============
+=========== 1 failed,  5 passed in 0.08 seconds ============
 ```
 
 With color terminals, you’d see red FAILED and green PASSED outcomes in the
@@ -858,7 +861,7 @@ E       ? ^ ^
 E       + (3, 2, 1)
 E       ? ^ ^
 test_two.py:2: AssertionError
-1 failed, 5 passed in 0.08 seconds
+1 failed,  5 passed in 0.08 seconds
 ```
 
 The -q option makes the output pretty terse, but it’s usually enough. We’ll
@@ -914,7 +917,7 @@ t_after = Task(summary='finish book', owner='brian', done=True, id=10)
 t_before = Task(summary='finish book', owner='brian', done=False, id=None)
 t_expected = Task(summary='finish book', owner='brian', done=True, id=11)
 tasks/test_four.py:24: AssertionError
-=========== 1 failed, 3 passed in 0.07 seconds ============
+=========== 1 failed,  3 passed in 0.07 seconds ============
 
 ```
 
@@ -938,14 +941,15 @@ ent traceback styles.
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --tb=no tasks**
+$ pytest --tb=no tasks
+
 =================== test session starts ===================
 collected4 items
 
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
 
-===========1 failed,3 passed in 0.06 seconds============
+===========1 failed, 3 passed in 0.06 seconds============
 ```
 
 --tb=line in many cases is enough to tell what’s wrong. If you have a ton of
@@ -964,7 +968,7 @@ tasks/test_three.py.. [100%]
 /home/jovyan/work/testing-with-pytest/code/ch1/tasks/test_four.py:24:
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
-===========1 failed,3 passed in 0.07 seconds============
+===========1 failed, 3 passed in 0.07 seconds============
 
 The next step up in verbose tracebacks is --tb=short:
 
@@ -983,7 +987,7 @@ E       AssertionError:assertTask(summary=...e=True,id=10)==
 Task(summary='...e=True,id=11)
 E       At index3 diff:10 != 11
 E       Use -v to get the fulldiff
-===========1 failed,3 passed in 0.07 seconds============
+===========1 failed, 3 passed in 0.07 seconds============
 ```
 
 That’s definitely enough to tell you what’s going on.
@@ -1091,7 +1095,7 @@ a project. You’ll learn about conftest.py and ini files such as pytest.ini in 
 
 ### Exercises
 
-1. Create a new virtual environment using python-m virtualenv or python-m venv.
+1. Create a new virtual environment using python -m virtualenv or python -m venv.
 Even if you know you don’t need virtual environments for the project
 you’re working on, humor me and learn enough about them to create one
 for trying out things in this course. I resisted using them for a very long
@@ -1117,12 +1121,12 @@ just created.
 4. Create a few test files. You can use the ones we used in this lab or
 make up your own. Practice running pytest against these files.
 
-5. Change the assert statements. Don’t just use assertsomething==something_else;
+5. Change the assert statements. Don’t just use assert something == something_else;
 try things like:
 
-- assert1 in [2, 3, 4]
-- asserta < b
-- assert'fizz' not in 'fizzbuzz'
+- assert 1 in [2, 3, 4]
+- assert a < b
+- assert 'fizz' not in 'fizzbuzz'
 
 ### What’s Next
 

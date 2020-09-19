@@ -37,7 +37,7 @@ We’ll use the sample project, Tasks, as discussed in The Tasks Project, on
 page xii, to see how to write test functions for a Python package. Tasks is a
 Python package that includes a command-line tool of the same name, tasks.
 
-Appendix 4, Packaging and Distributing Python Projectsincludes
+Appendix 4, Packaging and Distributing Python Projects includes
 an explanation of how to distribute your projects locally within a small team
 or globally through PyPI, so I won’t go into detail of how to do that here;
 however, let’s take a quick look at what’s in the Tasks project and how the
@@ -126,7 +126,7 @@ can have multiple conftest.py files; for example, you can have one at tests and
 one for each subdirectory under tests.
 
 If you haven’t already done so, you can download a copy of the source code
-for this project on the book’s website.^1 Alternatively, you can work on your
+for this project on the book’s website. Alternatively, you can work on your
 own project with a similar structure.
 
 **Installing a Package Locally**
@@ -199,20 +199,19 @@ tory. Or you can run pip install -e tasks_proj from one directory up:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code
-$ pip install ./tasks_proj/**
-Processing./tasks_proj
-Collectingclick(fromtasks==0.1.0)
-```
+$ pip install ./tasks_proj/
 
-```
-Downloading... click-6.7-py2.py3-none-any.whl
-Collectingtinydb(fromtasks==0.1.0)
-Downloading... tinydb-3.11.0-py2.py3-none-any.whl
-Requirementalreadysatisfied:six in
-./venv/lib/python3.7/site-packages(fromtasks==0.1.0)(1.11.0)
-Installingcollectedpackages:click,tinydb,tasks
-Runningsetup.pyinstallfor tasks... done
-Successfullyinstalledclick-6.7tasks-0.1.0tinydb-3.11.0
+Processing ./tasks_proj
+Collecting click (from tasks==0.1.0)
+Chapter 2. Writing Test Functions • 26
+report erratum • discussDownloading ... click-6.7-py2.py3-none-any.whl
+Collecting tinydb (from tasks==0.1.0)
+Downloading ... tinydb-3.11.0-py2.py3-none-any.whl
+Requirement already satisfied: six in
+./venv/lib/python3.7/site-packages (from tasks==0.1.0) (1.11.0)
+Installing collected packages: click, tinydb, tasks
+Running setup.py install for tasks ... done
+Successfully installed click-6.7 tasks-0.1.0 tinydb-3.11.0
 ```
 
 If you only want to run tests against tasks, this command is fine. If you want
@@ -220,17 +219,19 @@ to be able to modify the source code while tasks is installed, you need to insta
 it with the -e option (for “editable”):
 
 ```
-$ pip install -e ./tasks_proj/**
-Obtainingfile:///home/jovyan/work/testing-with-pytest/code/tasks_proj
-Requirementalreadysatisfied:clickin
-/path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
-Requirementalreadysatisfied:tinydbin
-/path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
-Requirementalreadysatisfied:six in
-/path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
-Installingcollectedpackages:tasks
-Runningsetup.pydevelopfor tasks
-Successfullyinstalledtasks
+$ pip install -e ./tasks_proj/
+
+
+Obtaining file:///path/to/code/tasks_proj
+Requirement already satisfied: click in
+/path/to/venv/lib/python3.7/site-packages (from tasks==0.1.0)
+Requirement already satisfied: tinydb in
+/path/to/venv/lib/python3.7/site-packages (from tasks==0.1.0)
+Requirement already satisfied: six in
+/path/to/venv/lib/python3.7/site-packages (from tasks==0.1.0)
+Installing collected packages: tasks
+Running setup.py develop for tasks
+Successfully installed tasks
 ```
 
 We also need to install pytest (if you haven’t already done so):
@@ -287,7 +288,7 @@ tions failed. Let’s see how helpful this rewriting is by looking at a few asse
 failures:
 
 ```
-**ch2/tasks_proj/tests/unit/test_task_fail.py
+ch2/tasks_proj/tests/unit/test_task_fail.py
 
 """Use the Task type to show test failures."""
 from tasks import Task
@@ -311,51 +312,46 @@ All of these tests fail, but what’s interesting is the traceback information:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit
-venv)$ pytest test_task_fail.py
+$ pytest test_task_fail.py
+
 
 =================== test session starts ===================
-collected2 items
-
-test_task_fail.pyFF [100%]
-
-========================FAILURES=========================
-___________________test_task_equality____________________
-
-
+collected 2 items
+test_task_fail.py FF [100%]
+======================== FAILURES =========================
+___________________ test_task_equality ____________________
 def test_task_equality():
-"""Differenttasksshouldnot be equal."""
-t1 = Task('sitthere','brian')
-t2 = Task('dosomething','okken')
-```
+    """Different tasks should not be equal."""
+    t1 = Task('sit there', 'brian')
+    t2 = Task('do something', 'okken')
+    > assert t1 == t2
+    E   AssertionError: assert Task(summary=...alse, id=None) ==
+    Task(summary='...alse, id=None)
+    E   At index 0 diff: 'sit there' != 'do something'
+    E   Use -v to get the full diff
 
-```
-**> assertt1 == t2**
-E AssertionError:assertTask(summary=...alse,id=None)==
-Task(summary='...alse,id=None)
-E At index0 diff:'sitthere'!= 'do something'
-E Use -v to get the fulldiff
+test_task_fail.py:9: AssertionError
 
-test_task_fail.py:9:AssertionError
-___________________test_dict_equality____________________
-
+___________________ test_dict_equality ____________________
 def test_dict_equality():
-"""Differenttaskscomparedas dictsshouldnot be equal."""
-t1_dict= Task('makesandwich','okken')._asdict()
-t2_dict= Task('makesandwich','okkem')._asdict()
-**> assertt1_dict== t2_dict**
-E AssertionError:assertOrderedDict([...('id',None)])==
-OrderedDict([(...('id',None)])
-E Omitting3 identicalitems,use -vv to show
-E Differingitems:
-E {'owner':'okken'}!= {'owner':'okkem'}
-E Use -v to get the fulldiff
+    """Different tasks compared as dicts should not be equal."""
+    t1_dict = Task('make sandwich', 'okken')._asdict()
+    t2_dict = Task('make sandwich', 'okkem')._asdict()
+    > assert t1_dict == t2_dict
+    E   AssertionError: assert OrderedDict([...('id', None)]) ==
+    OrderedDict([(...('id', None)])
+    E   Omitting 3 identical items, use -vv to show
+    E   Differing items:
+    E   {'owner': 'okken'} != {'owner': 'okkem'}
+    E   Use -v to get the full diff
+    test_task_fail.py:16: AssertionError
+================ 2 failed in 0.07 seconds =================
 
-test_task_fail.py:16:AssertionError
-================2 failedin 0.07 seconds=================
+
 ```
 
 Wow. That’s a lot of information. For each failing test, the exact line of failure
-is shown with a > pointing to the failure. The E lines show you extra informa-
+is shown with a > pointing to the failure. The E   lines show you extra informa-
 tion about the assert failure to help you figure out what went wrong.
 
 I intentionally put two mismatches in test_task_equality(), but only the first was
@@ -366,25 +362,26 @@ the error message:
 $ pytest -v test_task_fail.py::test_task_equality
 
 =================== test session starts ===================
-collected1 item
-
-test_task_fail.py::test_task_equalityFAILED [100%]
-
-========================FAILURES=========================
-___________________test_task_equality____________________
-
+collected 1 item
+test_task_fail.py::test_task_equality FAILED [100%]
+======================== FAILURES =========================
+___________________ test_task_equality ____________________
 def test_task_equality():
-"""Differenttasksshouldnot be equal."""
-t1 = Task('sitthere','brian')
-t2 = Task('dosomething','okken')
-**> assertt1 == t2**
-E AssertionError:assertTask(summary=...alse,id=None)==
-Task(summary='...alse,id=None)
-E At index0 diff:'sitthere'!= 'do something'
-E Fulldiff:
-E - Task(summary='sitthere',owner='brian',done=False,id=None)
-E? ^^^ ^^^ ^^^^
-E + Task(summary='dosomething', owner='okken',done=False,id=None)
+"""Different tasks should not be equal."""
+t1 = Task('sit there', 'brian')
+t2 = Task('do something', 'okken')
+> assert t1 == t2
+E   AssertionError: assert Task(summary=...alse, id=None) ==
+Task(summary='...alse, id=None)
+E     At index 0 diff: 'sit there' != 'do something'
+E   Full diff:
+E   - Task(summary='sit there', owner='brian', done=False, id=None)
+E   ? ^^^ ^^^ ^^^^
+E   + Task(summary='do something', owner='okken', done=False, id=None)
+E   ? +++ ^^^ ^^^ ^^^^
+test_task_fail.py:9: AssertionError
+================ 1 failed in 0.07 seconds =================
+
 ```
 
 ```
@@ -398,7 +395,7 @@ Well, I think that’s pretty darned cool. pytest not only found both difference
 but it also showed us exactly where the differences are.
 
 This example only used equality assert; many more varieties of assert statements
-with awesome trace debug information are found on the pytest.org website.^2
+with awesome trace debug information are found on the pytest.org website.
 
 ### Expecting Exceptions
 
@@ -406,16 +403,16 @@ Exceptions may be raised in a few places in the Tasks API. Let’s take a quick
 peek at the functions found in tasks/api.py:
 
 ```
-def add (task): _# type:(Task)-> int_
-def get (task_id): _# type:(int)-> Task_
-def list_tasks (owner=None): _# type:(str|None)-> listof Task_
-def count (): _# type:(None)-> int_
-def update (task_id,task): _# type:(int,Task)-> None_
-def delete (task_id): _# type:(int)-> None_
-def delete_all (): _# type:() -> None_
-def unique_id (): _# type:() -> int_
-def start_tasks_db (db_path,db_type): _# type:(str,str)-> None_
-def stop_tasks_db (): _# type:() -> None_
+def add(task): # type: (Task) -> int
+def get(task_id): # type: (int) -> Task
+def list_tasks(owner=None): # type: (str|None) -> list of Task
+def count(): # type: (None) -> int
+def update(task_id, task): # type: (int, Task) -> None
+def delete(task_id): # type: (int) -> None
+def delete_all(): # type: () -> None
+def unique_id(): # type: () -> int
+def start_tasks_db(db_path, db_type): # type: (str, str) -> None
+def stop_tasks_db(): # type: () -> None
 ```
 
 There’s an agreement between the CLI code in cli.py and the API code in api.py
@@ -427,7 +424,7 @@ the wrong type in a test function to intentionally cause TypeError exceptions,
 and use with pytest.raises(<expectedexception>), like this:
 
 ```
-**ch2/tasks_proj/tests/func/test_api_exceptions.py
+ch2/tasks_proj/tests/func/test_api_exceptions.py
 
 import pytest
 import tasks
@@ -452,7 +449,7 @@ db_type need to be a string, it really has to be either 'tiny' or 'mongo'. You c
 check to make sure the exception message is correct by adding as excinfo:
 
 ```
-**ch2/tasks_proj/tests/func/test_api_exceptions.py
+ch2/tasks_proj/tests/func/test_api_exceptions.py
 
 def test_start_tasks_db_raises():
     """Make sure unsupported db raises an exception."""
@@ -488,7 +485,7 @@ to some of the tests. Let’s add it to a couple of tests in test_api_exceptions
 that the markers smoke and get aren’t built into pytest; I just made them up):
 
 ```
-**ch2/tasks_proj/tests/func/test_api_exceptions.py
+ch2/tasks_proj/tests/func/test_api_exceptions.py
 
 @pytest.mark.smoke
 def test_list_raises():
@@ -537,28 +534,27 @@ It gets better. The expression after -m can use and, or, and not to combine
 multiple markers:
 
 ```
-$ pytest -v -m "smokeand get" test_api_exceptions.py
+$ pytest -v -m "smoke and get" test_api_exceptions.py
 
 =================== test session starts ===================
-collected7 items/ 6 deselected
+collected 7 items / 6 deselected
+test_api_exceptions.py::test_get_raises PASSED [100%]
+========= 1 passed, 6 deselected in 0.02 seconds ==========
 
-test_api_exceptions.py::test_get_raises PASSED            [100%]
-
-=========1 passed,6 deselectedin 0.02 seconds==========
 ```
 
 That time we only ran the test that had both smoke and get markers. We can
 use not as well:
 
 ```
-$ pytest -v -m "smokeand not get" **test_api_exceptions.py
+$ pytest -v -m "smoke and not get" test_api_exceptions.py
+
 
 =================== test session starts ===================
-collected7 items/ 6 deselected
+collected 7 items / 6 deselected
+test_api_exceptions.py::test_list_raises PASSED [100%]
+========= 1 passed, 6 deselected in 0.02 seconds ==========
 
-test_api_exceptions.py::test_list_raises PASSED            [100%]
-
-=========1 passed,6 deselectedin 0.02 seconds==========
 ```
 
 The addition of -m "smoke and not get" selected the test that was marked with
@@ -575,7 +571,7 @@ Let’s add a couple of tests that look at adding a task, and use one of them as
 part of our smoke test suite:
 
 ```
-**ch2/tasks_proj/tests/func/test_add.py
+ch2/tasks_proj/tests/func/test_add.py
 
 import pytest
 import tasks
@@ -612,7 +608,7 @@ is no database initialized in the test. We can define a fixture to get the datab
 initialized before the test and cleaned up after the test:
 
 ```
-**ch2/tasks_proj/tests/func/test_add.py
+ch2/tasks_proj/tests/func/test_add.py
 
 @pytest.fixture(autouse=True)
 def initialized_tasks_db(tmpdir):
@@ -648,13 +644,12 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v -m smoke
 
 =================== test session starts ===================
-collected56 items/ 53 deselected
+collected 56 items / 53 deselected
+tests/func/test_add.py::test_added_task_has_id_set PASSED [ 33%]
+tests/func/test_api_exceptions.py::test_list_raises PASSED [ 66%]
+tests/func/test_api_exceptions.py::test_get_raises PASSED [100%]
+========= 3 passed, 53 deselected in 0.14 seconds =========
 
-tests/func/test_add.py::test_added_task_has_id_setPASSED[ 33%]
-tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 66%]
-tests/func/test_api_exceptions.py::test_get_raisesPASSED[100%]
-
-=========3 passed,53 deselectedin 0.14 seconds=========
 ``` 
 
 This shows that marked tests from different files can all run together.
@@ -675,7 +670,7 @@ it’s just not shown here):
 
 
 ```
-**ch2/tasks_proj/tests/func/test_unique_id_1.py
+ch2/tasks_proj/tests/func/test_unique_id_1.py
 
 import pytest
 import tasks
@@ -706,7 +701,7 @@ def test_unique_id():
 id_1= tasks.unique_id()
 id_2= tasks.unique_id()
 **> assertid_1!= id_2**
-E assert1 != 1
+E   assert1 != 1
 
 test_unique_id_1.py:12:AssertionError
 ================1 failedin 0.10 seconds=================
@@ -719,7 +714,7 @@ We could just change the test. But instead, let’s just mark the first one to g
 skipped for now:
 
 ```
-**ch2/tasks_proj/tests/func/test_unique_id_2.py
+ch2/tasks_proj/tests/func/test_unique_id_2.py
 
 @pytest.mark.skip(reason='misunderstood the API')
 def test_unique_id_1():
@@ -763,7 +758,7 @@ also, and we intend to make that work in version 0.2.0 of the package. We
 can leave the test in place and use skipif instead:
 
 ```
-**ch2/tasks_proj/tests/func/test_unique_id_3.py
+ch2/tasks_proj/tests/func/test_unique_id_3.py
 
 @pytest.mark.skipif(tasks.__version__ < '0.2.0',
                     reason='not supported until version 0.2.0')
@@ -834,7 +829,7 @@ $ pytest --help
 -r chars
 
 showextratestsummaryinfoas specifiedby chars
-(f)ailed,(E)error,(s)skipped,(x)failed,(X)passed,
+(f)ailed,(E)error,(s)skipped,(x)failed, (X)passed,
 (p)passed,(P)passedwithoutput,(a)allexceptpP.
 ```
 
@@ -848,7 +843,7 @@ the xfail marker, we are telling pytest to run a test function, but that we expe
 it to fail. Let’s modify our unique_id() test again to use xfail:
 
 ```
-**ch2/tasks_proj/tests/func/test_unique_id_4.py
+ch2/tasks_proj/tests/func/test_unique_id_4.py
 
 @pytest.mark.xfail(tasks.__version__ < '0.2.0',
                    reason='not supported until version 0.2.0')
@@ -887,7 +882,7 @@ collected4 items
 
 test_unique_id_4.pyxxX. [100%]
 
-=====1 passed,2 xfailed,1 xpassed in 0.10 seconds======
+=====1 passed,2 xfailed, 1 xpassed in 0.10 seconds======
 ```
 
 The x is for XFAIL, which means “expected to fail.” The capital X is for XPASS or
@@ -906,7 +901,7 @@ test_unique_id_4.py::test_unique_id_is_a_duckxfail[ 50%]
 test_unique_id_4.py::test_unique_id_not_a_duckXPASS[ 75%]
 test_unique_id_4.py::test_unique_id_2 PASSED            [100%]
 
-=====1 passed,2 xfailed,1 xpassed in 0.10 seconds======
+=====1 passed,2 xfailed, 1 xpassed in 0.10 seconds======
 ```
 
 You can configure pytest to report the tests that pass but were marked with
@@ -949,7 +944,7 @@ tests/func/test_unique_id_2.pys. [ 88%]
 tests/func/test_unique_id_3.pys. [ 92%]
 tests/func/test_unique_id_4.pyxxX. [100%]
 
-1 failed,44 passed,2 skipped,2 xfailed,1 xpassed in 0.41seconds
+1 failed, 44 passed,2 skipped,2 xfailed, 1 xpassed in 0.41seconds
 ```
 
 An important trick to learn is that using -v gives you the syntax for how to
@@ -970,7 +965,7 @@ tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 72%]
 tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 74%]
 ...
 
-tests/func/test_unique_id_1.py::test_unique_idFAILED[ 84%]
+tests/func/test_unique_id_1.py::test_unique_id FAILED[ 84%]
 tests/func/test_unique_id_2.py::test_unique_id_1SKIPPED[ 86%]
 tests/func/test_unique_id_2.py::test_unique_id_2PASSED[ 88%]
 ...
@@ -980,7 +975,7 @@ tests/func/test_unique_id_4.py::test_unique_id_is_a_duckxfail[ 96%]
 tests/func/test_unique_id_4.py::test_unique_id_not_a_duckXPASS[ 98%]
 tests/func/test_unique_id_4.py::test_unique_id_2PASSED[100%]
 
-1 failed,44 passed,2 skipped,2 xfailed,1 xpassed in 0.48seconds
+1 failed, 44 passed,2 skipped,2 xfailed, 1 xpassed in 0.48seconds
 ```
 You’ll see the syntax listed here in the next few examples.
 
@@ -1028,7 +1023,7 @@ Test classes are a way to group tests that make sense to be grouped together.
 Here’s an example:
 
 ```
-**ch2/tasks_proj/tests/func/test_api_exceptions.py
+ch2/tasks_proj/tests/func/test_api_exceptions.py
 
 class TestUpdate():
     """Test expected exceptions with tasks.update()."""
@@ -1142,7 +1137,7 @@ To help understand the problem parametrized testing is trying to solve, let’s
 take a simple test for add():
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py
+ch2/tasks_proj/tests/func/test_add_variety.py
 
 import pytest
 import tasks
@@ -1199,7 +1194,7 @@ if we want to test lots of variations of a task? No problem. We can use
 test, like this:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py
+ch2/tasks_proj/tests/func/test_add_variety.py
 
 @pytest.mark.parametrize('task',
                          [Task('sleep', done=True),
@@ -1238,7 +1233,7 @@ This use of parametrize() works for our purposes. However, let’s pass in the
 tasks as tuples to see how multiple test parameters would work:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py
+ch2/tasks_proj/tests/func/test_add_variety.py
 
 @pytest.mark.parametrize('summary, owner, done',
                          [('sleep', None, False),
@@ -1306,7 +1301,7 @@ Now let’s go back to the list of tasks version, but move the task list to a va
 able outside the function:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py
+ch2/tasks_proj/tests/func/test_add_variety.py
 tasks_to_try= (Task( _'sleep'_ , done=True),
 Task( _'wake'_ , _'brian'_ ),
 Task( _'wake'_ , _'brian'_ ),
@@ -1349,7 +1344,7 @@ can use it to generate ids:
 
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py
+ch2/tasks_proj/tests/func/test_add_variety.py
 
 tasks_to_try = (Task('sleep', done=True),
                 Task('wake', 'brian'),
@@ -1407,7 +1402,7 @@ You can apply parametrize() to classes as well. When you do that, the same data
 sets will be sent to all test methods in the class:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py
+ch2/tasks_proj/tests/func/test_add_variety.py
 
 @pytest.mark.parametrize('task', tasks_to_try, ids=task_ids)
 class TestAdd():
@@ -1453,7 +1448,7 @@ parameter value when passing in a list within the @pytest.mark.parametrize()
 decorator. You do this with pytest.param(<value>,id="something") syntax:
 
 ```
-**ch2/tasks_proj/tests/func/test_add_variety.py
+ch2/tasks_proj/tests/func/test_add_variety.py
 
 @pytest.mark.parametrize('task', [
     pytest.param(Task('create'), id='just summary'),
@@ -1487,7 +1482,7 @@ This is useful when the id cannot be derived from the parameter value.
 
 ### Exercises
 
-1. Download the project for this lab, tasks_proj, from the book’s webpage^3
+1. Download the project for this lab, tasks_proj, from the book’s webpage
 and make sure you can install it locally with pip install /path/to/tasks_proj.
 2. Explore the tests directory.
 3. Run pytest with a single file.

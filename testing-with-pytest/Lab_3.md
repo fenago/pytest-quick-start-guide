@@ -14,7 +14,7 @@ Fixtures are also used to get data ready for multiple tests.
 Here’s a simple fixture that returns a number:
 
 ```
-**ch3/test_fixtures.py
+ch3/test_fixtures.py
 
 import pytest
 
@@ -116,7 +116,7 @@ on page 73.)
 Given those pieces, this fixture works nicely:
 
 ```
-**ch3/a/tasks_proj/tests/conftest.py
+ch3/a/tasks_proj/tests/conftest.py
 
 import pytest
 import tasks
@@ -150,7 +150,7 @@ tests. We’re not returning any data with the yield in this fixture. But you ca
 Let’s change one of our tasks.add() tests to use this fixture:
 
 ```
-**ch3/a/tasks_proj/tests/func/test_add.py
+ch3/a/tasks_proj/tests/func/test_add.py
 
 import pytest
 import tasks
@@ -237,7 +237,7 @@ Fixtures are a great place to store data to use for testing. You can return
 anything. Here’s a fixture returning a tuple of mixed type:
 
 ```
-**ch3/test_fixtures.py
+ch3/test_fixtures.py
 
 @pytest.fixture()
 def a_tuple():
@@ -318,7 +318,7 @@ But what about the Tasks project? For the Tasks project, we could probably
 use some data fixtures, perhaps different lists of tasks with various properties:
 
 ```
-**ch3/a/tasks_proj/tests/conftest.py
+ch3/a/tasks_proj/tests/conftest.py
 
 # Reminder of Task constructor interface
 # Task(summary=None, owner=None, done=False, id=None)
@@ -362,7 +362,7 @@ tasks_db fixture. Let’s keep the chain going and add some specialized fixtures
 for non-empty tasks databases:
 
 ```
-**ch3/a/tasks_proj/tests/conftest.py
+ch3/a/tasks_proj/tests/conftest.py
 
 @pytest.fixture()
 def db_with_3_tasks(tasks_db, tasks_just_a_few):
@@ -384,7 +384,7 @@ can use these when you want the test to start from a non-empty database,
 like this:
 
 ```
-**ch3/a/tasks_proj/tests/func/test_add.py
+ch3/a/tasks_proj/tests/func/test_add.py
 
 def test_add_increases_count(db_with_3_tasks):
     """Test tasks.add() affect on tasks.count()."""
@@ -479,7 +479,7 @@ session scope share one setup and teardown call.
 Here’s how the scope values look in action:
 
 ```
-**ch3/test_scope.py
+ch3/test_scope.py
 
 """Demo fixture scope."""
 
@@ -584,7 +584,7 @@ is just a one-line code change (well, two if you count tmpdir -> tmpdir_factory 
 the parameter list):
 
 ```
-**ch3/b/tasks_proj/tests/conftest.py
+ch3/b/tasks_proj/tests/conftest.py
 
 import pytest
 import tasks
@@ -614,7 +614,7 @@ The data fixtures just return a value, so there really is no reason to have them
 run all the time. Once per session is sufficient:
 
 ```
-**ch3/b/tasks_proj/tests/conftest.py
+ch3/b/tasks_proj/tests/conftest.py
 
 # Reminder of Task constructor interface
 # Task(summary=None, owner=None, done=False, id=None)
@@ -718,7 +718,7 @@ It doesn’t make sense to do this with test functions—it’s just more typing
 But it does work well for test classes:
 
 ```
-**ch3/test_scope.py
+ch3/test_scope.py
 
 @pytest.mark.usefixtures('class_scope')
 class TestSomething():
@@ -747,7 +747,7 @@ want to run at certain times, but tests don’t really depend on any system
 state or data from the fixture. Here’s a rather contrived example:
 
 ```
-**ch3/test_autouse.py
+ch3/test_autouse.py
 
 """Demonstrate autouse fixtures."""
 
@@ -822,7 +822,7 @@ using it, is usually the same as the function name of the fixture. However,
 pytest allows you to rename fixtures with a name parameter to @pytest.fixture():
 
 ```
-**ch3/test_rename_fixture.py
+ch3/test_rename_fixture.py
 
 """Demonstrate fixture renaming."""
 
@@ -924,7 +924,7 @@ parametrize fixtures. We still use our list of tasks, list of task identifiers, 
 an equivalence function, just as before:
 
 ```
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py
+ch3/b/tasks_proj/tests/func/test_add_variety2.py
 
 
 ```
@@ -952,7 +952,7 @@ But now, instead of parametrizing the test, we will parametrize a fixture
 called a_task:
 
 ```
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py
+ch3/b/tasks_proj/tests/func/test_add_variety2.py
 
 @pytest.fixture(params=tasks_to_try)
 def a_task(request):
@@ -997,7 +997,7 @@ number to the name of the fixture. However, we can use the same string list
 we used when we parametrized our tests:
 
 ```
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py
+ch3/b/tasks_proj/tests/func/test_add_variety2.py
 @pytest.fixture(params=tasks_to_try,ids=task_ids)
 def b_task (request):
 """Usinga listof ids."""
@@ -1030,7 +1030,7 @@ identifiers. Here’s what it looks like when we use a function to generate the
 identifiers:
 
 ```
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py
+ch3/b/tasks_proj/tests/func/test_add_variety2.py
 
 def id_func(fixture_value):
     """A function for generating ids."""
@@ -1087,7 +1087,7 @@ The decision (in the code) of which database to use is isolated to the
 start_tasks_db() call in the tasks_db_session fixture:
 
 ```
-**ch3/b/tasks_proj/tests/conftest.py
+ch3/b/tasks_proj/tests/conftest.py
 
 import pytest
 import tasks
@@ -1136,7 +1136,7 @@ To test MongoDB, we need to run all the tests with db_type set to mongo. A small
 change does the trick:
 
 ```
-**ch3/c/tasks_proj/tests/conftest.py
+ch3/c/tasks_proj/tests/conftest.py
 
 import pytest
 import tasks
@@ -1197,15 +1197,15 @@ tests/func/test_add_variety.py::test_add_2[tiny-task0]PASSED[ 5%]
 tests/func/test_add_variety.py::test_add_2[tiny-task1]PASSED[ 6%]
 ...
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo]FAILED[ 43%]
-tests/func/test_add.py::test_added_task_has_id_set[mongo]FAILED[ 44%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 43%]
+tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED[ 44%]
 tests/func/test_add.py::test_add_increases_count[mongo]PASSED[ 45%]
-tests/func/test_add_variety.py::test_add_1[mongo]FAILED[ 46%]
-tests/func/test_add_variety.py::test_add_2[mongo-task0]FAILED[ 47%]
-tests/func/test_add_variety.py::test_add_2[mongo-task1]FAILED[ 48%]
+tests/func/test_add_variety.py::test_add_1[mongo] FAILED[ 46%]
+tests/func/test_add_variety.py::test_add_2[mongo-task0] FAILED[ 47%]
+tests/func/test_add_variety.py::test_add_2[mongo-task1] FAILED[ 48%]
 ...
 
-==========42 failed,54 passed in 4.85 seconds===========
+==========42 failed, 54 passed in 4.85 seconds===========
 ```
 
 Hmm. Bummer. Looks like we’ll need to do some debugging before we let

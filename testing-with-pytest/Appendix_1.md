@@ -61,9 +61,9 @@ global site-packages directory. When you’re done with a virtual environment,
 you can just delete the directory and it completely disappears.
 
 I’ve covered the basics and common use case of venv. However, venv is a flexible
-tool with many options. Be sure to check out python-m venv --help. It may pre-
+tool with many options. Be sure to check out python -m venv --help. It may pre-
 emptively answer questions you may have about your specific situation. Also,
-the Python docs on venv^1 are worth reading if you still have questions.
+the Python docs on venv are worth reading if you still have questions.
 
 1. https://docs.python.org/3/library/venv.html
 

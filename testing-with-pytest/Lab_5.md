@@ -184,7 +184,7 @@ into how to distribute it.
 Plugins can include hook functions that alter pytest’s behavior. Because
 pytest was developed with the intent to allow plugins to change quite a bit
 about the way pytest behaves, a lot of hook functions are available. The hook
-functions for pytest are specified on the pytest documentation site.^1
+functions for pytest are specified on the pytest documentation site.
 
 For our example, we’ll create a plugin that changes the way the test status
 looks. We’ll also include a command-line option to turn on this new behavior.
@@ -213,7 +213,7 @@ conditions.
 Here are a couple more tests:
 
 ```
-**ch5/a/tasks_proj/tests/func/test_api_exceptions.py
+ch5/a/tasks_proj/tests/func/test_api_exceptions.py
 
 """Test for expected exceptions from using the API wrong."""
 import pytest
@@ -266,7 +266,7 @@ withpytest.raises(ValueError):
 E Failed:DID NOT RAISE<class'ValueError'>
 
 tests/func/test_api_exceptions.py:20:Failed
-===========1 failed,56 passed in 0.48 seconds===========
+===========1 failed, 56 passed in 0.48 seconds===========
 ```
 
 Let’s run it again with -v for verbose. Since you’ve already seen the traceback,
@@ -285,9 +285,9 @@ plugins:cov-2.5.1
 collected9 items/ 7 deselected
 
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
-test_api_exceptions.py::TestAdd::test_done_not_boolFAILED[100%]
+test_api_exceptions.py::TestAdd::test_done_not_bool FAILED[100%]
 
-====1 failed,1 passed,7 deselectedin 0.10 seconds=====
+====1 failed, 1 passed,7 deselectedin 0.10 seconds=====
 ```
 
 We could go off and try to fix this test (and we should later), but now we are
@@ -297,7 +297,7 @@ Let’s start by adding the “thank you” message to the header, which you can
 do with a pytest hook called pytest_report_header().
 
 ```
-**ch5/b/tasks_proj/tests/conftest.py
+ch5/b/tasks_proj/tests/conftest.py
 
 def pytest_report_header():
     """Thank tester for running tests."""
@@ -314,7 +314,7 @@ OPPORTUNITYfor improvement. There’s a hook function that allows for this type 
 shenanigans: pytest_report_teststatus():
 
 ```
-**ch5/b/tasks_proj/tests/conftest.py
+ch5/b/tasks_proj/tests/conftest.py
 
 def pytest_report_teststatus(report):
     """Turn failures into opportunities."""
@@ -339,7 +339,7 @@ test_api_exceptions.py.O
 
 
 ```
-====`1 failed,1 passed,7 deselectedin 0.10 seconds=====
+====`1 failed, 1 passed,7 deselectedin 0.10 seconds=====
 ```
 
 
@@ -358,14 +358,14 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed,1 passed,7 deselectedin 0.11 seconds=====
+====1 failed, 1 passed,7 deselectedin 0.11 seconds=====
 ```
 
 The last modification we’ll make is to add a command-line option, --nice, to
 only have our status modifications occur if --nice is passed in:
 
 ```
-**ch5/c/tasks_proj/tests/conftest.py
+ch5/c/tasks_proj/tests/conftest.py
 
 def pytest_addoption(parser):
     """Turn nice features on with --nice option."""
@@ -389,7 +389,7 @@ def pytest_report_teststatus(report, config):
 
 This is a good place to note that for this plugin, we are using just a couple of
 hook functions. There are many more, which can be found on the main pytest
-documentation site.^2
+documentation site.
 
 We can manually test our plugin just by running it against our example file.
 First, with no --nice option, to make sure just the username shows up:
@@ -410,7 +410,7 @@ test_api_exceptions.py.F [100%]
 
 
 ```
-====1 failed,1 passed,7 deselectedin 0.11 seconds=====
+====1 failed, 1 passed,7 deselectedin 0.11 seconds=====
 
 Now with --nice:
 
@@ -423,7 +423,7 @@ collected9 items/ 7 deselected
 
 test_api_exceptions.py.O [100%]
 
-====1 failed,1 passed,7 deselectedin 0.12 seconds=====
+====1 failed, 1 passed,7 deselectedin 0.12 seconds=====
 
 And with --nice and --verbose:
 
@@ -438,7 +438,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed,1 passed,7 deselectedin 0.10 seconds=====
+====1 failed, 1 passed,7 deselectedin 0.10 seconds=====
 ```
 
 Great! All of the changes we wanted are done with about a dozen lines of code
@@ -481,7 +481,7 @@ In pytest_nice.py, we’ll put the exact contents of our conftest.py that were r
 to this feature (and take it out of the tasks_proj/tests/conftest.py):
 
 ```
-**ch5/pytest-nice/pytest_nice.py
+ch5/pytest-nice/pytest_nice.py
 
 """Code for pytest-nice plugin."""
 
@@ -512,7 +512,7 @@ def pytest_report_teststatus(report, config):
 In setup.py, we need a very minimal call to setup():
 
 ```
-**ch5/pytest-nice/setup.py
+ch5/pytest-nice/setup.py
 
 """Setup for pytest-nice plugin."""
 
@@ -576,7 +576,7 @@ about a project is a good idea anyway. Here’s what I’ve put in the file for
 pytest-nice:
 
 ```
-**ch5/pytest-nice/README.rst**
+ch5/pytest-nice/README.rst**
 
 pytest-nice: A pytestplugin
 =============================
@@ -630,7 +630,7 @@ Our test directory for pytest-nice has two files: conftest.py and test_nice.py. 
 pytester, we need to add just one line to conftest.py:
 
 ```
-**ch5/pytest-nice/tests/conftest.py
+ch5/pytest-nice/tests/conftest.py
 
 """pytester is needed for testing plugins."""
 pytest_plugins = 'pytester'
@@ -652,7 +652,7 @@ Let’s look at one example:
 
 
 ```
-**ch5/pytest-nice/tests/test_nice.py
+ch5/pytest-nice/tests/test_nice.py
 
 def test_pass_fail(testdir):
 
@@ -683,7 +683,7 @@ test file. In this case, we are creating two tests: one that passes and one that
 
 We run pytest against the new test file with testdir.runpytest(). You can pass in
 options if you want. The return value can then be examined further, and is
-of type RunResult.^5
+of type RunResult.
 
 Usually, I look at stdout and ret. For checking the output like we did manually,
 use fnmatch_lines, passing in a list of strings that we want to see in the output,
@@ -692,7 +692,7 @@ The strings passed into fnmatch_lines can include glob wildcards. We can use our
 example file for more tests. Instead of duplicating that code, let’s make a fixture:
 
 ```
-**ch5/pytest-nice/tests/test_nice.py
+ch5/pytest-nice/tests/test_nice.py
 
 @pytest.fixture()
 def sample_test(testdir):
@@ -714,7 +714,7 @@ Now, for the rest of the tests, we can use sample_test as a directory that alrea
 contains our sample test file. Here are the tests for the other option variants:
 
 ```
-**ch5/pytest-nice/tests/test_nice.py
+ch5/pytest-nice/tests/test_nice.py
 
 def test_with_nice(sample_test):
     result = sample_test.runpytest('--nice')
@@ -740,7 +740,7 @@ Just a couple more tests to write. Let’s make sure our thank-you message is
 in the header:
 
 ```
-**ch5/pytest-nice/tests/test_nice.py
+ch5/pytest-nice/tests/test_nice.py
 
 def test_header(sample_test):
     result = sample_test.runpytest('--nice')
@@ -759,7 +759,7 @@ separate test so that one test checks one thing.
 Finally, let’s check the help text:
 
 ```
-**ch5/pytest -nice/tests/test_nice.py
+ch5/pytest -nice/tests/test_nice.py
 
 def test_help_message(testdir):
     result = testdir.runpytest('--help')
@@ -931,7 +931,7 @@ plugin, similar to the directory described in Creating an Installable Plugin,
 on page 105.
 2. Fill out all the files of the directory to make pytest-slower an installable plugin.
 3. Write some test code for the plugin.
-4. Take a look at the Python Package Index^8 and search for “pytest-.” Find
+4. Take a look at the Python Package Index and search for “pytest-.” Find
 a pytest plugin that looks interesting to you.
 5. Install the plugin you chose and try it out on Tasks tests.
 

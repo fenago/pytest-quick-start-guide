@@ -92,7 +92,7 @@ A test suite is, simply put, code that tests your code. Usually, they
 create one or more necessary resources and call the application code
 under test. They then assert that the results are as expected. Besides
 being executed on the developer\'s machine, in most modern setups, they
-are run continuously---for example, every hour or every commit---by an
+are run continuously for example, every hour or every commit by an
 automated system such as Jenkins. Because of this, adding tests for a
 piece of code means that, from now on, it will be tested again and again
 as features are added and bugs are fixed.

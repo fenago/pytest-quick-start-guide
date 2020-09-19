@@ -741,7 +741,7 @@ name = 'Solaire', class_name = 'mage'
 E           test_checks.InvalidClassNameError: invalid class name: "mage"
 
 tests\test_checks.py:40: InvalidClassNameError
-================ 1 failed, 1 passed in 0.05 seconds =================
+================ 1 failed,  1 passed in 0.05 seconds =================
 ```
 
 
@@ -1246,7 +1246,7 @@ running with `-x` to deal with the next problem.
 
 If you find this brilliant, you don\'t want to skip the next section!
 
-### Last failed, failed first: \--lf, \--ff
+### Last failed,  failed first: \--lf, \--ff
 
 
 
@@ -1286,7 +1286,7 @@ tests pass again.
 
 Keep in mind that it doesn\'t matter if you execute another subset of
 tests in the middle of your refactoring; pytest always remembers which
-tests failed, regardless of the command-line executed.
+tests failed,  regardless of the command-line executed.
 
 If you have ever done a large refactoring and had to keep track of which
 tests were failing so that you didn\'t waste your time running the test
@@ -1757,7 +1757,7 @@ pytest --durations=5
 0.00s call CH2/tests/core/test_core.py::test_type_checking
 0.00s teardown CH2/tests/core/test_parser.py::test_parse_expr
 0.00s call CH2/tests/test_digest.py::test_commit_hash
-================ 3 failed, 7 passed in 5.51 seconds =================
+================ 3 failed,  7 passed in 5.51 seconds =================
 ```
 
 
@@ -1785,7 +1785,7 @@ ________________________ test_type_checking _________________________
 E       assert 0
 
 tests\core\test_core.py:12: AssertionError
-=============== 14 failed, 17 passed in 5.68 seconds ================
+=============== 14 failed,  17 passed in 5.68 seconds ================
 ```
 
 
@@ -1825,7 +1825,7 @@ FAIL tests\test_checks.py::test_invalid_class_name
 FAIL tests\test_read_properties.py::test_read_properties
 FAIL tests\core\test_core.py::test_check_options
 FAIL tests\core\test_core.py::test_type_checking
-=============== 14 failed, 17 passed in 5.68 seconds ================
+=============== 14 failed,  17 passed in 5.68 seconds ================
 ```
 
 
