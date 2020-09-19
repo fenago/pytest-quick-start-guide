@@ -815,10 +815,7 @@ useful, let\'s take a look at the full signature:
     platform, Python version, library version, and so on.
     
     
-    Copy
-    
-
-    ``` {.programlisting .language-markup}
+``` {.programlisting .language-markup}
     @pytest.mark.xfail(
         sys.platform.startswith("win"),
         reason="flaky on Windows #42", strict=False
@@ -834,10 +831,7 @@ useful, let\'s take a look at the full signature:
     ticket number.
     
     
-    Copy
-    
-
-    ``` {.programlisting .language-markup}
+``` {.programlisting .language-markup}
     @pytest.mark.xfail(
         sys.platform.startswith("win"), 
     reason="flaky on Windows #42", strict=False
@@ -853,10 +847,7 @@ useful, let\'s take a look at the full signature:
     missing functionality or to test for known bugs.
     
     
-    Copy
-    
-
-    ``` {.programlisting .language-markup}
+``` {.programlisting .language-markup}
     @pytest.mark.xfail(raises=NotImplementedError,
                        reason='will be implemented in #987')
     def test_credential_check():
@@ -870,10 +861,7 @@ useful, let\'s take a look at the full signature:
     fault due to a known problem).
     
     
-    Copy
-    
-
-    ``` {.programlisting .language-markup}
+``` {.programlisting .language-markup}
     @pytest.mark.xfail(
     run=False, reason="undefined particles cause a crash #625"
     )
