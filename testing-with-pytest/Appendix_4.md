@@ -57,7 +57,7 @@ One directory with one module and a setup.py file is enough to make it instal-
 lable via pip:
 
 ```
-$ cd /path/to/code/appendices/packaging
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
 $ pip install ./some_module_proj
 Processing ./some_module_proj
 Installing collected packages: some-module
@@ -148,7 +148,7 @@ Instead of using py_modules, we specify packages.
 This is now installable:
 
 ```
-$ cd /path/to/code/appendices/packaging
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
 $ pip install ./some_package_proj/
 Processing ./some_package_proj
 Installing collected packages: some-package
@@ -183,7 +183,7 @@ For personal use, the configuration shown in the previous section is enough
 to create a source distribution and a wheel. Let’s try it:
 
 ```
-$ cd /path/to/code/appendices/packaging/some_package_proj/
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj/
 $ pip install wheel
 $ python setup.py sdist bdist_wheel
 running sdist
@@ -306,7 +306,7 @@ into a CHANGELOG.rst file.
 Let’s see if this was enough to remove the warnings:
 
 ```
-$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
 $ python setup.py sdist bdist_wheel
 running sdist
 running build
@@ -331,7 +331,7 @@ Now, we can put the .whl and/or .tar.gz files in a local shared directory and pi
 install to our heart’s content:
 
 ```
-$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
 $ mkdir ~/packages/
 $ cp dist/some_package-1.0-py3-none-any.whl ~/packages
 $ cp dist/some_package-1.0.tar.gz ~/packages

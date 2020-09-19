@@ -27,7 +27,7 @@ Following is a normal test run of tests that start with test_list from ch7/tasks
 _proj_v2:
 
 ```
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pip install .
 $ pip install pytest-repeat
 $ cd tests
@@ -41,12 +41,12 @@ collected 62 items / 56 deselected
 1. https://pypi.python.org/pypi/pytest-repeat
 
 ```
-func/test_api_exceptions.py::test_list_raises PASSED [ 16%]
-unit/test_cli.py::test_list_no_args PASSED [ 33%]
-unit/test_cli.py::test_list_print_empty PASSED [ 50%]
-unit/test_cli.py::test_list_print_many_items PASSED [ 66%]
-unit/test_cli.py::test_list_dash_o PASSED [ 83%]
-unit/test_cli.py::test_list_dash_dash_owner PASSED [100%]
+func/test_api_exceptions.py::test_list_raises PASSED            [ 16%]
+unit/test_cli.py::test_list_no_args PASSED            [ 33%]
+unit/test_cli.py::test_list_print_empty PASSED            [ 50%]
+unit/test_cli.py::test_list_print_many_items PASSED            [ 66%]
+unit/test_cli.py::test_list_dash_o PASSED            [ 83%]
+unit/test_cli.py::test_list_dash_dash_owner PASSED            [100%]
 =========== 6 passed, 56 deselected in 0.13 seconds ===========
 ```
 
@@ -57,18 +57,18 @@ $ pytest --count=2 -v -k test_list
 ===================== test session starts =====================
 plugins: repeat-0.7.0, mock-1.10.0
 collected 124 items / 112 deselected
-func/test_api_exceptions.py::test_list_raises[1/2] PASSED [ 8%]
-func/test_api_exceptions.py::test_list_raises[2/2] PASSED [ 16%]
-unit/test_cli.py::test_list_no_args[1/2] PASSED [ 25%]
-unit/test_cli.py::test_list_no_args[2/2] PASSED [ 33%]
-unit/test_cli.py::test_list_print_empty[1/2] PASSED [ 41%]
-unit/test_cli.py::test_list_print_empty[2/2] PASSED [ 50%]
-unit/test_cli.py::test_list_print_many_items[1/2] PASSED [ 58%]
-unit/test_cli.py::test_list_print_many_items[2/2] PASSED [ 66%]
-unit/test_cli.py::test_list_dash_o[1/2] PASSED [ 75%]
-unit/test_cli.py::test_list_dash_o[2/2] PASSED [ 83%]
-unit/test_cli.py::test_list_dash_dash_owner[1/2] PASSED [ 91%]
-unit/test_cli.py::test_list_dash_dash_owner[2/2] PASSED [100%]
+func/test_api_exceptions.py::test_list_raises[1/2] PASSED            [ 8%]
+func/test_api_exceptions.py::test_list_raises[2/2] PASSED            [ 16%]
+unit/test_cli.py::test_list_no_args[1/2] PASSED            [ 25%]
+unit/test_cli.py::test_list_no_args[2/2] PASSED            [ 33%]
+unit/test_cli.py::test_list_print_empty[1/2] PASSED            [ 41%]
+unit/test_cli.py::test_list_print_empty[2/2] PASSED            [ 50%]
+unit/test_cli.py::test_list_print_many_items[1/2] PASSED            [ 58%]
+unit/test_cli.py::test_list_print_many_items[2/2] PASSED            [ 66%]
+unit/test_cli.py::test_list_dash_o[1/2] PASSED            [ 75%]
+unit/test_cli.py::test_list_dash_o[2/2] PASSED            [ 83%]
+unit/test_cli.py::test_list_dash_dash_owner[1/2] PASSED            [ 91%]
+unit/test_cli.py::test_list_dash_dash_owner[2/2] PASSED            [100%]
 ========== 12 passed, 112 deselected in 0.16 seconds ==========
 ```
 
@@ -105,7 +105,7 @@ Notice that it takes over ten seconds to run normally:
 
 ```
 $ pip install pytest-xdist
-$ cd /path/to/code/appendices/xdist
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pytest test_parallel.py
 =================== test session starts ===================
 plugins: xdist-1.23.0, forked-0.2
@@ -157,7 +157,7 @@ Let’s run the tests from the previous example (with one-second sleeps) with
 a half-second timeout:
 
 ```
-$ cd /path/to/code/appendices/xdist
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pip install pytest-timeout
 $ pytest --timeout=0.5 -x test_parallel.py
 =================== test session starts ===================
@@ -203,7 +203,7 @@ appear right away.
 Here’s a test with normal failures at the end:
 
 ```
-$ cd /path/to/code/appendices/xdist
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pytest --timeout=0.5 --tb=line --maxfail=2 test_parallel.py
 =================== test session starts ===================
 plugins: xdist-1.23.0, timeout-1.3.2, forked-0.2
@@ -213,8 +213,8 @@ timeout func_only: False
 collected 10 items
 test_parallel.py FF
 ======================== FAILURES =========================
-/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
-/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
 ================ 2 failed in 1.09 seconds =================
 ```
 
@@ -230,9 +230,9 @@ timeout method: signal
 timeout func_only: False
 collected 10 items
 test_parallel.py F
-/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
 test_parallel.py F
-/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
 ================ 2 failed in 1.10 seconds =================
 ```
 
@@ -309,13 +309,13 @@ pass vs. fail, be sure to try out pytest-html.
 The pytest-html plugin is really easy to start. Just add --html=report_name.html:
 
 ```
-$ cd /path/to/code/appendices/outcomes
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/outcomes
 $ pytest --html=report.html
 ====================== test session starts ======================
 metadata: ...
 collected 6 items
 test_outcomes.py .FxXsE
-generated html file: /path/to/code/appendices/outcomes/report.html
+generated html file: /home/jovyan/work/testing-with-pytest/code/appendices/outcomes/report.html
 ============================ ERRORS =============================
 _________________ ERROR at setup of test_error __________________
 @pytest.fixture()

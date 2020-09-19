@@ -16,7 +16,7 @@ def test_passing():
 This is what it looks like when it’s run:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest test_one.py
 
 =====================testsessionstarts======================
@@ -38,7 +38,7 @@ $ pytest -v test_one.py
 =====================testsessionstarts======================
 collected1 item
 
-test_one.py::test_passingPASSED [100%]
+test_one.py::test_passing PASSED            [100%]
 
 ===================1 passedin 0.01seconds===================
 ```
@@ -293,7 +293,7 @@ _test. From the ch1 directory, if you run pytest with no commands, you’ll run
 four files’ worth of tests:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest
 =====================testsessionstarts======================
 collected6 items
@@ -370,13 +370,13 @@ I’ll cover that in Lab 6, Configuration.
 Let’s take a closer look at the output of running just one file:
 
 ```
-$ cd /path/to/code/ch1/tasks
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
 $ pytest test_three.py
 
 
 ===================== test session starts ======================
 platform darwin -- Python 3.x.y, pytest-3.x.y, py-1.x.y, pluggy-0.x.y
-rootdir: /path/to/code/ch1, inifile:
+rootdir: /home/jovyan/work/testing-with-pytest/code/ch1, inifile:
 collected 2 items
 test_three.py .. [100%]
 =================== 2 passed in 0.01 seconds ===================
@@ -397,7 +397,7 @@ depends on. Both py and pluggy are packages developed by the pytest team
 to help with the implementation of pytest.
 
 ```
-_rootdir:/path/to/code/ch1/tasks,inifile:_
+_rootdir:/home/jovyan/work/testing-with-pytest/code/ch1/tasks,inifile:_
 
 ```
 The rootdir is the topmost common directory to all of the directories being
@@ -459,12 +459,12 @@ run just one. Specify the file directly, and add a ::test_name, like this:
 
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -v tasks/test_four.py::test_asdict**
 =====================testsessionstarts======================
 collected1 item
 
-tasks/test_four.py::test_asdictPASSED [100%]
+tasks/test_four.py::test_asdict PASSED            [100%]
 
 ===================1 passedin 0.01seconds===================
 ```
@@ -519,7 +519,7 @@ directory, you should see all of the test functions you’ve looked at so far in
 this lab:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --collect-only**
 ===================testsessionstarts===================
 collected6 items
@@ -549,7 +549,7 @@ suffix in their names. Let’s say you want to run the test_asdict() and test_de
 tests. You can test out the filter with --collect-only:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -k** _"asdictor defaults"_ **--collect-only**
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
@@ -584,8 +584,8 @@ $ pytest -v -k** _"asdictor defaults"_
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
 
-tasks/test_four.py::test_asdictPASSED [ 50%]
-tasks/test_three.py::test_defaultsPASSED [100%]
+tasks/test_four.py::test_asdict PASSED            [ 50%]
+tasks/test_three.py::test_defaults PASSED            [100%]
 
 =========2 passed,4 deselectedin 0.02seconds==========
 ```
@@ -614,7 +614,7 @@ Then you’d do the same for test_replace(). You can then run all the tests with
 the same marker with pytest -m run_these_please:
 
 ```
-$ cd /path/to/code/ch1/tasks
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
 $ pytest -m run_these_please
 
 =================== test session starts ===================
@@ -643,7 +643,7 @@ do. That’s what the -x option does.
 Let’s try it on the six tests we have so far:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -x**
 ===================testsessionstarts===================
 collected6 items
@@ -672,7 +672,7 @@ also use --tb=no to turn off the stack trace, since you’ve already seen it and
 don’t need to see it again:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=no
 ===================testsessionstarts===================
 collected6 items
@@ -699,7 +699,7 @@ but let’s take a look anyway. Since there is only one failure, if we set --max
 all of the tests should run, and --maxfail=1 should act just like -x:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --maxfail=2 --tb=no
 
 =================== test session starts ===================
@@ -752,7 +752,7 @@ When one or more tests fails, having a convenient way to run just the failing
 tests is helpful for debugging. Just use --lf and you’re ready to debug:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --lf
 
 
@@ -780,7 +780,7 @@ The --ff/--failed-first option will do the same as --last-failed, and then run t
 of the tests that passed last time:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --ff --tb=no
 $ pytest --ff --tb=no
 
@@ -789,7 +789,7 @@ $ pytest --ff --tb=no
 collected 6 items
 run-last-failure: rerun previous 1 failure first
 test_two.py F [ 16%]
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --ff --tb=no
 $ pytest --ff --tb=no
 =================== test session starts ===================
@@ -812,18 +812,18 @@ We’ve used it quite a bit already, but let’s run it again for fun in conjunc
 with --ff and --tb=no:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -v --ff --tb=no
 
 =================== test session starts ===================
 collected 6 items
 run-last-failure: rerun previous 1 failure first
 test_two.py::test_failing FAILED [ 16%]
-test_one.py::test_passing PASSED [ 33%]
-tasks/test_four.py::test_asdict PASSED [ 50%]
-tasks/test_four.py::test_replace PASSED [ 66%]
-tasks/test_three.py::test_defaults PASSED [ 83%]
-tasks/test_three.py::test_member_access PASSED [100%]
+test_one.py::test_passing PASSED            [ 33%]
+tasks/test_four.py::test_asdict PASSED            [ 50%]
+tasks/test_four.py::test_replace PASSED            [ 66%]
+tasks/test_three.py::test_defaults PASSED            [ 83%]
+tasks/test_three.py::test_member_access PASSED            [100%]
 =========== 1 failed, 5 passed in 0.08 seconds ============
 ```
 
@@ -842,7 +842,7 @@ failing line of any failing tests.
 Let’s try -q by itself:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -q
 
 
@@ -887,7 +887,7 @@ cause a failure. But this is enough to demonstrate the command-line option
 --l/--showlocals:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -l tasks
 
 
@@ -938,7 +938,7 @@ ent traceback styles.
 --tb=no removes the traceback entirely:
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=notasks**
 ===================testsessionstarts===================
 collected4 items
@@ -962,7 +962,7 @@ tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
 
 ========================FAILURES=========================
-/path/to/code/ch1/tasks/test_four.py:24:
+/home/jovyan/work/testing-with-pytest/code/ch1/tasks/test_four.py:24:
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
 ===========1 failed,3 passedin 0.07seconds============
@@ -1009,7 +1009,7 @@ which one:
 
 
 ```
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --durations=3tasks**
 ===================testsessionstarts===================
 collected4 items

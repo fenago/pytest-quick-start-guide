@@ -687,7 +687,7 @@ def test_passing ():
 
 This is what it looks like when it’s run:
 
-$ cd /path/to/code/ch
+$ cd /home/jovyan/work/testing-with-pytest/code/ch
 $ pytest test_one.py
 
 =====================testsessionstarts======================
@@ -712,7 +712,7 @@ $ pytest -v test_one.py
 =====================testsessionstarts======================
 collected1 item
 
-test_one.py::test_passingPASSED [100%]
+test_one.py::test_passing PASSED            [100%]
 
 ===================1 passedin 0.01seconds===================
 
@@ -1000,7 +1000,7 @@ _test. From the ch1 directory, if you run pytest with no commands, you’ll run
 
 four files’ worth of tests:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest
 =====================testsessionstarts======================
 collected6 items
@@ -1081,12 +1081,12 @@ I’ll cover that in Lab 6, Configuration
 
 Let’s take a closer look at the output of running just one file:
 
-$ cd /path/to/code/ch1/tasks
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
 $ pytest test_three.py
 
 =====================testsessionstarts======================
 platformdarwin-- Python3.x.y,pytest-3.x.y,py-1.x.y,pluggy-0.x.y
-rootdir:/path/to/code/ch1,inifile:
+rootdir:/home/jovyan/work/testing-with-pytest/code/ch1,inifile:
 collected2 items
 
 test_three.py.. [100%]
@@ -1115,7 +1115,7 @@ to help with the implementation of pytest.
 Running pytest • 7
 
 
-_rootdir:/path/to/code/ch1/tasks,inifile:_
+_rootdir:/home/jovyan/work/testing-with-pytest/code/ch1/tasks,inifile:_
 
 ```
 The rootdir is the topmost common directory to all of the directories being
@@ -1178,12 +1178,12 @@ run just one. Specify the file directly, and add a ::test_name, like this:
 Running Only One Test • 9
 
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -v tasks/test_four.py::test_asdict**
 =====================testsessionstarts======================
 collected1 item
 
-tasks/test_four.py::test_asdictPASSED [100%]
+tasks/test_four.py::test_asdict PASSED            [100%]
 
 ===================1 passedin 0.01seconds===================
 
@@ -1247,7 +1247,7 @@ directory, you should see all of the test functions you’ve looked at so far in
 
 this lab:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --collect-only**
 ===================testsessionstarts===================
 collected6 items
@@ -1280,7 +1280,7 @@ suffix in their names. Let’s say you want to run the test_asdict() and test_de
 
 tests. You can test out the filter with --collect-only:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -k "asdictor defaults" **--collect-only**
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
@@ -1315,8 +1315,8 @@ $ pytest -v -k "asdictor defaults"
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
 
-tasks/test_four.py::test_asdictPASSED [ 50%]
-tasks/test_three.py::test_defaultsPASSED [100%]
+tasks/test_four.py::test_asdict PASSED            [ 50%]
+tasks/test_three.py::test_defaults PASSED            [100%]
 
 =========2 passed,4 deselectedin 0.02seconds==========
 
@@ -1345,7 +1345,7 @@ Then you’d do the same for test_replace(). You can then run all the tests with
 
 the same marker with pytest-m run_these_please:
 
-$ cd /path/to/code/ch1/tasks
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
 $ pytest-m run_these_please**
 ===================testsessionstarts===================
 collected4 items/ 2 deselected
@@ -1384,7 +1384,7 @@ do. That’s what the -x option does.
 
 Let’s try it on the six tests we have so far:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest-x**
 ===================testsessionstarts===================
 collected6 items
@@ -1414,7 +1414,7 @@ also use --tb=no to turn off the stack trace, since you’ve already seen it and
 
 don’t need to see it again:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -1447,7 +1447,7 @@ but let’s take a look anyway. Since there is only one failure, if we set --max
 
 all of the tests should run, and --maxfail=1 should act just like -x:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --maxfail=2--tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -1516,7 +1516,7 @@ When one or more tests fails, having a convenient way to run just the failing
 
 tests is helpful for debugging. Just use --lf and you’re ready to debug:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --lf**
 ===================testsessionstarts===================
 collected6 items/ 5 deselected
@@ -1546,7 +1546,7 @@ The --ff/--failed-first option will do the same as --last-failed, and then run t
 
 of the tests that passed last time:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --ff--tb=no
 $ pytest --ff--tb=no**
 ===================testsessionstarts===================
@@ -1580,18 +1580,18 @@ We’ve used it quite a bit already, but let’s run it again for fun in conjunc
 
 with --ff and --tb=no:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -v --ff--tb=no**
 ===================testsessionstarts===================
 collected6 items
 run-last-failure:rerunprevious1 failurefirst
 
 test_two.py::test_failingFAILED [ 16%]
-test_one.py::test_passingPASSED [ 33%]
-tasks/test_four.py::test_asdictPASSED [ 50%]
-tasks/test_four.py::test_replacePASSED [ 66%]
-tasks/test_three.py::test_defaultsPASSED [ 83%]
-tasks/test_three.py::test_member_accessPASSED [100%]
+test_one.py::test_passing PASSED            [ 33%]
+tasks/test_four.py::test_asdict PASSED            [ 50%]
+tasks/test_four.py::test_replace PASSED            [ 66%]
+tasks/test_three.py::test_defaults PASSED            [ 83%]
+tasks/test_three.py::test_member_access PASSED            [100%]
 
 ===========1 failed,5 passedin 0.08seconds============
 
@@ -1612,7 +1612,7 @@ Lab 1. Getting Started with pytest • 16
 
 Let’s try -q by itself:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -q**
 .F.... [100%]
 ========================FAILURES=========================
@@ -1659,7 +1659,7 @@ cause a failure. But this is enough to demonstrate the command-line option
 
 --l/--showlocals:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest-l tasks**
 ===================testsessionstarts===================
 collected4 items
@@ -1717,7 +1717,7 @@ ent traceback styles.
 
 --tb=no removes the traceback entirely:
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=notasks**
 ===================testsessionstarts===================
 collected4 items
@@ -1742,7 +1742,7 @@ tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
 
 ========================FAILURES=========================
-/path/to/code/ch1/tasks/test_four.py:24:
+/home/jovyan/work/testing-with-pytest/code/ch1/tasks/test_four.py:24:
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
 ===========1 failed,3 passedin 0.07seconds============
@@ -1795,7 +1795,7 @@ which one:
 Using Options • 19
 
 
-$ cd /path/to/code/ch1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --durations=3tasks**
 ===================testsessionstarts===================
 collected4 items
@@ -2183,7 +2183,7 @@ Install tasks either by running pip install . or pip install -e. from the tasks_
 
 tory. Or you can run pip install -e tasks_proj from one directory up:
 
-$ cd /path/to/code
+$ cd /home/jovyan/work/testing-with-pytest/code
 $ pip install ./tasks_proj/**
 Processing./tasks_proj
 Collectingclick(fromtasks==0.1.0)
@@ -2207,7 +2207,7 @@ to be able to modify the source code while tasks is installed, you need to insta
 it with the -e option (for “editable”):
 
 $ pip install -e ./tasks_proj/**
-Obtainingfile:///path/to/code/tasks_proj
+Obtainingfile:///home/jovyan/work/testing-with-pytest/code/tasks_proj
 Requirementalreadysatisfied:clickin
 /path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
 Requirementalreadysatisfied:tinydbin
@@ -2224,7 +2224,7 @@ $ pip install pytest**
 
 Now let’s try running tests:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/unit
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit
 $ pytest test_task.py
 
 ===================testsessionstarts===================
@@ -2299,7 +2299,7 @@ t2_dict= Task( _'makesandwich'_ , _'okkem'_ )._asdict()
 
 All of these tests fail, but what’s interesting is the traceback information:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/unit**
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit**
 venv)$ pytest test_task_fail.py
 ===================testsessionstarts===================
 collected2 items
@@ -2515,14 +2515,14 @@ tasks.get(task_id= '123' )
 ```
 Now, let’s run just those tests that are marked with -m marker_name:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v -m smoketest_api_exceptions.py
 
 ===================testsessionstarts===================
 collected7 items/ 5 deselected
 
-test_api_exceptions.py::test_list_raisesPASSED [ 50%]
-test_api_exceptions.py::test_get_raisesPASSED [100%]
+test_api_exceptions.py::test_list_raises PASSED            [ 50%]
+test_api_exceptions.py::test_get_raises PASSED            [100%]
 
 =========2 passed,5 deselectedin 0.03seconds==========
 $ pytest -v -m get test_api_exceptions.py
@@ -2530,7 +2530,7 @@ $ pytest -v -m get test_api_exceptions.py
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
-test_api_exceptions.py::test_get_raisesPASSED [100%]
+test_api_exceptions.py::test_get_raises PASSED            [100%]
 
 =========1 passed,6 deselectedin 0.02seconds==========
 
@@ -2551,7 +2551,7 @@ $ pytest -v -m** "smokeand get" **test_api_exceptions.py
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
-test_api_exceptions.py::test_get_raisesPASSED [100%]
+test_api_exceptions.py::test_get_raises PASSED            [100%]
 
 =========1 passed,6 deselectedin 0.02seconds==========
 
@@ -2564,7 +2564,7 @@ $ pytest -v -m** "smokeand not get" **test_api_exceptions.py
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
-test_api_exceptions.py::test_list_raisesPASSED [100%]
+test_api_exceptions.py::test_list_raises PASSED            [100%]
 
 =========1 passed,6 deselectedin 0.02seconds==========
 
@@ -2663,7 +2663,7 @@ Let’s set aside fixture discussion for now and go to the top of the project an
 
 run our smoke test suite:
 
-$ cd /path/to/code/ch2/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v -m smoke**
 ===================testsessionstarts===================
 collected56 items/ 53 deselected
@@ -2713,7 +2713,7 @@ assert id_1!= id_2
 ```
 Then give it a run:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest test_unique_id_1.py
 
 ===================testsessionstarts===================
@@ -2777,7 +2777,7 @@ $ pytest -v test_unique_id_2.py
 collected2 items
 
 test_unique_id_2.py::test_unique_id_1SKIPPED [ 50%]
-test_unique_id_2.py::test_unique_id_2PASSED [100%]
+test_unique_id_2.py::test_unique_id_2 PASSED            [100%]
 
 ===========1 passed,1 skippedin 0.03seconds===========
 
@@ -2826,7 +2826,7 @@ $ pytest -v test_unique_id_3.py
 collected2 items
 
 test_unique_id_3.py::test_unique_id_1SKIPPED [ 50%]
-test_unique_id_3.py::test_unique_id_2PASSED [100%]
+test_unique_id_3.py::test_unique_id_2 PASSED            [100%]
 
 ===========1 passed,1 skippedin 0.03seconds===========
 
@@ -2901,7 +2901,7 @@ as xfail, and differ only by == vs. !=. So one of them is bound to pass.
 
 Running this shows:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest test_unique_id_4.py
 
 ===================testsessionstarts===================
@@ -2925,7 +2925,7 @@ collected4 items
 test_unique_id_4.py::test_unique_id_1xfail [ 25%]
 test_unique_id_4.py::test_unique_id_is_a_duckxfail[ 50%]
 test_unique_id_4.py::test_unique_id_not_a_duckXPASS[ 75%]
-test_unique_id_4.py::test_unique_id_2PASSED [100%]
+test_unique_id_4.py::test_unique_id_2 PASSED            [100%]
 
 =====1 passed,2 xfailed,1 xpassedin 0.10seconds======
 
@@ -2961,7 +2961,7 @@ To run all the tests from one directory, use the directory as a parameter to
 
 pytest:
 
-$ cd /path/to/code/ch2/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest tests/func--tb=no**
 ===================testsessionstarts===================
 collected50 items
@@ -3016,7 +3016,7 @@ To run a file full of tests, list the file with the relative path as a parameter
 
 pytest:
 
-$ cd /path/to/code/ch2/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest tests/func/test_add.py
 
 ===================testsessionstarts===================
@@ -3032,7 +3032,7 @@ We’ve been doing this for a while.
 
 To run a single test function, add :: and the test function name:
 
-$ cd /path/to/code/ch2/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v tests/func/test_add.py::test_add_returns_valid_id**
 ===================testsessionstarts===================
 collected1 item
@@ -3073,7 +3073,7 @@ functions and add ::, then the class name to the file parameter:
 Lab 2. Writing Test Functions • 40
 
 
-$ cd /path/to/code/ch2/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v tests/func/test_api_exceptions.py::TestUpdate**
 ===================testsessionstarts===================
 collected2 items
@@ -3089,7 +3089,7 @@ If you don’t want to run all of a test class—just one method—just add
 
 another :: and the method name:
 
-$ cd /path/to/code/ch2/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id**
 ===================testsessionstarts===================
 collected1 item
@@ -3115,7 +3115,7 @@ You can use and, or, and not in your expression to create complex expressions.
 
 For example, we can run all of the functions that have _raises in their name:
 
-$ cd /path/to/code/ch2/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v -k _raises**
 ===================testsessionstarts===================
 collected56 items/ 51 deselected
@@ -3212,12 +3212,12 @@ included to make sure the database is accessible. Let’s make sure the test
 
 passes:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_1**
 ===================testsessionstarts===================
 collected1 item
 
-test_add_variety.py::test_add_1PASSED [100%]
+test_add_variety.py::test_add_1 PASSED            [100%]
 
 ================1 passedin 0.05seconds=================
 
@@ -3250,15 +3250,15 @@ our case is a list of Task objects. pytest will run this test once for each task
 
 and report each as a separate test:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_2**
 ===================testsessionstarts===================
 collected4 items
 
-test_add_variety.py::test_add_2[task0]PASSED [ 25%]
-test_add_variety.py::test_add_2[task1]PASSED [ 50%]
-test_add_variety.py::test_add_2[task2]PASSED [ 75%]
-test_add_variety.py::test_add_2[task3]PASSED [100%]
+test_add_variety.py::test_add_2[task0] PASSED            [ 25%]
+test_add_variety.py::test_add_2[task1] PASSED            [ 50%]
+test_add_variety.py::test_add_2[task2] PASSED            [ 75%]
+test_add_variety.py::test_add_2[task3] PASSED            [100%]
 
 Parametrized Testing • 43
 
@@ -3288,7 +3288,7 @@ When you use types that are easy for pytest to convert into strings, the test
 
 identifier uses the parameter values in the report to make it readable:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_3**
 ===================testsessionstarts===================
 collected4 items
@@ -3304,7 +3304,7 @@ You can use that whole test identifier—called a node in pytest terminology—t
 
 re-run the test if you want:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_3[sleep-None-False]**
 ===================testsessionstarts===================
 collected1 item
@@ -3318,7 +3318,7 @@ Be sure to use quotes if there are spaces in the identifier:
 Lab 2. Writing Test Functions • 44
 
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v** "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
 ===================testsessionstarts===================
 collected1 item
@@ -3350,16 +3350,16 @@ It’s convenient and the code looks nice. But the readability of the output is
 
 hard to interpret:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_4**
 ===================testsessionstarts===================
 collected5 items
 
-test_add_variety.py::test_add_4[task0]PASSED [ 20%]
-test_add_variety.py::test_add_4[task1]PASSED [ 40%]
-test_add_variety.py::test_add_4[task2]PASSED [ 60%]
-test_add_variety.py::test_add_4[task3]PASSED [ 80%]
-test_add_variety.py::test_add_4[task4]PASSED [100%]
+test_add_variety.py::test_add_4[task0] PASSED            [ 20%]
+test_add_variety.py::test_add_4[task1] PASSED            [ 40%]
+test_add_variety.py::test_add_4[task2] PASSED            [ 60%]
+test_add_variety.py::test_add_4[task3] PASSED            [ 80%]
+test_add_variety.py::test_add_4[task4] PASSED            [100%]
 
 ================5 passedin 0.06seconds=================
 
@@ -3392,7 +3392,7 @@ t_from_db= tasks.get(task_id)
 
 Let’s run that and see how it looks:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_5**
 ===================testsessionstarts===================
 collected5 items
@@ -3411,7 +3411,7 @@ generate the same task id. To be able to tell them apart, pytest added a unique
 
 index to each, 0 and 1. The custom test identifiers can be used to run tests:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v** "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
 ===================testsessionstarts===================
 collected1 item
@@ -3454,7 +3454,7 @@ t_from_db= tasks.get(task_id)
 
 Here it is in action:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::TestAdd**
 ===================testsessionstarts===================
 collected10 items
@@ -3492,7 +3492,7 @@ t_from_db= tasks.get(task_id)
 
 In action:
 
-$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_6**
 ===================testsessionstarts===================
 collected3 items
@@ -3794,14 +3794,14 @@ If you run the test from the last section, you don’t get to see what fixtures
 
 are run:
 
-$ cd /path/to/code/
+$ cd /home/jovyan/work/testing-with-pytest/code/
 $ pip install ./tasks_proj/** _# if not installedyet_
-$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest -v test_add.py-k valid_id**
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
 
-test_add.py::test_add_returns_valid_idPASSED [100%]
+test_add.py::test_add_returns_valid_id PASSED            [100%]
 
 =========1 passed,2 deselectedin 0.04seconds==========
 
@@ -3863,7 +3863,7 @@ Since test_a_tuple() should fail (23 != 32), we can see what happens when a test
 
 with a fixture fails:
 
-$ cd /path/to/code/ch3
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest test_fixtures.py::test_a_tuple**
 ===================testsessionstarts===================
 collected1 item
@@ -4030,7 +4030,7 @@ test_add_increases_count() to only be possible if add() really failed to alter t
 
 Let’s trace it and see all the fixtures run:
 
-$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest --setup-showtest_add.py::test_add_increases_count**
 ===================testsessionstarts===================
 collected1 item
@@ -4145,7 +4145,7 @@ Let’s use --setup-show to demonstrate that the number of times a fixture is ca
 
 and when the setup and teardown are run depend on the scope:
 
-$ cd /path/to/code/ch3
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest --setup-showtest_scope.py
 
 ===================testsessionstarts===================
@@ -4279,7 +4279,7 @@ Task( _'Eatice cream'_ , _'Daniel'_ ))
 
 Now, let’s see if all of these changes work with our tests:
 
-$ cd /path/to/code/ch3/b/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
 $ pytest
 ===================testsessionstarts===================
 collected55 items
@@ -4419,7 +4419,7 @@ We want to add test times after each test, and the date and current time at
 
 the end of the session. Here’s what these look like:
 
-$ cd /path/to/code/ch3
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest -v -s test_autouse.py
 
 =====================testsessionstarts======================
@@ -4517,7 +4517,7 @@ defined are at the bottom, along with where they are defined. We can use this
 
 to look up the definition of lue. Let’s use that in the Tasks project:
 
-$ cd /path/to/code/ch3/b/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
 $ pytest --fixturestests/func/test_add.py
 
 ========================testsessionstarts========================
@@ -4611,15 +4611,15 @@ to the test using it. Since our task list has four tasks, the fixture will be ca
 
 four times, and then the test will get called four times:
 
-$ cd /path/to/code/ch3/b/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
 $ pytest -v test_add_variety2.py::test_add_a**
 ===================testsessionstarts===================
 collected4 items
 
-test_add_variety2.py::test_add_a[a_task0]PASSED [ 25%]
-test_add_variety2.py::test_add_a[a_task1]PASSED [ 50%]
-test_add_variety2.py::test_add_a[a_task2]PASSED [ 75%]
-test_add_variety2.py::test_add_a[a_task3]PASSED [100%]
+test_add_variety2.py::test_add_a[a_task0] PASSED            [ 25%]
+test_add_variety2.py::test_add_a[a_task1] PASSED            [ 50%]
+test_add_variety2.py::test_add_a[a_task2] PASSED            [ 75%]
+test_add_variety2.py::test_add_a[a_task3] PASSED            [100%]
 
 ================4 passedin 0.05seconds=================
 
@@ -4818,7 +4818,7 @@ this example and in a debugger example in Lab 7.
 ```
 Here’s what we have so far:
 
-$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
 $ pip install pymongo
 $ pytest -v --tb=no**
 ===================testsessionstarts===================
@@ -5043,7 +5043,7 @@ the base directory used for this session. The print statement is in the example
 
 so you can see where the directory is on your system. Let’s see where it is:
 
-$ cd /path/to/code/ch4
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4
 $ pytest -q -s test_tmpdir.py::test_tmpdir_factory**
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 /T/pytest-of-okken/pytest-732
@@ -5194,7 +5194,7 @@ The options --myopt and --foo <value> were added to the previous code, and the
 
 help string was modified, as shown here:
 
-$ cd /path/to/code/ch4/pytestconfig
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/pytestconfig
 $ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 **...**
@@ -5338,13 +5338,13 @@ Let’s run them using --verbose to see the function names, and --tb=no to hide
 
 the stack trace:
 
-$ cd /path/to/code/ch4/cache
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest --verbose--tb=notest_pass_fail.py
 
 ===================testsessionstarts===================
 collected2 items
 
-test_pass_fail.py::test_this_passesPASSED [ 50%]
+test_pass_fail.py::test_this_passes PASSED            [ 50%]
 test_pass_fail.py::test_this_failsFAILED [100%]
 
 ===========1 failed,1 passedin 0.06seconds============
@@ -5360,7 +5360,7 @@ collected2 items
 run-last-failure:rerunprevious1 failurefirst
 
 test_pass_fail.py::test_this_failsFAILED [ 50%]
-test_pass_fail.py::test_this_passesPASSED [100%]
+test_pass_fail.py::test_this_passes PASSED            [100%]
 
 ===========1 failed,1 passedin 0.06seconds============
 
@@ -5410,7 +5410,7 @@ sum_= x + y
 
 And the output:
 
-$ cd /path/to/code/ch4/cache
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest -q test_few_failures.py
 
 .F... [100%]
@@ -5577,7 +5577,7 @@ random amount of time, all shorter than a second. Let’s see it run a couple
 
 of times:
 
-$ cd /path/to/code/ch4/cache
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest -q --tb=linetest_slower.py
 
 ..... [100%]
@@ -5798,7 +5798,7 @@ def test_capsys_disabled (capsys):
 
 Now, 'alwaysprint this' will always be output:
 
-$ cd /path/to/code/ch4/cap
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cap
 $ pytest -q test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
@@ -6125,13 +6125,13 @@ different test. The import in the top docstring will allow the first part to pas
 
 but the code in the docstrings of the functions will fail:
 
-$ cd /path/to/code/ch4/dt/1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/1
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 ===================testsessionstarts===================
 collected3 items
 
-unnecessary_math.py::unnecessary_mathPASSED [ 33%]
+unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.divideFAILED[ 66%]
 unnecessary_math.py::unnecessary_math.multiplyFAILED[100%]
 
@@ -6151,7 +6151,7 @@ Using doctest_namespace • 93
 
 NameError:name'um'is not defined
 
-/path/to/code/ch4/dt/1/unnecessary_math.py:37:UnexpectedException
+/home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:37:UnexpectedException
 ___________[doctest]unnecessary_math.multiply___________
 022
 023 Returnsa multipliedby b.
@@ -6164,7 +6164,7 @@ File"<doctestunnecessary_math.multiply[0]>",line1, in <module>
 
 NameError:name'um'is not defined
 
-/path/to/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
+/home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
 ===========2 failed,1 passedin 0.12seconds============
 
 One way to fix it is to put the import statement in each docstring:
@@ -6192,13 +6192,13 @@ Returnsa dividedby b.
 
 This definitely fixes the problem:
 
-$ cd /path/to/code/ch4/dt/2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/2
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 ===================testsessionstarts===================
 collected3 items
 
-unnecessary_math.py::unnecessary_mathPASSED [ 33%]
+unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.dividePASSED[ 66%]
 unnecessary_math.py::unnecessary_math.multiplyPASSED[100%]
 
@@ -6598,7 +6598,7 @@ tasks.add(Task(summary= _'summary'_ , done= _'True'_ ))
 
 Let’s run them to see if they pass:
 
-$ cd /path/to/code/ch5/a/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj
 $ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -6637,7 +6637,7 @@ And now let’s focus on the new tests with -k TestAdd, which works because
 
 there aren’t any other tests with names that contain “TestAdd.”
 
-$ cd /path/to/code/ch5/a/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
 $ pytest -v --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -6685,7 +6685,7 @@ And now we have just the output we were looking for. A test session with no
 
 --verbose flag shows an O for failures, er, improvement opportunities:
 
-$ cd /path/to/code/ch5/b/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
 $ pytest --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
@@ -6748,7 +6748,7 @@ We can manually test our plugin just by running it against our example file.
 
 First, with no --nice option, to make sure just the username shows up:
 
-$ cd /path/to/code/ch5/c/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
 $ pytest --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7157,9 +7157,9 @@ is installed. We do this either by installing the .zip.gz file or installing the
 
 rent directory in editable mode:
 
-$ cd /path/to/code/ch5/pytest-nice/
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/pytest-nice/
 $ pip install .**
-Processing/path/to/code/ch5/pytest-nice
+Processing/home/jovyan/work/testing-with-pytest/code/ch5/pytest-nice
 **...**
 Runningsetup.pybdist_wheelfor pytest-nice... done
 **...**
@@ -7174,13 +7174,13 @@ $ pytest -v**
 plugins:nice-0.1.0,cov-2.5.1
 collected7 items
 
-test_nice.py::test_pass_failPASSED [ 14%]
-test_nice.py::test_with_nicePASSED [ 28%]
-test_nice.py::test_with_nice_verbosePASSED [ 42%]
-test_nice.py::test_not_nice_verbosePASSED [ 57%]
-test_nice.py::test_headerPASSED [ 71%]
-test_nice.py::test_header_not_nicePASSED [ 85%]
-test_nice.py::test_help_messagePASSED [100%]
+test_nice.py::test_pass_fail PASSED            [ 14%]
+test_nice.py::test_with_nice PASSED            [ 28%]
+test_nice.py::test_with_nice_verbose PASSED            [ 42%]
+test_nice.py::test_not_nice_verbose PASSED            [ 57%]
+test_nice.py::test_header PASSED            [ 71%]
+test_nice.py::test_header_not_nice PASSED            [ 85%]
+test_nice.py::test_help_message PASSED            [100%]
 
 ================7 passedin 0.57seconds=================
 
@@ -7204,7 +7204,7 @@ Believe it or not, we are almost done with our plugin. From the command
 
 line, we can use this setup.py file to create a distribution:
 
-$ cd /path/to/code/ch5/pytest-nice
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/pytest-nice
 $ pythonsetup.pysdist**
 runningsdist
 runningegg_info
@@ -7525,7 +7525,7 @@ With these markers registered, you can now also see them with pytest --markers
 
 with their descriptions:
 
-$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
 $ pytest --markers**
 @pytest.mark.smoke:Run the smoketesttestfunctions
 
@@ -7547,7 +7547,7 @@ ch6/a/tasks_proj and ch6/b/tasks_proj is the contents of the pytest.ini file. It
 
 in ch6/a. Let’s try running the tests without registering any markers:
 
-$ cd /path/to/code/ch6/a/tasks_proj/tests
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/a/tasks_proj/tests
 $ pytest --strict --tb=line**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7594,7 +7594,7 @@ for the project.
 
 This should allow us to run tests, including the smoke tests:
 
-$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
 $ pytest --strict-m smoke**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7860,7 +7860,7 @@ ning them individually will be fine, but running pytest from the dups directory
 
 won’t work:
 
-$ cd /path/to/code/ch6/dups
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups
 $ pytesta**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7890,9 +7890,9 @@ importedmodule'test_foo'has this__file__attribute:
 Lab 6. Configuration • 124
 
 
-/path/to/code/ch6/dups/a/test_foo.py
+/home/jovyan/work/testing-with-pytest/code/ch6/dups/a/test_foo.py
 whichis not the sameas the testfilewe wantto collect:
-/path/to/code/ch6/dups/b/test_foo.py
+/home/jovyan/work/testing-with-pytest/code/ch6/dups/b/test_foo.py
 HINT:remove__pycache__/ .pycfiles
 and/oruse a uniquebasename for yourtestfilemodules
 !!!!!!!!!Interrupted:1 errorsduringcollection!!!!!!!!!
@@ -7916,7 +7916,7 @@ dups_fixed/
 
 Now, let’s try this again from the top level in dups_fixed:
 
-$ cd /path/to/code/ch6/dups_fixed
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups_fixed
 $ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -8007,7 +8007,7 @@ In Parametrizing Fixtures, we left the Tasks project with a few
 
 failures:
 
-$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
 $ pytest --tb=no-q**
 .........................................FF.FFFFFFF[ 53%]
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
@@ -8142,7 +8142,7 @@ E + whereFalse= isinstance(ObjectId('5b8c1316cb02981dc91fccd1'),int)
 
 tests/func/test_add.py:16:AssertionError
 **>>>>>>>>>>>>>>>>>>>>>>enteringPDB >>>>>>>>>>>>>>>>>>>>>>>
-> /path/to/code/ch3/c/tasks_proj/tests/func/test_add.py(16)
+> /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj/tests/func/test_add.py(16)
 > test_add_returns_valid_id()
 -> assertisinstance(task_id,int)**
 (Pdb)
@@ -8237,16 +8237,16 @@ Uninstallingtasks-0.1.0:
 **...**
 Proceed(y/n)?y
 Successfullyuninstalledtasks-0.1.0
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pip install -e.**
-Obtainingfile:///path/to/code/ch7/tasks_proj_v2
+Obtainingfile:///home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 **...**
 Installingcollectedpackages:tasks
 Runningsetup.pydevelopfor tasks
 Successfullyinstalledtasks
 $ pip list
 ...**
-tasks 0.1.1 /path/to/code/tasks_proj_v2/src
+tasks 0.1.1 /home/jovyan/work/testing-with-pytest/code/tasks_proj_v2/src
 **...**
 
 Coverage.py: Determining How Much Code Is Tested • 131
@@ -8256,7 +8256,7 @@ Now that the next version of Tasks is installed, we can run our baseline cov-
 
 erage report:
 
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pytest --cov=src**
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
@@ -8455,7 +8455,7 @@ Lab 7. Using pytest with Other Tools • 136
 
 Let’s pause and install version 2 of Tasks:
 
-$ cd /path/to/code/
+$ cd /home/jovyan/work/testing-with-pytest/code/
 $ pip install -e ch7/tasks_proj_v2
 ...**
 Successfullyinstalledtasks
@@ -8744,17 +8744,17 @@ tasks.cli.tasks.list_tasks.assert_called_once_with( _'okken'_ )
 
 Let’s make sure they all work:
 
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pytest -v tests/unit/test_cli.py
 
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected5 items
 
-tests/unit/test_cli.py::test_list_no_argsPASSED [ 20%]
+tests/unit/test_cli.py::test_list_no_args PASSED            [ 20%]
 tests/unit/test_cli.py::test_list_print_emptyPASSED[ 40%]
 tests/unit/test_cli.py::test_list_print_many_itemsPASSED[ 60%]
-tests/unit/test_cli.py::test_list_dash_oPASSED [ 80%]
+tests/unit/test_cli.py::test_list_dash_o PASSED            [ 80%]
 tests/unit/test_cli.py::test_list_dash_dash_ownerPASSED[100%]
 
 ================5 passedin 0.07seconds=================
@@ -8900,10 +8900,10 @@ This can be done within a virtual environment.
 
 Then to run tox, just run, well, tox:
 
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ tox**
-GLOBsdist-make:/path/to/code/ch7/tasks_proj_v2/setup.py
-py27inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
+GLOBsdist-make:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/setup.py
+py27inst-nodeps:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py27installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,funcsigs==1.0.2,
 mock==2.0.0,more-itertools==4.3.0,pathlib2==2.3.2,pbr==5.0.0,pluggy==0.8.0,
 py==1.7.0,pytest==3.9.1,pytest-mock==1.10.0,scandir==1.9.0,six==1.11.0,
@@ -8924,7 +8924,7 @@ tests/unit/test_cli.py..... [ 93%]
 tests/unit/test_task.py.... [100%]
 
 =====================62 passedin 0.51seconds=====================
-py37inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
+py37inst-nodeps:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py37installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,
 more-itertools==4.3.0,pluggy==0.8.0,py==1.7.0,pytest==3.9.1,
 pytest-mock==1.10.0,six==1.11.0,tasks==0.1.1,tinydb==3.11.1
@@ -9185,7 +9185,7 @@ The actual test is at the bottom, test_delete_decreases_count(). The rest of the
 
 is there for setup and teardown. This test runs fine in unittest:
 
-$ cd /path/to/code/ch7/unittest
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/unittest
 $ python-m unittest-v test_delete_unittest.py
 
 test_delete_decreases_count(test_delete_unittest.TestNonEmpty)... ok
@@ -9673,7 +9673,7 @@ To check the version of pip and which version of Python it’s tied to, use pip 
 version:
 
 (my_env)$ pip --version
-pip 18.0from/path/to/code/venv/lib/python3.7/site-packages/pip(python3.7)
+pip 18.0from/home/jovyan/work/testing-with-pytest/code/venv/lib/python3.7/site-packages/pip(python3.7)
 
 To list the packages you have currently installed with pip, use pip list. If there’s
 
@@ -9830,7 +9830,7 @@ Following is a normal test run of tests that start with test_list from ch7/tasks
 
 _proj_v2:
 
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pip install .
 $ pip install pytest-repeat
 $ cd tests
@@ -9843,12 +9843,12 @@ collected62 items/ 56 deselected
 1. https://pypi.python.org/pypi/pytest-repeat
 
 
-func/test_api_exceptions.py::test_list_raisesPASSED [ 16%]
-unit/test_cli.py::test_list_no_argsPASSED [ 33%]
-unit/test_cli.py::test_list_print_emptyPASSED [ 50%]
-unit/test_cli.py::test_list_print_many_itemsPASSED [ 66%]
-unit/test_cli.py::test_list_dash_oPASSED [ 83%]
-unit/test_cli.py::test_list_dash_dash_ownerPASSED [100%]
+func/test_api_exceptions.py::test_list_raises PASSED            [ 16%]
+unit/test_cli.py::test_list_no_args PASSED            [ 33%]
+unit/test_cli.py::test_list_print_empty PASSED            [ 50%]
+unit/test_cli.py::test_list_print_many_items PASSED            [ 66%]
+unit/test_cli.py::test_list_dash_o PASSED            [ 83%]
+unit/test_cli.py::test_list_dash_dash_owner PASSED            [100%]
 
 ===========6 passed,56 deselectedin 0.13seconds===========
 
@@ -9861,14 +9861,14 @@ collected124 items/ 112 deselected
 
 func/test_api_exceptions.py::test_list_raises[1/2]PASSED[ 8%]
 func/test_api_exceptions.py::test_list_raises[2/2]PASSED[ 16%]
-unit/test_cli.py::test_list_no_args[1/2]PASSED [ 25%]
-unit/test_cli.py::test_list_no_args[2/2]PASSED [ 33%]
-unit/test_cli.py::test_list_print_empty[1/2]PASSED [ 41%]
-unit/test_cli.py::test_list_print_empty[2/2]PASSED [ 50%]
+unit/test_cli.py::test_list_no_args[1/2] PASSED            [ 25%]
+unit/test_cli.py::test_list_no_args[2/2] PASSED            [ 33%]
+unit/test_cli.py::test_list_print_empty[1/2] PASSED            [ 41%]
+unit/test_cli.py::test_list_print_empty[2/2] PASSED            [ 50%]
 unit/test_cli.py::test_list_print_many_items[1/2]PASSED[ 58%]
 unit/test_cli.py::test_list_print_many_items[2/2]PASSED[ 66%]
-unit/test_cli.py::test_list_dash_o[1/2]PASSED [ 75%]
-unit/test_cli.py::test_list_dash_o[2/2]PASSED [ 83%]
+unit/test_cli.py::test_list_dash_o[1/2] PASSED            [ 75%]
+unit/test_cli.py::test_list_dash_o[2/2] PASSED            [ 83%]
 unit/test_cli.py::test_list_dash_dash_owner[1/2]PASSED[ 91%]
 unit/test_cli.py::test_list_dash_dash_owner[2/2]PASSED[100%]
 
@@ -9914,7 +9914,7 @@ time.sleep(1)
 Notice that it takes over ten seconds to run normally:
 
 $ pip install pytest-xdist
-$ cd /path/to/code/appendices/xdist
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pytest test_parallel.py
 
 ===================testsessionstarts===================
@@ -9980,7 +9980,7 @@ Let’s run the tests from the previous example (with one-second sleeps) with
 
 a half-second timeout:
 
-$ cd /path/to/code/appendices/xdist
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pip install pytest-timeout
 $ pytest --timeout=0.5-x test_parallel.py
 
@@ -10037,7 +10037,7 @@ Appendix 3. Plugin Sampler Pack • 166
 
 Here’s a test with normal failures at the end:
 
-$ cd /path/to/code/appendices/xdist
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pytest --timeout=0.5 --tb=line--maxfail=2test_parallel.py
 
 ===================testsessionstarts===================
@@ -10050,8 +10050,8 @@ collected10 items
 test_parallel.pyFF
 
 ========================FAILURES=========================
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
 ================2 failedin 1.09seconds=================
 
 Here’s the same test with --instafail:
@@ -10068,11 +10068,11 @@ collected10 items
 
 test_parallel.pyF
 
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
 
 test_parallel.pyF
 
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
+/home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
 
 ================2 failedin 1.10seconds=================
 
@@ -10163,7 +10163,7 @@ Plugins That Alter or Enhance Output • 169
 
 The pytest-html plugin is really easy to start. Just add --html=report_name.html:
 
-$ cd /path/to/code/appendices/outcomes
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/outcomes
 $ pytest --html=report.html**
 ======================testsessionstarts======================
 metadata:...
@@ -10171,7 +10171,7 @@ collected6 items
 
 test_outcomes.py.FxXsE
 
-generatedhtmlfile:/path/to/code/appendices/outcomes/report.html
+generatedhtmlfile:/home/jovyan/work/testing-with-pytest/code/appendices/outcomes/report.html
 ============================ERRORS=============================
 _________________ERRORat setupof test_error__________________
 
@@ -10387,7 +10387,7 @@ One directory with one module and a setup.py file is enough to make it instal-
 
 lable via pip:
 
-$ cd /path/to/code/appendices/packaging
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
 $ pip install ./some_module_proj**
 Processing./some_module_proj
 Installingcollectedpackages:some-module
@@ -10474,7 +10474,7 @@ Instead of using py_modules, we specify packages.
 
 This is now installable:
 
-$ cd /path/to/code/appendices/packaging
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
 $ pip install ./some_package_proj/**
 Processing./some_package_proj
 Installingcollectedpackages:some-package
@@ -10512,7 +10512,7 @@ For personal use, the configuration shown in the previous section is enough
 
 to create a source distribution and a wheel. Let’s try it:
 
-$ cd /path/to/code/appendices/packaging/some_package_proj/
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj/
 $ pip install wheel
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
@@ -10663,7 +10663,7 @@ into a CHANGELOG.rst file.
 
 Let’s see if this was enough to remove the warnings:
 
-$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
 runningbuild
@@ -10688,7 +10688,7 @@ Now, we can put the .whl and/or .tar.gz files in a local shared directory and pi
 
 install to our heart’s content:
 
-$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
 $ mkdir~/packages/
 $ cp dist/some_package-1.0-py3-none-any.whl~/packages
 $ cp dist/some_package-1.0.tar.gz~/packages
@@ -10841,7 +10841,7 @@ Appendix 5. xUnit Fixtures • 184
 
 Here’s the test session to help visualize the control flow:
 
-$ cd /path/to/code/appendices/xunit
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xunit
 $ pytest-s test_xUnit_fixtures.py
 
 ============testsessionstarts=============
@@ -10910,7 +10910,7 @@ def test_2 (module_fixture,function_fixture):
 
 You _can_ do it. But please don’t. It gets confusing. Take a look at this:
 
-$ cd /path/to/code/appendices/xunit
+$ cd /home/jovyan/work/testing-with-pytest/code/appendices/xunit
 $ pytest-s test_mixed_fixtures.py
 
 ============testsessionstarts=============

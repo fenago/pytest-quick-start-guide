@@ -19,7 +19,7 @@ In Parametrizing Fixtures, we left the Tasks project with a few
 failures:
 
 ```
-$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
 $ pytest --tb=no -q
 
 .........................................FF.FFFFFFF[ 53%]
@@ -152,7 +152,7 @@ E + whereFalse= isinstance(ObjectId('5b8c1316cb02981dc91fccd1'),int)
 
 tests/func/test_add.py:16:AssertionError
 **>>>>>>>>>>>>>>>>>>>>>>enteringPDB >>>>>>>>>>>>>>>>>>>>>>>
-> /path/to/code/ch3/c/tasks_proj/tests/func/test_add.py(16)
+> /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj/tests/func/test_add.py(16)
 > test_add_returns_valid_id()
 -> assertisinstance(task_id,int)**
 (Pdb)
@@ -248,9 +248,9 @@ Uninstallingtasks-0.1.0:
 
 Proceed(y/n)?y
 Successfullyuninstalledtasks-0.1.0
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pip install -e.
-Obtainingfile:///path/to/code/ch7/tasks_proj_v2
+Obtainingfile:///home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 ...
 
 Installingcollectedpackages:tasks
@@ -258,7 +258,7 @@ Runningsetup.pydevelopfor tasks
 Successfullyinstalledtasks
 $ pip list
 ...
-tasks 0.1.1 /path/to/code/tasks_proj_v2/src
+tasks 0.1.1 /home/jovyan/work/testing-with-pytest/code/tasks_proj_v2/src
 ...
 ```
 
@@ -268,7 +268,7 @@ Now that the next version of Tasks is installed, we can run our baseline cov-
 erage report:
 
 ```
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pytest --cov=src
 
 ===================testsessionstarts===================
@@ -431,7 +431,7 @@ obvious.
 Let’s pause and install version 2 of Tasks:
 
 ```
-$ cd /path/to/code/
+$ cd /home/jovyan/work/testing-with-pytest/code/
 $ pip install -e ch7/tasks_proj_v2
 ...
 Successfullyinstalledtasks
@@ -712,17 +712,17 @@ def test_list_dash_dash_owner(no_db, mocker):
 Let’s make sure they all work:
 
 ```
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pytest -v tests/unit/test_cli.py
 
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected5 items
 
-tests/unit/test_cli.py::test_list_no_argsPASSED [ 20%]
+tests/unit/test_cli.py::test_list_no_args PASSED            [ 20%]
 tests/unit/test_cli.py::test_list_print_emptyPASSED[ 40%]
 tests/unit/test_cli.py::test_list_print_many_itemsPASSED[ 60%]
-tests/unit/test_cli.py::test_list_dash_oPASSED [ 80%]
+tests/unit/test_cli.py::test_list_dash_o PASSED            [ 80%]
 tests/unit/test_cli.py::test_list_dash_dash_ownerPASSED[100%]
 
 ================5 passedin 0.07seconds=================
@@ -849,11 +849,11 @@ This can be done within a virtual environment.
 Then to run tox, just run, well, tox:
 
 ```
-$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ tox
 
-GLOBsdist-make:/path/to/code/ch7/tasks_proj_v2/setup.py
-py27inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
+GLOBsdist-make:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/setup.py
+py27inst-nodeps:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py27installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,funcsigs==1.0.2,
 mock==2.0.0,more-itertools==4.3.0,pathlib2==2.3.2,pbr==5.0.0,pluggy==0.8.0,
 py==1.7.0,pytest==3.9.1,pytest-mock==1.10.0,scandir==1.9.0,six==1.11.0,
@@ -876,7 +876,7 @@ tests/unit/test_task.py.... [100%]
 
 =====================62 passedin 0.51seconds=====================
 
-py37inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
+py37inst-nodeps:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py37installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,
 more-itertools==4.3.0,pluggy==0.8.0,py==1.7.0,pytest==3.9.1,
 pytest-mock==1.10.0,six==1.11.0,tasks==0.1.1,tinydb==3.11.1
@@ -1099,7 +1099,7 @@ The actual test is at the bottom, test_delete_decreases_count(). The rest of the
 is there for setup and teardown. This test runs fine in unittest:
 
 ```
-$ cd /path/to/code/ch7/unittest
+$ cd /home/jovyan/work/testing-with-pytest/code/ch7/unittest
 $ python -m unittest -v test_delete_unittest.py
 test_delete_decreases_count(test_delete_unittest.TestNonEmpty)... ok
 

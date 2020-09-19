@@ -37,7 +37,7 @@ version:
 
 ```
 (my_env) $ pip --version
-pip 18.0 from /path/to/code/venv/lib/python3.7/site-packages/pip (python 3.7)
+pip 18.0 from /home/jovyan/work/testing-with-pytest/code/venv/lib/python3.7/site-packages/pip (python 3.7)
 ```
 
 To list the packages you have currently installed with pip, use pip list. If there’s

@@ -128,7 +128,7 @@ the base directory used for this session. The print statement is in the example
 so you can see where the directory is on your system. Let’s see where it is:
 
 ```
-$ cd /path/to/code/ch4
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4
 $ pytest -q -s test_tmpdir.py::test_tmpdir_factory
 
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
@@ -255,7 +255,7 @@ The options --myopt and --foo <value> were added to the previous code, and the
 help string was modified, as shown here:
 
 ```
-$ cd /path/to/code/ch4/pytestconfig
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/pytestconfig
 $ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 ...
@@ -406,13 +406,13 @@ Let’s run them using --verbose to see the function names, and --tb=no to hide
 the stack trace:
 
 ```
-$ cd /path/to/code/ch4/cache
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest --verbose--tb=notest_pass_fail.py
 
 ===================testsessionstarts===================
 collected2 items
 
-test_pass_fail.py::test_this_passesPASSED [ 50%]
+test_pass_fail.py::test_this_passes PASSED            [ 50%]
 test_pass_fail.py::test_this_failsFAILED [100%]
 
 ===========1 failed,1 passedin 0.06seconds============
@@ -430,7 +430,7 @@ collected2 items
 run-last-failure:rerunprevious1 failurefirst
 
 test_pass_fail.py::test_this_failsFAILED [ 50%]
-test_pass_fail.py::test_this_passesPASSED [100%]
+test_pass_fail.py::test_this_passes PASSED            [100%]
 
 ===========1 failed,1 passedin 0.06seconds============
 ```
@@ -486,7 +486,7 @@ def test_a(x, y, expected):
 And the output:
 
 ```
-$ cd /path/to/code/ch4/cache
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest -q test_few_failures.py
 .F... [100%]
 
@@ -648,7 +648,7 @@ random amount of time, all shorter than a second. Let’s see it run a couple
 of times:
 
 ```
-$ cd /path/to/code/ch4/cache
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest -q --tb=linetest_slower.py
 ..... [100%]
 5 passedin 1.40seconds
@@ -856,7 +856,7 @@ def test_capsys_disabled (capsys):
 Now, 'alwaysprint this' will always be output:
 
 ```
-$ cd /path/to/code/ch4/cap
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cap
 $ pytest -q test_capsys.py::test_capsys_disabled
 
 alwaysprintthis
@@ -1138,13 +1138,13 @@ different test. The import in the top docstring will allow the first part to pas
 but the code in the docstrings of the functions will fail:
 
 ```
-$ cd /path/to/code/ch4/dt/1
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/1
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 ===================testsessionstarts===================
 collected3 items
 
-unnecessary_math.py::unnecessary_mathPASSED [ 33%]
+unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.divideFAILED[ 66%]
 unnecessary_math.py::unnecessary_math.multiplyFAILED[100%]
 
@@ -1165,7 +1165,7 @@ File"<doctestunnecessary_math.divide[0]>", line1, in <module>
 ```
 NameError:name'um'is not defined
 
-/path/to/code/ch4/dt/1/unnecessary_math.py:37:UnexpectedException
+/home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:37:UnexpectedException
 
 ___________[doctest]unnecessary_math.multiply___________
 022
@@ -1180,7 +1180,7 @@ File"<doctestunnecessary_math.multiply[0]>",line1, in <module>
 
 NameError:name'um'is not defined
 
-/path/to/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
+/home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
 
 ===========2 failed,1 passedin 0.12seconds============
 ```
@@ -1217,13 +1217,13 @@ def divide(a, b):
 This definitely fixes the problem:
 
 ```
-$ cd /path/to/code/ch4/dt/2
+$ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/2
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 ===================testsessionstarts===================
 collected3 items
 
-unnecessary_math.py::unnecessary_mathPASSED [ 33%]
+unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.dividePASSED[ 66%]
 unnecessary_math.py::unnecessary_math.multiplyPASSED[100%]
 

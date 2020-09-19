@@ -158,7 +158,7 @@ markers =
 With these markers registered, you can now also see them with pytest --markers
 with their descriptions:
 
-$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
 $ pytest --markers
 
 @pytest.mark.smoke: Run the smoke test test functions
@@ -180,7 +180,7 @@ ch6/a/tasks_proj and ch6/b/tasks_proj is the contents of the pytest.ini file. It
 in ch6/a. Let’s try running the tests without registering any markers:
 
 ```
-$ cd /path/to/code/ch6/a/tasks_proj/tests
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/a/tasks_proj/tests
 $ pytest --strict --tb=line
 
 
@@ -227,7 +227,7 @@ for the project.
 This should allow us to run tests, including the smoke tests:
 
 ```
-$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
 $ pytest --strict -m smoke
 
 =================== test session starts ===================
@@ -465,7 +465,7 @@ ning them individually will be fine, but running pytest from the dups directory
 won’t work:
 
 ```
-$ cd /path/to/code/ch6/dups
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups
 $ pytest a
 
 ===================testsessionstarts===================
@@ -497,9 +497,9 @@ importedmodule'test_foo'has this__file__attribute:
 ```
 
 ```
-/path/to/code/ch6/dups/a/test_foo.py
+/home/jovyan/work/testing-with-pytest/code/ch6/dups/a/test_foo.py
 whichis not the sameas the testfilewe wantto collect:
-/path/to/code/ch6/dups/b/test_foo.py
+/home/jovyan/work/testing-with-pytest/code/ch6/dups/b/test_foo.py
 HINT:remove__pycache__/ .pycfiles
 and/oruse a uniquebasename for yourtestfilemodules
 !!!!!!!!!Interrupted:1 errorsduringcollection!!!!!!!!!
@@ -526,7 +526,7 @@ dups_fixed/
 Now, let’s try this again from the top level in dups_fixed:
 
 ```
-$ cd /path/to/code/ch6/dups_fixed
+$ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups_fixed
 $ pytest
 
 ===================testsessionstarts===================

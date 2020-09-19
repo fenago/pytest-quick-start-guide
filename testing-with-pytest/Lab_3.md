@@ -176,15 +176,15 @@ If you run the test from the last section, you don’t get to see what fixtures
 are run:
 
 ```
-$ cd /path/to/code/
+$ cd /home/jovyan/work/testing-with-pytest/code/
 $ pip install ./tasks_proj/ # if not installed yet
-$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest -v test_add.py-k valid_id
 
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
 
-test_add.py::test_add_returns_valid_idPASSED [100%]
+test_add.py::test_add_returns_valid_id PASSED            [100%]
 
 =========1 passed,2 deselectedin 0.04seconds==========
 ```
@@ -244,7 +244,7 @@ Since test_a_tuple() should fail (23 != 32), we can see what happens when a test
 with a fixture fails:
 
 ```
-$ cd /path/to/code/ch3
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest test_fixtures.py::test_a_tuple
 
 ===================testsessionstarts===================
@@ -399,7 +399,7 @@ test_add_increases_count() to only be possible if add() really failed to alter t
 Let’s trace it and see all the fixtures run:
 
 ```
-$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest --setup-showtest_add.py::test_add_increases_count
 
 ===================testsessionstarts===================
@@ -518,7 +518,7 @@ Let’s use --setup-show to demonstrate that the number of times a fixture is ca
 and when the setup and teardown are run depend on the scope:
 
 ```
-$ cd /path/to/code/ch3
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest --setup-showtest_scope.py
 
 ===================testsessionstarts===================
@@ -642,7 +642,7 @@ def tasks_mult_per_owner():
 Now, let’s see if all of these changes work with our tests:
 
 ```
-$ cd /path/to/code/ch3/b/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
 $ pytest
 
 ===================testsessionstarts===================
@@ -778,7 +778,7 @@ We want to add test times after each test, and the date and current time at
 the end of the session. Here’s what these look like:
 
 ```
-$ cd /path/to/code/ch3
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest -v -s test_autouse.py
 
 =====================testsessionstarts======================
@@ -872,7 +872,7 @@ defined are at the bottom, along with where they are defined. We can use this
 to look up the definition of lue. Let’s use that in the Tasks project:
 
 ```
-$ cd /path/to/code/ch3/b/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
 $ pytest --fixturestests/func/test_add.py
 
 ========================testsessionstarts========================
@@ -966,16 +966,16 @@ to the test using it. Since our task list has four tasks, the fixture will be ca
 four times, and then the test will get called four times:
 
 ```
-$ cd /path/to/code/ch3/b/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
 $ pytest -v test_add_variety2.py::test_add_a
 
 ===================testsessionstarts===================
 collected4 items
 
-test_add_variety2.py::test_add_a[a_task0]PASSED [ 25%]
-test_add_variety2.py::test_add_a[a_task1]PASSED [ 50%]
-test_add_variety2.py::test_add_a[a_task2]PASSED [ 75%]
-test_add_variety2.py::test_add_a[a_task3]PASSED [100%]
+test_add_variety2.py::test_add_a[a_task0] PASSED            [ 25%]
+test_add_variety2.py::test_add_a[a_task1] PASSED            [ 50%]
+test_add_variety2.py::test_add_a[a_task2] PASSED            [ 75%]
+test_add_variety2.py::test_add_a[a_task3] PASSED            [100%]
 
 ================4 passedin 0.05seconds=================
 ```
@@ -1171,7 +1171,7 @@ this example and in a debugger example in Lab 7.
 Here’s what we have so far:
 
 ```
-$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
 $ pip install pymongo
 $ pytest -v --tb=no
 

@@ -231,7 +231,7 @@ class TestAdd():
 Let’s run them to see if they pass:
 
 ```
-$ cd /path/to/code/ch5/a/tasks_proj
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj
 $ pytest
 
 ===================testsessionstarts===================
@@ -269,7 +269,7 @@ And now let’s focus on the new tests with -k TestAdd, which works because
 there aren’t any other tests with names that contain “TestAdd.”
 
 ```
-$ cd /path/to/code/ch5/a/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
 $ pytest -v --tb=notest_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
@@ -318,7 +318,7 @@ And now we have just the output we were looking for. A test session with no
 --verbose flag shows an O for failures, er, improvement opportunities:
 
 ```
-$ cd /path/to/code/ch5/b/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
 $ pytest --tb=notest_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
@@ -387,7 +387,7 @@ We can manually test our plugin just by running it against our example file.
 First, with no --nice option, to make sure just the username shows up:
 
 ```
-$ cd /path/to/code/ch5/c/tasks_proj/tests/func
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
 $ pytest --tb=notest_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
@@ -772,9 +772,9 @@ is installed. We do this either by installing the .zip.gz file or installing the
 rent directory in editable mode:
 
 ```
-$ cd /path/to/code/ch5/pytest -nice/
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/pytest -nice/
 $ pip install .
-Processing/path/to/code/ch5/pytest -nice
+Processing/home/jovyan/work/testing-with-pytest/code/ch5/pytest -nice
 ...
 
 Runningsetup.pybdist_wheelfor pytest-nice... done
@@ -794,13 +794,13 @@ $ pytest -v
 plugins:nice-0.1.0,cov-2.5.1
 collected7 items
 
-test_nice.py::test_pass_failPASSED [ 14%]
-test_nice.py::test_with_nicePASSED [ 28%]
-test_nice.py::test_with_nice_verbosePASSED [ 42%]
-test_nice.py::test_not_nice_verbosePASSED [ 57%]
-test_nice.py::test_headerPASSED [ 71%]
-test_nice.py::test_header_not_nicePASSED [ 85%]
-test_nice.py::test_help_messagePASSED [100%]
+test_nice.py::test_pass_fail PASSED            [ 14%]
+test_nice.py::test_with_nice PASSED            [ 28%]
+test_nice.py::test_with_nice_verbose PASSED            [ 42%]
+test_nice.py::test_not_nice_verbose PASSED            [ 57%]
+test_nice.py::test_header PASSED            [ 71%]
+test_nice.py::test_header_not_nice PASSED            [ 85%]
+test_nice.py::test_help_message PASSED            [100%]
 
 ================7 passedin 0.57seconds=================
 ```
@@ -826,7 +826,7 @@ Believe it or not, we are almost done with our plugin. From the command
 line, we can use this setup.py file to create a distribution:
 
 ```
-$ cd /path/to/code/ch5/pytest -nice
+$ cd /home/jovyan/work/testing-with-pytest/code/ch5/pytest -nice
 $ pythonsetup.pysdist
 runningsdist
 runningegg_info

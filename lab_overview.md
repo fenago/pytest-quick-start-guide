@@ -37,12 +37,8 @@ Labs for this course are available at path shared below. Elev8ed Notecourses (po
 		* <host-ip>:<port>/lab/workspaces/lab6_Configuration
 7. ##### Using pytest with Other Tools
 		* <host-ip>:<port>/lab/workspaces/lab7_Tools
-8. ##### 
+8. ##### Appendix
 		* <host-ip>:<port>/lab/workspaces/lab8_Appendix
-9. ##### 
-		* <host-ip>:<port>/lab/workspaces/lab9_
-10. ##### 
-		* <host-ip>:<port>/lab/workspaces/lab10_
 
 ### About
 
