@@ -78,7 +78,7 @@ ables with -l:
 
 
 ```
-$ pytest -v --lf-l -x
+$ pytest -v --lf -l -x
 
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -1215,7 +1215,7 @@ and passed.
 Let’s use --setup-show to investigate further:
 
 ```
-$ pytest-q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
+$ pytest -q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
 
 SETUP S tmpdir_factory
 SETUP S tasks_db_session(fixturesused:tmpdir_factory)

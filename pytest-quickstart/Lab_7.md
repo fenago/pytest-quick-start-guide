@@ -1,8 +1,9 @@
 
+<img align="right" src="../logo.png">
+
 
 Lab 7. Wrapping Up
--------------------------------
-
+--------------------
 
 
 In the previous lab, we learned a number of techniques that can be
@@ -22,21 +23,12 @@ the following topics:
 
 
 Overview of what we have learned 
---------------------------------------------------
-
-
+-----------------------------------
 
 The following sections will summarize what we have learned in this book.
 
 
-
-<div>
-
-<div>
-
 ### Introduction
-
-
 
 
 -   You should consider writing tests as your safety net. It will make
@@ -203,11 +195,6 @@ Most pytest-dev members reside in Western Europe, but we have members
 from all around the globe, including UAE, Russia, India, and Brazil
 (which is where I live).
 
-
-
-<div>
-
-<div>
 
 ### Getting involved
 

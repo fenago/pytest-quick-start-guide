@@ -1,3 +1,5 @@
+<img align="right" src="../logo.png">
+
 
 
 Lab 3. Markers and Parametrization
@@ -41,11 +43,6 @@ tests, and is also available for fixtures and plugins, to perform
 different tasks. Let\'s take a look at how to create and apply marks to
 test functions, and later on jump into built-in pytest marks.
 
-
-
-<div>
-
-<div>
 
 ### Creating marks
 
@@ -488,11 +485,6 @@ ones. Also, keep in mind that many plugins introduce other marks as
 well.
 
 
-
-<div>
-
-<div>
-
 ### \@pytest.mark.skipif
 
 
@@ -907,11 +899,6 @@ that explicitly passes the `strict` parameter overrides the
 configuration value.
 
 
-
-<div>
-
-<div>
-
 #### pytest.xfail
 
 
@@ -1050,11 +1037,6 @@ for formula, inputs, result in values:
 This solves the problem of duplicating code, but now we are back to the
 initial problem of seeing only one failure at a time.
 
-
-
-<div>
-
-<div>
 
 ### Enter \@pytest.mark.parametrize
 

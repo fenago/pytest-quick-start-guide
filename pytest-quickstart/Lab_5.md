@@ -1,7 +1,8 @@
+<img align="right" src="../logo.png">
+
 
 Lab 5. Plugins
 ---------------------------
-
 
 
 In the previous lab, we explored one of the most important features
@@ -40,11 +41,6 @@ This flexibility has led to an enormous and rich plugin ecosystem. At
 the time of writing, the number of plugins available is over 500, and
 that number keeps increasing at an astonishing rate. 
 
-
-
-<div>
-
-<div>
 
 ### Finding plugins
 
@@ -104,11 +100,6 @@ plugins here, so we will try to cover the ones that cover popular
 frameworks and general capabilities, with a few obscure plugins thrown
 in. Of course, this barely scratches the surface, but let\'s get to it.
 
-
-
-<div>
-
-<div>
 
 ### pytest-xdist
 
@@ -685,11 +676,11 @@ pytest-annotate.py
 It is very neat to quickly and efficiently annotate a large code base,
 especially if that code base is well covered by tests.
 
-### pytest-qt
+### pytest -qt
 
 
 
-The `pytest-qt` plugin allows you
+The `pytest -qt` plugin allows you
 to write tests for GUI applications written
 in the `Qt` framework (<https://www.qt.io/>), supporting the
 more popular sets of Python bindings for

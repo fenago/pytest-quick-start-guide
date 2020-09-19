@@ -1,8 +1,8 @@
+<img align="right" src="../logo.png">
 
 
 Lab 4. Fixtures
 ----------------------------
-
 
 
 In the previous lab, we learned how to use marks and parametrization
@@ -92,11 +92,6 @@ will hurt maintainability in the long run, for example, if the data
 layout changes (adding a new item to the tuple or the cast size, for
 example).
 
-
-
-<div>
-
-<div>
 
 ### Enter fixtures
 
@@ -447,11 +442,6 @@ a session-scoped fixture, and there are various forms to run only a
 subset of tests, as we have seen in previous labs.
 
 
-
-<div>
-
-<div>
-
 ### Scopes in action
 
 
@@ -568,11 +558,6 @@ that test. Note that it is possible for a test function to add the
 autouse fixture to its parameter list if it is interested in the return
 value of the fixture, as normal.
 
-
-
-<div>
-
-<div>
 
 ### \@pytest.mark.usefixtures
 
@@ -776,11 +761,6 @@ Let\'s take a look at some built-in pytest
 fixtures.
 
 
-
-<div>
-
-<div>
-
 ### tmpdir
 
 
@@ -952,11 +932,6 @@ automatically at the end of the test, ensuring we don\'t leak that
 change to other tests in the system.
 
 
-
-<div>
-
-<div>
-
 #### How and where to patch
 
 
@@ -1111,11 +1086,6 @@ capture the standard output and standard errors, even for extension
 modules.
 
 
-
-<div>
-
-<div>
-
 #### Binary mode
 
 
@@ -1207,11 +1177,6 @@ The following are some short topics and tips
 that did not fit into the previous sections, but that I think are worth
 mentioning. 
 
-
-
-<div>
-
-<div>
 
 ### When to use fixtures, as opposed to simple functions
 

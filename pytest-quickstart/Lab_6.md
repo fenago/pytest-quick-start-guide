@@ -1,4 +1,6 @@
 
+<img align="right" src="../logo.png">
+
 
 Lab 6. Converting unittest suites to pytest
 --------------------------------------------------------
@@ -610,11 +612,6 @@ to start to use pytest functionality that is incompatible with
 we can use them naturally from pytest and also keep existing
 `unittest`-based tests working?
 
-
-
-<div>
-
-<div>
 
 ### Reusing test code with fixtures
 

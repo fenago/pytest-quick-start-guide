@@ -128,7 +128,7 @@ preferring to use them—for a project. If you set addopts in pytest.ini to the 
 you want, you don’t have to type them in anymore. Here’s a set I like:
 
 ```
-**[pytest]**
+[pytest]
 addopts= _-rsxX-l --tb=short--strict_
 ```
 
@@ -150,28 +150,27 @@ default, this isn’t an error. pytest just thinks you created two markers. This
 can be fixed, however, by registering markers in pytest.ini, like this:
 
 ```
-**[pytest]**
-markers=
-**smoke:Run the smoketestfunctionsfor tasksproject
-get:Run the testfunctionsthattesttasks.get()**
-```
+[pytest]
+markers =
+    smoke: Run the smoke test functions for tasks project
+    get: Run the test functions that test tasks.get()
 
 With these markers registered, you can now also see them with pytest --markers
 with their descriptions:
 
-```
 $ cd /path/to/code/ch6/b/tasks_proj/tests
 $ pytest --markers
-@pytest.mark.smoke:Run the smoketesttestfunctions
 
-@pytest.mark.get:Run the testfunctionsthattesttasks.get()
+@pytest.mark.smoke: Run the smoke test test functions
+
+@pytest.mark.get: Run the test functions that test tasks.get()
+
+...
+
+@pytest.mark.skip(reason=None): skip the ...
 
 ...
 
-
-@pytest.mark.skip(reason=None):skipthe ...
-
-...
 ```
 
 If markers aren’t registered, they won’t show up in the --markers list. With them
@@ -184,27 +183,25 @@ in ch6/a. Let’s try running the tests without registering any markers:
 $ cd /path/to/code/ch6/a/tasks_proj/tests
 $ pytest --strict --tb=line
 
-===================testsessionstarts===================
-plugins:cov-2.5.1
-collected45 items/ 2 errors
 
-=========================ERRORS==========================
-____________ERRORcollectingfunc/test_add.py____________
-func/test_add.py:20:in <module>
+=================== test session starts ===================
+plugins: cov-2.5.1
+collected 45 items / 2 errors
+========================= ERRORS ==========================
+____________ ERROR collecting func/test_add.py ____________
+func/test_add.py:20: in <module>
+@pytest.mark.smoke
+...
+E AttributeError: 'smoke' not a registered marker
+______ ERROR collecting func/test_api_exceptions.py _______
+func/test_api_exceptions.py:30: in <module>
 @pytest.mark.smoke
 ...
 
-E AttributeError:'smoke'not a registeredmarker
-______ERRORcollectingfunc/test_api_exceptions.py_______
-func/test_api_exceptions.py:30:in <module>
-@pytest.mark.smoke
-...
+E AttributeError: 'smoke' not a registered marker
+!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!
+================= 2 error in 0.29 seconds =================
 
-
-
-E AttributeError:'smoke'not a registeredmarker
-!!!!!!!!!Interrupted:2 errorsduringcollection!!!!!!!!!
-=================2 errorin 0.29seconds=================
 ```
 
 
@@ -231,16 +228,14 @@ This should allow us to run tests, including the smoke tests:
 
 ```
 $ cd /path/to/code/ch6/b/tasks_proj/tests
-$ pytest --strict-m smoke
+$ pytest --strict -m smoke
 
-===================testsessionstarts===================
-plugins:cov-2.5.1
-collected57 items/ 54 deselected
-
-func/test_add.py. [ 33%]
-func/test_api_exceptions.py.. [100%]
-
-=========3 passed,54 deselectedin 0.13seconds=========
+=================== test session starts ===================
+plugins: cov-2.5.1
+collected 57 items / 54 deselected
+func/test_add.py . [ 33%]
+func/test_api_exceptions.py .. [100%]
+========= 3 passed, 54 deselected in 0.13 seconds =========
 ```
 
 ### Requiring a Minimum pytest Version
@@ -252,8 +247,8 @@ introduced into pytest until version 3.0. To avoid confusion, I add the followin
 to projects that use approx():
 
 ```
-**[pytest]**
-minversion= _3.0_
+[pytest]
+minversion= 3.0
 ```
 
 This way, if someone tries to run the tests using an older version of pytest,
@@ -276,8 +271,8 @@ In the case of the Tasks project, you could list src in there also, because havi
 pytest look for test files there would just be a waste of time.
 
 ```
-**[pytest]**
-norecursedirs= _.* venvsrc *.eggdistbuild_
+[pytest]
+norecursedirs = .* venv src *.egg dist build
 ```
 
 When overriding a setting that already has a useful value, like this setting,
@@ -320,8 +315,8 @@ tasks_proj/
 It could then make sense to put tests in testpaths:
 
 ```
-**[pytest]**
-testpaths= _tests_
+[pytest]
+testpaths= tests
 ```
 
 Now, as long as you start pytest from the tasks_proj directory, pytest will only
@@ -374,7 +369,7 @@ function. But what if we want to name our test classes <something>Test or
 <something>Suite? That’s where python_classes comes in:
 
 ```
-**[pytest]**
+[pytest]
 python_classes= _*TestTest**Suite_
 ```
 
@@ -399,7 +394,7 @@ test files check_<something>.py. Seems reasonable. Instead of renaming all of
 your files, just add a line to pytest.ini like this:
 
 ```
-**[pytest]**
+[pytest]
 python_files= _test_**_testcheck_*_
 ```
 
@@ -412,7 +407,7 @@ python_functions acts like the previous two settings, but for test function and
 method names. The default is test_*. To add check_*—you guessed it—do this:
 
 ```
-**[pytest]**
+[pytest]
 python_functions= _test_*check_*_
 ```
 

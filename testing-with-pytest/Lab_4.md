@@ -522,7 +522,7 @@ another flag that might make things easier is --showlocals, or -l for short:
 
 
 ```
-$ pytest -q --lf-l test_few_failures.py
+$ pytest -q --lf -l test_few_failures.py
 run-last-failure:rerunprevious1 failure
 F [100%]
 
@@ -652,7 +652,7 @@ $ cd /path/to/code/ch4/cache
 $ pytest -q --tb=linetest_slower.py
 ..... [100%]
 5 passedin 1.40seconds
-$ pytest-q --tb=linetest_slower.py
+$ pytest -q --tb=linetest_slower.py
 ..E.E.. [100%]
 
 =========================ERRORS==========================
@@ -864,7 +864,7 @@ alwaysprintthis
 . [100%]
 1 passedin 0.02seconds
 
-$ pytest-q -s test_capsys.py::test_capsys_disabled**
+$ pytest -q -s test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
 normalprint,usuallycaptured

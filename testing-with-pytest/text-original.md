@@ -1613,7 +1613,7 @@ Lab 1. Getting Started with pytest • 16
 Let’s try -q by itself:
 
 $ cd /path/to/code/ch1
-$ pytest-q**
+$ pytest -q**
 .F.... [100%]
 ========================FAILURES=========================
 ______________________test_failing_______________________
@@ -5044,7 +5044,7 @@ the base directory used for this session. The print statement is in the example
 so you can see where the directory is on your system. Let’s see where it is:
 
 $ cd /path/to/code/ch4
-$ pytest-q -s test_tmpdir.py::test_tmpdir_factory**
+$ pytest -q -s test_tmpdir.py::test_tmpdir_factory**
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 /T/pytest-of-okken/pytest-732
 .
@@ -5411,7 +5411,7 @@ sum_= x + y
 And the output:
 
 $ cd /path/to/code/ch4/cache
-$ pytest-q test_few_failures.py
+$ pytest -q test_few_failures.py
 
 .F... [100%]
 ========================FAILURES=========================
@@ -5438,7 +5438,7 @@ the test again to see the failure again. You can specify the test case on the
 
 command line:
 
-$ pytest-q** "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
+$ pytest -q** "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
 
 If you don’t want to copy/paste or there are multiple failed cases you’d like
 
@@ -5449,7 +5449,7 @@ another flag that might make things easier is --showlocals, or -l for short:
 Using cache • 81
 
 
-$ pytest-q --lf-l test_few_failures.py
+$ pytest -q --lf -l test_few_failures.py
 
 run-last-failure:rerunprevious1 failure
 F [100%]
@@ -5578,11 +5578,11 @@ random amount of time, all shorter than a second. Let’s see it run a couple
 of times:
 
 $ cd /path/to/code/ch4/cache
-$ pytest-q --tb=linetest_slower.py
+$ pytest -q --tb=linetest_slower.py
 
 ..... [100%]
 5 passedin 1.40seconds
-$ pytest-q --tb=linetest_slower.py
+$ pytest -q --tb=linetest_slower.py
 
 ..E.E.. [100%]
 =========================ERRORS==========================
@@ -5596,7 +5596,7 @@ assert0.28841<= (0.086302* 2)
 
 Well, that was fun. Let’s see what’s in the cache:
 
-$ pytest-q --cache-show**
+$ pytest -q --cache-show**
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower.py::test_slow_stuff[1]':True,
@@ -5688,15 +5688,15 @@ end of the test session, the collected current dictionary is saved in the cache.
 
 After running it a couple of times, let’s look at the saved cache:
 
-$ pytest-q --cache-cleartest_slower_2.py
+$ pytest -q --cache-cleartest_slower_2.py
 
 ..... [100%]
 5 passedin 2.27seconds
-$ pytest-q --tb=notest_slower_2.py
+$ pytest -q --tb=notest_slower_2.py
 
 .E.E...E [100%]
 5 passed,3 errorin 3.65seconds
-$ pytest-q --cache-show**
+$ pytest -q --cache-show**
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower_2.py::test_slow_stuff[0]':True,
@@ -5799,13 +5799,13 @@ def test_capsys_disabled (capsys):
 Now, 'alwaysprint this' will always be output:
 
 $ cd /path/to/code/ch4/cap
-$ pytest-q test_capsys.py::test_capsys_disabled**
+$ pytest -q test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
 
 . [100%]
 1 passedin 0.02seconds
-$ pytest-q -s test_capsys.py::test_capsys_disabled**
+$ pytest -q -s test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
 normalprint,usuallycaptured
@@ -7410,7 +7410,7 @@ For tox.ini:
 **ch6/format/tox.ini**
 _;...tox specificstuff..._
 
-**[pytest]**
+[pytest]
 addopts= _-rsxX-l --tb=short--strict_
 xfail_strict= _true
 ;...moreoptions..._
@@ -7486,7 +7486,7 @@ preferring to use them—for a project. If you set addopts in pytest.ini to the 
 
 you want, you don’t have to type them in anymore. Here’s a set I like:
 
-**[pytest]**
+[pytest]
 addopts= _-rsxX-l --tb=short--strict_
 
 The -rsxX tells pytest to report the reasons for all tests that skipped, xfailed, or
@@ -7516,7 +7516,7 @@ default, this isn’t an error. pytest just thinks you created two markers. This
 
 can be fixed, however, by registering markers in pytest.ini, like this:
 
-**[pytest]**
+[pytest]
 markers=
 **smoke:Run the smoketestfunctionsfor tasksproject
 get:Run the testfunctionsthattesttasks.get()**
@@ -7617,8 +7617,8 @@ introduced into pytest until version 3.0. To avoid confusion, I add the followin
 
 to projects that use approx():
 
-**[pytest]**
-minversion= _3.0_
+[pytest]
+minversion= 3.0
 
 This way, if someone tries to run the tests using an older version of pytest,
 
@@ -7649,8 +7649,8 @@ In the case of the Tasks project, you could list src in there also, because havi
 
 pytest look for test files there would just be a waste of time.
 
-**[pytest]**
-norecursedirs= _.* venvsrc *.eggdistbuild_
+[pytest]
+norecursedirs= .* venvsrc *.eggdistbuild_
 
 When overriding a setting that already has a useful value, like this setting,
 
@@ -7695,7 +7695,7 @@ Lab 6. Configuration • 120
 
 It could then make sense to put tests in testpaths:
 
-**[pytest]**
+[pytest]
 testpaths= _tests_
 
 Now, as long as you start pytest from the tasks_proj directory, pytest will only
@@ -7760,7 +7760,7 @@ function. But what if we want to name our test classes <something>Test or
 
 <something>Suite? That’s where python_classes comes in:
 
-**[pytest]**
+[pytest]
 python_classes= _*TestTest**Suite_
 
 Lab 6. Configuration • 122
@@ -7787,7 +7787,7 @@ test files check_<something>.py. Seems reasonable. Instead of renaming all of
 
 your files, just add a line to pytest.ini like this:
 
-**[pytest]**
+[pytest]
 python_files= _test_**_testcheck_*_
 
 Easy peasy. Now you can migrate your naming convention gradually if you
@@ -7800,7 +7800,7 @@ python_functions acts like the previous two settings, but for test function and
 
 method names. The default is test_*. To add check_*—you guessed it—do this:
 
-**[pytest]**
+[pytest]
 python_functions= _test_*check_*_
 
 Now the pytest naming conventions don’t seem that restrictive, do they? If you
@@ -8064,7 +8064,7 @@ Now we know which tests are failing. Let’s look at just one of them by using
 
 ables with -l:
 
-$ pytest -v --lf-l -x**
+$ pytest -v --lf -l -x**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -8857,7 +8857,7 @@ envlist= _py27,py37_
 deps= _pytest_
 commands= _pytest_
 
-**[pytest]**
+[pytest]
 addopts= _-rsxX-l --tb=short--strict_
 markers=
 **smoke:Run the smoketesttestfunctions
@@ -9242,12 +9242,12 @@ is almost identical.
 
 Both tests pass individually:
 
-$ pytest-q test_delete_pytest.py
+$ pytest -q test_delete_pytest.py
 
 
 . [100%]
 1 passedin 0.02seconds
-$ pytest-q test_delete_unittest.py
+$ pytest -q test_delete_unittest.py
 
 . [100%]
 1 passedin 0.02seconds
@@ -9303,7 +9303,7 @@ and passed.
 
 Let’s use --setup-show to investigate further:
 
-$ pytest-q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
+$ pytest -q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
 
 
 SETUP S tmpdir_factory

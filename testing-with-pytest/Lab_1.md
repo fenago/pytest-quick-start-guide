@@ -16,7 +16,7 @@ def test_passing():
 This is what it looks like when it’s run:
 
 ```
-$ cd /path/to/code/ch
+$ cd /path/to/code/ch1
 $ pytest test_one.py
 
 =====================testsessionstarts======================

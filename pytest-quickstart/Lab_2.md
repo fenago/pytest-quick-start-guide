@@ -1,3 +1,4 @@
+<img align="right" src="../logo.png">
 
 
 Lab 2. Writing and Running Tests
@@ -231,11 +232,6 @@ to a class ([Lab
 [*Fixtures*]).
 
 
-
-<div>
-
-<div>
-
 ### Running tests
 
 
@@ -397,11 +393,6 @@ expressions involved in the failure. By itself, this would be pretty
 cool already, but pytest goes a step further and provides specialized
 explanations of failures involving other data types.
 
-
-
-<div>
-
-<div>
 
 #### Text differences
 
@@ -756,11 +747,6 @@ by `pytest.raises`, which failed the test (as any other
 exception would).
 
 
-
-<div>
-
-<div>
-
 #### Checking exception messages
 
 
@@ -1048,11 +1034,6 @@ common test layouts, which we will discuss
 next.
 
 
-
-<div>
-
-<div>
-
 ### Tests that accompany your code
 
 
@@ -1196,11 +1177,6 @@ at the beginning of the lab, this is not a complete list of all of
 the command-line features; just the ones that you will use (and love)
 the most.
 
-
-
-<div>
-
-<div>
 
 ### Keyword expressions: -k
 
@@ -1432,11 +1408,6 @@ Showing the captured output on failing tests is very handy when running
 tests locally, and even more so when running tests on CI.
 
 
-
-<div>
-
-<div>
-
 #### Disabling capturing with -s
 
 
@@ -1543,11 +1514,6 @@ traceback modes, which are controlled by the `--tb` flag. The
 default is `--tb=auto` and was shown previously. Let\'s have a
 look at an overview of the other modes in the next sections.
 
-
-
-<div>
-
-<div>
 
 #### \--tb=long
 
@@ -2192,11 +2158,6 @@ Now, we will take a look at more common configuration options. More
 options will be introduced in the coming labs as we cover new
 features.
 
-
-
-<div>
-
-<div>
 
 ### Additional command-line: addopts
 
