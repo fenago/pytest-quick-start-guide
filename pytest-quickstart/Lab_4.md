@@ -39,6 +39,14 @@ Here\'s what we will cover in this lab:
 -   Tips/discussion
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/pytest-quickstart/code` folder.
+
 
 Introducing fixtures 
 --------------------------------------
@@ -784,7 +792,7 @@ unique directories.
 The fixture provides a `py.local` object
 (<http://py.readthedocs.io/en/latest/path.html>), from
 the `py` library
-([http://py.readthedocs.io](http://py.readthedocs.io/){.ulink}), which
+([http://py.readthedocs.io](http://py.readthedocs.io/)), which
 provides convenient methods to deal with file paths, such as joining,
 reading, writing, getting the extension, and so on; it is similar in
 philosophy to the `pathlib.Path` object

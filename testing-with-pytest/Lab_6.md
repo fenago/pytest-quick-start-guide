@@ -10,6 +10,16 @@ look at the configuration files that affect pytest, discuss how pytest changes
 its behavior based on them, and make some changes to the configuration
 files of the Tasks project.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/testing-with-pytest/code` folder.
+
+
+
 ### Understanding pytest Configuration Files
 
 Before I discuss how you can alter pytest’s default behavior, let’s run down

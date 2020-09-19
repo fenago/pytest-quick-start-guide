@@ -22,6 +22,15 @@ the following topics:
 
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/pytest-quickstart/code` folder.
+
+
 Overview of what we have learned 
 -----------------------------------
 
@@ -144,7 +153,7 @@ The following sections will summarize what we have learned in this course.
 
 -   Use`plugincompat` (<http://plugincompat.herokuapp.com/>)
     and PyPI (<https://pypi.org/>[) to
-    search](https://pypi.org/){.ulink} for
+    search](https://pypi.org/) for
     new plugins.
 -   Plugins are [**simple to install**]: install with
     `pip` and they are activated automatically.

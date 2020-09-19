@@ -24,6 +24,17 @@ streams, modify environmental variables, and interrogate warnings. The
 builtin fixtures are extensions to the core functionality of pytest. Let’s now 
 take a look at several of the most often used builtin fixtures one by one.
 
+
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/testing-with-pytest/code` folder.
+
+
+
 ### Using tmpdir and tmpdir_factory
 
 The tmpdir and tmpdir_factory builtin fixtures are used to create a temporary file
@@ -407,7 +418,7 @@ the stack trace:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
-$ pytest --verbose--tb=notest_pass_fail.py
+$ pytest --verbose --tb=no test_pass_fail.py
 
 ===================testsessionstarts===================
 collected2 items
@@ -423,7 +434,7 @@ ously will be run first, followed by the rest of the session:
 
 
 ```
-$ pytest --verbose--tb=no--fftest_pass_fail.py
+$ pytest --verbose --tb=no --fftest_pass_fail.py
 
 ===================testsessionstarts===================
 collected2 items
@@ -438,7 +449,7 @@ test_pass_fail.py::test_this_passes PASSED            [100%]
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
 
 ```
-venv)$ pytest --verbose--tb=no--lftest_pass_fail.py
+venv)$ pytest --verbose --tb=no --lftest_pass_fail.py
 
 ===================testsessionstarts===================
 collected2 items/ 1 deselected
@@ -749,7 +760,7 @@ $ pytest -q --cache-cleartest_slower_2.py
 ..... [100%]
 5 passedin 2.27seconds
 
-$ pytest -q --tb=notest_slower_2.py
+$ pytest -q --tb=no test_slower_2.py
 .E.E...E [100%]
 5 passed,3 errorin 3.65seconds
 

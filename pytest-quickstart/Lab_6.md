@@ -21,7 +21,7 @@ in-house-grown test suites that contain all kinds of customizations
 grown organically over the years. Most of the tips and advice in this
 lab come from my own experience when migrating our[]{#id324673405
 .indexterm} massive `unittest`-style test suite at ESSS
-([https://wwww.esss.co](https://www.esss.co/){.ulink}), where I work.
+([https://wwww.esss.co](https://www.esss.co/)), where I work.
 
 Here is what we will cover in this lab:
 
@@ -33,6 +33,15 @@ Here is what we will cover in this lab:
 -   Refactoring test utilities
 -   Migration strategy
 
+
+
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/pytest-quickstart/code` folder.
 
 
 Using pytest as a test runner 
@@ -95,7 +104,7 @@ modifications:
 
 
 ``` {.programlisting .language-markup}
-λ pytest test_simple.py
+pytest test_simple.py
 ======================== test session starts ========================
 ...
 collected 3 items
@@ -225,7 +234,7 @@ plain assert statements instead of `self.assert*` methods.
 
 Converting all the method calls is boring and error-prone, that\'s why
 the
-[`unittest2pytest`](https://github.com/pytest-dev/unittest2pytest){.ulink} tool
+[`unittest2pytest`](https://github.com/pytest-dev/unittest2pytest) tool
 exists. It converts all `self.assert*` method calls to plain
 asserts, and also converts `self.assertRaises` calls to the
 appropriate pytest idiom.
@@ -234,7 +243,7 @@ Install it using `pip`:
 
 
 ``` {.programlisting .language-markup}
-λ pip install unittest2pytest
+pip install unittest2pytest
 ```
 
 
@@ -242,7 +251,7 @@ Once installed, you can now execute it on the files you want:
 
 
 ``` {.programlisting .language-markup}
-λ unittest2pytest test_simple2.py
+unittest2pytest test_simple2.py
 RefactoringTool: Refactored test_simple2.py
 --- test_simple2.py (original)
 +++ test_simple2.py (refactored)
@@ -291,7 +300,7 @@ The updated file runs just as before:
 
 
 ``` {.programlisting .language-markup}
-λ pytest test_simple2.py
+pytest test_simple2.py
 ======================== test session starts ========================
 ...
 collected 3 items

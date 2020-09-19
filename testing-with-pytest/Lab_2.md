@@ -22,6 +22,15 @@ markers to mark which tests you want to run and discuss how builtin markers
 can help you skip tests and mark tests as expecting to fail. Finally, I’ll cover
 parametrizing tests, which allows tests to get called with different data.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/testing-with-pytest/code` folder.
+
+
 ### Testing a Package
 
 We’ll use the sample project, Tasks, as discussed in The Tasks Project, on
@@ -926,7 +935,7 @@ pytest:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest tests/func--tb=no
+$ pytest tests/func--tb=no 
 
 ===================testsessionstarts===================
 collected50 items
@@ -947,7 +956,7 @@ An important trick to learn is that using -v gives you the syntax for how to
 run a specific directory, class, and test.
 
 ```
-$ pytest -v tests/func--tb=no
+$ pytest -v tests/func--tb=no 
 
 ===================testsessionstarts===================
 collected50 items

@@ -31,6 +31,14 @@ In summary, here is what we will be covering in this lab:
 -   Parametrization
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/pytest-quickstart/code` folder.
+
 
 Mark basics 
 -----------------------------
@@ -141,7 +149,7 @@ the `slow` mark:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -m slow
+pytest -m slow
 ```
 
 
@@ -151,7 +159,7 @@ not the tests with the `serial` mark you can use::
 
 
 ``` {.programlisting .language-markup}
-λ pytest -m "slow and not serial"
+pytest -m "slow and not serial"
 ```
 
 
@@ -177,9 +185,9 @@ complete test suite: 
 
 
 ``` {.programlisting .language-markup}
-λ pytest -m "smoke"
+pytest -m "smoke"
 ...
-λ pytest -m "not smoke"
+pytest -m "not smoke"
 ```
 
 
@@ -200,13 +208,13 @@ This would then be executed like this:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -m "smoke"
+pytest -m "smoke"
 ...
-λ pytest -m "unittest"
+pytest -m "unittest"
 ...
-λ pytest -m "integration"
+pytest -m "integration"
 ...
-λ pytest -m "not smoke and not unittest and not integration"
+pytest -m "not smoke and not unittest and not integration"
 ```
 
 
@@ -366,13 +374,13 @@ executed in layers on CI based on marked tests:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -m "smoke"
+pytest -m "smoke"
 ...
-λ pytest -m "unittest"
+pytest -m "unittest"
 ...
-λ pytest -m "integration"
+pytest -m "integration"
 ...
-λ pytest -m "not smoke and not unittest and not integration"
+pytest -m "not smoke and not unittest and not integration"
 ```
 
 
@@ -416,7 +424,7 @@ flag:
 
 
 ``` {.programlisting .language-markup}
-λ pytest --markers
+pytest --markers
 @pytest.mark.slow:
 
 @pytest.mark.serial:
@@ -438,7 +446,7 @@ the mark when running with `--strict`:
 
 
 ``` {.programlisting .language-markup}
-λ pytest --strict tests\test_wrong_mark.py
+pytest --strict tests\test_wrong_mark.py
 ...
 collected 0 items / 1 errors
 
@@ -1266,7 +1274,7 @@ easier when using the `-k `flag:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -k "x + 3-inputs0-4.0"
+pytest -k "x + 3-inputs0-4.0"
 ```
 
 
@@ -1276,7 +1284,7 @@ versus:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -k "add"
+pytest -k "add"
 ```
 
 
@@ -1361,7 +1369,7 @@ requirements.
 
 Some time passes, and new requirements arrive: now we need to serialize
 our objects into other formats, namely `XML` and
-[`YAML`(](http://yaml.org/){.ulink}<http://yaml.org/>[)](http://yaml.org/){.ulink}.
+[`YAML`(](http://yaml.org/)<http://yaml.org/>[)](http://yaml.org/).
 To keep things simple, we create two new classes,
 `XMLSerializer` and `YAMLSerializer`, which
 implement the same `serialize`/`deserialize`

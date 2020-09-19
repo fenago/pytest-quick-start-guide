@@ -61,7 +61,6 @@ Why spend time writing tests? 
 ------------------------------------------------
 
 
-
 Testing programs manually is natural; writing automated tests is not.
 
 Programmers use various techniques when
@@ -126,6 +125,15 @@ night.
 
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/pytest-quickstart/code` folder.
+
+
 A quick look at the unittest module 
 -----------------------------------------------------
 
@@ -186,7 +194,7 @@ framework will tell us when we execute it:
 
 
 ``` {.programlisting .language-markup}
-    λ python3 -m venv .env
+    python3 -m venv .env
   source .env/bin/activate
     F
     ======================================================================
@@ -211,7 +219,7 @@ the function is now correct:
 
 
 ``` {.programlisting .language-markup}
-    λ python test_fibo.py
+    python test_fibo.py
     .
     ----------------------------------------------------------------------
     Ran 1 test in 0.000s
@@ -291,7 +299,7 @@ when an assertion fails:
 
 
 ``` {.programlisting .language-markup}
-    λ pytest test_fibo2.py -q
+    pytest test_fibo2.py -q
     F                                                              [100%]
     ============================= FAILURES ==============================
     _____________________________ test_fibo _____________________________

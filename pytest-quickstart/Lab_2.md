@@ -4,8 +4,6 @@
 Lab 2. Writing and Running Tests
 ---------------------------------------------
 
-
-
 In the previous lab, we discussed why testing is so important and
 looked at a brief overview of the `unittest` module. We also
 took a cursory look at pytest\'s features, but barely got a taste of
@@ -20,7 +18,6 @@ and directories, and how to use pytest\'s command line effectively. 
 
 Here\'s what is covered in this lab:
 
-
 -   Installing pytest
 -   Writing and running tests
 -   Organizing files and packages
@@ -28,11 +25,19 @@ Here\'s what is covered in this lab:
 -   Configuration: `pytest.ini` file
 
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/pytest-quickstart/code` folder.
+
 
 ### Note
 
 In the lab, there are a lot of examples typed into the command line.
-They are marked by the λ character. To avoid clutter and to focus on the
+They are marked by the character. To avoid clutter and to focus on the
 important parts, the pytest header (which normally displays the pytest
 version, the Python version, installed plugins, and so on) will be
 suppressed. 
@@ -86,7 +91,7 @@ pip, you can skip this section:
 
 
 ``` {.programlisting .language-markup}
-λ python -m venv .env
+python -m venv .env
 ```
 
 
@@ -99,7 +104,7 @@ pip, you can skip this section:
 
 
 ``` {.programlisting .language-markup}
-λ source .env/bin/activate
+source .env/bin/activate
 ```
 
 
@@ -107,7 +112,7 @@ Or on Windows:
 
 
 ``` {.programlisting .language-markup}
-λ .env\Scripts\activate
+.env\Scripts\activate
 ```
 
 
@@ -121,7 +126,7 @@ will be executed from the `virtualenv`, not from your system.
 
 
 ``` {.programlisting .language-markup}
-λ pip install pytest
+pip install pytest
 ```
 
 
@@ -129,7 +134,7 @@ You can verify that everything went well by typing:
 
 
 ``` {.programlisting .language-markup}
-λ pytest --version
+pytest --version
 This is pytest version 3.5.1, imported from x:\fibo\.env36\lib\site-packages\pytest.py
 ```
 
@@ -173,7 +178,7 @@ name of the file:
 
 
 ``` {.programlisting .language-markup}
-λ pytest test_player_mechanics.py
+pytest test_player_mechanics.py
 ```
 
 
@@ -244,7 +249,7 @@ You can start by just simply executing the `pytest` command:
 
 
 ``` {.programlisting .language-markup}
-λ pytest
+pytest
 ```
 
 
@@ -258,7 +263,7 @@ recursively, and will run all of the tests found in those files:
 
 
 ``` {.programlisting .language-markup}
-      λ pytest tests/core tests/contrib
+      pytest tests/core tests/contrib
 ```
 
 
@@ -268,7 +273,7 @@ recursively, and will run all of the tests found in those files:
 
 
 ``` {.programlisting .language-markup}
-      λ pytest tests/core tests/contrib/test_text_plugin.py
+      pytest tests/core tests/contrib/test_text_plugin.py
 ```
 
 
@@ -279,7 +284,7 @@ recursively, and will run all of the tests found in those files:
 
 
 ``` {.programlisting .language-markup}
-      λ pytest tests/core/test_core.py::test_regex_matching
+      pytest tests/core/test_core.py::test_regex_matching
 ```
 
 
@@ -290,7 +295,7 @@ recursively, and will run all of the tests found in those files:
 
 
 ``` {.programlisting .language-markup}
-      λ pytest tests/contrib/test_text_plugin.py::TestPluginHooks
+      pytest tests/contrib/test_text_plugin.py::TestPluginHooks
 ```
 
 
@@ -302,7 +307,7 @@ recursively, and will run all of the tests found in those files:
 
 
 ``` {.programlisting .language-markup}
-      λ pytest tests/contrib/
+      pytest tests/contrib/
       test_text_plugin.py::TestPluginHooks::test_registration
 ```
 
@@ -320,7 +325,7 @@ the `-v` flag:
 
 
 ``` {.programlisting .language-markup}
- λ pytest tests/core -v
+ pytest tests/core -v
 ======================== test session starts ========================
 ...
 collected 6 items
@@ -339,7 +344,7 @@ the `--collect-only`  flag:
 
 
 ``` {.programlisting .language-markup}
-λ pytest tests/core --collect-only
+pytest tests/core --collect-only
 ======================== test session starts ========================
 ...
 collected 6 items
@@ -816,7 +821,7 @@ It lets you choose from a number of warning classes, for example:
 
 (This list is not exhaustive. Consult the warnings documentation for the
 full listing. For more details, go
-to: <https://docs.python.org/3/library/warnings.html>[).](https://docs.python.org/3/library/warnings.html){.ulink}
+to: <https://docs.python.org/3/library/warnings.html>[).](https://docs.python.org/3/library/warnings.html)
 
 Warning classes help users control which warnings should be shown and
 which ones should be suppressed.
@@ -1076,7 +1081,7 @@ specify tests using their module import path. For example:
 
 
 ``` {.programlisting .language-markup}
-λ pytest --pyargs mylib.tests
+pytest --pyargs mylib.tests
 ```
 
 
@@ -1193,7 +1198,7 @@ expression*]), you can run tests whose
 
 
 ``` {.programlisting .language-markup}
-λ pytest -k "test_parse"
+pytest -k "test_parse"
 ```
 
 
@@ -1203,7 +1208,7 @@ Boolean operators:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -k "parse and not num"
+pytest -k "parse and not num"
 ```
 
 
@@ -1231,7 +1236,7 @@ equals `--maxfail=1`.
 
 
 ``` {.programlisting .language-markup}
-λ pytest tests/core -x
+pytest tests/core -x
 ```
 
 
@@ -1256,7 +1261,7 @@ flag (meaning last failed[*):*]
 
 
 ``` {.programlisting .language-markup}
-λ pytest --lf tests/core
+pytest --lf tests/core
 ...
 collected 6 items / 4 deselected
 run-last-failure: rerun previous 2 failures
@@ -1268,7 +1273,7 @@ two flags are refactoring heaven:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -x --lf
+pytest -x --lf
 ```
 
 
@@ -1297,7 +1302,7 @@ run yet:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -x --lf
+pytest -x --lf
 ======================== test session starts ========================
 ...
 collected 6 items
@@ -1350,7 +1355,7 @@ When executing this test, by default, you won\'t see the output of the
 
 
 ``` {.programlisting .language-markup}
-λ pytest tests\test_digest.py
+pytest tests\test_digest.py
 ======================== test session starts ========================
 ...
 
@@ -1380,7 +1385,7 @@ the error traceback:
 
 
 ``` {.programlisting .language-markup}
-λ pytest tests\test_digest.py
+pytest tests\test_digest.py
 ======================== test session starts ========================
 ...
 
@@ -1422,7 +1427,7 @@ capturing:
 
 
 ``` {.programlisting .language-markup}
-λ pytest tests\test_digest.py -s
+pytest tests\test_digest.py -s
 ======================== test session starts ========================
 ...
 
@@ -1515,7 +1520,7 @@ default is `--tb=auto` and was shown previously. Let\'s have a
 look at an overview of the other modes in the next sections.
 
 
-#### \--tb=long
+#### --tb=long
 
 
 
@@ -1567,7 +1572,7 @@ tests\test_read_properties.py:14: ValueError
 ```
 
 
-#### \--tb=short
+#### --tb=short
 
 
 
@@ -1594,13 +1599,7 @@ E   ValueError: invalid literal for int() with base 10: 'null'
 
  
 
- 
-
- 
-
- 
-
-#### \--tb=native
+#### --tb=native
 
 
 
@@ -1625,7 +1624,7 @@ ValueError: invalid literal for int() with base 10: 'null'
 ```
 
 
-#### \--tb=line
+#### --tb=line
 
 
 
@@ -1645,7 +1644,7 @@ massive refactoring and except a ton of failures anyway, planning to
 enter [**refactoring-heaven mode**] with
 the `--lf -x` flags afterwards.
 
-#### \--tb=no
+#### --tb=no 
 
 
 
@@ -1670,7 +1669,7 @@ tests\test_read_properties.py F                                [100%]
 
  
 
-#### \--showlocals (-l)
+#### --showlocals (-l)
 
 
 
@@ -1752,7 +1751,7 @@ or uses zero to see a summary of all tests:
 
 
 ``` {.programlisting .language-markup}
-λ pytest --durations=5
+pytest --durations=5
 ...
 ===================== slowest 5 test durations ======================
 3.40s call CH2/tests/test_slow.py::test_corner_case
@@ -2181,7 +2180,7 @@ With that configuration, typing the following:
 
 
 ``` {.programlisting .language-markup}
-λ pytest tests/test_core.py
+pytest tests/test_core.py
 ```
 
 
@@ -2189,7 +2188,7 @@ Is the same as typing:
 
 
 ``` {.programlisting .language-markup}
-λ pytest --tb=native --max-fail=10 -v tests/test_core.py
+pytest --tb=native --max-fail=10 -v tests/test_core.py
 ```
 
 
@@ -2204,7 +2203,7 @@ configured in `pytest.ini`:
 
 
 ``` {.programlisting .language-markup}
-λ pytest --tb=auto tests/test_core.py
+pytest --tb=auto tests/test_core.py
 ```
 
 
@@ -2358,7 +2357,7 @@ passed multiple times to override more than one option:
 
 
 ``` {.programlisting .language-markup}
-λ pytest -o python_classes=Suite -o cache_dir=$TMP/pytest-cache
+pytest -o python_classes=Suite -o cache_dir=$TMP/pytest-cache
 ```
 
 

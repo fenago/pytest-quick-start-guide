@@ -3,6 +3,16 @@
 
 ### Getting Started with pytest
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/testing-with-pytest/code` folder.
+
+
+
 This is a test:
 
 ```
@@ -673,7 +683,7 @@ don’t need to see it again:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --tb=no
+$ pytest --tb=no 
 ===================testsessionstarts===================
 collected6 items
 
@@ -700,7 +710,7 @@ all of the tests should run, and --maxfail=1 should act just like -x:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --maxfail=2 --tb=no
+$ pytest --maxfail=2 --tb=no 
 
 =================== test session starts ===================
 collected 6 items
@@ -709,7 +719,7 @@ test_two.py F [ 33%]
 tasks/test_four.py .. [ 66%]
 tasks/test_three.py .. [100%]
 =========== 1 failed, 5 passed in 0.07 seconds ============
-$ pytest --maxfail=1 --tb=no
+$ pytest --maxfail=1 --tb=no 
 =================== test session starts ===================
 collected 6 items
 test_one.py . [ 16%]
@@ -781,8 +791,8 @@ of the tests that passed last time:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --ff --tb=no
-$ pytest --ff --tb=no
+$ pytest --ff --tb=no 
+$ pytest --ff --tb=no 
 
 
 =================== test session starts ===================
@@ -790,8 +800,8 @@ collected 6 items
 run-last-failure: rerun previous 1 failure first
 test_two.py F [ 16%]
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --ff --tb=no
-$ pytest --ff --tb=no
+$ pytest --ff --tb=no 
+$ pytest --ff --tb=no 
 =================== test session starts ===================
 collected 6 items
 run-last-failure: rerun previous 1 failure first
@@ -809,11 +819,11 @@ obvious difference is that each test gets its own line, and the name of the test
 and the outcome are spelled out instead of indicated with just a dot.
 
 We’ve used it quite a bit already, but let’s run it again for fun in conjunction
-with --ff and --tb=no:
+with --ff and --tb=no :
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest -v --ff --tb=no
+$ pytest -v --ff --tb=no 
 
 =================== test session starts ===================
 collected 6 items
@@ -863,7 +873,7 @@ test_two.py:2: AssertionError
 ```
 
 The -q option makes the output pretty terse, but it’s usually enough. We’ll
-use the -q option frequently in the rest of the book (as well as --tb=no) to limit
+use the -q option frequently in the rest of the book (as well as --tb=no ) to limit
 the output to what we are specifically trying to understand at the time.
 
 **-l, --showlocals**
@@ -939,7 +949,7 @@ ent traceback styles.
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --tb=notasks**
+$ pytest --tb=no tasks**
 ===================testsessionstarts===================
 collected4 items
 

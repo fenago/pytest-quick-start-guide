@@ -9,6 +9,16 @@ combination with pytest for effective and efficient testing. While this is by no
 means an exhaustive list, the tools discussed here give you a taste of the
 power of mixing pytest with other tools.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/testing-with-pytest/code` folder.
+
+
+
 ### pdb: Debugging Test Failures
 
 The pdb module is the Python debugger in the standard library. You use --pdb
@@ -58,7 +68,7 @@ backs, and we didn’t have --verbose turned on. Let’s re-run the failures (at
 three of them) with verbose:
 
 ```
-$ pytest --tb=no--verbose--lf--maxfail=3
+$ pytest --tb=no --verbose--lf--maxfail=3
 
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -73,7 +83,7 @@ tests/func/test_add_variety.py::test_add_1[mongo]FAILED[ 7%]
 ```
 
 Now we know which tests are failing. Let’s look at just one of them by using
--x, including the traceback by not using --tb=no, and showing the local vari-
+-x, including the traceback by not using --tb=no , and showing the local vari-
 ables with -l:
 
 
@@ -841,7 +851,7 @@ the markers are declared.
 Before running tox, you have to make sure you install it:
 
 ```
-$ pip install tox**
+$ pip install tox
 ```
 
 This can be done within a virtual environment.
@@ -1215,7 +1225,7 @@ and passed.
 Let’s use --setup-show to investigate further:
 
 ```
-$ pytest -q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
+$ pytest -q --tb=no --setup-showtest_delete_pytest.pytest_delete_unittest.py
 
 SETUP S tmpdir_factory
 SETUP S tasks_db_session(fixturesused:tmpdir_factory)

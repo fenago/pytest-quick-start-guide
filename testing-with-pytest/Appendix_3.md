@@ -107,6 +107,7 @@ Notice that it takes over ten seconds to run normally:
 $ pip install pytest-xdist
 $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pytest test_parallel.py
+
 =================== test session starts ===================
 plugins: xdist-1.23.0, forked-0.2
 collected 10 items
@@ -120,6 +121,7 @@ the system. Here’s the same test run on multiple processors:
 
 ```
 $ pytest -n auto test_parallel.py
+
 =================== test session starts ===================
 plugins: xdist-1.23.0, forked-0.2
 gw0 [10] / gw1 [10] / gw2 [10] / gw3 [10]
@@ -160,6 +162,7 @@ a half-second timeout:
 $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pip install pytest-timeout
 $ pytest --timeout=0.5 -x test_parallel.py
+
 =================== test session starts ===================
 plugins: xdist-1.23.0, timeout-1.3.2, forked-0.2
 timeout: 0.5s
@@ -223,6 +226,8 @@ Here’s the same test with --instafail:
 ```
 $ pip install pytest-instafail
 $ pytest --instafail --timeout=0.5 --tb=line --maxfail=2 test_parallel.py
+
+
 =================== test session starts ===================
 plugins: xdist-1.23.0, timeout-1.3.2, instafail-0.4.0, forked-0.2
 timeout: 0.5s
@@ -250,11 +255,11 @@ A test without sugar is shownon page 168.
 
 5. https://pypi.python.org/pypi/pytest-sugar
 
-![](./images/168/25.png)
+![](./images/168-25.png)
 
 And here’s the test with sugar:
 
-![](./images/168/26.png)
+![](./images/168-26.png)
 
 The checkmarks (or x’s for failures) show up as the tests finish. The progress
 bars grow in real time, too. It’s quite satisfying to watch.
@@ -271,22 +276,22 @@ To demonstrate the emoji plugin in action, following is sample code that
 produces pass, fail, skip, xfail, xpass, and error. Here it is with normal output
 and tracebacks turned off:
 
-![](./images/168/27.png)
+![](./images/168-27.png)
 
 6. https://pypi.python.org/pypi/pytest-emoji
 
 
 Here it is with verbose, -v:
 
-![](./images/169/28.png)
+![](./images/169-28.png)
 
 Now, here is the sample code with --emoji:
 
-![](./images/169/29.png)
+![](./images/169-29.png)
 
 And then with both -v and --emoji:
 
-![](./images/169/30.png)
+![](./images/169-30.png)
 
 It’s a pretty fun plugin, but don’t dismiss it as silly out of hand; it allows you
 to change the emoji using hook functions. It’s one of the few pytest plugins
@@ -311,6 +316,9 @@ The pytest-html plugin is really easy to start. Just add --html=report_name.html
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/appendices/outcomes
 $ pytest --html=report.html
+
+
+
 ====================== test session starts ======================
 metadata: ...
 collected 6 items
@@ -338,11 +346,11 @@ and a results and summary page.
 
 The following screen shows the session environment information and summary:
 
-![](./images/170/31.png)
+![](./images/170-31.png)
 
 The next screen shows the summary and results:
 
-![](./images/170/32.png)
+![](./images/170-32.png)
 
 The report includes JavaScript that allows you to filter and sort, and you can
 add extra information to the report, including images. If you need to produce

@@ -1415,7 +1415,7 @@ also use --tb=no to turn off the stack trace, since you’ve already seen it and
 don’t need to see it again:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --tb=no**
+$ pytest --tb=no **
 ===================testsessionstarts===================
 collected6 items
 
@@ -1448,7 +1448,7 @@ but let’s take a look anyway. Since there is only one failure, if we set --max
 all of the tests should run, and --maxfail=1 should act just like -x:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --maxfail=2--tb=no**
+$ pytest --maxfail=2--tb=no **
 ===================testsessionstarts===================
 collected6 items
 
@@ -1458,7 +1458,7 @@ tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
 ===========1 failed,5 passedin 0.07seconds============
-$ pytest --maxfail=1--tb=no**
+$ pytest --maxfail=1--tb=no **
 ===================testsessionstarts===================
 collected6 items
 
@@ -1547,8 +1547,8 @@ The --ff/--failed-first option will do the same as --last-failed, and then run t
 of the tests that passed last time:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --ff--tb=no
-$ pytest --ff--tb=no**
+$ pytest --ff--tb=no 
+$ pytest --ff--tb=no **
 ===================testsessionstarts===================
 collected6 items
 run-last-failure:rerunprevious1 failurefirst
@@ -1578,10 +1578,10 @@ and the outcome are spelled out instead of indicated with just a dot.
 
 We’ve used it quite a bit already, but let’s run it again for fun in conjunction
 
-with --ff and --tb=no:
+with --ff and --tb=no :
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest -v --ff--tb=no**
+$ pytest -v --ff--tb=no **
 ===================testsessionstarts===================
 collected6 items
 run-last-failure:rerunprevious1 failurefirst
@@ -1633,7 +1633,7 @@ test_two.py:2:AssertionError
 
 The -q option makes the output pretty terse, but it’s usually enough. We’ll
 
-use the -q option frequently in the rest of the book (as well as --tb=no) to limit
+use the -q option frequently in the rest of the book (as well as --tb=no ) to limit
 
 the output to what we are specifically trying to understand at the time.
 
@@ -1718,7 +1718,7 @@ ent traceback styles.
 --tb=no removes the traceback entirely:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --tb=notasks**
+$ pytest --tb=no tasks**
 ===================testsessionstarts===================
 collected4 items
 
@@ -2962,7 +2962,7 @@ To run all the tests from one directory, use the directory as a parameter to
 pytest:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest tests/func--tb=no**
+$ pytest tests/func--tb=no **
 ===================testsessionstarts===================
 collected50 items
 
@@ -2982,7 +2982,7 @@ An important trick to learn is that using -v gives you the syntax for how to
 
 run a specific directory, class, and test.
 
-$ pytest -v tests/func--tb=no**
+$ pytest -v tests/func--tb=no **
 ===================testsessionstarts===================
 collected50 items
 
@@ -4820,7 +4820,7 @@ Here’s what we have so far:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
 $ pip install pymongo
-$ pytest -v --tb=no**
+$ pytest -v --tb=no **
 ===================testsessionstarts===================
 collected96 items
 
@@ -5339,7 +5339,7 @@ Let’s run them using --verbose to see the function names, and --tb=no to hide
 the stack trace:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
-$ pytest --verbose--tb=notest_pass_fail.py
+$ pytest --verbose --tb=no test_pass_fail.py
 
 ===================testsessionstarts===================
 collected2 items
@@ -5353,7 +5353,7 @@ If you run them again with the --ff or --failed-first flag, the tests that faile
 
 ously will be run first, followed by the rest of the session:
 
-$ pytest --verbose--tb=no--fftest_pass_fail.py
+$ pytest --verbose --tb=no --fftest_pass_fail.py
 
 ===================testsessionstarts===================
 collected2 items
@@ -5366,7 +5366,7 @@ test_pass_fail.py::test_this_passes PASSED            [100%]
 
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
 
-venv)$ pytest --verbose--tb=no--lftest_pass_fail.py
+venv)$ pytest --verbose --tb=no --lftest_pass_fail.py
 ===================testsessionstarts===================
 collected2 items/ 1 deselected
 run-last-failure:rerunprevious1 failure
@@ -5692,7 +5692,7 @@ $ pytest -q --cache-cleartest_slower_2.py
 
 ..... [100%]
 5 passedin 2.27seconds
-$ pytest -q --tb=notest_slower_2.py
+$ pytest -q --tb=no test_slower_2.py
 
 .E.E...E [100%]
 5 passed,3 errorin 3.65seconds
@@ -6628,7 +6628,7 @@ tests/func/test_api_exceptions.py:20:Failed
 
 Let’s run it again with -v for verbose. Since you’ve already seen the traceback,
 
-you can turn that off with --tb=no.
+you can turn that off with --tb=no .
 
 Writing Your Own Plugins • 101
 
@@ -6638,7 +6638,7 @@ And now let’s focus on the new tests with -k TestAdd, which works because
 there aren’t any other tests with names that contain “TestAdd.”
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
-$ pytest -v --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --tb=no test_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -6686,7 +6686,7 @@ And now we have just the output we were looking for. A test session with no
 --verbose flag shows an O for failures, er, improvement opportunities:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
-$ pytest --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest --tb=no test_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6704,7 +6704,7 @@ Writing Your Own Plugins • 103
 
 And the -v or --verbose flag will be nicer also:
 
-$ pytest -v --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --tb=no test_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6749,7 +6749,7 @@ We can manually test our plugin just by running it against our example file.
 First, with no --nice option, to make sure just the username shows up:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
-$ pytest --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest --tb=no test_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -6765,7 +6765,7 @@ Lab 5. Plugins • 104
 
 Now with --nice:
 
-$ pytest --nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest --nice--tb=no test_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6777,7 +6777,7 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
-$ pytest -v --nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --nice--tb=no test_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -7284,10 +7284,10 @@ out the thorough instruction found in the Python Packaging User Guide.^6
 
 When you are contributing a pytest plugin, another great place to start is by
 
-using the cookiecutter-pytest-plugin^7 :
+using the cookiecutter -pytest-plugin^7 :
 
-$ pip install cookiecutter
-$ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin**
+$ pip install cookiecutter 
+$ cookiecutter https://github.com/pytest-dev/cookiecutter -pytest-plugin**
 
 This project first asks you some questions about your plugin. Then it creates
 
@@ -7330,7 +7330,7 @@ run through the different configuration files and learn what you can do there
 to make your testing life easier.
 
 6. https://packaging.python.org/distributing
-7. https://github.com/pytest-dev/cookiecutter-pytest-plugin
+7. https://github.com/pytest-dev/cookiecutter -pytest-plugin
 8. https://pypi.python.org/pypi
 
 Lab 5. Plugins • 114
@@ -8008,7 +8008,7 @@ In Parametrizing Fixtures, we left the Tasks project with a few
 failures:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
-$ pytest --tb=no-q**
+$ pytest --tb=no -q**
 .........................................FF.FFFFFFF[ 53%]
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
 42 failed,54 passedin 5.51seconds
@@ -8046,7 +8046,7 @@ backs, and we didn’t have --verbose turned on. Let’s re-run the failures (at
 
 three of them) with verbose:
 
-$ pytest --tb=no--verbose--lf--maxfail=3**
+$ pytest --tb=no --verbose--lf--maxfail=3**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -8060,7 +8060,7 @@ tests/func/test_add_variety.py::test_add_1[mongo]FAILED[ 7%]
 
 Now we know which tests are failing. Let’s look at just one of them by using
 
--x, including the traceback by not using --tb=no, and showing the local vari-
+-x, including the traceback by not using --tb=no , and showing the local vari-
 
 ables with -l:
 
@@ -9303,7 +9303,7 @@ and passed.
 
 Let’s use --setup-show to investigate further:
 
-$ pytest -q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
+$ pytest -q --tb=no --setup-showtest_delete_pytest.pytest_delete_unittest.py
 
 
 SETUP S tmpdir_factory
@@ -11120,7 +11120,7 @@ with Jenkins, 145 – 149
 Python advantages, xi
 specifying test directories,
 121
-cookiecutter-pytest-plugin, 114
+cookiecutter -pytest-plugin, 114
 --count option, 164
 --cov-report option, 132
 --cov=src option, 132

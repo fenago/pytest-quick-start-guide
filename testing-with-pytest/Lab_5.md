@@ -31,6 +31,14 @@ everything. But you’ll get far enough to be able to share plugins with your
 team. I’ll also discuss some shortcuts to getting PyPI–distributed plugins up
 with the least amount of work.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/testing-with-pytest/code` folder.
+
 
 ### Finding Plugins
 
@@ -262,7 +270,7 @@ tests/func/test_api_exceptions.py:20:Failed
 ```
 
 Let’s run it again with -v for verbose. Since you’ve already seen the traceback,
-you can turn that off with --tb=no.
+you can turn that off with --tb=no .
 
 
 And now let’s focus on the new tests with -k TestAdd, which works because
@@ -270,7 +278,7 @@ there aren’t any other tests with names that contain “TestAdd.”
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
-$ pytest -v --tb=notest_api_exceptions.py-k TestAdd
+$ pytest -v --tb=no test_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -319,7 +327,7 @@ And now we have just the output we were looking for. A test session with no
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
-$ pytest --tb=notest_api_exceptions.py-k TestAdd
+$ pytest --tb=no test_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
@@ -339,7 +347,7 @@ test_api_exceptions.py.O
 And the -v or --verbose flag will be nicer also:
 
 ```
-$ pytest -v --tb=notest_api_exceptions.py-k TestAdd
+$ pytest -v --tb=no test_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
@@ -388,7 +396,7 @@ First, with no --nice option, to make sure just the username shows up:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
-$ pytest --tb=notest_api_exceptions.py-k TestAdd
+$ pytest --tb=no test_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -406,7 +414,7 @@ test_api_exceptions.py.F [100%]
 
 Now with --nice:
 
-$ pytest --nice--tb=notest_api_exceptions.py-k TestAdd
+$ pytest --nice--tb=no test_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
@@ -419,7 +427,7 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
-$ pytest -v --nice--tb=notest_api_exceptions.py-k TestAdd
+$ pytest -v --nice--tb=no test_api_exceptions.py-k TestAdd
 
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
@@ -874,7 +882,7 @@ put pytest-nice-0.1.0.tar.gz into a directory called myplugins.
 To install pytest-nice from myplugins:
 
 ```
-$ pip install --no-index--find-linksmypluginspytest-nice
+$ pip install --no-index --find-links myplugins pytest-nice
 ```
 
 The --no-index tells pip to not go out to PyPI to look for what you want to install.
@@ -885,11 +893,10 @@ If you’ve done some bug fixes and there are newer versions in myplugins, you
 can upgrade by adding --upgrade:
 
 ```
-$ pip install --upgrade--no-index--find-linksmypluginspytest-nice
+$ pip install --upgrade --no-index --find-links myplugins pytest-nice
 ```
 
-This is just like any other use of pip, but with the --no-index --find-linksmyplugins
-added.
+This is just like any other use of pip, but with the ---no-index --find-links myplugins added.
 
 
 **Distributing Plugins Through PyPI**
@@ -897,15 +904,15 @@ added.
 If you want to share your plugin with the world, there are a few more steps
 we need to do. Actually, there are quite a few more steps. However, because
 this course isn’t focused on contributing to open source, I recommend checking
-out the thorough instruction found in the Python Packaging User Guide.^6
+out the thorough instruction found in the Python Packaging User Guide.
 
 When you are contributing a pytest plugin, another great place to start is by
-using the cookiecutter-pytest-plugin^7 :
+using the cookiecutter -pytest-plugin :
 
 ```
-$ pip install cookiecutter
+$ pip install cookiecutter 
 
-$ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin
+$ cookiecutter https://github.com/pytest-dev/cookiecutter -pytest-plugin
 ```
 
 This project first asks you some questions about your plugin. Then it creates
@@ -936,6 +943,6 @@ run through the different configuration files and learn what you can do there
 to make your testing life easier.
 
 6. https://packaging.python.org/distributing
-7. https://github.com/pytest-dev/cookiecutter-pytest-plugin
+7. https://github.com/pytest-dev/cookiecutter -pytest-plugin
 8. https://pypi.python.org/pypi
 

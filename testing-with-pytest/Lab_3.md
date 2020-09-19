@@ -65,6 +65,16 @@ Once you get a good mental model of how they work, they will seem easy to
 you. However, you have to play with them a while to get there, so let’s get
 started.
 
+#### Pre-reqs:
+- Google Chrome (Recommended)
+
+#### Lab Environment
+Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
+
+All exercises are present in `work/testing-with-pytest/code` folder.
+
+
+
 ### Sharing Fixtures Through conftest.py
 
 You can put fixtures into individual test files, but to share fixtures among
@@ -1173,7 +1183,7 @@ Here’s what we have so far:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
 $ pip install pymongo
-$ pytest -v --tb=no
+$ pytest -v --tb=no 
 
 ===================testsessionstarts===================
 collected96 items

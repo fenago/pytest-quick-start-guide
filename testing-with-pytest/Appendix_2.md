@@ -37,6 +37,7 @@ version:
 
 ```
 (my_env) $ pip --version
+
 pip 18.0 from /home/jovyan/work/testing-with-pytest/code/venv/lib/python3.7/site-packages/pip (python 3.7)
 ```
 
@@ -49,12 +50,15 @@ Package Version
 ---------- -------
 pip 18.0
 setuptools 39.0.1
+
+
 (my_env) $ pip install pytest
 ...
 Installing collected packages: six, more-itertools, atomicwrites,
 pluggy, attrs, py, pytest
 Successfully installed atomicwrites-1.2.1 attrs-18.2.0
 more-itertools-4.3.0 pluggy-0.7.1 py-1.6.0 pytest-3.8.0 six-1.11.0
+
 (my_env) $ pip list
 Package Version
 -------------- -------
@@ -111,6 +115,7 @@ You can also use pip to download a lot of files at once using a requirements.txt
 (my_env) $ cat requirements.txt
 pytest==3.8.1
 pytest-xdist==1.23.2
+
 (my_env) $ pip install -r requirements.txt
 ...
 
@@ -126,13 +131,13 @@ The following downloads pytest and all dependencies:
 ```
 (my_env) $ mkdir ~/.pipcache
 (my_env) $ pip download -d ~/pipcache pytest
+
+
 Collecting pytest
 ...
-
+Successfully downloaded pytest atomicwrites pluggy
+more-itertools setuptools py six attrs
 ```
-
-Successfullydownloadedpytestatomicwritespluggy
-more-itertoolssetuptoolspy six attrs
 
 Later, even if you’re offline, you can install from the cache:
 
@@ -140,12 +145,12 @@ Later, even if you’re offline, you can install from the cache:
 (my_env) $ pip install --no-index --find-links=~/pipcache pytest
 Looking in links: /Users/okken/pipcache
 Collecting pytest
-...
 
+...
 Installing collected packages: attrs, six, more-itertools, atomicwrites,
 py, pluggy, pytest
 Successfully installed atomicwrites-1.x.y attrs-18.x.y
-more-itertools-4.x.y pluggy-0.x.y py-1.x.y pytest-3.x.y six-1.x.
+more-itertools-4.x.y pluggy-0.x.y py-1.x.y pytest-3.x.y six-1.x.y
 ```
 
 This is great for situations like running tox or continuous integration test
