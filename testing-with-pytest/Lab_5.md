@@ -37,7 +37,7 @@ with the least amount of work.
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/testing-with-pytest/code` folder.
+All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 
 ### Finding Plugins
@@ -242,7 +242,7 @@ Let’s run them to see if they pass:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj
 $ pytest
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected57 items
 
@@ -266,7 +266,7 @@ withpytest.raises(ValueError):
 E Failed:DID NOT RAISE<class'ValueError'>
 
 tests/func/test_api_exceptions.py:20:Failed
-===========1 failed,56 passedin 0.48seconds===========
+===========1 failed,56 passed in 0.48 seconds===========
 ```
 
 Let’s run it again with -v for verbose. Since you’ve already seen the traceback,
@@ -280,14 +280,14 @@ there aren’t any other tests with names that contain “TestAdd.”
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
 $ pytest -v --tb=no test_api_exceptions.py-k TestAdd
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
 
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py::TestAdd::test_done_not_boolFAILED[100%]
 
-====1 failed,1 passed,7 deselectedin 0.10seconds=====
+====1 failed,1 passed,7 deselectedin 0.10 seconds=====
 ```
 
 We could go off and try to fix this test (and we should later), but now we are
@@ -329,7 +329,7 @@ And now we have just the output we were looking for. A test session with no
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
 $ pytest --tb=no test_api_exceptions.py-k TestAdd
 
-===================testsessionstarts===================
+=================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -339,7 +339,7 @@ test_api_exceptions.py.O
 
 
 ```
-====`1 failed,1 passed,7 deselectedin 0.10seconds=====
+====`1 failed,1 passed,7 deselectedin 0.10 seconds=====
 ```
 
 
@@ -349,7 +349,7 @@ And the -v or --verbose flag will be nicer also:
 ```
 $ pytest -v --tb=no test_api_exceptions.py-k TestAdd
 
-===================testsessionstarts===================
+=================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -358,7 +358,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed,1 passed,7 deselectedin 0.11seconds=====
+====1 failed,1 passed,7 deselectedin 0.11 seconds=====
 ```
 
 The last modification we’ll make is to add a command-line option, --nice, to
@@ -398,7 +398,7 @@ First, with no --nice option, to make sure just the username shows up:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
 $ pytest --tb=no test_api_exceptions.py-k TestAdd
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
 
@@ -410,26 +410,26 @@ test_api_exceptions.py.F [100%]
 
 
 ```
-====1 failed,1 passed,7 deselectedin 0.11seconds=====
+====1 failed,1 passed,7 deselectedin 0.11 seconds=====
 
 Now with --nice:
 
 $ pytest --nice--tb=no test_api_exceptions.py-k TestAdd
 
-===================testsessionstarts===================
+=================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
 
 test_api_exceptions.py.O [100%]
 
-====1 failed,1 passed,7 deselectedin 0.12seconds=====
+====1 failed,1 passed,7 deselectedin 0.12 seconds=====
 
 And with --nice and --verbose:
 
 $ pytest -v --nice--tb=no test_api_exceptions.py-k TestAdd
 
-===================testsessionstarts===================
+=================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -438,7 +438,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed,1 passed,7 deselectedin 0.10seconds=====
+====1 failed,1 passed,7 deselectedin 0.10 seconds=====
 ```
 
 Great! All of the changes we wanted are done with about a dozen lines of code
@@ -798,7 +798,7 @@ Now that it’s installed, let’s run the tests:
 ```
 $ pytest -v
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:nice-0.1.0,cov-2.5.1
 collected7 items
 
@@ -810,7 +810,7 @@ test_nice.py::test_header PASSED            [ 71%]
 test_nice.py::test_header_not_nice PASSED            [ 85%]
 test_nice.py::test_help_message PASSED            [100%]
 
-================7 passedin 0.57seconds=================
+================7 passed in 0.57 seconds=================
 ```
 
 Yay! All the tests pass. We can uninstall it just like any other Python package

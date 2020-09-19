@@ -71,7 +71,7 @@ started.
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/testing-with-pytest/code` folder.
+All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 
 
@@ -191,12 +191,12 @@ $ pip install ./tasks_proj/ # if not installed yet
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest -v test_add.py-k valid_id
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected3 items/ 2 deselected
 
 test_add.py::test_add_returns_valid_id PASSED            [100%]
 
-=========1 passed,2 deselectedin 0.04seconds==========
+=========1 passed,2 deselectedin 0.04 seconds==========
 ```
 
 When I’m developing fixtures, I like to see what’s running and when. Fortu-
@@ -206,7 +206,7 @@ nately, pytest provides a command-line flag, --setup-show, that does just that:
 ```
 $ pytest --setup-showtest_add.py-k valid_id
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected3 items/ 2 deselected
 
 test_add.py
@@ -219,7 +219,7 @@ TEARDOWNF tasks_db
 TEARDOWNF tmpdir
 TEARDOWNS tmpdir_factory
 
-=========1 passed,2 deselectedin 0.03seconds==========
+=========1 passed,2 deselectedin 0.03 seconds==========
 ```
 
 Our test is in the middle, and pytest designates a SETUP and TEARDOWN portion
@@ -257,7 +257,7 @@ with a fixture fails:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest test_fixtures.py::test_a_tuple
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected1 item
 
 test_fixtures.pyF [100%]
@@ -276,7 +276,7 @@ def test_a_tuple(a_tuple):
 E assert23 == 32
 
 test_fixtures.py:43:AssertionError
-================1 failedin 0.07seconds=================
+================1 failedin 0.07 seconds=================
 ```
 
 Along with the stack trace section, pytest reports the value parameters of the
@@ -290,7 +290,7 @@ What happens if the assert (or any exception) happens in the fixture?
 ```
 $ pytest -v test_fixtures.py::test_other_data
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected1 item
 
 test_fixtures.py::test_other_dataERROR [100%]
@@ -306,7 +306,7 @@ x = 43
 E assert43 == 42
 
 test_fixtures.py:24:AssertionError
-=================1 errorin 0.06seconds=================
+=================1 errorin 0.06 seconds=================
 ```
 
 A couple of things happen. The stack trace shows correctly that the assert
@@ -412,7 +412,7 @@ Let’s trace it and see all the fixtures run:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest --setup-showtest_add.py::test_add_increases_count
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected1 item
 
 test_add.py
@@ -429,7 +429,7 @@ TEARDOWNF tasks_db
 TEARDOWNF tmpdir
 TEARDOWNS tmpdir_factory
 
-================1 passedin 0.05seconds=================
+================1 passed in 0.05 seconds=================
 ```
 
 There are those F’s and S’s for function and session scope again. Let’s learn
@@ -531,7 +531,7 @@ and when the setup and teardown are run depend on the scope:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest --setup-showtest_scope.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected4 items
 
 test_scope.py
@@ -550,7 +550,7 @@ TEARDOWNC class_scope
 TEARDOWNM mod_scope
 TEARDOWNS sess_scope
 
-================4 passedin 0.02seconds=================
+================4 passed in 0.02 seconds=================
 ``` 
 
 Now you get to see not just F and S for function and session, but also C and
@@ -655,7 +655,7 @@ Now, let’s see if all of these changes work with our tests:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
 $ pytest
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected55 items
 
 tests/func/test_add.py... [ 5%]
@@ -666,7 +666,7 @@ tests/func/test_api_exceptions.py....... [ 90%]
 tests/func/test_unique_id.py. [ 92%]
 tests/unit/test_task.py.... [100%]
 
-================55 passedin 0.33seconds================
+================55 passed in 0.33 seconds================
 ```
 
 Looks like it’s all good. Let’s trace the fixtures for one test file to see if the
@@ -674,7 +674,8 @@ different scoping worked as expected:
 
 ```
 $ pytest --setup-showtests/func/test_add.py
-===================testsessionstarts===================
+
+=================== test session starts ===================
 collected3 items
 
 tests/func/test_add.py
@@ -702,7 +703,7 @@ TEARDOWNS tasks_db_session
 TEARDOWNS tmpdir_factory
 TEARDOWNS tasks_just_a_few
 
-================3 passedin 0.04seconds=================
+================3 passed in 0.04 seconds=================
 ```
 
 Yep. Looks right. tasks_db_session is called once per session, and the quicker
@@ -791,7 +792,7 @@ the end of the session. Here’s what these look like:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest -v -s test_autouse.py
 
-=====================testsessionstarts======================
+===================== test session starts ======================
 collected2 items
 
 test_autouse.py::test_1PASSED
@@ -802,7 +803,7 @@ testduration: 1.24seconds
 --
 finished: 25 Jul 16:18:27
 -----------------
-===================2 passedin 2.25seconds===================
+===================2 passed in 2.25 seconds===================
 ```
 
 The autouse feature is good to have around. But it’s more of an exception than
@@ -845,7 +846,7 @@ verse_and_everything. That name even shows up if we run it with --setup-show:
 ```
 $ pytest --setup-showtest_rename_fixture.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected1 item
 
 test_rename_fixture.py
@@ -853,7 +854,7 @@ SETUP F lue
 test_rename_fixture.py::test_everything(fixturesused:lue).
 TEARDOWNF lue
 
-================1 passedin 0.01seconds=================
+================1 passed in 0.01 seconds=================
 ```
 
 If you need to find out where lue is defined, you can add the pytest option
@@ -863,7 +864,7 @@ for the test, including ones that have been renamed:
 ```
 $ pytest --fixturestest_rename_fixture.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 ...
 
 ```
@@ -874,7 +875,7 @@ $ pytest --fixturestest_rename_fixture.py
 lue
 Returnultimateanswer.
 
-==============no testsran in 0.01seconds===============
+==============no tests ran in 0.01 seconds===============
 ```
 
 Most of the output is omitted—there’s a lot there. Luckily, the fixtures we
@@ -885,7 +886,7 @@ to look up the definition of lue. Let’s use that in the Tasks project:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
 $ pytest --fixturestests/func/test_add.py
 
-========================testsessionstarts========================
+======================== test session starts ========================
 ...
 
 tmpdir_factory
@@ -910,7 +911,7 @@ Connecteddb with3 tasks,all unique.
 db_with_multi_per_owner
 Connecteddb with9 tasks,3 owners,all with3 tasks.
 
-===================no testsran in 0.01 seconds====================
+===================no tests ran in 0.01  seconds====================
 ```
 
 Cool. All of our conftest.py fixtures are there. And at the bottom of the builtin
@@ -979,7 +980,7 @@ four times, and then the test will get called four times:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
 $ pytest -v test_add_variety2.py::test_add_a
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected4 items
 
 test_add_variety2.py::test_add_a[a_task0] PASSED            [ 25%]
@@ -987,7 +988,7 @@ test_add_variety2.py::test_add_a[a_task1] PASSED            [ 50%]
 test_add_variety2.py::test_add_a[a_task2] PASSED            [ 75%]
 test_add_variety2.py::test_add_a[a_task3] PASSED            [100%]
 
-================4 passedin 0.05seconds=================
+================4 passed in 0.05 seconds=================
 ```
 
 
@@ -1013,7 +1014,7 @@ This gives us better identifiers:
 
 ```
 $ pytest -v test_add_variety2.py::test_add_b**
-===================testsessionstarts===================
+=================== test session starts ===================
 collected4 items
 
 test_add_variety2.py::test_add_b[Task(sleep,None,True)]PASSED[ 25%]
@@ -1021,7 +1022,7 @@ test_add_variety2.py::test_add_b[Task(wake,brian,False)]PASSED[ 50%]
 test_add_variety2.py::test_add_b[Task(breathe,BRIAN,True)]PASSED[ 75%]
 test_add_variety2.py::test_add_b[Task(exercise,BrIaN,False)]PASSED[100%]
 
-================4 passedin 0.04seconds=================
+================4 passed in 0.04 seconds=================
 ```
 
 We can also set the ids parameter to a function we write that provides the
@@ -1060,7 +1061,7 @@ cleaner than generating a full list ahead of time, and looks the same:
 ```
 $ pytest -v test_add_variety2.py::test_add_c
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected4 items
 
 test_add_variety2.py::test_add_c[Task(sleep,None,True)]PASSED[ 25%]
@@ -1068,7 +1069,7 @@ test_add_variety2.py::test_add_c[Task(wake,brian,False)]PASSED[ 50%]
 test_add_variety2.py::test_add_c[Task(breathe,BRIAN,True)]PASSED[ 75%]
 test_add_variety2.py::test_add_c[Task(exercise,BrIaN,False)]PASSED[100%]
 
-================4 passedin 0.05seconds=================
+================4 passed in 0.05 seconds=================
 ```
 
 With parametrized functions, you get to run that function multiple times. But
@@ -1185,7 +1186,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
 $ pip install pymongo
 $ pytest -v --tb=no 
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected96 items
 
 tests/func/test_add.py::test_add_returns_valid_id[tiny]PASSED[ 1%]
@@ -1204,7 +1205,7 @@ tests/func/test_add_variety.py::test_add_2[mongo-task0]FAILED[ 47%]
 tests/func/test_add_variety.py::test_add_2[mongo-task1]FAILED[ 48%]
 ...
 
-==========42 failed,54 passedin 4.85seconds===========
+==========42 failed,54 passed in 4.85 seconds===========
 ```
 
 Hmm. Bummer. Looks like we’ll need to do some debugging before we let

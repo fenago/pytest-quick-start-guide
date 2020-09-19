@@ -31,7 +31,7 @@ Here\'s what is covered in this lab:
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/pytest-quickstart/code` folder.
+All exercises are present in `~/work/pytest-quickstart/code` folder.
 
 
 ### Note
@@ -1356,6 +1356,7 @@ When executing this test, by default, you won\'t see the output of the
 
 ``` {.programlisting .language-markup}
 pytest tests\test_digest.py
+
 ======================== test session starts ========================
 ...
 
@@ -1386,6 +1387,7 @@ the error traceback:
 
 ``` {.programlisting .language-markup}
 pytest tests\test_digest.py
+
 ======================== test session starts ========================
 ...
 
@@ -1722,14 +1724,9 @@ tests locally and in CI, being a firm favorite. Be careful, though, as
 this might be a security risk: local variables might expose passwords
 and other sensitive information, so make sure to transfer tracebacks
 using secure connections and be careful to make them public.
-
  
 
- 
-
-
-### Slow tests with \--durations
-
+### Slow tests with --durations
 
 
 At the start of a project,  your test suite
@@ -1752,6 +1749,7 @@ or uses zero to see a summary of all tests:
 
 ``` {.programlisting .language-markup}
 pytest --durations=5
+
 ...
 ===================== slowest 5 test durations ======================
 3.40s call CH2/tests/test_slow.py::test_corner_case

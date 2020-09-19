@@ -31,7 +31,7 @@ take a look at several of the most often used builtin fixtures one by one.
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/testing-with-pytest/code` folder.
+All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 
 
@@ -145,7 +145,7 @@ $ pytest -q -s test_tmpdir.py::test_tmpdir_factory
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 /T/pytest-of-okken/pytest-732
 .
-1 passedin 0.04seconds
+1 passed in 0.04seconds
 ```
 
 This base directory is system- and user-dependent, and pytest-NUM changes
@@ -301,18 +301,18 @@ $ pytest-s -q test_config.py::test_option**
 "foo"set to: bar
 "myopt"set to: False
 .
-1 passedin 0.01seconds
+1 passed in 0.01seconds
 $ pytest-s -q --myopttest_config.py::test_option**
 "foo"set to: bar
 "myopt"set to: True
 .
-1 passedin 0.01seconds
+1 passed in 0.01seconds
 
 $ pytest-s -q --myopt--foobaz test_config.py::test_option**
 "foo"set to: baz
 "myopt"set to: True
 .
-1 passedin 0.01seconds
+1 passed in 0.01seconds
 ```
 
 Because pytestconfig is a fixture, it can also be accessed from other fixtures.
@@ -420,13 +420,13 @@ the stack trace:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest --verbose --tb=no test_pass_fail.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected2 items
 
 test_pass_fail.py::test_this_passes PASSED            [ 50%]
 test_pass_fail.py::test_this_failsFAILED [100%]
 
-===========1 failed,1 passedin 0.06seconds============
+===========1 failed,1 passed in 0.06 seconds============
 ```
 
 If you run them again with the --ff or --failed-first flag, the tests that failed previ-
@@ -436,14 +436,14 @@ ously will be run first, followed by the rest of the session:
 ```
 $ pytest --verbose --tb=no --fftest_pass_fail.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected2 items
 run-last-failure:rerunprevious1 failurefirst
 
 test_pass_fail.py::test_this_failsFAILED [ 50%]
 test_pass_fail.py::test_this_passes PASSED            [100%]
 
-===========1 failed,1 passedin 0.06seconds============
+===========1 failed,1 passed in 0.06 seconds============
 ```
 
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
@@ -451,13 +451,13 @@ Or you can use --lf or --last-failed to just run the tests that failed the last 
 ```
 venv)$ pytest --verbose --tb=no --lftest_pass_fail.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected2 items/ 1 deselected
 run-last-failure:rerunprevious1 failure
 
 test_pass_fail.py::test_this_failsFAILED [100%]
 
-=========1 failed,1 deselectedin 0.06seconds==========
+=========1 failed,1 deselectedin 0.06 seconds==========
 ```
 
 Before we look at how the failure data is being saved and how you can use
@@ -515,7 +515,7 @@ E assert1.01e+25== 1.1e+25± 1.1e+19
 E + where1.1e+25± 1.1e+19= approx(1.1e+25)
 
 test_few_failures.py:21:AssertionError
-1 failed,4 passedin 0.10seconds
+1 failed,4 passed in 0.10seconds
 ```
 
 Maybe you can spot the problem right off the bat. But let’s pretend the test
@@ -568,22 +568,22 @@ information with --cache-show:
 ```
 $ pytest --cache-show
 
-=====================testsessionstarts======================
+===================== test session starts ======================
 -------------------------cachevalues-------------------------
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 
-=================no testsran in 0.00seconds=================
+=================no tests ran in 0.00 seconds=================
 
 $ pytest --cache-show
 
-===================testsessionstarts===================
+=================== test session starts ===================
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 ...
 
-==============no testsran in 0.00seconds===============
+==============no tests ran in 0.00 seconds===============
 ```
 
 Or you can look in the cache dir:
@@ -662,7 +662,7 @@ of times:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest -q --tb=linetest_slower.py
 ..... [100%]
-5 passedin 1.40seconds
+5 passed in 1.40seconds
 $ pytest -q --tb=linetest_slower.py
 ..E.E.. [100%]
 
@@ -698,7 +698,7 @@ duration/test_slower.py__test_slow_stuff[3]contains:
 duration/test_slower.py__test_slow_stuff[4]contains:
 0.148116
 
-no testsran in 0.01seconds
+no tests ran in 0.01seconds
 ```
 
 You can easily see the duration data separate from the cache data due to the
@@ -758,7 +758,7 @@ After running it a couple of times, let’s look at the saved cache:
 ```
 $ pytest -q --cache-cleartest_slower_2.py
 ..... [100%]
-5 passedin 2.27seconds
+5 passed in 2.27seconds
 
 $ pytest -q --tb=no test_slower_2.py
 .E.E...E [100%]
@@ -784,7 +784,7 @@ duration/testdurationscontains:
 'test_slower_2.py::test_slow_stuff[3]':0.271242,
 'test_slower_2.py::test_slow_stuff[4]':0.689478}
 
-no testsran in 0.00seconds
+no tests ran in 0.00seconds
 ```
 
 That looks better.
@@ -873,14 +873,14 @@ $ pytest -q test_capsys.py::test_capsys_disabled
 alwaysprintthis
 
 . [100%]
-1 passedin 0.02seconds
+1 passed in 0.02seconds
 
 $ pytest -q -s test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
 normalprint,usuallycaptured
 .
-1 passedin 0.01seconds
+1 passed in 0.01seconds
 ```
 
 As you can see, alwaysprintthis shows up with or without output capturing, since
@@ -1152,7 +1152,7 @@ but the code in the docstrings of the functions will fail:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/1
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected3 items
 
 unnecessary_math.py::unnecessary_math PASSED            [ 33%]
@@ -1193,7 +1193,7 @@ NameError:name'um'is not defined
 
 /home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
 
-===========2 failed,1 passedin 0.12seconds============
+===========2 failed,1 passed in 0.12 seconds============
 ```
 
 One way to fix it is to put the import statement in each docstring:
@@ -1231,14 +1231,14 @@ This definitely fixes the problem:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/2
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected3 items
 
 unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.dividePASSED[ 66%]
 unnecessary_math.py::unnecessary_math.multiplyPASSED[100%]
 
-================3 passedin 0.03seconds=================
+================3 passed in 0.03 seconds=================
 ```
 
 

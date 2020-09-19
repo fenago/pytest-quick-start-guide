@@ -208,6 +208,7 @@ Here’s a test with normal failures at the end:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
 $ pytest --timeout=0.5 --tb=line --maxfail=2 test_parallel.py
+
 =================== test session starts ===================
 plugins: xdist-1.23.0, timeout-1.3.2, forked-0.2
 timeout: 0.5s

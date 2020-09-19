@@ -16,7 +16,7 @@ files of the Tasks project.
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/testing-with-pytest/code` folder.
+All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 
 
@@ -478,25 +478,25 @@ won’t work:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups
 $ pytest a
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected1 item
 
 a/test_foo.py. [100%]
 
-================1 passedin 0.01seconds=================
+================1 passed in 0.01 seconds=================
 $ pytestb
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected1 item
 
 b/test_foo.py. [100%]
 
-================1 passedin 0.01seconds=================
+================1 passed in 0.01 seconds=================
 $ pytest
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected1 item/ 1 errors
 
@@ -514,7 +514,7 @@ HINT:remove__pycache__/ .pycfiles
 and/oruse a uniquebasename for yourtestfilemodules
 !!!!!!!!!Interrupted:1 errorsduringcollection!!!!!!!!!
 
-=================1 errorin 0.15seconds=================
+=================1 errorin 0.15 seconds=================
 ```
 
 That error message highlights that we have two files named the same, but
@@ -539,14 +539,14 @@ Now, let’s try this again from the top level in dups_fixed:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups_fixed
 $ pytest
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected2 items
 
 a/test_foo.py. [ 50%]
 b/test_foo.py. [100%]
 
-================2 passedin 0.03seconds=================
+================2 passed in 0.03 seconds=================
 ```
 
 There, all better. You might say to yourself that you’ll never have duplicate

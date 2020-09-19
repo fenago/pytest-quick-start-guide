@@ -15,7 +15,7 @@ power of mixing pytest with other tools.
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/testing-with-pytest/code` folder.
+All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 
 
@@ -35,7 +35,7 @@ $ pytest --tb=no -q
 .........................................FF.FFFFFFF[ 53%]
 
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
-42 failed,54 passedin 5.51seconds
+42 failed,54 passed in 5.51seconds
 
 Before we look at how pdb can help us debug this test, let’s take a look at the
 
@@ -70,7 +70,7 @@ three of them) with verbose:
 ```
 $ pytest --tb=no --verbose--lf--maxfail=3
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
@@ -79,7 +79,7 @@ tests/func/test_add.py::test_add_returns_valid_id[mongo]FAILED[ 2%]
 tests/func/test_add.py::test_added_task_has_id_set[mongo]FAILED[ 4%]
 tests/func/test_add_variety.py::test_add_1[mongo]FAILED[ 7%]
 
-=========3 failed,54 deselectedin 3.12seconds=========
+=========3 failed,54 deselectedin 3.12 seconds=========
 ```
 
 Now we know which tests are failing. Let’s look at just one of them by using
@@ -90,7 +90,7 @@ ables with -l:
 ```
 $ pytest -v --lf -l -x
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
@@ -122,7 +122,7 @@ task_id = ObjectId('5b8c12dccb02981dc226d897')
 tasks_db = None
 
 tests/func/test_add.py:16:AssertionError
-=========1 failed,54 deselectedin 2.91seconds=========
+=========1 failed,54 deselectedin 2.91 seconds=========
 ```
 
 Quite often this is enough to understand the test failure. In this particular
@@ -139,7 +139,7 @@ session and start us right at the point of failure with --pdb:
 ```
 $ pytest -v --lf-x --pdb
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
@@ -211,7 +211,7 @@ Now you can quit the debugger and continue on with testing.
 ```
 (Pdb)q
 
-========1 failed,54 deselectedin 87.51seconds=========
+========1 failed,54 deselectedin 87.51 seconds=========
 ```
 
 If we hadn’t used -x, pytest would have opened pdb again at the next failed
@@ -281,7 +281,7 @@ erage report:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pytest --cov=src
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
 collected62 items
 
@@ -306,7 +306,7 @@ src/tasks/tasksdb_tinydb.py 32 4 88%
 --------------------------------------------------
 TOTAL 250 126 50%
 
-================62 passedin 0.62seconds================
+================62 passed in 0.62 seconds================
 ```
 
 Since the current directory is tasks_proj_v2 and the source code under test is
@@ -329,7 +329,7 @@ If you run coverage.py again with --cov-report=html, an HTML report is generated
 ```
 $ pytest --cov=src--cov-report=html
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
 ```
 
@@ -349,7 +349,7 @@ tests/unit/test_task.py.... [100%]
 ----------coverage:platformdarwin,python3.7.0-final-0-----------
 CoverageHTMLwrittento dir htmlcov
 
-================62 passedin 0.70seconds================
+================62 passed in 0.70 seconds================
 ```
 
 You can then open htmlcov/index.html in a browser, which shows the output in
@@ -725,7 +725,7 @@ Let’s make sure they all work:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pytest -v tests/unit/test_cli.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
 collected5 items
 
@@ -735,7 +735,7 @@ tests/unit/test_cli.py::test_list_print_many_itemsPASSED[ 60%]
 tests/unit/test_cli.py::test_list_dash_o PASSED            [ 80%]
 tests/unit/test_cli.py::test_list_dash_dash_ownerPASSED[100%]
 
-================5 passedin 0.07seconds=================
+================5 passed in 0.07 seconds=================
 ```
 
 Yay! They pass.
@@ -872,7 +872,7 @@ tasks==0.1.1,tinydb==3.11.1
 py27runtests:PYTHONHASHSEED='2121166562'
 py27runtests:commands[0]| pytest
 
-========================testsessionstarts========================
+======================== test session starts ========================
 plugins:mock-1.10.0
 collected62 items
 
@@ -884,7 +884,7 @@ tests/func/test_unique_id.py. [ 85%]
 tests/unit/test_cli.py..... [ 93%]
 tests/unit/test_task.py.... [100%]
 
-=====================62 passedin 0.51seconds=====================
+=====================62 passed in 0.51 seconds=====================
 
 py37inst-nodeps:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py37installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,
@@ -893,7 +893,7 @@ pytest-mock==1.10.0,six==1.11.0,tasks==0.1.1,tinydb==3.11.1
 py37runtests:PYTHONHASHSEED='2121166562'
 py37runtests:commands[0]| pytest
 
-========================testsessionstarts========================
+======================== test session starts ========================
 plugins:mock-1.10.0
 collected62 items
 
@@ -908,7 +908,7 @@ tests/unit/test_task.py.... [100%]
 
 
 ```
-=====================62 passedin 0.46seconds=====================
+=====================62 passed in 0.46 seconds=====================
 ______________________________summary______________________________
 py27:commandssucceeded
 py37:commandssucceeded
@@ -1124,13 +1124,13 @@ It also runs fine in pytest:
 ```
 $ pytest -v test_delete_unittest.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
 collected1 item
 
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
 
-================1 passedin 0.02seconds=================
+================1 passed in 0.02 seconds=================
 ```
 
 This is great if you just want to use pytest as a test runner for unittest.
@@ -1166,10 +1166,10 @@ Both tests pass individually:
 $ pytest -q test_delete_pytest.py
 
 . [100%]
-1 passedin 0.02seconds
+1 passed in 0.02seconds
 $ pytest -q test_delete_unittest.py
 . [100%]
-1 passedin 0.02seconds
+1 passed in 0.02seconds
 ```
 
 You can even run them together if—and only if—you make sure the unittest
@@ -1178,14 +1178,14 @@ version runs first:
 ```
 $ pytest -v test_delete_unittest.pytest_delete_pytest .py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
 
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[ 50%]
 test_delete_pytest .py::test_delete_decreases_countPASSED[100%]
 
-================2 passedin 0.03seconds=================
+================2 passed in 0.03 seconds=================
 ```
 
 If you run the pytest version first, something goes haywire:
@@ -1194,7 +1194,7 @@ If you run the pytest version first, something goes haywire:
 ```
 $ pytest -v test_delete_pytest.pytest_delete_unittest.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected2 items
 
 test_delete_pytest.py::test_delete_decreases_countPASSED[ 50%]
@@ -1216,7 +1216,7 @@ global_tasksdb
 E AttributeError:'NoneType'objecthas no attribute'stop_tasks_db'
 
 ../tasks_proj_v2/src/tasks/api.py:128:AttributeError
-============2 passed,1 errorin 0.14seconds============
+============2 passed,1 errorin 0.14 seconds============
 ```
 
 You can see that something goes wrong at the end, after both tests have run
@@ -1291,14 +1291,14 @@ Now both unittest and pytest can cooperate and not run into each other:
 ```
 $ pytest -v test_delete_pytest.pytest_delete_unittest_fix.py
 
-===================testsessionstarts===================
+=================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
 
 test_delete_pytest.py::test_delete_decreases_countPASSED[ 50%]
 test_delete_unittest_fix.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
 
-================2 passedin 0.03seconds=================
+================2 passed in 0.03 seconds=================
 ```
 
 Note that this is only necessary for session scope resources shared by unittest

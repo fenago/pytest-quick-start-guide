@@ -9,7 +9,7 @@
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/testing-with-pytest/code` folder.
+All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 
 
@@ -29,12 +29,12 @@ This is what it looks like when it’s run:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest test_one.py
 
-=====================testsessionstarts======================
+===================== test session starts ======================
 collected1 item
 
 test_one.py.
 
-===================1 passedin 0.01seconds===================
+===================1 passed in 0.01 seconds===================
 ```
 
 The dot after test_one.py means that one test was run and it passed. The [100%]
@@ -45,12 +45,13 @@ can use -v or --verbose:
 
 ```
 $ pytest -v test_one.py
-=====================testsessionstarts======================
+
+===================== test session starts ======================
 collected1 item
 
 test_one.py::test_passing PASSED            [100%]
 
-===================1 passedin 0.01seconds===================
+===================1 passed in 0.01 seconds===================
 ```
 
 If you have a color terminal, the PASSED and bottom line are green. It’s nice.
@@ -93,7 +94,8 @@ full diff. Let’s do that:
 
 ```
 $ pytest -v test_two.py
-=====================testsessionstarts======================
+
+===================== test session starts ======================
 collected1 item
 
 test_two.py::test_failingFAILED [100%]
@@ -112,7 +114,7 @@ E       + (3, 2, 1)
 E? ^ ^
 
 test_two.py:2:AssertionError
-===================1 failedin 0.05seconds===================
+===================1 failedin 0.05 seconds===================
 ```
 
 Wow. pytest adds little carets (^) to show us exactly what’s different.
@@ -151,8 +153,8 @@ using some frequently used command-line options.
 Here’s Task:
 
 ```
-**fromcollectionsimport** namedtuple
-Task= namedtuple( 'Task' , [ 'summary' , 'owner' , 'done' , 'id' ])
+from collections import namedtuple
+Task = namedtuple('Task', ['summary', 'owner', 'done', 'id'])
 ```
 
 The namedtuple() factory function has been around since Python 2.6, but I still
@@ -305,7 +307,7 @@ four files’ worth of tests:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest
-=====================testsessionstarts======================
+===================== test session starts ======================
 collected6 items
 
 test_one.py. [ 16%]
@@ -323,7 +325,7 @@ E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-==============1 failed,5 passedin 0.17seconds==============
+==============1 failed,5 passed in 0.17 seconds==============
 ```
 
 To get just our new task tests to run, you can give pytest all the filenames
@@ -332,26 +334,27 @@ tests are:
 
 ```
 $ pytest tasks/test_three.py tasks/test_four.py
-=====================testsessionstarts======================
+
+===================== test session starts ======================
 collected4 items
 
 tasks/test_three.py.. [ 50%]
 tasks/test_four.py.. [100%]
 
-===================4 passedin 0.02seconds===================
+===================4 passed in 0.02 seconds===================
 
 $ pytest tasks**
-=====================testsessionstarts======================
+===================== test session starts ======================
 collected4 items
 
 tasks/test_four.py.. [ 50%]
 tasks/test_three.py.. [100%]
 
-===================4 passedin 0.02seconds===================
+===================4 passed in 0.02 seconds===================
 
 $ cd tasks
 $ pytest
-=====================testsessionstarts======================
+===================== test session starts ======================
 ```
 
 ```
@@ -360,7 +363,7 @@ collected4 items
 test_four.py.. [ 50%]
 test_three.py.. [100%]
 
-===================4 passedin 0.02seconds===================
+===================4 passed in 0.02 seconds===================
 ```
 
 The part of pytest execution where pytest goes off and finds which tests to
@@ -435,7 +438,7 @@ The percentage of completed tests is reported after each test file and based
 on percentage of the number of test cases collected and selected to run.
 
 ```
-_===================2 passedin 0.01 seconds===================_
+_===================2 passed in 0.01  seconds===================_
 ```
 This refers to the number of passing tests and how long the entire test
 session took. If non-passing tests were present, the number of each cate-
@@ -470,13 +473,14 @@ run just one. Specify the file directly, and add a ::test_name, like this:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest -v tasks/test_four.py::test_asdict**
-=====================testsessionstarts======================
+$ pytest -v tasks/test_four.py::test_asdict
+
+===================== test session starts ======================
 collected1 item
 
 tasks/test_four.py::test_asdict PASSED            [100%]
 
-===================1 passedin 0.01seconds===================
+===================1 passed in 0.01 seconds===================
 ```
 
 Now, let’s take a look at some of the options.
@@ -495,30 +499,9 @@ you’re first getting started.
 
 ```
 $ pytest --help
-... subsetof the list...**
--k EXPRESSION onlyrun tests/classes whichmatchthe given
-substringexpression.
-Example:-k 'test_methodor test_other'matches
-all testfunctionsand classeswhosename
-contains'test_method'or 'test_other'.
--m MARKEXPR onlyrun testsmatchinggivenmarkexpression.
-example:-m 'mark1and not mark2'.
--x, --exitfirst exitinstantlyon firsterroror failedtest.
---maxfail=num exitafter firstnum failuresor errors.
---capture=method per-testcapturingmethod:one of fd|sys|no.
--s shortcutfor --capture=no.
---lf,--last-failed rerunonlythe teststhatfailedlasttime
-(or all if nonefailed)
---ff,--failed-first run all testsbut run the lastfailuresfirst.
--v, --verbose increaseverbosity.
--q, --quiet decreaseverbosity.
--l, --showlocals showlocalsin tracebacks(disabledby default).
---tb=style tracebackprintmode(auto/long/short/line/native/no).
---durations=N showN slowestsetup/testdurations(N=0for all).
---collect-only onlycollecttests,don'texecutethem.
---version displaypytestlib versionand importinformation.
--h, --help showhelpmessageand configurationinfo
 ```
+
+![](./images/2.png)
 
 **--collect-only**
 
@@ -530,8 +513,8 @@ this lab:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --collect-only**
-===================testsessionstarts===================
+$ pytest --collect-only
+=================== test session starts ===================
 collected6 items
 <Module'test_one.py'>
 <Function'test_passing'>
@@ -544,7 +527,7 @@ collected6 items
 <Function'test_defaults'>
 <Function'test_member_access'>
 
-==============no testsran in 0.02seconds===============
+==============no tests ran in 0.02 seconds===============
 ```
 
 The --collect-only option is helpful to check if other options that select tests are correct
@@ -560,15 +543,16 @@ tests. You can test out the filter with --collect-only:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest -k** _"asdictor defaults"_ **--collect-only**
-===================testsessionstarts===================
+$ pytest -k "asdict or defaults" --collect-only
+
+=================== test session starts ===================
 collected6 items/ 4 deselected
 <Module'tasks/test_four.py'>
 <Function'test_asdict'>
 <Module'tasks/test_three.py'>
 <Function'test_defaults'>
 
-==============4 deselectedin 0.02seconds===============
+==============4 deselectedin 0.02 seconds===============
 ```
 
 Yep. That looks like what we want. Now you can run them by removing the
@@ -576,28 +560,32 @@ Yep. That looks like what we want. Now you can run them by removing the
 
 
 ```
-$ pytest -k** _"asdictor defaults"_
-===================testsessionstarts===================
+$ pytest -k "asdict or defaults"
+
+
+=================== test session starts ===================
 collected6 items/ 4 deselected
 
 tasks/test_four.py. [ 50%]
 tasks/test_three.py. [100%]
 
-=========2 passed,4 deselectedin 0.03seconds==========
+=========2 passed,4 deselectedin 0.03 seconds==========
 ```
 
 Hmm. Just dots. So they passed. But were they the right tests? One way to
 find out is to use -v or --verbose:
 
 ```
-$ pytest -v -k** _"asdictor defaults"_
-===================testsessionstarts===================
+$ pytest -v -k "asdict or defaults"
+
+
+=================== test session starts ===================
 collected6 items/ 4 deselected
 
 tasks/test_four.py::test_asdict PASSED            [ 50%]
 tasks/test_three.py::test_defaults PASSED            [100%]
 
-=========2 passed,4 deselectedin 0.02seconds==========
+========= 2 passed, 4 deselectedin 0.02 seconds ==========
 ```
 
 Yep. They were the correct tests.
@@ -654,8 +642,9 @@ Let’s try it on the six tests we have so far:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest -x**
-===================testsessionstarts===================
+$ pytest -x
+
+=================== test session starts ===================
 collected6 items
 
 test_one.py. [ 16%]
@@ -671,7 +660,7 @@ E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-===========1 failed,1 passedin 0.13seconds============
+===========1 failed,1 passed in 0.13 seconds============
 ```
 
 Near the top of the output you see that all six tests (or “items”) were collected,
@@ -684,7 +673,7 @@ don’t need to see it again:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=no 
-===================testsessionstarts===================
+=================== test session starts ===================
 collected6 items
 
 test_one.py. [ 16%]
@@ -692,7 +681,7 @@ test_two.pyF [ 33%]
 tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
-===========1 failed,5 passedin 0.07seconds============
+===========1 failed,5 passed in 0.07 seconds============
 ```
 
 This demonstrates that without the -x, pytest notes failure in test_two.py and
@@ -950,13 +939,13 @@ ent traceback styles.
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=no tasks**
-===================testsessionstarts===================
+=================== test session starts ===================
 collected4 items
 
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
 
-===========1 failed,3 passedin 0.06seconds============
+===========1 failed,3 passed in 0.06 seconds============
 ```
 
 --tb=line in many cases is enough to tell what’s wrong. If you have a ton of
@@ -965,7 +954,7 @@ failing tests, this option can help to show a pattern in the failures:
 
 ```
 $ pytest --tb=linetasks
-===================testsessionstarts===================
+=================== test session starts ===================
 collected4 items
 
 tasks/test_four.py.F [ 50%]
@@ -975,12 +964,12 @@ tasks/test_three.py.. [100%]
 /home/jovyan/work/testing-with-pytest/code/ch1/tasks/test_four.py:24:
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
-===========1 failed,3 passedin 0.07seconds============
+===========1 failed,3 passed in 0.07 seconds============
 
 The next step up in verbose tracebacks is --tb=short:
 
 $ pytest --tb=shorttasks
-===================testsessionstarts===================
+=================== test session starts ===================
 collected4 items
 
 tasks/test_four.py.F [ 50%]
@@ -994,7 +983,7 @@ E       AssertionError:assertTask(summary=...e=True,id=10)==
 Task(summary='...e=True,id=11)
 E       At index3 diff:10 != 11
 E       Use -v to get the fulldiff
-===========1 failed,3 passedin 0.07seconds============
+===========1 failed,3 passed in 0.07 seconds============
 ```
 
 That’s definitely enough to tell you what’s going on.
@@ -1020,18 +1009,20 @@ which one:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --durations=3tasks**
-===================testsessionstarts===================
+$ pytest --durations=3 tasks
+
+
+=================== test session starts ===================
 collected4 items
 
 tasks/test_four.py.. [ 50%]
 tasks/test_three.py.. [100%]
 
-================slowest3 testdurations=================
+================slowest 3 test durations=================
 0.10scall tasks/test_four.py::test_replace
 0.00ssetup tasks/test_three.py::test_defaults
 0.00steardowntasks/test_four.py::test_asdict
-================4 passedin 0.13seconds=================
+================4 passed in 0.13 seconds=================
 ```
 
 The slow test with the extra sleep shows up right away with the label call,

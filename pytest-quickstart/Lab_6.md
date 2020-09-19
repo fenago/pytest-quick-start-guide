@@ -41,7 +41,7 @@ Here is what we will cover in this lab:
 #### Lab Environment
 Al labs are ready to run. All packages have been installed. There is no requirement for any setup.
 
-All exercises are present in `work/pytest-quickstart/code` folder.
+All exercises are present in `~/work/pytest-quickstart/code` folder.
 
 
 Using pytest as a test runner 
@@ -105,6 +105,7 @@ modifications:
 
 ``` {.programlisting .language-markup}
 pytest test_simple.py
+
 ======================== test session starts ========================
 ...
 collected 3 items
@@ -301,6 +302,7 @@ The updated file runs just as before:
 
 ``` {.programlisting .language-markup}
 pytest test_simple2.py
+
 ======================== test session starts ========================
 ...
 collected 3 items
