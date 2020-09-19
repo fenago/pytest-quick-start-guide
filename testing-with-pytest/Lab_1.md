@@ -170,7 +170,7 @@ pip install pytest
 ```
 
 If you are not familiar with virtualenv or pip, I have got you covered. Check
-out Appendix 1, Virtual Environments, on page 157 and Appendix 2, pip,
+out Appendix 1, Virtual Environmentsand Appendix 2, pip,
 on page 159.
 
 **What About Windows, Python 2, and virtualenv?**
@@ -386,7 +386,7 @@ pytest provides a nice delimiter for the start of the test session. A session
 is one invocation of pytest, including all of the tests run on possibly
 multiple directories. This definition of session becomes important when
 I talk about session scope in relation to pytest fixtures in Specifying Fixture
-Scope, on page 58.
+Scope
 
 ```
 _platformdarwin-- Python3.x.y, pytest -3.x.y, py-1.x.y, pluggy-0.x.y_
@@ -403,7 +403,7 @@ _rootdir:/path/to/code/ch1/tasks,inifile:_
 The rootdir is the topmost common directory to all of the directories being
 searched for test code. The inifile (blank here) lists the configuration file being
 used. Configuration files could be pytest.ini, tox.ini, or setup.cfg. You’ll look at
-configuration files in more detail in Lab 6, Configuration, on page 115.
+configuration files in more detail in Lab 6, Configuration
 
 ```
 _collected2 items_
@@ -441,14 +441,14 @@ Here are the possible outcomes of a test function:
 - FAILED (F): The test did not run successfully (or XPASS + strict).
 - SKIPPED (s): The test was skipped. You can tell pytest to skip a test by
     using either the @pytest.mark.skip() or pytest.mark.skipif() decorators, discussed
-    in Skipping Tests, on page 34.
+    in Skipping Tests
 - xfail (x): The test was not supposed to pass, ran, and failed. You can tell
     pytest that a test is expected to fail by using the @pytest.mark.xfail() decorator,
-    discussed in Marking Tests as Expecting to Fail, on page 37.
+    discussed in Marking Tests as Expecting to Fail
 - XPASS (X): The test was not supposed to pass, ran, and passed.
 - ERROR (E): An exception happened outside of the test function, in either
-    a fixture, discussed in Lab 3, pytest Fixtures, on page 51, or in a
-    hook function, discussed in Lab 5, Plugins, on page 97.
+    a fixture, discussed in Lab 3, pytest Fixtures, or in a
+    hook function, discussed in Lab 5, Plugins
 
 
 ### Running Only One Test
@@ -1029,7 +1029,7 @@ followed by setup and teardown. Every test essentially has three phases: call,
 setup, and teardown. Setup and teardown are also called _fixtures_ and are a
 chance for you to add code to get data or the software system under test into
 a precondition state before the test runs, as well as clean up afterwards if
-necessary. I cover fixtures in depth in Lab 3, pytest Fixtures, on page 51.
+necessary. I cover fixtures in depth in Lab 3, pytest Fixtures
 
 **-- version
 
@@ -1059,16 +1059,16 @@ The -h option shows:
     via plugins
 
 - A list of options available to ini style configuration files, which I’ll discuss
-    more in Lab 6, Configuration, on page 115
+    more in Lab 6, Configuration
 
 - A list of environmental variables that can affect pytest behavior (also
-    discussed in Lab 6, Configuration, on page 115 )
+    discussed in Lab 6, Configuration)
 
 - A reminder that pytest --markers can be used to see available markers,
-    discussed in Lab 2, Writing Test Functions, on page 23
+    discussed in Lab 2, Writing Test Functions
 
 - A reminder that pytest --fixtures can be used to see available fixtures, dis-
-    cussed in Lab 3, pytest Fixtures, on page 51
+    cussed in Lab 3, pytest Fixtures
 
 The last bit of information the help text displays is this note:
 
@@ -1086,7 +1086,7 @@ marker definitions.
 The ability to customize the behavior of pytest in conftest.py files and test files
 allows customized behavior local to a project or even a subset of the tests for
 a project. You’ll learn about conftest.py and ini files such as pytest.ini in Lab
-6, Configuration, on page 115.
+6, Configuration
 
 ### Exercises
 

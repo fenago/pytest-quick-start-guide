@@ -460,7 +460,7 @@ helpful definitions:
 
 - _Unit test_ : A test that checks a small bit of code, like a function or a class,
     in isolation of the rest of the system. I consider the tests in Lab 1,
-    Getting Started with pytest, on page 1, to be unit tests run against the
+    Getting Started with pytest, to be unit tests run against the
     Tasks data structure.
 - _Integration test_ : A test that checks a larger bit of the code, maybe several
     classes, or a subsystem. Mostly it’s a label used for some test larger than
@@ -481,7 +481,7 @@ Learn pytest While Testing an Example Application • xiii
 
 ### How This Book Is Organized
 
-In Lab 1, Getting Started with pytest, on page 1, you’ll install pytest
+In Lab 1, Getting Started with pytest, you’ll install pytest
 
 and get it ready to use. You’ll then take one piece of the Tasks project—the
 
@@ -495,7 +495,7 @@ for pytest, such as being able to re-run test failures, stop execution after the
 
 first failure, control the stack trace and test run verbosity, and much more.
 
-In Lab 2, Writing Test Functions, on page 23, you’ll install Tasks locally
+In Lab 2, Writing Test Functions, you’ll install Tasks locally
 
 using pip and look at how to structure tests within a Python project. You’ll do
 
@@ -542,7 +542,7 @@ and MongoDB, the database back ends supported by Tasks.
 Preface • xiv
 
 
-In Lab 4, Builtin Fixtures, on page 73, you will look at some builtin fix-
+In Lab 4, Builtin Fixtures, you will look at some builtin fix-
 
 tures provided out-of-the-box by pytest. You will learn how pytest builtin
 
@@ -552,7 +552,7 @@ test output from your code under test, use monkey patches, check for
 
 warnings, and more.
 
-In Lab 5, Plugins, on page 97, you’ll learn how to add command-line
+In Lab 5, Plugins, you’ll learn how to add command-line
 
 options to pytest, alter the pytest output, and share pytest customizations,
 
@@ -568,9 +568,9 @@ case you’re not inspired enough by this lab to write some plugins of your
 
 own, I’ve hand-picked a bunch of great plugins to show off what’s possible
 
-in Appendix 3, Plugin Sampler Pack, on page 163.
+in Appendix 3, Plugin Sampler Pack
 
-Speaking of customization, in Lab 6, Configuration, on page 115 , you’ll
+Speaking of customization, in Lab 6, Configuration, you’ll
 
 learn how you can customize how pytest runs by default for your project with
 
@@ -584,7 +584,7 @@ tests are written for, and more. These configuration elements can be put in
 
 tox.ini or setup.cfg as well.
 
-In the final lab, Lab 7, Using pytest with Other Tools, on page 127 ,
+In the final lab, Lab 7, Using pytest with Other Tools,
 
 you’ll look at how you can take the already powerful pytest and supercharge
 
@@ -614,7 +614,7 @@ _pip_
 
 ```
 You should use pip to install pytest and pytest plugins. If you want a
-refresher on pip, check out Appendix 2, pip, on page 159.
+refresher on pip, check out Appendix 2, pip
 ```
 What You Need to Know • xv
 
@@ -878,7 +878,7 @@ $ pip install pytest
 
 If you are not familiar with virtualenv or pip, I have got you covered. Check
 
-out Appendix 1, Virtual Environments, on page 157 and Appendix 2, pip,
+out Appendix 1, Virtual Environmentsand Appendix 2, pip,
 
 on page 159.
 
@@ -1077,7 +1077,7 @@ Since our test files and functions start with test_, we’re good. There are way
 
 to alter these discovery rules if you have a bunch of tests named differently.
 
-I’ll cover that in Lab 6, Configuration, on page 115.
+I’ll cover that in Lab 6, Configuration
 
 Let’s take a closer look at the output of running just one file:
 
@@ -1102,7 +1102,7 @@ pytest provides a nice delimiter for the start of the test session. A session
 is one invocation of pytest, including all of the tests run on possibly
 multiple directories. This definition of session becomes important when
 I talk about session scope in relation to pytest fixtures in Specifying Fixture
-Scope, on page 58.
+Scope
 ```
 _platformdarwin-- Python3.x.y, pytest-3.x.y, py-1.x.y, pluggy-0.x.y_
 
@@ -1121,7 +1121,7 @@ _rootdir:/path/to/code/ch1/tasks,inifile:_
 The rootdir is the topmost common directory to all of the directories being
 searched for test code. The inifile (blank here) lists the configuration file being
 used. Configuration files could be pytest.ini, tox.ini, or setup.cfg. You’ll look at
-configuration files in more detail in Lab 6, Configuration, on page 115.
+configuration files in more detail in Lab 6, Configuration
 ```
 _collected2 items_
 
@@ -1157,14 +1157,14 @@ Here are the possible outcomes of a test function:
 - FAILED (F): The test did not run successfully (or XPASS + strict).
 - SKIPPED (s): The test was skipped. You can tell pytest to skip a test by
     using either the @pytest.mark.skip() or pytest.mark.skipif() decorators, discussed
-    in Skipping Tests, on page 34.
+    in Skipping Tests
 - xfail (x): The test was not supposed to pass, ran, and failed. You can tell
     pytest that a test is expected to fail by using the @pytest.mark.xfail() decorator,
-    discussed in Marking Tests as Expecting to Fail, on page 37.
+    discussed in Marking Tests as Expecting to Fail
 - XPASS (X): The test was not supposed to pass, ran, and passed.
 - ERROR (E): An exception happened outside of the test function, in either
-    a fixture, discussed in Lab 3, pytest Fixtures, on page 51, or in a
-    hook function, discussed in Lab 5, Plugins, on page 97.
+    a fixture, discussed in Lab 3, pytest Fixtures, or in a
+    hook function, discussed in Lab 5, Plugins
 
 Lab 1. Getting Started with pytest • 8
 
@@ -1819,7 +1819,7 @@ chance for you to add code to get data or the software system under test into
 
 a precondition state before the test runs, as well as clean up afterwards if
 
-necessary. I cover fixtures in depth in Lab 3, pytest Fixtures, on page 51.
+necessary. I cover fixtures in depth in Lab 3, pytest Fixtures
 
 **--version**
 
@@ -1849,17 +1849,17 @@ The -h option shows:
 - Command-line options and a short description, including options added
     via plugins
 - A list of options available to ini style configuration files, which I’ll discuss
-    more in Lab 6, Configuration, on page 115
+    more in Lab 6, Configuration
 
 Lab 1. Getting Started with pytest • 20
 
 
 - A list of environmental variables that can affect pytest behavior (also
-    discussed in Lab 6, Configuration, on page 115 )
+    discussed in Lab 6, Configuration)
 - A reminder that pytest --markers can be used to see available markers,
-    discussed in Lab 2, Writing Test Functions, on page 23
+    discussed in Lab 2, Writing Test Functions
 - A reminder that pytest --fixtures can be used to see available fixtures, dis-
-    cussed in Lab 3, pytest Fixtures, on page 51
+    cussed in Lab 3, pytest Fixtures
 
 The last bit of information the help text displays is this note:
 
@@ -1882,7 +1882,7 @@ allows customized behavior local to a project or even a subset of the tests for
 
 a project. You’ll learn about conftest.py and ini files such as pytest.ini in Lab
 
-6, Configuration, on page 115.
+6, Configuration
 
 ### Exercises
 
@@ -1983,7 +1983,7 @@ page xii, to see how to write test functions for a Python package. Tasks is a
 
 Python package that includes a command-line tool of the same name, tasks.
 
-Appendix 4, Packaging and Distributing Python Projects, on page 175 includes
+Appendix 4, Packaging and Distributing Python Projectsincludes
 
 an explanation of how to distribute your projects locally within a small team
 
@@ -2038,7 +2038,7 @@ All of the top-level files, CHANGELOG.rst, LICENSE, README.rst, MANIFEST.in, and
 
 are discussed in more detail in Appendix 4, Packaging and Distributing Python
 
-Projects, on page 175. Although setup.py is important for building a distribution
+Projects Although setup.py is important for building a distribution
 
 out of a package, it’s also crucial for being able to install a package locally so
 
@@ -2075,7 +2075,7 @@ The tests/func/__init__.py and tests/unit/__init__.py files are empty. They are 
 
 but do allow you to have duplicate test file names in multiple test directories.
 
-This is discussed in full in Avoiding Filename Collisions, on page 123.
+This is discussed in full in Avoiding Filename Collisions
 
 The pytest.ini file is optional. It contains project-wide pytest configuration. There
 
@@ -2097,11 +2097,11 @@ Fixtures are setup and teardown functions that run before and after test
 
 functions, and can be used to represent resources and data used by the
 
-tests. (Fixtures are discussed in Lab 3, pytest Fixtures, on page 51 and
+tests. (Fixtures are discussed in Lab 3, pytest Fixturesand
 
-Lab 4, Builtin Fixtures, on page 73, and hook functions are discussed
+Lab 4, Builtin Fixtures, and hook functions are discussed
 
-in Lab 5, Plugins, on page 97.) Hook functions and fixtures that are used
+in Lab 5, Plugins) Hook functions and fixtures that are used
 
 by tests in multiple subdirectories should be contained in tests/conftest.py. You
 
@@ -2119,7 +2119,7 @@ own project with a similar structure.
 
 The test file, tests/unit/test_task.py, contains the tests we worked on in Running
 
-pytest, on page 4, in files test_three.py and test_four.py. I’ve just renamed it here
+pytest, in files test_three.py and test_four.py. I’ve just renamed it here
 
 to something that makes more sense for what it’s testing and copied everything
 
@@ -2637,11 +2637,11 @@ Marking Test Functions • 33
 
 The fixture, tmpdir, used in this example is a builtin fixture. You’ll learn all
 
-about builtin fixtures in Lab 4, Builtin Fixtures, on page 73, and you’ll
+about builtin fixtures in Lab 4, Builtin Fixtures, and you’ll
 
 learn about writing your own fixtures and how they work in Lab 3, pytest
 
-Fixtures, on page 51, including the autouse parameter used here.
+Fixtures, including the autouse parameter used here.
 
 autouse as used in our test indicates that all tests in this file will use the fixture.
 
@@ -2657,7 +2657,7 @@ also supports old-fashioned setup and teardown functions, like what is used
 
 in unittest and nose, but they are not nearly as fun. However, if you are
 
-curious, they are described in Appendix 5, xUnit Fixtures, on page 183 .)
+curious, they are described in Appendix 5, xUnit Fixtures.)
 
 Let’s set aside fixture discussion for now and go to the top of the project and
 
@@ -2678,7 +2678,7 @@ This shows that marked tests from different files can all run together.
 
 ### Skipping Tests
 
-While the markers discussed in Marking Test Functions, on page 31 were
+While the markers discussed in Marking Test Functionswere
 
 names of your own choosing, pytest includes a few helpful builtin markers:
 
@@ -2936,7 +2936,7 @@ xfail to be reported as FAIL. This is done in a pytest.ini file:
 [pytest]
 xfail_strict=true
 
-I’ll discuss pytest.ini more in Lab 6, Configuration, on page 115.
+I’ll discuss pytest.ini more in Lab 6, Configuration
 
 ### Running a Subset of Tests
 
@@ -3685,7 +3685,7 @@ is considered a local _plugin_ , which will make sense once we start talking abo
 Lab 3. pytest Fixtures • 52
 
 
-plugins in Lab 5, Plugins, on page 97. For now, think of tests/conftest.py as
+plugins in Lab 5, Plugins For now, think of tests/conftest.py as
 
 a place where we can put fixtures used by all tests under the tests directory.
 
@@ -4552,7 +4552,7 @@ list is the tmpdir and tmpdir_factory that we used also.
 
 ### Parametrizing Fixtures
 
-In Parametrized Testing, on page 42, we parametrized tests. We can also
+In Parametrized Testing, we parametrized tests. We can also
 
 parametrize fixtures. We still use our list of tasks, list of task identifiers, and
 
@@ -4844,7 +4844,7 @@ Hmm. Bummer. Looks like we’ll need to do some debugging before we let
 
 anyone use the Mongo version. You’ll take a look at how to debug this in pdb:
 
-Debugging Test Failures, on page 127. Until then, we’ll use the TinyDB version.
+Debugging Test Failures Until then, we’ll use the TinyDB version.
 
 ### Exercises
 
@@ -4897,7 +4897,7 @@ how to use them for test data as well as setup and teardown code. You also
 
 used conftest.py for sharing fixtures between tests in multiple test files. By the
 
-end of Lab 3, pytest Fixtures, on page 51, the Tasks project had these fix-
+end of Lab 3, pytest Fixtures, the Tasks project had these fix-
 
 tures: tasks_db_session, tasks_just_a_few, tasks_mult_per_owner, tasks_db, db_with_3_tasks, and
 
@@ -4911,7 +4911,7 @@ included some commonly needed fixtures with pytest. You’ve already seen tmpdir
 
 and tmpdir_factory in use by the Tasks project in Changing Scope for Tasks Project
 
-Fixtures, on page 61. You’ll take a look at them in more detail in this lab.
+Fixtures You’ll take a look at them in more detail in this lab.
 
 The builtin fixtures that come prepackaged with pytest can help you do some
 
@@ -4992,7 +4992,7 @@ tmpdir_factory is available.
 
 The tmpdir_factory fixture is a lot like tmpdir, but it has a different interface. As
 
-discussed in Specifying Fixture Scope, on page 58, function scope fixtures
+discussed in Specifying Fixture Scope, function scope fixtures
 
 run once per test function, module scope fixtures run once per module, class
 
@@ -5165,7 +5165,7 @@ value of command-line options directly from pytestconfig, but to add the option
 
 and have pytest parse it, you need to add a hook function. _Hook functions_ ,
 
-which I cover in more detail in Lab 5, Plugins, on page 97, are another
+which I cover in more detail in Lab 5, Plugins, are another
 
 way to control how pytest behaves and are used frequently in plugins. How-
 
@@ -5277,7 +5277,7 @@ def test_pytestconfig (pytestconfig):
 
 You’ll use pytestconfig again when I demonstrate ini files in Lab 6, Config-
 
-uration, on page 115.
+uration
 
 ### Using cache
 
@@ -6040,7 +6040,7 @@ You can also use the monkeypatch fixture functions in conjunction with
 
 unittest.mock to temporarily replace attributes with mock objects. You’ll look at
 
-that in Lab 7, Using pytest with Other Tools, on page 127.
+that in Lab 7, Using pytest with Other Tools
 
 ### Using doctest_namespace
 
@@ -6233,7 +6233,7 @@ have the um symbol defined.
 
 I’ll cover running doctest from pytest more in Lab 7, Using pytest with
 
-Other Tools, on page 127.
+Other Tools
 
 ### Using recwarn
 
@@ -6363,7 +6363,7 @@ do but not quite, you can fork it, or use it as a reference for creating your
 
 own plugin. While this lab is about creating your own plugins, Appendix
 
-3, Plugin Sampler Pack, on page 163 is included to give you a taste of what’s
+3, Plugin Sampler Packis included to give you a taste of what’s
 
 possible.
 
@@ -6384,7 +6384,7 @@ with the least amount of work.
 
 You can find third-party pytest plugins in several places. The plugins listed
 
-in Appendix 3, Plugin Sampler Pack, on page 163 are all available for download
+in Appendix 3, Plugin Sampler Packare all available for download
 
 from PyPI. However, that’s not the only place to look for great pytest plugins.
 
@@ -6477,7 +6477,7 @@ locally, and also if you’re creating new virtual environments for continuous
 
 integration or with tox. (We’ll talk about both tox and continuous integration
 
-in Lab 7, Using pytest with Other Tools, on page 127 .)
+in Lab 7, Using pytest with Other Tools.)
 
 Note that with the local directory install method, you can install multiple
 
@@ -6564,7 +6564,7 @@ to a conftest.py file, then, after we get things working in conftest.py, we’ll
 
 the code to a package.
 
-Let’s go back to the Tasks project. In Expecting Exceptions, on page 30, we
+Let’s go back to the Tasks project. In Expecting Exceptions, we
 
 wrote some tests that made sure exceptions were raised if someone called an
 
@@ -6994,7 +6994,7 @@ Plugins are code that needs to be tested just like any other code. However,
 
 testing a change to a testing tool is a little tricky. When we developed the
 
-plugin code in Writing Your Own Plugins, on page 100 , we tested it manually
+plugin code in Writing Your Own Plugins, we tested it manually
 
 by using a sample test file, running pytest against it, and looking at the output
 
@@ -7344,7 +7344,7 @@ So far in this book, I’ve talked about the various non-test files that affect
 
 pytest mostly in passing, with the exception of conftest.py, which I covered quite
 
-thoroughly in Lab 5, Plugins, on page 97. In this lab, we’ll take a
+thoroughly in Lab 5, Plugins In this lab, we’ll take a
 
 look at the configuration files that affect pytest, discuss how pytest changes
 
@@ -7366,11 +7366,11 @@ Everyone should know about these:
     make in pytest.ini.
 - _conftest.py_ : This is a local plugin to allow hook functions and fixtures for
     the directory where the conftest.py file exists and all subdirectories. conftest.py
-    files are covered Lab 5, Plugins, on page 97.
+    files are covered Lab 5, Plugins
 - ___init__.py_ : When put into every test subdirectory, this file allows you to
     have identical test filenames in multiple test directories. We’ll look at an
     example of what can go wrong without __init__.py files in test directories in
-    Avoiding Filename Collisions, on page 123.
+    Avoiding Filename Collisions
 
 If you use tox, you’ll be interested in:
 
@@ -7380,7 +7380,7 @@ If you use tox, you’ll be interested in:
 
 ```
 saving you one configuration file. Tox is covered in Lab 7, Using pytest
-with Other Tools, on page 127.
+with Other Tools
 ```
 If you want to distribute a Python package (like Tasks), this file will be of
 
@@ -7391,7 +7391,7 @@ interest:
     run pythonsetup.pytest and have it run all of your pytest tests. If you are
     distributing a package, you may already have a setup.cfg file, and you can
     use that file to store pytest configuration. You’ll see how in Appendix 4,
-    Packaging and Distributing Python Projects, on page 175.
+    Packaging and Distributing Python Projects
 
 Regardless of which file you put your pytest configuration in, the format will
 
@@ -7460,7 +7460,7 @@ minversion(string) minimallyrequiredpytestversion
 
 You’ll look at all of these settings in this lab, except doctest_optionflags, which
 
-is covered in Lab 7, Using pytest with Other Tools, on page 127.
+is covered in Lab 7, Using pytest with Other Tools
 
 **Plugins Can Add ini-file Options**
 
@@ -7504,7 +7504,7 @@ Changing the Default Command-Line Options • 117
 
 ### Registering Markers to Avoid Marker Typos
 
-Custom markers, as discussed in Marking Test Functions, on page 31, are
+Custom markers, as discussed in Marking Test Functions, are
 
 great for allowing you to mark a subset of tests to run with a specific marker.
 
@@ -7817,7 +7817,7 @@ Setting xfail_strict= true causes tests marked with @pytest.mark.xfail that don�
 
 be reported as an error. I think this should always be set. For more information
 
-on the xfail marker, go to Marking Tests as Expecting to Fail, on page 37.
+on the xfail marker, go to Marking Tests as Expecting to Fail
 
 ### Avoiding Filename Collisions
 
@@ -7939,7 +7939,7 @@ again.
 
 ### Exercises
 
-In Lab 5, Plugins, on page 97, you created a plugin called pytest-nice that
+In Lab 5, Plugins, you created a plugin called pytest-nice that
 
 included a --nice command-line option. Let’s extend that to include a pytest.ini
 
@@ -8003,7 +8003,7 @@ to have pytest start a debugging session at the point of failure. Let’s look a
 
 pdb in action in the context of the Tasks project.
 
-In Parametrizing Fixtures, on page 66, we left the Tasks project with a few
+In Parametrizing Fixtures, we left the Tasks project with a few
 
 failures:
 
@@ -8017,7 +8017,7 @@ Before we look at how pdb can help us debug this test, let’s take a look at th
 
 pytest options available to help speed up debugging test failures, which we
 
-first looked at in Using Options, on page 10:
+first looked at in Using Options
 
 - _--tb=[auto/long/short/line/native/no]_ : Controls the traceback style.
 - _-v / --verbose_ : Displays all the test names, passing or failing.
@@ -8029,7 +8029,7 @@ first looked at in Using Options, on page 10:
 
 ```
 Installing MongoDB
-As mentioned in Lab 3, pytest Fixtures, on page 51, running
+As mentioned in Lab 3, pytest Fixtures, running
 the MongoDB tests requires installing MongoDB and pymongo.
 I’ve been testing with the Community Server edition found at
 https://www.mongodb.com/download-center. pymongo is installed with pip:
@@ -8392,7 +8392,7 @@ our code under test from the rest of the system. Mock objects are sometimes
 
 called test doubles, spies, fakes, or stubs. Between pytest’s own monkeypatch
 
-fixture (covered in Using monkeypatch, on page 88) and mock, you should
+fixture (covered in Using monkeypatch and mock, you should
 
 have all the test double functionality you need.
 
@@ -8418,7 +8418,7 @@ make it my preferred interface to the mock system.
 
 For the Tasks project, we’ll use mock to help us test the command-line interface.
 
-In Coverage.py: Determining How Much Code Is Tested, on page 130 , you saw
+In Coverage.py: Determining How Much Code Is Tested, you saw
 
 that our cli.py file wasn’t being tested at all. We’ll start to fix that now. But
 
@@ -8877,7 +8877,7 @@ The commands=pytest line tells tox to run pytest in each environment.
 
 Under [pytest], we can put whatever we normally would want to put into pytest.ini
 
-to configure pytest, as discussed in Lab 6, Configuration, on page 115. In
+to configure pytest, as discussed in Lab 6, Configuration In
 
 this case, addopts is used to turn on extra summary information for skips,
 
@@ -9234,7 +9234,7 @@ Lab 7. Using pytest with Other Tools • 150
 
 The fixtures we’ve been using for the Tasks project, including db_with_3_tasks
 
-introduced in Using Multiple Fixtures, on page 57, help set up the database
+introduced in Using Multiple Fixtures, help set up the database
 
 before the test. It’s a much smaller file, even though the test function itself
 
@@ -9382,7 +9382,7 @@ test_delete_unittest_fix.py::TestNonEmpty::test_delete_decreases_countPASSED[100
 
 Note that this is only necessary for session scope resources shared by unittest
 
-and pytest. As discussed earlier in Marking Test Functions, on page 31, you
+and pytest. As discussed earlier in Marking Test Functions, you
 
 can also use pytest markers on unittest tests, such as @pytest.mark.skip() and
 
@@ -9505,15 +9505,15 @@ check out the appendixes that follow. If you’ve made it this far, I’ll assum
 
 you no longer need help with pip or virtual environments. However, you may
 
-not have looked at Appendix 3, Plugin Sampler Pack, on page 163. If you
+not have looked at Appendix 3, Plugin Sampler Pack If you
 
 enjoyed this lab, it deserves your time to at least skim through it. Then,
 
-Appendix 4, Packaging and Distributing Python Projects, on page 175 provides
+Appendix 4, Packaging and Distributing Python Projectsprovides
 
 a quick look at how to share code through various levels of packaging, and
 
-Appendix 5, xUnit Fixtures, on page 183 covers an alternative style of pytest
+Appendix 5, xUnit Fixturescovers an alternative style of pytest
 
 fixtures that closer resembles traditional xUnit testing tools.
 
@@ -9806,9 +9806,9 @@ of pytest. So many useful plugins are available, it’s difficult to pick just a
 
 handful to showcase. You’ve already seen the pytest-cov plugin in Coverage.py:
 
-Determining How Much Code Is Tested, on page 130 , and the pytest-mock plugin
+Determining How Much Code Is Tested, and the pytest-mock plugin
 
-in mock: Swapping Out Part of the System, on page 136. The following plugins
+in mock: Swapping Out Part of the System The following plugins
 
 give you just a taste of what else is out there.
 

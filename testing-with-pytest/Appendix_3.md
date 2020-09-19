@@ -7,8 +7,8 @@
 Plugins are the booster rockets that enable you to get even more power out
 of pytest. So many useful plugins are available, it’s difficult to pick just a
 handful to showcase. You’ve already seen the pytest-cov plugin in Coverage.py:
-Determining How Much Code Is Tested, on page 130 , and the pytest-mock plugin
-in mock: Swapping Out Part of the System, on page 136. The following plugins
+Determining How Much Code Is Tested, and the pytest-mock plugin
+in mock: Swapping Out Part of the System The following plugins
 give you just a taste of what else is out there.
 
 All of the plugins featured here are available on PyPI and are installed with
@@ -250,11 +250,11 @@ A test without sugar is shownon page 168.
 
 5. https://pypi.python.org/pypi/pytest-sugar
 
-![](./images168/25.png)
+![](./images/168/25.png)
 
 And here’s the test with sugar:
 
-![](./images168/26.png)
+![](./images/168/26.png)
 
 The checkmarks (or x’s for failures) show up as the tests finish. The progress
 bars grow in real time, too. It’s quite satisfying to watch.
@@ -271,22 +271,22 @@ To demonstrate the emoji plugin in action, following is sample code that
 produces pass, fail, skip, xfail, xpass, and error. Here it is with normal output
 and tracebacks turned off:
 
-![](./images168/27.png)
+![](./images/168/27.png)
 
 6. https://pypi.python.org/pypi/pytest-emoji
 
 
 Here it is with verbose, -v:
 
-![](./images169/28.png)
+![](./images/169/28.png)
 
 Now, here is the sample code with --emoji:
 
-![](./images169/29.png)
+![](./images/169/29.png)
 
 And then with both -v and --emoji:
 
-![](./images169/30.png)
+![](./images/169/30.png)
 
 It’s a pretty fun plugin, but don’t dismiss it as silly out of hand; it allows you
 to change the emoji using hook functions. It’s one of the few pytest plugins
@@ -338,11 +338,11 @@ and a results and summary page.
 
 The following screen shows the session environment information and summary:
 
-![](./images170/31.png)
+![](./images/170/31.png)
 
 The next screen shows the summary and results:
 
-![](./images170/32.png)
+![](./images/170/32.png)
 
 The report includes JavaScript that allows you to filter and sort, and you can
 add extra information to the report, including images. If you need to produce

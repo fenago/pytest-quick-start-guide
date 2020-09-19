@@ -28,7 +28,7 @@ We’ll use the sample project, Tasks, as discussed in The Tasks Project, on
 page xii, to see how to write test functions for a Python package. Tasks is a
 Python package that includes a command-line tool of the same name, tasks.
 
-Appendix 4, Packaging and Distributing Python Projects, on page 175 includes
+Appendix 4, Packaging and Distributing Python Projectsincludes
 an explanation of how to distribute your projects locally within a small team
 or globally through PyPI, so I won’t go into detail of how to do that here;
 however, let’s take a quick look at what’s in the Tasks project and how the
@@ -75,7 +75,7 @@ src. This isn’t a requirement of pytest, but it’s a best practice.
 
 All of the top-level files, CHANGELOG.rst, LICENSE, README.rst, MANIFEST.in, and setup.py,
 are discussed in more detail in Appendix 4, Packaging and Distributing Python
-Projects, on page 175. Although setup.py is important for building a distribution
+Projects Although setup.py is important for building a distribution
 out of a package, it’s also crucial for being able to install a package locally so
 that the package is available for import.
 
@@ -96,7 +96,7 @@ tionality like tasks.add() instead of having to do tasks.api.add().
 
 The tests/func/__init__.py and tests/unit/__init__.py files are empty. They are optional,
 but do allow you to have duplicate test file names in multiple test directories.
-This is discussed in full in Avoiding Filename Collisions, on page 123.
+This is discussed in full in Avoiding Filename Collisions
 
 The pytest.ini file is optional. It contains project-wide pytest configuration. There
 should be at most only one of these in your project. It can contain directives
@@ -109,9 +109,9 @@ and can contain hook functions and fixtures. Hook functions are a way to
 insert code into part of the pytest execution process to alter how pytest works.
 Fixtures are setup and teardown functions that run before and after test
 functions, and can be used to represent resources and data used by the
-tests. (Fixtures are discussed in Lab 3, pytest Fixtures, on page 51 and
-Lab 4, Builtin Fixtures, on page 73, and hook functions are discussed
-in Lab 5, Plugins, on page 97.) Hook functions and fixtures that are used
+tests. (Fixtures are discussed in Lab 3, pytest Fixturesand
+Lab 4, Builtin Fixtures, and hook functions are discussed
+in Lab 5, Plugins) Hook functions and fixtures that are used
 by tests in multiple subdirectories should be contained in tests/conftest.py. You
 can have multiple conftest.py files; for example, you can have one at tests and
 one for each subdirectory under tests.
@@ -123,7 +123,7 @@ own project with a similar structure.
 **Installing a Package Locally**
 
 The test file, tests/unit/test_task.py, contains the tests we worked on in Running
-pytest, on page 4, in files test_three.py and test_four.py. I’ve just renamed it here
+pytest, in files test_three.py and test_four.py. I’ve just renamed it here
 to something that makes more sense for what it’s testing and copied everything
 into one file. I also removed the definition of the Task data structure, because
 that really belongs in api.py.
@@ -618,9 +618,9 @@ def initialized_tasks_db(tmpdir):
 ```
 
 The fixture, tmpdir, used in this example is a builtin fixture. You’ll learn all
-about builtin fixtures in Lab 4, Builtin Fixtures, on page 73, and you’ll
+about builtin fixtures in Lab 4, Builtin Fixtures, and you’ll
 learn about writing your own fixtures and how they work in Lab 3, pytest
-Fixtures, on page 51, including the autouse parameter used here.
+Fixtures, including the autouse parameter used here.
 
 autouse as used in our test indicates that all tests in this file will use the fixture.
 The code before the yield runs before each test; the code after the yield runs
@@ -629,7 +629,7 @@ that and more in later labs, but here we need some way to set up the
 database for testing, so I couldn’t wait any longer to show you a fixture. (pytest
 also supports old-fashioned setup and teardown functions, like what is used
 in unittest and nose, but they are not nearly as fun. However, if you are
-curious, they are described in Appendix 5, xUnit Fixtures, on page 183 .)
+curious, they are described in Appendix 5, xUnit Fixtures.)
 
 Let’s set aside fixture discussion for now and go to the top of the project and
 run our smoke test suite:
@@ -652,7 +652,7 @@ This shows that marked tests from different files can all run together.
 
 ### Skipping Tests
 
-While the markers discussed in Marking Test Functions, on page 31 were
+While the markers discussed in Marking Test Functionswere
 names of your own choosing, pytest includes a few helpful builtin markers:
 skip, skipif, and xfail. I’ll discuss skip and skipif in this section, and xfail in the next.
 
@@ -908,7 +908,7 @@ xfail to be reported as FAIL. This is done in a pytest.ini file:
 xfail_strict=true
 ```
 
-I’ll discuss pytest.ini more in Lab 6, Configuration, on page 115.
+I’ll discuss pytest.ini more in Lab 6, Configuration
 
 ### Running a Subset of Tests
 

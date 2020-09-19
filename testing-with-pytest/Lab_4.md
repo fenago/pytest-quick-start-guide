@@ -6,7 +6,7 @@
 In the previous lab, you looked at what fixtures are, how to write them, and
 how to use them for test data as well as setup and teardown code. You also
 used conftest.py for sharing fixtures between tests in multiple test files. By the
-end of Lab 3, pytest Fixtures, on page 51, the Tasks project had these fix-
+end of Lab 3, pytest Fixtures, the Tasks project had these fix-
 tures: tasks_db_session, tasks_just_a_few, tasks_mult_per_owner, tasks_db, db_with_3_tasks, and
 db_with_multi_per_owner defined in conftest.py to be used by any test function in the
 Tasks project that needed them.
@@ -14,7 +14,7 @@ Tasks project that needed them.
 Reusing common fixtures is such a good idea that the pytest developers
 included some commonly needed fixtures with pytest. You’ve already seen tmpdir
 and tmpdir_factory in use by the Tasks project in Changing Scope for Tasks Project
-Fixtures, on page 61. You’ll take a look at them in more detail in this lab.
+Fixtures You’ll take a look at them in more detail in this lab.
 
 The builtin fixtures that come prepackaged with pytest can help you do some
 pretty useful things in your tests easily and consistently. For example, in
@@ -79,7 +79,7 @@ function. For fixtures with scope other than function (class, module, session),
 tmpdir_factory is available.
 
 The tmpdir_factory fixture is a lot like tmpdir, but it has a different interface. As
-discussed in Specifying Fixture Scope, on page 58, function scope fixtures
+discussed in Specifying Fixture Scope, function scope fixtures
 run once per test function, module scope fixtures run once per module, class
 scope fixtures run once per class, and test scope fixtures run once per session.
 Therefore, resources created in session scope fixtures have a lifetime of the
@@ -229,7 +229,7 @@ To see how pytestconfig works, you’ll look at how to add a custom command-
 line option and read the option value from within a test. You can read the
 value of command-line options directly from pytestconfig, but to add the option
 and have pytest parse it, you need to add a hook function. _Hook functions_ ,
-which I cover in more detail in Lab 5, Plugins, on page 97, are another
+which I cover in more detail in Lab 5, Plugins, are another
 way to control how pytest behaves and are used frequently in plugins. How-
 ever, adding a custom command-line option and reading it from pytestconfig is
 common enough that I want to cover it here.
@@ -350,7 +350,7 @@ def test_pytestconfig(pytestconfig):
 ```
 
 You’ll use pytestconfig again when I demonstrate ini files in Lab 6, Config-
-uration, on page 115.
+uration
 
 ### Using cache
 
@@ -1065,7 +1065,7 @@ patch.chdir(the_tmpdir).
 
 You can also use the monkeypatch fixture functions in conjunction with
 unittest.mock to temporarily replace attributes with mock objects. You’ll look at
-that in Lab 7, Using pytest with Other Tools, on page 127.
+that in Lab 7, Using pytest with Other Tools
 
 ### Using doctest_namespace
 
@@ -1256,7 +1256,7 @@ conftest.py file, any doctests found within the scope of this conftest.py file w
 have the um symbol defined.
 
 I’ll cover running doctest from pytest more in Lab 7, Using pytest with
-Other Tools, on page 127.
+Other Tools
 
 ### Using recwarn
 

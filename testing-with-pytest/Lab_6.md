@@ -5,7 +5,7 @@
 
 So far in this book, I’ve talked about the various non-test files that affect
 pytest mostly in passing, with the exception of conftest.py, which I covered quite
-thoroughly in Lab 5, Plugins, on page 97. In this lab, we’ll take a
+thoroughly in Lab 5, Plugins In this lab, we’ll take a
 look at the configuration files that affect pytest, discuss how pytest changes
 its behavior based on them, and make some changes to the configuration
 files of the Tasks project.
@@ -23,12 +23,12 @@ Everyone should know about these:
 
 - _conftest.py_ : This is a local plugin to allow hook functions and fixtures for
     the directory where the conftest.py file exists and all subdirectories. conftest.py
-    files are covered Lab 5, Plugins, on page 97.
+    files are covered Lab 5, Plugins
 
 - ___init__.py_ : When put into every test subdirectory, this file allows you to
     have identical test filenames in multiple test directories. We’ll look at an
     example of what can go wrong without __init__.py files in test directories in
-    Avoiding Filename Collisions, on page 123.
+    Avoiding Filename Collisions
 
 If you use tox, you’ll be interested in:
 
@@ -38,7 +38,7 @@ If you use tox, you’ll be interested in:
 
 
 saving you one configuration file. Tox is covered in Lab 7, Using pytest
-with Other Tools, on page 127.
+with Other Tools
 
 If you want to distribute a Python package (like Tasks), this file will be of
 
@@ -49,7 +49,7 @@ interest:
     run pythonsetup.pytest and have it run all of your pytest tests. If you are
     distributing a package, you may already have a setup.cfg file, and you can
     use that file to store pytest configuration. You’ll see how in Appendix 4,
-    Packaging and Distributing Python Projects, on page 175.
+    Packaging and Distributing Python Projects
 
 Regardless of which file you put your pytest configuration in, the format will
 mostly be the same.
@@ -103,28 +103,12 @@ a sampling:
 
 ```
 $ pytest --help
-...
-[pytest]ini-optionsin the firstpytest.ini|tox.ini|setup.cfgfilefound:
-
-markers(linelist) markersfor testfunctions
-norecursedirs(args) directorypatternsto avoidfor recursion
-testpaths(args) directoriesto searchfor testswhenno filesor
-directoriesare givenin the commandline.
-usefixtures(args) listof defaultfixturesto be usedwiththisproject
-python_files(args) glob-stylefilepatternsfor Pythontestmodulediscovery
-python_classes(args) prefixesor globnamesfor Pythontestclassdiscovery
-python_functions(args) prefixesor globnamesfor Pythontestfunctionand
-methoddiscovery
-xfail_strict(bool) defaultfor the strictparameterof xfailmarkers
-whennot givenexplicitly(default:False)
-doctest_optionflags(args)optionflagsfor doctests
-addopts(args) extracommandlineoptions
-minversion(string) minimallyrequiredpytestversion
-...
 ```
 
-You’ll look at all of these settings in this lab, except doctest_optionflags, which
-is covered in Lab 7, Using pytest with Other Tools, on page 127.
+![](./images/1.png)
+
+
+You’ll look at all of these settings in this lab, except doctest_optionflags, which is covered in Lab 7, Using pytest with Other Tools
 
 **Plugins Can Add ini-file Options**
 
@@ -158,7 +142,7 @@ aren’t registered in a config file. You’ll see how to do that in the next se
 
 ### Registering Markers to Avoid Marker Typos
 
-Custom markers, as discussed in Marking Test Functions, on page 31, are
+Custom markers, as discussed in Marking Test Functions, are
 great for allowing you to mark a subset of tests to run with a specific marker.
 However, it’s too easy to misspell a marker and end up having some tests
 marked with @pytest.mark.smoke and some marked with @pytest.mark.somke. By
@@ -441,7 +425,7 @@ good reason.
 
 Setting xfail_strict= true causes tests marked with @pytest.mark.xfail that don’t fail to
 be reported as an error. I think this should always be set. For more information
-on the xfail marker, go to Marking Tests as Expecting to Fail, on page 37.
+on the xfail marker, go to Marking Tests as Expecting to Fail
 
 ### Avoiding Filename Collisions
 
@@ -568,7 +552,7 @@ again.
 
 ### Exercises
 
-In Lab 5, Plugins, on page 97, you created a plugin called pytest-nice that
+In Lab 5, Plugins, you created a plugin called pytest-nice that
 included a --nice command-line option. Let’s extend that to include a pytest.ini
 option called nice.
 

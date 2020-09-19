@@ -21,7 +21,7 @@ already written the change you want to make to pytest. Since we will be
 looking at open source plugins, if a plugin does almost what you want to
 do but not quite, you can fork it, or use it as a reference for creating your
 own plugin. While this lab is about creating your own plugins, Appendix
-3, Plugin Sampler Pack, on page 163 is included to give you a taste of what’s
+3, Plugin Sampler Packis included to give you a taste of what’s
 possible.
 
 In this lab, you’ll learn how to create plugins, and I’ll point you in the
@@ -35,7 +35,7 @@ with the least amount of work.
 ### Finding Plugins
 
 You can find third-party pytest plugins in several places. The plugins listed
-in Appendix 3, Plugin Sampler Pack, on page 163 are all available for download
+in Appendix 3, Plugin Sampler Packare all available for download
 from PyPI. However, that’s not the only place to look for great pytest plugins.
 
 ```
@@ -125,7 +125,7 @@ pip to look in the directory called some_plugins. This technique is especially
 useful if you have both third-party and your own custom plugins stored
 locally, and also if you’re creating new virtual environments for continuous
 integration or with tox. (We’ll talk about both tox and continuous integration
-in Lab 7, Using pytest with Other Tools, on page 127 .)
+in Lab 7, Using pytest with Other Tools.)
 
 Note that with the local directory install method, you can install multiple
 versions and specify which version you want by adding == and the version
@@ -193,7 +193,7 @@ to share and grow into a plugin. Therefore, we’ll start by adding functionalit
 to a conftest.py file, then, after we get things working in conftest.py, we’ll move
 the code to a package.
 
-Let’s go back to the Tasks project. In Expecting Exceptions, on page 30, we
+Let’s go back to the Tasks project. In Expecting Exceptions, we
 wrote some tests that made sure exceptions were raised if someone called an
 API function incorrectly. Looks like we missed at least a few possible error
 conditions.
@@ -613,7 +613,7 @@ minimal version, but it works.
 
 Plugins are code that needs to be tested just like any other code. However,
 testing a change to a testing tool is a little tricky. When we developed the
-plugin code in Writing Your Own Plugins, on page 100 , we tested it manually
+plugin code in Writing Your Own Plugins, we tested it manually
 by using a sample test file, running pytest against it, and looking at the output
 to make sure it was right. We can do the same thing in an automated way
 using a plugin called pytester that ships with pytest but is disabled by default.

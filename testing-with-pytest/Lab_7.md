@@ -15,12 +15,12 @@ The pdb module is the Python debugger in the standard library. You use --pdb
 to have pytest start a debugging session at the point of failure. Let’s look at
 pdb in action in the context of the Tasks project.
 
-In Parametrizing Fixtures, on page 66, we left the Tasks project with a few
+In Parametrizing Fixtures, we left the Tasks project with a few
 failures:
 
 ```
 $ cd /path/to/code/ch3/c/tasks_proj
-$ pytest --tb=no-q
+$ pytest --tb=no -q
 
 .........................................FF.FFFFFFF[ 53%]
 
@@ -31,7 +31,7 @@ Before we look at how pdb can help us debug this test, let’s take a look at th
 
 pytest options available to help speed up debugging test failures, which we
 
-first looked at in Using Options, on page 10:
+first looked at in Using Options
 
 - _--tb=[auto/long/short/line/native/no]_ : Controls the traceback style.
 - _-v / --verbose_ : Displays all the test names, passing or failing.
@@ -43,7 +43,7 @@ first looked at in Using Options, on page 10:
 
 ```
 Installing MongoDB
-As mentioned in Lab 3, pytest Fixtures, on page 51, running
+As mentioned in Lab 3, pytest Fixtures, running
 the MongoDB tests requires installing MongoDB and pymongo.
 I’ve been testing with the Community Server edition found at
 https://www.mongodb.com/download-center. pymongo is installed with pip:
@@ -345,17 +345,17 @@ CoverageHTMLwrittento dir htmlcov
 You can then open htmlcov/index.html in a browser, which shows the output in
 the following screen:
 
-![](./images133/33.png)
+![](./images/133/33.png)
 
 Clicking on tasksdb_tinydb.py shows a report for the one file. The top of the report
 shows the percentage of lines covered, plus how many lines were covered and
 how many are missing, as shown in the following screen:
 
-![](./images134/34.png)
+![](./images/134/34.png)
 
 Scrolling down, you can see the missing lines, as shown in the next screen:
 
-![](./images135/35.png)
+![](./images/135/35.png)
 
 Even though this screen isn’t the complete page for this file, it’s enough to
 tell us that:
@@ -386,7 +386,7 @@ documentation.
 The mock package is used to swap out pieces of the system to isolate bits of
 our code under test from the rest of the system. Mock objects are sometimes
 called test doubles, spies, fakes, or stubs. Between pytest’s own monkeypatch
-fixture (covered in Using monkeypatch, on page 88) and mock, you should
+fixture (covered in Using monkeypatch and mock, you should
 have all the test double functionality you need.
 
 ```
@@ -405,7 +405,7 @@ for use with pytest, a plugin called pytest-mock has some conveniences that
 make it my preferred interface to the mock system.
 
 For the Tasks project, we’ll use mock to help us test the command-line interface.
-In Coverage.py: Determining How Much Code Is Tested, on page 130 , you saw
+In Coverage.py: Determining How Much Code Is Tested, you saw
 that our cli.py file wasn’t being tested at all. We’ll start to fix that now. But
 let’s first talk about strategy.
 
@@ -828,7 +828,7 @@ You can also specify which version to use.
 The commands=pytest line tells tox to run pytest in each environment.
 
 Under [pytest], we can put whatever we normally would want to put into pytest.ini
-to configure pytest, as discussed in Lab 6, Configuration, on page 115. In
+to configure pytest, as discussed in Lab 6, Configuration In
 this case, addopts is used to turn on extra summary information for skips,
 xfails, and xpasses (-rsxX) and turn on showing local variables in stack traces
 
@@ -966,7 +966,7 @@ or Unix-like systems, select Add build step->Execute shell. On Windows, select A
 buildstep->ExecuteWindowsbatchcommand. Since I’m on a Mac, I used an Executeshell
 block, as shown here:
 
-![](./images146/36.png)
+![](./images/146/36.png)
 
 The content of the text box is:
 
@@ -988,7 +988,7 @@ Next, we’ll add a post-build action: Add post-buildaction->PublishJunit test r
 Fill in the Test report XMLs with results.xml, as shown in the next screen.
 
 
-![](./images147/37.png)
+![](./images/147/37.png)
 
 That’s it! Now we can run tests through Jenkins. Here are the steps:
 
@@ -1003,7 +1003,7 @@ output.
 Before running the tests a second time, I’ve added a failure to one of the tests.
 After a refresh of the top project view, we see the following overview:
 
-![](./images148/38.png)
+![](./images/148/38.png)
 
 You can zoom in to the failure information by clicking inside the graph or on
 the “Latest Test Result” link to see an overview of the test session. Click on
@@ -1015,7 +1015,7 @@ information.
 Going back to Jenkins > tasks, you can click on Test Results Analyzer to see
 a table view of test results:
 
-![](./images148/39.png)
+![](./images/148/39.png)
 
 You’ve seen how to run pytest suites with virtual environments from Jenkins,
 but there are quite a few other topics to explore around using pytest and
@@ -1146,7 +1146,7 @@ def test_delete_decreases_count(db_with_3_tasks):
 ```
 
 The fixtures we’ve been using for the Tasks project, including db_with_3_tasks
-introduced in Using Multiple Fixtures, on page 57, help set up the database
+introduced in Using Multiple Fixtures, help set up the database
 before the test. It’s a much smaller file, even though the test function itself
 is almost identical.
 
@@ -1292,7 +1292,7 @@ test_delete_unittest_fix.py::TestNonEmpty::test_delete_decreases_countPASSED[100
 ```
 
 Note that this is only necessary for session scope resources shared by unittest
-and pytest. As discussed earlier in Marking Test Functions, on page 31, you
+and pytest. As discussed earlier in Marking Test Functions, you
 can also use pytest markers on unittest tests, such as @pytest.mark.skip() and
 @pytest.mark.xfail(), and user markers like @pytest.mark.foo().
 
@@ -1380,11 +1380,11 @@ permutations in the labs.
 You are definitely ready to go out and try pytest with your own projects. And
 check out the appendixes that follow. If you’ve made it this far, I’ll assume
 you no longer need help with pip or virtual environments. However, you may
-not have looked at Appendix 3, Plugin Sampler Pack, on page 163. If you
+not have looked at Appendix 3, Plugin Sampler Pack If you
 enjoyed this lab, it deserves your time to at least skim through it. Then,
-Appendix 4, Packaging and Distributing Python Projects, on page 175 provides
+Appendix 4, Packaging and Distributing Python Projectsprovides
 a quick look at how to share code through various levels of packaging, and
-Appendix 5, xUnit Fixtures, on page 183 covers an alternative style of pytest
+Appendix 5, xUnit Fixturescovers an alternative style of pytest
 fixtures that closer resembles traditional xUnit testing tools.
 
 Also, keep in touch! Check out the book’s webpage^11 and use the discussion

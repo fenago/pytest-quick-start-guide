@@ -84,7 +84,7 @@ tasks_proj/tests, makes the most sense.
 Although conftest.py is a Python module, it should not be imported by test files.
 Don’t importconftest from anywhere. The conftest.py file gets read by pytest, and
 is considered a local _plugin_ , which will make sense once we start talking about
-plugins in Lab 5, Plugins, on page 97. For now, think of tests/conftest.py as
+plugins in Lab 5, Plugins For now, think of tests/conftest.py as
 a place where we can put fixtures used by all tests under the tests directory.
 Next, let’s rework some of our tests for tasks_proj to properly use fixtures.
 
@@ -908,7 +908,7 @@ list is the tmpdir and tmpdir_factory that we used also.
 
 ### Parametrizing Fixtures
 
-In Parametrized Testing, on page 42, we parametrized tests. We can also
+In Parametrized Testing, we parametrized tests. We can also
 parametrize fixtures. We still use our list of tasks, list of task identifiers, and
 an equivalence function, just as before:
 
@@ -1199,7 +1199,7 @@ tests/func/test_add_variety.py::test_add_2[mongo-task1]FAILED[ 48%]
 
 Hmm. Bummer. Looks like we’ll need to do some debugging before we let
 anyone use the Mongo version. You’ll take a look at how to debug this in pdb:
-Debugging Test Failures, on page 127. Until then, we’ll use the TinyDB version.
+Debugging Test Failures Until then, we’ll use the TinyDB version.
 
 ### Exercises
 
