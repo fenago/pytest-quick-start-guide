@@ -47,23 +47,28 @@ Here’s a simple example using tmpdir:
 
 ```
 **ch4/test_tmpdir.py
-def test_tmpdir (tmpdir):
-_# tmpdiralreadyhas a pathnameassociatedwithit
-# join()extendsthe pathto includea filename
-# the fileis createdwhenit'swrittento_
-a_file= tmpdir.join( _'something.txt'_ )
 
-# you can createdirectories
-a_sub_dir= tmpdir.mkdir( 'anything' )
-# you can createfilesin directories(createdwhenwritten)
-another_file= a_sub_dir.join( 'something_else.txt' )
-# thiswritecreates'something.txt'
-a_file.write( 'contentsmay settleduringshipping' )
-# thiswritecreates'anything/something_else.txt'
-another_file.write( 'somethingdifferent' )
-# you can readthe filesas well
-assert a_file.read()== 'contentsmay settleduringshipping'
-assert another_file.read()== 'somethingdifferent'
+def test_tmpdir(tmpdir):
+    # tmpdir already has a path name associated with it
+    # join() extends the path to include a filename
+    # the file is created when it's written to
+    a_file = tmpdir.join('something.txt')
+
+    # you can create directories
+    a_sub_dir = tmpdir.mkdir('anything')
+
+    # you can create files in directories (created when written)
+    another_file = a_sub_dir.join('something_else.txt')
+
+    # this write creates 'something.txt'
+    a_file.write('contents may settle during shipping')
+
+    # this write creates 'anything/something_else.txt'
+    another_file.write('something different')
+
+    # you can read the files as well
+    assert a_file.read() == 'contents may settle during shipping'
+    assert another_file.read() == 'something different'
 ```
 
 The value returned from tmpdir is an object of type py.path.local.^1 This seems like
@@ -88,24 +93,30 @@ just enough to use tmpdir_factory instead:
 
 ```
 **ch4/test_tmpdir.py
-def test_tmpdir_factory (tmpdir_factory):
-_# you shouldstartwithmakinga directory
-# a_diractslikethe objectreturnedfromthe tmpdirfixture_
-a_dir= tmpdir_factory.mktemp( _'mydir'_ )
-_# base_tempwillbe the parentdir of 'mydir'
-# you don'thaveto use getbasetemp()
-# usingit herejustto showthatit'savailable_
-base_temp= tmpdir_factory.getbasetemp()
-**print ( _'base:'_ , base_temp)
-_# the restof thistestlooksthe sameas the 'test_tmpdir()'
-# exampleexceptI'm usinga_dirinsteadof tmpdir_
-a_file= a_dir.join( _'something.txt'_ )
-a_sub_dir= a_dir.mkdir( _'anything'_ )
-another_file= a_sub_dir.join( _'something_else.txt'_ )
-a_file.write( _'contentsmay settleduringshipping'_ )
-another_file.write( _'somethingdifferent'_ )
-**assert** a_file.read()== _'contentsmay settleduringshipping'_
-**assert** another_file.read()== _'somethingdifferent'_
+
+def test_tmpdir_factory(tmpdir_factory):
+    # you should start with making a directory
+    # a_dir acts like the object returned from the tmpdir fixture
+    a_dir = tmpdir_factory.mktemp('mydir')
+
+    # base_temp will be the parent dir of 'mydir'
+    # you don't have to use getbasetemp()
+    # using it here just to show that it's available
+    base_temp = tmpdir_factory.getbasetemp()
+    print('base:', base_temp)
+
+    # the rest of this test looks the same as the 'test_tmpdir()'
+    # example except I'm using a_dir instead of tmpdir
+
+    a_file = a_dir.join('something.txt')
+    a_sub_dir = a_dir.mkdir('anything')
+    another_file = a_sub_dir.join('something_else.txt')
+
+    a_file.write('contents may settle during shipping')
+    another_file.write('something different')
+
+    assert a_file.read() == 'contents may settle during shipping'
+    assert another_file.read() == 'something different'
 ```
 
 The first line uses mktemp('mydir') to create a directory and saves it in a_dir. For
@@ -118,7 +129,8 @@ so you can see where the directory is on your system. Let’s see where it is:
 
 ```
 $ cd /path/to/code/ch4
-$ pytest-q -s test_tmpdir.py::test_tmpdir_factory**
+$ pytest -q -s test_tmpdir.py::test_tmpdir_factory
+
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 /T/pytest-of-okken/pytest-732
 .
@@ -131,7 +143,7 @@ after a session, but pytest cleans them up and only the most recent few
 temporary base directories are left on the system, which is great if you need
 to inspect the files after a test run.
 
-You can also specify your own base directory if you need to with pytest--
+You can also specify your own base directory if you need to with pytest --
 basetemp=mydir.
 
 
@@ -150,27 +162,28 @@ file like this:
 
 ```
 **ch4/authors/conftest.py
-_"""Demonstratetmpdir_factory."""_
+
+"""Demonstrate tmpdir_factory."""
 
 import json
 import pytest
 
-@pytest.fixture(scope= _'module'_ )
-def author_file_json (tmpdir_factory):
-_"""Writesomeauthorsto a datafile."""_
-python_author_data= {
-_'Ned'_ : { _'City'_ : _'Boston'_ },
-_'Brian'_ : { _'City'_ : _'Portland'_ },
-_'Luciano'_ : { _'City'_ : _'SauPaulo'_ }
-}
 
+@pytest.fixture(scope='module')
+def author_file_json(tmpdir_factory):
+    """Write some authors to a data file."""
+    python_author_data = {
+        'Ned': {'City': 'Boston'},
+        'Brian': {'City': 'Portland'},
+        'Luciano': {'City': 'Sau Paulo'}
+    }
 
-file_= tmpdir_factory.mktemp( 'data' ).join( 'author_file.json' )
-print ( 'file:{}' .format(str(file_)))
+    file_ = tmpdir_factory.mktemp('data').join('author_file.json')
+    print('file:{}'.format(str(file_)))
 
-with file.open( 'w' ) as f:
-json.dump(python_author_data, f)
-return file
+    with file.open('w') as f:
+        json.dump(python_author_data, f)
+    return file
 ```
 
 The author_file_json() fixture creates a temporary directory called data and creates
@@ -181,23 +194,24 @@ the json file will only be created once per module that has a test using it:
 
 ```
 **ch4/authors/test_authors.py
-_"""Someteststhatuse tempdatafiles."""_
-import json**
 
-def test_brian_in_portland (author_file_json):
-_"""Atestthatusesa datafile."""_
-**with** author_file_json.open() **as** f:
-authors= json.load(f)
-**assert** authors[ _'Brian'_ ][ _'City'_ ] == _'Portland'_
-```
+"""Some tests that use temp data files."""
+import json
 
-```
-def test_all_have_cities (author_file_json):
-_"""Samefileis usedfor bothtests."""_
-**with** author_file_json.open() **as** f:
-authors= json.load(f)
-**for** a **in** authors:
-**assert** len(authors[a][ _'City'_ ]) > 0
+
+def test_brian_in_portland(author_file_json):
+    """A test that uses a data file."""
+    with author_file_json.open() as f:
+        authors = json.load(f)
+    assert authors['Brian']['City'] == 'Portland'
+
+
+def test_all_have_cities(author_file_json):
+    """Same file is used for both tests."""
+    with author_file_json.open() as f:
+        authors = json.load(f)
+    for a in authors:
+        assert len(authors[a]['City']) > 0
 ```
 
 Both tests will use the same json file. If one test data file works for multiple
@@ -225,11 +239,12 @@ options already available in the pytest command line:
 
 ```
 **ch4/pytestconfig/conftest.py
-def pytest_addoption (parser):
-parser.addoption( _"--myopt"_ , action= _"store_true"_ ,
-help= _"some booleanoption"_ )
-parser.addoption( _"--foo"_ , action= _"store"_ , default= _"bar"_ ,
-help= _"foo: bar or baz"_ )
+
+def pytest_addoption(parser):
+    parser.addoption("--myopt", action="store_true",
+                     help="some boolean option")
+    parser.addoption("--foo", action="store", default="bar",
+                     help="foo: bar or baz")
 ```
 
 Adding command-line options via pytest_addoption should be done via plugins
@@ -257,12 +272,16 @@ customoptions:
 
 Now we can access those options from a test:
 
+```
 **ch4/pytestconfig/test_config.py
+
 import pytest
 
-def test_option (pytestconfig):
-**print ( _'"foo"set to:'_ , pytestconfig.getoption( _'foo'_ ))
-**print ( _'"myopt"set to:'_ , pytestconfig.getoption( _'myopt'_ ))
+
+def test_option(pytestconfig):
+    print('"foo" set to:', pytestconfig.getoption('foo'))
+    print('"myopt" set to:', pytestconfig.getoption('myopt'))
+```
 
 Let’s see how this works:
 
@@ -290,17 +309,20 @@ You can make fixtures for the option names, if you like, like this:
 
 ```
 **ch4/pytestconfig/test_config.py
+
 @pytest.fixture()
-def foo (pytestconfig):
+def foo(pytestconfig):
     return pytestconfig.option.foo
 
+
 @pytest.fixture()
-def myopt (pytestconfig):
+def myopt(pytestconfig):
     return pytestconfig.option.myopt
 
-def test_fixtures_for_options (foo, myopt):
-**print ( _'"foo"set to:'_ , foo)
-**print ( _'"myopt"set to:'_ , myopt)
+
+def test_fixtures_for_options(foo, myopt):
+    print('"foo" set to:', foo)
+    print('"myopt" set to:', myopt)
 ```
 
 You can also access builtin options, not just options you add, as well as
@@ -314,16 +336,17 @@ Here’s an example of a few configuration values and options:
 
 ```
 **ch4/pytestconfig/test_config.py
-def test_pytestconfig (pytestconfig):
-**print ( _'args :'_ , pytestconfig.args)
-**print ( _'inifile :'_ , pytestconfig.inifile)
-**print ( _'invocation_dir :'_ , pytestconfig.invocation_dir)
-**print ( _'rootdir :'_ , pytestconfig.rootdir)
-**print ( _'-k EXPRESSION :'_ , pytestconfig.getoption( _'keyword'_ ))
-**print ( _'-v,--verbose :'_ , pytestconfig.getoption( _'verbose'_ ))
-**print ( _'-q,--quiet :'_ , pytestconfig.getoption( _'quiet'_ ))
-**print ( _'-l,--showlocals:'_ , pytestconfig.getoption( _'showlocals'_ ))
-**print ( _'--tb=style :'_ , pytestconfig.getoption( _'tbstyle'_ ))
+
+def test_pytestconfig(pytestconfig):
+    print('args            :', pytestconfig.args)
+    print('inifile         :', pytestconfig.inifile)
+    print('invocation_dir  :', pytestconfig.invocation_dir)
+    print('rootdir         :', pytestconfig.rootdir)
+    print('-k EXPRESSION   :', pytestconfig.getoption('keyword'))
+    print('-v, --verbose   :', pytestconfig.getoption('verbose'))
+    print('-q, --quiet     :', pytestconfig.getoption('quiet'))
+    print('-l, --showlocals:', pytestconfig.getoption('showlocals'))
+    print('--tb=style      :', pytestconfig.getoption('tbstyle'))
 ```
 
 You’ll use pytestconfig again when I demonstrate ini files in Lab 6, Config-
@@ -351,6 +374,7 @@ of cache options:
 
 ```
 $ pytest --help
+
 ...
 --lf, --last-failed rerun only the tests that failed at the last run (or
 all if none failed)
@@ -369,11 +393,13 @@ To see these in action, we’ll use these two tests:
 
 ```
 **ch4/cache/test_pass_fail.py
-def test_this_passes ():
-**assert** 1 == 1
 
-def test_this_fails ():
-**assert** 1 == 2
+def test_this_passes():
+    assert 1 == 1
+
+
+def test_this_fails():
+    assert 1 == 2
 ```
 
 Let’s run them using --verbose to see the function names, and --tb=no to hide
@@ -381,7 +407,8 @@ the stack trace:
 
 ```
 $ cd /path/to/code/ch4/cache
-$ pytest--verbose--tb=notest_pass_fail.py
+$ pytest --verbose--tb=notest_pass_fail.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -396,7 +423,8 @@ ously will be run first, followed by the rest of the session:
 
 
 ```
-$ pytest--verbose--tb=no--fftest_pass_fail.py
+$ pytest --verbose--tb=no--fftest_pass_fail.py
+
 ===================testsessionstarts===================
 collected2 items
 run-last-failure:rerunprevious1 failurefirst
@@ -410,7 +438,8 @@ test_pass_fail.py::test_this_passesPASSED [100%]
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
 
 ```
-venv)$ pytest--verbose--tb=no--lftest_pass_fail.py
+venv)$ pytest --verbose--tb=no--lftest_pass_fail.py
+
 ===================testsessionstarts===================
 collected2 items/ 1 deselected
 run-last-failure:rerunprevious1 failure
@@ -430,33 +459,37 @@ Here’s a parametrized test with one failure:
 
 ```
 **ch4/cache/test_few_failures.py
-_"""Demonstrate-lf and -ff withfailingtests."""_
+
+"""Demonstrate -lf and -ff with failing tests."""
 
 import pytest
-frompytestimport** approx
+from pytest import approx
 
-testdata= [
-_# x, y, expected_
-(1.01,2.01,3.02),
-(1e25,1e23,1.1e25),
-(1.23,3.21,4.44),
-(0.1,0.2,0.3),
-(1e25,1e24,1.1e25)
+
+testdata = [
+    # x, y, expected
+    (1.01, 2.01, 3.02),
+    (1e25, 1e23, 1.1e25),
+    (1.23, 3.21, 4.44),
+    (0.1, 0.2, 0.3),
+    (1e25, 1e24, 1.1e25)
 ]
 
-@pytest.mark.parametrize( _"x,y,expected"_ , testdata)
-def test_a (x, y, expected):
-_"""Demoapprox()."""_
-sum_= x + y
-**assert** sum_== approx(expected)
+
+@pytest.mark.parametrize("x,y,expected", testdata)
+def test_a(x, y, expected):
+    """Demo approx()."""
+    sum_ = x + y
+    assert sum_ == approx(expected)
 ```
 
 And the output:
 
 ```
 $ cd /path/to/code/ch4/cache
-$ pytest-q test_few_failures.py
+$ pytest -q test_few_failures.py
 .F... [100%]
+
 ========================FAILURES=========================
 _______________test_a[1e+25-1e+23-1.1e+25]_______________
 
@@ -480,7 +513,7 @@ the test again to see the failure again. You can specify the test case on the
 command line:
 
 ```
-$ pytest-q** _"test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"_
+$ pytest -q "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
 ```
 
 If you don’t want to copy/paste or there are multiple failed cases you’d like
@@ -489,9 +522,10 @@ another flag that might make things easier is --showlocals, or -l for short:
 
 
 ```
-$ pytest-q --lf-l test_few_failures.py
+$ pytest -q --lf-l test_few_failures.py
 run-last-failure:rerunprevious1 failure
 F [100%]
+
 ========================FAILURES=========================
 _______________test_a[1e+25-1e+23-1.1e+25]_______________
 
@@ -521,7 +555,8 @@ test failure information from the last test session. You can see the stored
 information with --cache-show:
 
 ```
-$ pytest--cache-show**
+$ pytest --cache-show
+
 =====================testsessionstarts======================
 -------------------------cachevalues-------------------------
 cache/lastfailedcontains:
@@ -529,7 +564,8 @@ cache/lastfailedcontains:
 
 =================no testsran in 0.00seconds=================
 
-$ pytest--cache-show**
+$ pytest --cache-show
+
 ===================testsessionstarts===================
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
@@ -572,21 +608,22 @@ Here’s our fixture used to time tests:
 
 ```
 **ch4/cache/test_slower.py
+
 @pytest.fixture(autouse=True)
-def check_duration (request,cache):
-key = _'duration/'_ + request.node.nodeid.replace( _':'_ , _'_'_ )
-_# nodeid'scan havecolons
-# keysbecomefilenameswithin.cache
-# replacecolonswithsomethingfilenamesafe_
-start_time= datetime.datetime.now()
-**yield**
-stop_time= datetime.datetime.now()
-this_duration= (stop_time- start_time).total_seconds()
-last_duration= cache.get(key,None)
-cache.set(key,this_duration)
-**if** last_duration **is not** None:
-errorstring= _"testdurationover2x lastduration"_
-**assert** this_duration<= last_duration* 2, errorstring
+def check_duration(request, cache):
+    key = 'duration/' + request.node.nodeid.replace(':', '_')
+    # nodeid's can have colons
+    # keys become filenames within .cache
+    # replace colons with something filename safe
+    start_time = datetime.datetime.now()
+    yield
+    stop_time = datetime.datetime.now()
+    this_duration = (stop_time - start_time).total_seconds()
+    last_duration = cache.get(key, None)
+    cache.set(key, this_duration)
+    if last_duration is not None:
+        errorstring = "test duration over 2x last duration"
+        assert this_duration <= last_duration * 2, errorstring
 ```
 
 The fixture is autouse, so it doesn’t need to be referenced from the test. The
@@ -599,9 +636,10 @@ Now we need some tests that take different amounts of time:
 
 ```
 **ch4/cache/test_slower.py
-@pytest.mark.parametrize( _'i'_ , range(5))
-def test_slow_stuff (i):
-time.sleep(random.random())
+
+@pytest.mark.parametrize('i', range(5))
+def test_slow_stuff(i):
+    time.sleep(random.random())
 ```
 
 Because you probably don’t want to write a bunch of tests for this, I used
@@ -611,11 +649,12 @@ of times:
 
 ```
 $ cd /path/to/code/ch4/cache
-$ pytest-q --tb=linetest_slower.py
+$ pytest -q --tb=linetest_slower.py
 ..... [100%]
 5 passedin 1.40seconds
 $ pytest-q --tb=linetest_slower.py
 ..E.E.. [100%]
+
 =========================ERRORS==========================
 _________ERRORat teardownof test_slow_stuff[1]_________
 E AssertionError:testdurationover2x lastduration
@@ -629,7 +668,8 @@ assert0.28841<= (0.086302* 2)
 Well, that was fun. Let’s see what’s in the cache:
 
 ```
-$ pytest-q --cache-show**
+$ pytest -q --cache-show
+
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower.py::test_slow_stuff[1]':True,
@@ -671,26 +711,26 @@ Here’s one possible refactoring of the same functionality:
 
 ```
 **ch4/cache/test_slower_2.py
-Duration= namedtuple( _'Duration'_ , [ _'current'_ , _'last'_ ])
 
-@pytest.fixture(scope= _'session'_ )
-def duration_cache (request):
-key = _'duration/testdurations'_
-d = Duration({},request.config.cache.get(key,{}))
-**yield** d
-request.config.cache.set(key,d.current)
+@pytest.fixture(scope='session')
+def duration_cache(request):
+    key = 'duration/testdurations'
+    d = Duration({}, request.config.cache.get(key, {}))
+    yield d
+    request.config.cache.set(key, d.current)
+
 
 @pytest.fixture(autouse=True)
-def check_duration (request,duration_cache):
-d = duration_cache
-nodeid= request.node.nodeid
-start_time= datetime.datetime.now()
-**yield**
-duration= (datetime.datetime.now()- start_time).total_seconds()
-d.current[nodeid]= duration
-**if** d.last.get(nodeid,None) **is not** None:
-errorstring= _"testdurationover2x lastduration"_
-**assert** duration<= (d.last[nodeid]* 2), errorstring
+def check_duration(request, duration_cache):
+    d = duration_cache
+    nodeid = request.node.nodeid
+    start_time = datetime.datetime.now()
+    yield
+    duration = (datetime.datetime.now() - start_time).total_seconds()
+    d.current[nodeid] = duration
+    if d.last.get(nodeid, None) is not None:
+        errorstring = "test duration over 2x last duration"
+        assert duration <= (d.last[nodeid] * 2), errorstring
 ```
 
 The duration_cache fixture is session scope. It reads the previous entry or an empty
@@ -705,15 +745,16 @@ end of the test session, the collected current dictionary is saved in the cache.
 After running it a couple of times, let’s look at the saved cache:
 
 ```
-$ pytest-q --cache-cleartest_slower_2.py
+$ pytest -q --cache-cleartest_slower_2.py
 ..... [100%]
 5 passedin 2.27seconds
 
-$ pytest-q --tb=notest_slower_2.py
+$ pytest -q --tb=notest_slower_2.py
 .E.E...E [100%]
 5 passed,3 errorin 3.65seconds
 
-$ pytest-q --cache-show**
+$ pytest -q --cache-show
+
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower_2.py::test_slow_stuff[0]':True,
@@ -747,8 +788,9 @@ Suppose you have a function to print a greeting to stdout:
 
 ```
 **ch4/cap/test_capsys.py
-def greeting (name):
-**print ( _'Hi,{}'_ .format(name))
+
+def greeting(name):
+    print('Hi, {}'.format(name))
 ```
 
 You can’t test it by checking the return value. You have to test stdout somehow.
@@ -756,16 +798,18 @@ You can test the output by using capsys:
 
 ```
 **ch4/cap/test_capsys.py
-def test_greeting (capsys):
-greeting( _'Earthling'_ )
-out,err = capsys.readouterr()
-**assert** out == _'Hi,Earthling\n'_
-**assert** err == _''_
-greeting( _'Brian'_ )
-greeting( _'Nerd'_ )
-out,err = capsys.readouterr()
-**assert** out == _'Hi,Brian\nHi, Nerd\n'_
-**assert** err == _''_
+
+def test_greeting(capsys):
+    greeting('Earthling')
+    out, err = capsys.readouterr()
+    assert out == 'Hi, Earthling\n'
+    assert err == ''
+
+    greeting('Brian')
+    greeting('Nerd')
+    out, err = capsys.readouterr()
+    assert out == 'Hi, Brian\nHi, Nerd\n'
+    assert err == ''
 ```
 
 The captured stdout and stderr are retrieved from capsys.redouterr(). The return
@@ -776,14 +820,16 @@ The previous example only used stdout. Let’s look at an example using stderr:
 
 ```
 **ch4/cap/test_capsys.py
-def yikes (problem):
-**print ( _'YIKES!{}'_ .format(problem),file=sys.stderr)
 
-def test_yikes (capsys):
-yikes( _'Outof coffee!'_ )
-out,err = capsys.readouterr()
-**assert** out == _''_
-**assert** _'Outof coffee!'_ **in** err
+def yikes(problem):
+    print('YIKES! {}'.format(problem), file=sys.stderr)
+
+
+def test_yikes(capsys):
+    yikes('Out of coffee!')
+    out, err = capsys.readouterr()
+    assert out == ''
+    assert 'Out of coffee!' in err
 ```
 
 
@@ -811,7 +857,7 @@ Now, 'alwaysprint this' will always be output:
 
 ```
 $ cd /path/to/code/ch4/cap
-$ pytest-q test_capsys.py::test_capsys_disabled**
+$ pytest -q test_capsys.py::test_capsys_disabled
 
 alwaysprintthis
 
@@ -868,31 +914,32 @@ reads and writes a cheese preferences file:
 
 ```
 **ch4/monkey/cheese.py
-importos
-importjson**
 
-def read_cheese_preferences ():
-full_path= os.path.expanduser( _'~/.cheese.json'_ )
-**with** open(full_path, _'r'_ ) **as** f:
-prefs= json.load(f)
+import os
+import json
+
+
+def read_cheese_preferences():
+    full_path = os.path.expanduser('~/.cheese.json')
+    with open(full_path, 'r') as f:
+        prefs = json.load(f)
     return prefs
 
-def write_cheese_preferences (prefs):
-full_path= os.path.expanduser( _'~/.cheese.json'_ )
-**with** open(full_path, _'w'_ ) **as** f:
-json.dump(prefs,f, indent=4)
 
-def write_default_cheese_preferences ():
-write_cheese_preferences(_default_prefs)
-```
+def write_cheese_preferences(prefs):
+    full_path = os.path.expanduser('~/.cheese.json')
+    with open(full_path, 'w') as f:
+        json.dump(prefs, f, indent=4)
 
 
-```
-_default_prefs= {
-_'slicing'_ : [ _'manchego'_ , _'sharpcheddar'_ ],
-_'spreadable'_ : [ _'SaintAndre'_ , _'camembert'_ ,
-_'bucheron'_ , _'goat'_ , _'humboltfog'_ , _'cambozola'_ ],
-_'salads'_ : [ _'crumbledfeta'_ ]
+def write_default_cheese_preferences():
+    write_cheese_preferences(_default_prefs)
+
+_default_prefs = {
+    'slicing': ['manchego', 'sharp cheddar'],
+    'spreadable': ['Saint Andre', 'camembert',
+                   'bucheron', 'goat', 'humbolt fog', 'cambozola'],
+    'salads': ['crumbled feta']
 }
 ```
 
@@ -907,11 +954,12 @@ them in the testing of write_default_cheese_preferences():
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_full ():
-cheese.write_default_cheese_preferences()
-expected= cheese._default_prefs
-actual= cheese.read_cheese_preferences()
-**assert** expected== actual
+
+def test_def_prefs_full():
+    cheese.write_default_cheese_preferences()
+    expected = cheese._default_prefs
+    actual = cheese.read_cheese_preferences()
+    assert expected == actual
 ```
 
 One problem with this is that anyone who runs this test code will overwrite
@@ -923,12 +971,13 @@ HOME to point to that new temporary directory:
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_change_home (tmpdir,monkeypatch):
-monkeypatch.setenv( _'HOME'_ , tmpdir.mkdir( _'home'_ ))
-cheese.write_default_cheese_preferences()
-expected= cheese._default_prefs
-actual= cheese.read_cheese_preferences()
-**assert** expected== actual
+
+def test_def_prefs_change_home(tmpdir, monkeypatch):
+    monkeypatch.setenv('HOME', tmpdir.mkdir('home'))
+    cheese.write_default_cheese_preferences()
+    expected = cheese._default_prefs
+    actual = cheese.read_cheese_preferences()
+    assert expected == actual
 ```
 
 This is a pretty good test, but relying on HOME seems a little operating-system
@@ -946,14 +995,15 @@ Instead of patching the HOME environmental variable, let’s patch expanduser:
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_change_expanduser (tmpdir,monkeypatch):
-fake_home_dir= tmpdir.mkdir( _'home'_ )
-monkeypatch.setattr(cheese.os.path, _'expanduser'_ ,
-( **lambda** x: x.replace( _'~'_ , str(fake_home_dir))))
-cheese.write_default_cheese_preferences()
-expected= cheese._default_prefs
-actual= cheese.read_cheese_preferences()
-**assert** expected== actual
+
+def test_def_prefs_change_expanduser(tmpdir, monkeypatch):
+    fake_home_dir = tmpdir.mkdir('home')
+    monkeypatch.setattr(cheese.os.path, 'expanduser',
+                        (lambda x: x.replace('~', str(fake_home_dir))))
+    cheese.write_default_cheese_preferences()
+    expected = cheese._default_prefs
+    actual = cheese.read_cheese_preferences()
+    assert expected == actual
 ```
 
 During the test, anything in the cheese module that calls os.path.expanduser() gets
@@ -967,24 +1017,28 @@ ences() is called:
 
 ```
 **ch4/monkey/test_cheese.py
-def test_def_prefs_change_defaults (tmpdir,monkeypatch):
-_# writethe fileonce_
-fake_home_dir= tmpdir.mkdir( _'home'_ )
-monkeypatch.setattr(cheese.os.path, _'expanduser'_ ,
-( **lambda** x: x.replace( _'~'_ , str(fake_home_dir))))
-cheese.write_default_cheese_preferences()
-defaults_before= copy.deepcopy(cheese._default_prefs)
-_# changethe defaults_
-monkeypatch.setitem(cheese._default_prefs, _'slicing'_ , [ _'provolone'_ ])
-monkeypatch.setitem(cheese._default_prefs, _'spreadable'_ , [ _'brie'_ ])
-monkeypatch.setitem(cheese._default_prefs, _'salads'_ , [ _'pepperjack'_ ])
-defaults_modified= cheese._default_prefs
-_# writeit againwithmodified defaults_
-cheese.write_default_cheese_preferences()
-_# read,and check_
-actual= cheese.read_cheese_preferences()
-**assert** defaults_modified== actual
-**assert** defaults_modified!= defaults_before
+
+def test_def_prefs_change_defaults(tmpdir, monkeypatch):
+    # write the file once
+    fake_home_dir = tmpdir.mkdir('home')
+    monkeypatch.setattr(cheese.os.path, 'expanduser',
+                        (lambda x: x.replace('~', str(fake_home_dir))))
+    cheese.write_default_cheese_preferences()
+    defaults_before = copy.deepcopy(cheese._default_prefs)
+
+    # change the defaults
+    monkeypatch.setitem(cheese._default_prefs, 'slicing', ['provolone'])
+    monkeypatch.setitem(cheese._default_prefs, 'spreadable', ['brie'])
+    monkeypatch.setitem(cheese._default_prefs, 'salads', ['pepper jack'])
+    defaults_modified = cheese._default_prefs
+
+    # write it again with modified defaults
+    cheese.write_default_cheese_preferences()
+
+    # read, and check
+    actual = cheese.read_cheese_preferences()
+    assert defaults_modified == actual
+    assert defaults_modified != defaults_before
 ```
 
 Because _default_prefs is a dictionary, we can use monkeypatch.setitem() to change
@@ -1033,42 +1087,46 @@ file docstring and the docstrings of the functions:
 
 ```
 **ch4/dt/1/unnecessary_math.py
-_"""
-Thismoduledefinesmultiply(a,b) and divide(a,b)._
 
-_>>> importunnecessary_mathas um_
+"""
+This module defines multiply(a, b) and divide(a, b).
 
-_Here'show you use multiply:_
+>>> import unnecessary_math as um
 
-_>>> um.multiply(4,3)
+Here's how you use multiply:
+
+>>> um.multiply(4, 3)
 12
->>> um.multiply('a',3)
-'aaa'_
-```
-
-```
-_Here'show you use divide:_
-
-_>>> um.divide(10,5)
-2.0
-"""_
-
-def multiply (a, b):
-_"""
-Returnsa multipliedby b.
->>> um.multiply(4,3)
-12
->>> um.multiply('a',3)
+>>> um.multiply('a', 3)
 'aaa'
-"""_
+
+
+Here's how you use divide:
+
+>>> um.divide(10, 5)
+2.0
+"""
+
+
+def multiply(a, b):
+    """
+    Returns a multiplied by b.
+
+    >>> um.multiply(4, 3)
+    12
+    >>> um.multiply('a', 3)
+    'aaa'
+    """
     return a * b
 
-def divide (a, b):
-_"""
-Returnsa dividedby b.
->>> um.divide(10,5)
-2.0
-"""_
+
+def divide(a, b):
+    """
+    Returns a divided by b.
+
+    >>> um.divide(10, 5)
+    2.0
+    """
     return a / b
 ```
 
@@ -1081,7 +1139,8 @@ but the code in the docstrings of the functions will fail:
 
 ```
 $ cd /path/to/code/ch4/dt/1
-$ pytest-v --doctest-modules--tb=shortunnecessary_math.py
+$ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+
 ===================testsessionstarts===================
 collected3 items
 
@@ -1107,6 +1166,7 @@ File"<doctestunnecessary_math.divide[0]>", line1, in <module>
 NameError:name'um'is not defined
 
 /path/to/code/ch4/dt/1/unnecessary_math.py:37:UnexpectedException
+
 ___________[doctest]unnecessary_math.multiply___________
 022
 023 Returnsa multipliedby b.
@@ -1121,6 +1181,7 @@ File"<doctestunnecessary_math.multiply[0]>",line1, in <module>
 NameError:name'um'is not defined
 
 /path/to/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
+
 ===========2 failed,1 passedin 0.12seconds============
 ```
 
@@ -1128,24 +1189,28 @@ One way to fix it is to put the import statement in each docstring:
 
 ```
 **ch4/dt/2/unnecessary_math.py
-def multiply (a, b):
-_"""
-Returnsa multipliedby b.
->>> importunnecessary_mathas um
->>> um.multiply(4,3)
-12
->>> um.multiply('a',3)
-'aaa'
-"""_
+
+def multiply(a, b):
+    """
+    Returns a multiplied by b.
+
+    >>> import unnecessary_math as um
+    >>> um.multiply(4, 3)
+    12
+    >>> um.multiply('a', 3)
+    'aaa'
+    """
     return a * b
 
-def divide (a, b):
-_"""
-Returnsa dividedby b.
->>> importunnecessary_mathas um
->>> um.divide(10,5)
-2.0
-"""_
+
+def divide(a, b):
+    """
+    Returns a divided by b.
+
+    >>> import unnecessary_math as um
+    >>> um.divide(10, 5)
+    2.0
+    """
     return a / b
 ```
 
@@ -1153,7 +1218,8 @@ This definitely fixes the problem:
 
 ```
 $ cd /path/to/code/ch4/dt/2
-$ pytest-v --doctest-modules--tb=shortunnecessary_math.py
+$ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+
 ===================testsessionstarts===================
 collected3 items
 
@@ -1174,12 +1240,14 @@ conftest.py file, will fix the problem without changing the source code:
 
 ```
 **ch4/dt/3/conftest.py
-importpytest
-importunnecessary_math**
+
+import pytest
+import unnecessary_math
+
 
 @pytest.fixture(autouse=True)
-def add_um (doctest_namespace):
-doctest_namespace[ _'um'_ ] = unnecessary_math
+def add_um(doctest_namespace):
+    doctest_namespace['um'] = unnecessary_math
 ```
 
 This tells pytest to add the um name to the doctest_namespace and have it
@@ -1201,24 +1269,27 @@ and leave it there for a release or two:
 
 ```
 **ch4/test_warnings.py
-importwarnings
+
+import warnings
 import pytest
 
-def lame_function ():
-warnings.warn( _"Pleasestopusingthis"_ , DeprecationWarning)
-_# restof function_
+
+def lame_function():
+    warnings.warn("Please stop using this", DeprecationWarning)
+    # rest of function
 ```
 
 We can make sure the warning is getting issued correctly with a test:
 
 ```
 **ch4/test_warnings.py
-def test_lame_function (recwarn):
-lame_function()
-**assert** len(recwarn)== 1
-w = recwarn.pop()
-**assert** w.category== DeprecationWarning
-**assert** str(w.message)== _'Pleasestopusingthis'_
+
+def test_lame_function(recwarn):
+    lame_function()
+    assert len(recwarn) == 1
+    w = recwarn.pop()
+    assert w.category == DeprecationWarning
+    assert str(w.message) == 'Please stop using this'
 ```
 
 
@@ -1234,13 +1305,15 @@ In addition to recwarn, pytest can check for warnings with pytest.warns():
 
 ```
 **ch4/test_warnings.py
-def test_lame_function_2 ():
-**with** pytest.warns(None) **as** warning_list:
-lame_function()
-**assert** len(warning_list)== 1
-w = warning_list.pop()
-**assert** w.category== DeprecationWarning
-**assert** str(w.message)== _'Pleasestopusingthis'_
+
+def test_lame_function_2():
+    with pytest.warns(None) as warning_list:
+        lame_function()
+
+    assert len(warning_list) == 1
+    w = warning_list.pop()
+    assert w.category == DeprecationWarning
+    assert str(w.message) == 'Please stop using this'
 ```
 
 The pytest.warns() context manager provides an elegant way to demark what

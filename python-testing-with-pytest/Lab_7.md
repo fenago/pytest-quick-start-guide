@@ -20,8 +20,10 @@ failures:
 
 ```
 $ cd /path/to/code/ch3/c/tasks_proj
-$ pytest--tb=no-q**
+$ pytest --tb=no-q
+
 .........................................FF.FFFFFFF[ 53%]
+
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
 42 failed,54 passedin 5.51seconds
 
@@ -56,7 +58,8 @@ backs, and we didn’t have --verbose turned on. Let’s re-run the failures (at
 three of them) with verbose:
 
 ```
-$ pytest--tb=no--verbose--lf--maxfail=3**
+$ pytest --tb=no--verbose--lf--maxfail=3
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -75,7 +78,8 @@ ables with -l:
 
 
 ```
-$ pytest-v --lf-l -x**
+$ pytest -v --lf-l -x
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -123,7 +127,8 @@ wasn’t obvious why this test failed. We can have pytest start a debugging
 session and start us right at the point of failure with --pdb:
 
 ```
-$ pytest-v --lf-x --pdb**
+$ pytest -v --lf-x --pdb
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -228,7 +233,7 @@ pytest-cov, it is sufficient to install pytest-cov, as it will pull in coverage.
 
 ```
 $ pip install pytest-cov
-...**
+...
 Installingcollectedpackages:coverage,pytest-cov
 Successfullyinstalledcoverage-4.5.1 pytest-cov-2.5.1
 ```
@@ -237,14 +242,14 @@ Let’s run the coverage report on version 2 of Tasks. If you still have the fir
 version of the Tasks project installed, uninstall it and install version 2:
 
 ```
-$ pip uninstalltasks**
+$ pip uninstalltasks
 Uninstallingtasks-0.1.0:
 ...
 
 Proceed(y/n)?y
 Successfullyuninstalledtasks-0.1.0
 $ cd /path/to/code/ch7/tasks_proj_v2
-$ pip install -e.**
+$ pip install -e.
 Obtainingfile:///path/to/code/ch7/tasks_proj_v2
 ...
 
@@ -252,7 +257,7 @@ Installingcollectedpackages:tasks
 Runningsetup.pydevelopfor tasks
 Successfullyinstalledtasks
 $ pip list
-...**
+...
 tasks 0.1.1 /path/to/code/tasks_proj_v2/src
 ...
 ```
@@ -264,7 +269,8 @@ erage report:
 
 ```
 $ cd /path/to/code/ch7/tasks_proj_v2
-$ pytest--cov=src**
+$ pytest --cov=src
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected62 items
@@ -311,7 +317,8 @@ If you run coverage.py again with --cov-report=html, an HTML report is generated
 
 
 ```
-$ pytest--cov=src--cov-report=html**
+$ pytest --cov=src--cov-report=html
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 ```
@@ -426,7 +433,7 @@ Let’s pause and install version 2 of Tasks:
 ```
 $ cd /path/to/code/
 $ pip install -e ch7/tasks_proj_v2
-...**
+...
 Successfullyinstalledtasks
 ```
 
@@ -438,9 +445,9 @@ $ taskslist**
 ID owner donesummary
 -- ----- -----------
 ```
-$ tasksadd** _"do somethinggreat"_
-$ tasksadd** _"repeat"_ **-o Brian
-$ tasksadd** _"againand again"_ **--ownerOkken
+$ tasksadd** "do somethinggreat"
+$ tasksadd** "repeat" **-o Brian
+$ tasksadd** "againand again" **--ownerOkken
 $ taskslist**
 ID owner donesummary
 -- ----- -----------
@@ -451,7 +458,9 @@ $ taskslist-o Brian**
 ID owner donesummary
 -- ----- -----------
 2 BrianFalserepeat
-$ taskslist--ownerBrian**
+
+$ taskslist--ownerBrian
+
 ID owner donesummary
 -- ----- -----------
 2 BrianFalserepeat
@@ -467,18 +476,20 @@ into the code to decide what to mock and where. The main entry point is here:
 
 ```
 **ch7/tasks_proj_v2/src/tasks/cli.py
-if** __name__== _'__main__'_ :
-tasks_cli()
+
+if __name__ == '__main__':
+    tasks_cli()
 ```
 
 That’s just a call to tasks_cli():
 
 **ch7/tasks_proj_v2/src/tasks/cli.py
-@click.group(context_settings={ _'help_option_names'_ : [ _'-h'_ , _'--help'_ ]})
-@click.version_option(version= _'0.1.1'_ )
-def tasks_cli ():
-_"""Runthe tasksapplication."""_
-**pass**
+
+@click.group(context_settings={'help_option_names': ['-h', '--help']})
+@click.version_option(version='0.1.1')
+def tasks_cli():
+    """Run the tasks application."""
+    pass
 ```
 
 Obvious? No. But hold on, it gets better (or worse, depending on your perspec-
@@ -486,23 +497,25 @@ tive). Here’s one of the commands—the list command:
 
 ```
 **ch7/tasks_proj_v2/src/tasks/cli.py
-@tasks_cli.command(name= _"list"_ , help= _"listtasks"_ )
-@click.option( _'-o'_ , _'--owner'_ , default=None,
-help= _'listtaskswiththisowner'_ )
-def list_tasks (owner):
-_"""
-Listtasksin db.
-If ownergiven,onlylisttaskswiththatowner.
-"""_
-formatstr= _"{: >4} {: >10}{: >5} {}"_
-**print (formatstr.format( _'ID'_ , _'owner'_ , _'done'_ , _'summary'_ ))
-**print (formatstr.format( _'--'_ , _'-----'_ , _'----'_ , _'-------'_ ))
-**with** _tasks_db():
-**for** t **in** tasks.list_tasks(owner):
-done= _'True'_ **if** t.done **else** _'False'_
-owner= _''_ **if** t.owner **is** None **else** t.owner
-**print (formatstr.format(
-t.id,owner,done,t.summary))
+
+@tasks_cli.command(name="list", help="list tasks")
+@click.option('-o', '--owner', default=None,
+              help='list tasks with this owner')
+def list_tasks(owner):
+    """
+    List tasks in db.
+
+    If owner given, only list tasks with that owner.
+    """
+    formatstr = "{: >4} {: >10} {: >5} {}"
+    print(formatstr.format('ID', 'owner', 'done', 'summary'))
+    print(formatstr.format('--', '-----', '----', '-------'))
+    with _tasks_db():
+        for t in tasks.list_tasks(owner):
+            done = 'True' if t.done else 'False'
+            owner = '' if t.owner is None else t.owner
+            print(formatstr.format(
+                  t.id, owner, done, t.summary))
 ```
 
 Once you get used to writing Click code, it’s not that bad. I’m not going to
@@ -522,12 +535,13 @@ To stub _tasks_db(), let’s look at the real implementation:
 
 ```
 **ch7/tasks_proj_v2/src/tasks/cli.py
+
 @contextmanager
-def _tasks_db ():
-config= tasks.config.get_config()
-tasks.start_tasks_db(config.db_path,config.db_type)
-**yield**
-tasks.stop_tasks_db()
+def _tasks_db():
+    config = tasks.config.get_config()
+    tasks.start_tasks_db(config.db_path, config.db_type)
+    yield
+    tasks.stop_tasks_db()
 ```
 
 The _tasks_db() function is a context manager that retrieves the configuration
@@ -544,9 +558,10 @@ can replace the context manager with a simple stub:
 
 ```
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
+
 @contextmanager
-def stub_tasks_db ():
-**yield**
+def stub_tasks_db():
+    yield
 ```
 
 Because this is the first time we’ve looked at our test code for test_cli,py, let’s
@@ -554,16 +569,18 @@ look at this with all of the import statements:
 
 ```
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
-fromclick.testingimport** CliRunner
-**fromcontextlibimport** contextmanager
+
+from click.testing import CliRunner
+from contextlib import contextmanager
 import pytest
-fromtasks.apiimport** Task
+from tasks.api import Task
 import tasks.cli
-importtasks.config**
+import tasks.config
+
 
 @contextmanager
-def stub_tasks_db ():
-**yield**
+def stub_tasks_db():
+    yield
 ```
 
 Those imports are for the tests. The only import needed for the stub is from
@@ -575,12 +592,13 @@ at an actual test. Here’s a test that calls tasks list:
 
 ```
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
-def test_list_no_args (mocker):
-mocker.patch.object(tasks.cli, _'_tasks_db'_ , new=stub_tasks_db)
-mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ , return_value=[])
-runner= CliRunner()
-runner.invoke(tasks.cli.tasks_cli,[ _'list'_ ])
-tasks.cli.tasks.list_tasks.assert_called_once_with(None)
+
+def test_list_no_args(mocker):
+    mocker.patch.object(tasks.cli, '_tasks_db', new=stub_tasks_db)
+    mocker.patch.object(tasks.cli.tasks, 'list_tasks', return_value=[])
+    runner = CliRunner()
+    runner.invoke(tasks.cli.tasks_cli, ['list'])
+    tasks.cli.tasks.list_tasks.assert_called_once_with(None)
 ```
 
 The mocker fixture is provided by pytest-mock as a convenience interface to
@@ -608,17 +626,19 @@ Let’s look at an almost identical test function that checks the output:
 
 ```
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
-@pytest.fixture()
-def no_db (mocker):
-mocker.patch.object(tasks.cli, _'_tasks_db'_ , new=stub_tasks_db)
 
-def test_list_print_empty (no_db,mocker):
-mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ , return_value=[])
-runner= CliRunner()
-result= runner.invoke(tasks.cli.tasks_cli,[ _'list'_ ])
-expected_output= ( _" ID owner donesummary\n"
-" -- ----- -----------\n"_ )
-**assert** result.output== expected_output
+@pytest.fixture()
+def no_db(mocker):
+    mocker.patch.object(tasks.cli, '_tasks_db', new=stub_tasks_db)
+
+
+def test_list_print_empty(no_db, mocker):
+    mocker.patch.object(tasks.cli.tasks, 'list_tasks', return_value=[])
+    runner = CliRunner()
+    result = runner.invoke(tasks.cli.tasks_cli, ['list'])
+    expected_output = ("  ID      owner  done summary\n"
+                       "  --      -----  ---- -------\n")
+    assert result.output == expected_output
 ```
 
 This time we put the mock stubbing of tasks_db into a no_db fixture so we
@@ -643,43 +663,48 @@ but perhaps looking at several of these makes the code easier to understand:
 
 ```
 **ch7/tasks_proj_v2/tests/unit/test_cli.py
-def test_list_print_many_items (no_db,mocker):
-many_tasks= (
-Task( _'writelab'_ , _'Brian'_ , True,1),
-Task( _'editlab'_ , _'Katie'_ , False,2),
-Task( _'modifylab'_ , _'Brian'_ , False,3),
-Task( _'finalizelab'_ , _'Katie'_ , False,4),
-)
-mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ ,
-return_value=many_tasks)
-runner= CliRunner()
-result= runner.invoke(tasks.cli.tasks_cli,[ _'list'_ ])
-expected_output= ( _" ID owner donesummary\n"
-" -- ----- -----------\n"
-" 1 Brian Truewritelab\n"
-" 2 KatieFalseeditlab\n"
-" 3 BrianFalsemodifylab\n"
-" 4 KatieFalsefinalizelab\n"_ )
-**assert** result.output== expected_output
 
-def test_list_dash_o (no_db,mocker):
-mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ )
-runner= CliRunner()
-runner.invoke(tasks.cli.tasks_cli,[ _'list'_ , _'-o'_ , _'brian'_ ])
-tasks.cli.tasks.list_tasks.assert_called_once_with( _'brian'_ )
+def test_list_print_many_items(no_db, mocker):
+    many_tasks = (
+        Task('write chapter', 'Brian', True, 1),
+        Task('edit chapter', 'Katie', False, 2),
+        Task('modify chapter', 'Brian', False, 3),
+        Task('finalize chapter', 'Katie', False, 4),
+    )
+    mocker.patch.object(tasks.cli.tasks, 'list_tasks',
+                        return_value=many_tasks)
+    runner = CliRunner()
+    result = runner.invoke(tasks.cli.tasks_cli, ['list'])
+    expected_output = ("  ID      owner  done summary\n"
+                       "  --      -----  ---- -------\n"
+                       "   1      Brian  True write chapter\n"
+                       "   2      Katie False edit chapter\n"
+                       "   3      Brian False modify chapter\n"
+                       "   4      Katie False finalize chapter\n")
+    assert result.output == expected_output
 
-def test_list_dash_dash_owner (no_db,mocker):
-mocker.patch.object(tasks.cli.tasks, _'list_tasks'_ )
-runner= CliRunner()
-runner.invoke(tasks.cli.tasks_cli,[ _'list'_ , _'--owner'_ , _'okken'_ ])
-tasks.cli.tasks.list_tasks.assert_called_once_with( _'okken'_ )
+
+def test_list_dash_o(no_db, mocker):
+    mocker.patch.object(tasks.cli.tasks, 'list_tasks')
+    runner = CliRunner()
+    runner.invoke(tasks.cli.tasks_cli, ['list', '-o', 'brian'])
+    tasks.cli.tasks.list_tasks.assert_called_once_with('brian')
+
+
+def test_list_dash_dash_owner(no_db, mocker):
+    mocker.patch.object(tasks.cli.tasks, 'list_tasks')
+    runner = CliRunner()
+    runner.invoke(tasks.cli.tasks_cli, ['list', '--owner', 'okken'])
+    tasks.cli.tasks.list_tasks.assert_called_once_with('okken')
+
 ```
 
 Let’s make sure they all work:
 
 ```
 $ cd /path/to/code/ch7/tasks_proj_v2
-$ pytest-v tests/unit/test_cli.py
+$ pytest -v tests/unit/test_cli.py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected5 items
@@ -765,21 +790,22 @@ tasks_proj_v2/
 ```
 Now, here’s what the tox.ini file looks like:
 
-**ch7/tasks_proj_v2/tox.ini**
-_# tox.ini, put in samedir as setup.py_
+**ch7/tasks_proj_v2/tox.ini
 
-**[tox]**
-envlist= _py27,py37_
+# tox.ini , put in same dir as setup.py
 
-**[testenv]**
-deps= _pytest_
-commands= _pytest_
+[tox]
+envlist = py27,py37
 
-**[pytest]**
-addopts= _-rsxX-l --tb=short--strict_
-markers=
-**smoke:Run the smoketesttestfunctions
-get:Run the testfunctionsthattesttasks.get()**
+[testenv]
+deps=pytest
+commands=pytest
+
+[pytest]
+addopts = -rsxX -l --tb=short --strict
+markers = 
+  smoke: Run the smoke test test functions
+  get: Run the test functions that test tasks.get()
 ```
 
 Under [tox], we have envlist= py27,py37. This is a shorthand to tell tox to run
@@ -814,7 +840,8 @@ Then to run tox, just run, well, tox:
 
 ```
 $ cd /path/to/code/ch7/tasks_proj_v2
-$ tox**
+$ tox
+
 GLOBsdist-make:/path/to/code/ch7/tasks_proj_v2/setup.py
 py27inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py27installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,funcsigs==1.0.2,
@@ -824,6 +851,7 @@ tasks==0.1.1,tinydb==3.11.1
 
 py27runtests:PYTHONHASHSEED='2121166562'
 py27runtests:commands[0]| pytest
+
 ========================testsessionstarts========================
 plugins:mock-1.10.0
 collected62 items
@@ -837,12 +865,14 @@ tests/unit/test_cli.py..... [ 93%]
 tests/unit/test_task.py.... [100%]
 
 =====================62 passedin 0.51seconds=====================
+
 py37inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py37installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,
 more-itertools==4.3.0,pluggy==0.8.0,py==1.7.0,pytest==3.9.1,
 pytest-mock==1.10.0,six==1.11.0,tasks==0.1.1,tinydb==3.11.1
 py37runtests:PYTHONHASHSEED='2121166562'
 py37runtests:commands[0]| pytest
+
 ========================testsessionstarts========================
 plugins:mock-1.10.0
 collected62 items
@@ -937,10 +967,10 @@ code_path=/Users/okken/code/ch7/tasks_proj_v2
 
 _# run pytestin projectusingvirtualenvironmentinstalledpytest_
 cd ${code_path}
-${venv}/bin/pytest--junitxml=${WORKSPACE}/results.xml
+${venv}/bin/pytest --junitxml=${WORKSPACE}/results.xml
 ```
 
-The bottom line has ${venv}/bin/pytest--junit-xml=${WORKSPACE}/results.xml. The --junit-
+The bottom line has ${venv}/bin/pytest --junit-xml=${WORKSPACE}/results.xml. The --junit-
 xml flag is the only thing needed to produce the junit.xml format results file
 Jenkins needs.
 
@@ -1007,30 +1037,34 @@ address some of those here. First, let’s look at a test written for unittest:
 
 ```
 **ch7/unittest/test_delete_unittest.py
-importunittest
-importshutil
-importtempfile
-importtasks
-fromtasksimport** Task
 
-def setUpModule ():
-_"""Maketempdir,initializeDB."""_
-**global** temp_dir
-temp_dir= tempfile.mkdtemp()
-tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
+import unittest
+import shutil
+import tempfile
+import tasks
+from tasks import Task
 
-def tearDownModule ():
-_"""Cleanup DB, removetempdir."""_
-tasks.stop_tasks_db()
-shutil.rmtree(temp_dir)
 
-**class** TestNonEmpty(unittest.TestCase):
+def setUpModule():
+    """Make temp dir, initialize DB."""
+    global temp_dir
+    temp_dir = tempfile.mkdtemp()
+    tasks.start_tasks_db(str(temp_dir), 'tiny')
 
-def setUp (self):
-tasks.delete_all() # startempty
-# add a few items,savingids
-self.ids= []
-self.ids.append(tasks.add(Task( 'One' , 'Brian' , True)))
+
+def tearDownModule():
+    """Clean up DB, remove temp dir."""
+    tasks.stop_tasks_db()
+    shutil.rmtree(temp_dir)
+
+
+class TestNonEmpty(unittest.TestCase):
+
+    def setUp(self):
+        tasks.delete_all()  # start empty
+        # add a few items, saving ids
+        self.ids = []
+        self.ids.append(tasks.add(Task('One', 'Brian', True)))
 ```
 
 
@@ -1056,7 +1090,7 @@ is there for setup and teardown. This test runs fine in unittest:
 
 ```
 $ cd /path/to/code/ch7/unittest
-$ python-m unittest-v test_delete_unittest.py
+$ python -m unittest -v test_delete_unittest.py
 test_delete_decreases_count(test_delete_unittest.TestNonEmpty)... ok
 
 ----------------------------------------------------------------------
@@ -1068,7 +1102,8 @@ OK
 It also runs fine in pytest:
 
 ```
-$ pytest-v test_delete_unittest.py
+$ pytest -v test_delete_unittest.py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected1 item
@@ -1086,16 +1121,18 @@ look at a rewrite for this test and then try running them both:
 
 ```
 **ch7/unittest/test_delete_pytest.py
-importtasks**
 
-def test_delete_decreases_count (db_with_3_tasks):
-ids = [t.id **for** t **in** tasks.list_tasks()]
-_# GIVEN3 items_
-**assert** tasks.count()== 3
-_# WHENwe deleteone_
-tasks.delete(ids[0])
-_# THENcountdecreasesby 1_
-**assert** tasks.count()== 2
+import tasks
+
+
+def test_delete_decreases_count(db_with_3_tasks):
+    ids = [t.id for t in tasks.list_tasks()]
+    # GIVEN 3 items
+    assert tasks.count() == 3
+    # WHEN we delete one
+    tasks.delete(ids[0])
+    # THEN count decreases by 1
+    assert tasks.count() == 2
 ```
 
 The fixtures we’ve been using for the Tasks project, including db_with_3_tasks
@@ -1106,11 +1143,11 @@ is almost identical.
 Both tests pass individually:
 
 ```
-$ pytest-q test_delete_pytest.py
+$ pytest -q test_delete_pytest.py
 
 . [100%]
 1 passedin 0.02seconds
-$ pytest-q test_delete_unittest.py
+$ pytest -q test_delete_unittest.py
 . [100%]
 1 passedin 0.02seconds
 ```
@@ -1119,13 +1156,14 @@ You can even run them together if—and only if—you make sure the unittest
 version runs first:
 
 ```
-$ pytest-v test_delete_unittest.pytest_delete_pytest.py
+$ pytest -v test_delete_unittest.pytest_delete_pytest .py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
 
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[ 50%]
-test_delete_pytest.py::test_delete_decreases_countPASSED[100%]
+test_delete_pytest .py::test_delete_decreases_countPASSED[100%]
 
 ================2 passedin 0.03seconds=================
 ```
@@ -1134,7 +1172,8 @@ If you run the pytest version first, something goes haywire:
 
 
 ```
-$ pytest-v test_delete_pytest.pytest_delete_unittest.py
+$ pytest -v test_delete_pytest.pytest_delete_unittest.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -1197,21 +1236,23 @@ or method level:
 
 ```
 **ch7/unittest/test_delete_unittest_fix.py
-importpytest
-importunittest
-importtasks
-fromtasksimport** Task
 
-@pytest.mark.usefixtures( _'tasks_db_session'_ )
-**class** TestNonEmpty(unittest.TestCase):
+import pytest
+import unittest
+import tasks
+from tasks import Task
 
-def setUp (self):
-tasks.delete_all() # startempty
-# add a few items,savingids
-self.ids= []
-self.ids.append(tasks.add(Task( 'One' , 'Brian' , True)))
-self.ids.append(tasks.add(Task( 'Two' , 'StillBrian' , False)))
-self.ids.append(tasks.add(Task( 'Three' , 'NotBrian' , False)))
+
+@pytest.mark.usefixtures('tasks_db_session')
+class TestNonEmpty(unittest.TestCase):
+
+    def setUp(self):
+        tasks.delete_all()  # start empty
+        # add a few items, saving ids
+        self.ids = []
+        self.ids.append(tasks.add(Task('One', 'Brian', True)))
+        self.ids.append(tasks.add(Task('Two', 'Still Brian', False)))
+        self.ids.append(tasks.add(Task('Three', 'Not Brian', False)))
 ```
 
 
@@ -1228,7 +1269,8 @@ self.assertEqual(tasks.count(),2)
 Now both unittest and pytest can cooperate and not run into each other:
 
 ```
-$ pytest-v test_delete_pytest.pytest_delete_unittest_fix.py
+$ pytest -v test_delete_pytest.pytest_delete_unittest_fix.py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
@@ -1256,23 +1298,23 @@ that passes the ids through request.cls.ids:
 
 ```
 **ch7/unittest/test_delete_unittest_fix2.py
-importpytest
-importunittest
-importtasks
-fromtasksimport** Task
+
+import pytest
+import unittest
+import tasks
+from tasks import Task
+
 
 @pytest.fixture()
-def tasks_db_non_empty (tasks_db_session,request):
-tasks.delete_all() _# startempty
-# add a few items,savingids_
-ids = []
-ids.append(tasks.add(Task( _'One'_ , _'Brian'_ , True)))
-ids.append(tasks.add(Task( _'Two'_ , _'StillBrian'_ , False)))
-ids.append(tasks.add(Task( _'Three'_ , _'NotBrian'_ , False)))
-request.cls.ids= ids
-```
+def tasks_db_non_empty(tasks_db_session, request):
+    tasks.delete_all()  # start empty
+    # add a few items, saving ids
+    ids = []
+    ids.append(tasks.add(Task('One', 'Brian', True)))
+    ids.append(tasks.add(Task('Two', 'Still Brian', False)))
+    ids.append(tasks.add(Task('Three', 'Not Brian', False)))
+    request.cls.ids = ids
 
-```
 @pytest.mark.usefixtures( _'tasks_db_non_empty'_ )
 **class** TestNonEmpty(unittest.TestCase):
 

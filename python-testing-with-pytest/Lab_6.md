@@ -58,34 +58,38 @@ For pytest.ini:
 
 ```
 **ch6/format/pytest.ini
-[pytest]**
-addopts= _-rsxX-l --tb=short--strict_
-xfail_strict= _true
-;...moreoptions..._
+
+[pytest]
+addopts = -rsxX -l --tb=short --strict
+xfail_strict = true
+;... more options ...
 ```
 
 For tox.ini:
 
 ```
-**ch6/format/tox.ini**
-_;...tox specificstuff..._
 
-**[pytest]**
-addopts= _-rsxX-l --tb=short--strict_
-xfail_strict= _true
-;...moreoptions..._
+**ch6/format/tox.ini**
+
+;... tox specific stuff ...
+
+[pytest]
+addopts = -rsxX -l --tb=short --strict
+xfail_strict = true
+;... more options ...
 ```
 
 For setup.cfg:
 
 ```
 **ch6/format/setup.cfg**
-;...packagingspecificstuff...
+
+;... packaging specific stuff ...
 
 [tool:pytest]
-addopts= -rsxX-l --tb=short--strict
-xfail_strict= true
-;...moreoptions...
+addopts = -rsxX -l --tb=short --strict
+xfail_strict = true
+;... more options ...
 ```
 
 The only difference is that the section header for setup.cfg is [tool:pytest] instead
@@ -93,13 +97,13 @@ of [pytest].
 
 **List the Valid ini-file Options with pytest –help**
 
-You can get a list of all the valid settings for pytest.ini from pytest--help. This is
+You can get a list of all the valid settings for pytest.ini from pytest --help. This is
 a sampling:
 
 
 ```
-$ pytest--help
-...**
+$ pytest --help
+...
 [pytest]ini-optionsin the firstpytest.ini|tox.ini|setup.cfgfilefound:
 
 markers(linelist) markersfor testfunctions
@@ -126,7 +130,7 @@ is covered in Lab 7, Using pytest with Other Tools, on page 127.
 
 The previous settings list is not a constant. It is possible for plugins (and
 conftest.py files) to add ini file options. The added options will be added to the
-pytest--help output as well.
+pytest --help output as well.
 
 Now, let’s explore some of the configuration changes we can make with the
 builtin ini file settings available from core pytest.
@@ -168,12 +172,12 @@ markers=
 get:Run the testfunctionsthattesttasks.get()**
 ```
 
-With these markers registered, you can now also see them with pytest--markers
+With these markers registered, you can now also see them with pytest --markers
 with their descriptions:
 
 ```
 $ cd /path/to/code/ch6/b/tasks_proj/tests
-$ pytest--markers**
+$ pytest --markers
 @pytest.mark.smoke:Run the smoketesttestfunctions
 
 @pytest.mark.get:Run the testfunctionsthattesttasks.get()
@@ -194,7 +198,8 @@ in ch6/a. Let’s try running the tests without registering any markers:
 
 ```
 $ cd /path/to/code/ch6/a/tasks_proj/tests
-$ pytest--strict --tb=line**
+$ pytest --strict --tb=line
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected45 items/ 2 errors
@@ -225,11 +230,12 @@ and add a pytest.ini file to the tasks project:
 
 ```
 **ch6/b/tasks_proj/tests/pytest.ini
-[pytest]**
-addopts= _-rsxX-l --tb=short--strict_
-markers=
-**smoke:Run the smoketesttestfunctions
-get:Run the testfunctionsthattesttasks.get()**
+
+[pytest]
+addopts = -rsxX -l --tb=short --strict
+markers = 
+  smoke: Run the smoke test test functions
+  get: Run the test functions that test tasks.get()
 ```
 
 This has a combination of flags I prefer over the defaults: -rsxX to report which
@@ -241,7 +247,8 @@ This should allow us to run tests, including the smoke tests:
 
 ```
 $ cd /path/to/code/ch6/b/tasks_proj/tests
-$ pytest--strict-m smoke**
+$ pytest --strict-m smoke
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected57 items/ 54 deselected
@@ -420,8 +427,10 @@ want to, or just leave it as check_*.
 python_functions acts like the previous two settings, but for test function and
 method names. The default is test_*. To add check_*—you guessed it—do this:
 
+```
 **[pytest]**
 python_functions= _test_*check_*_
+```
 
 Now the pytest naming conventions don’t seem that restrictive, do they? If you
 don’t like the default naming convention, just change it. However, I encourage
@@ -450,12 +459,16 @@ matter what these files have in them, but for this example, they look like this:
 
 ```
 **ch6/dups/a/test_foo.py
-def test_a ():
-**pass**
 
+def test_a():
+    pass
+```
+
+```
 **ch6/dups/b/test_foo.py
-def test_b ():
-**pass**
+
+def test_b():
+    pass
 ```
 
 With a directory structure like this:
@@ -474,7 +487,8 @@ won’t work:
 
 ```
 $ cd /path/to/code/ch6/dups
-$ pytesta**
+$ pytest a
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item
@@ -482,7 +496,8 @@ collected1 item
 a/test_foo.py. [100%]
 
 ================1 passedin 0.01seconds=================
-$ pytestb**
+$ pytestb
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item
@@ -491,6 +506,7 @@ b/test_foo.py. [100%]
 
 ================1 passedin 0.01seconds=================
 $ pytest
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item/ 1 errors
@@ -508,6 +524,7 @@ whichis not the sameas the testfilewe wantto collect:
 HINT:remove__pycache__/ .pycfiles
 and/oruse a uniquebasename for yourtestfilemodules
 !!!!!!!!!Interrupted:1 errorsduringcollection!!!!!!!!!
+
 =================1 errorin 0.15seconds=================
 ```
 
@@ -532,6 +549,7 @@ Now, let’s try this again from the top level in dups_fixed:
 ```
 $ cd /path/to/code/ch6/dups_fixed
 $ pytest
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected2 items

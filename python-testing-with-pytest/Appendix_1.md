@@ -20,21 +20,21 @@ instead. Just remember to pip install virtualenv first.
 Here’s how to set up a virtual environment in macOS and Linux:
 
 ```
-$ python3-m venvenv_name
-$ sourceenv_name/bin/activate**
+$ python3 -m venv env_name
+$ source env_name/bin/activate**
 (env_name)$
-**... do yourwork...**
-(env_name)$ deactivate
+... do yourwork...
+(env_name) $ deactivate
 ```
 
 In Windows, there’s a change to the activate line:
 
 ```
-**C:/>python3-m venvenv_name
-C:/>env_name/Scripts/activate.bat**
-(env_name)C:/>
-**... do yourwork...**
-(env_name)C:/>deactivate
+C:/> python3 -m venv env_name
+C:/> env_name/Scripts/activate.bat
+(env_name) C:/>
+... do your work ...
+(env_name) C:/> deactivate
 ```
 
 I usually put the virtual environment directory, env_name, directly in my

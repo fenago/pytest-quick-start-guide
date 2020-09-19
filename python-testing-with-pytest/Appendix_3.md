@@ -31,47 +31,45 @@ $ cd /path/to/code/ch7/tasks_proj_v2
 $ pip install .
 $ pip install pytest-repeat
 $ cd tests
-$ pytest-v -k test_list
-$ pytest-v -k test_list**
-=====================testsessionstarts=====================
-plugins:repeat-0.7.0,mock-1.10.0
-collected62 items/ 56 deselected
+$ pytest -v -k test_list
+$ pytest -v -k test_list
+===================== test session starts =====================
+plugins: repeat-0.7.0, mock-1.10.0
+collected 62 items / 56 deselected
 ```
 
 1. https://pypi.python.org/pypi/pytest-repeat
 
 ```
-func/test_api_exceptions.py::test_list_raisesPASSED [ 16%]
-unit/test_cli.py::test_list_no_argsPASSED [ 33%]
-unit/test_cli.py::test_list_print_emptyPASSED [ 50%]
-unit/test_cli.py::test_list_print_many_itemsPASSED [ 66%]
-unit/test_cli.py::test_list_dash_oPASSED [ 83%]
-unit/test_cli.py::test_list_dash_dash_ownerPASSED [100%]
-===========6 passed,56 deselectedin 0.13seconds===========
+func/test_api_exceptions.py::test_list_raises PASSED [ 16%]
+unit/test_cli.py::test_list_no_args PASSED [ 33%]
+unit/test_cli.py::test_list_print_empty PASSED [ 50%]
+unit/test_cli.py::test_list_print_many_items PASSED [ 66%]
+unit/test_cli.py::test_list_dash_o PASSED [ 83%]
+unit/test_cli.py::test_list_dash_dash_owner PASSED [100%]
+=========== 6 passed, 56 deselected in 0.13 seconds ===========
 ```
 
 With the pytest-repeat plugin, you can use --count to run everything twice:
 
 ```
-$ pytest--count=2-v -k test_list**
-=====================testsessionstarts=====================
-plugins:repeat-0.7.0,mock-1.10.0
-collected124 items/ 112 deselected
-
-func/test_api_exceptions.py::test_list_raises[1/2]PASSED[ 8%]
-func/test_api_exceptions.py::test_list_raises[2/2]PASSED[ 16%]
-unit/test_cli.py::test_list_no_args[1/2]PASSED [ 25%]
-unit/test_cli.py::test_list_no_args[2/2]PASSED [ 33%]
-unit/test_cli.py::test_list_print_empty[1/2]PASSED [ 41%]
-unit/test_cli.py::test_list_print_empty[2/2]PASSED [ 50%]
-unit/test_cli.py::test_list_print_many_items[1/2]PASSED[ 58%]
-unit/test_cli.py::test_list_print_many_items[2/2]PASSED[ 66%]
-unit/test_cli.py::test_list_dash_o[1/2]PASSED [ 75%]
-unit/test_cli.py::test_list_dash_o[2/2]PASSED [ 83%]
-unit/test_cli.py::test_list_dash_dash_owner[1/2]PASSED[ 91%]
-unit/test_cli.py::test_list_dash_dash_owner[2/2]PASSED[100%]
-
-==========12 passed,112 deselectedin 0.16seconds==========
+$ pytest --count=2 -v -k test_list
+===================== test session starts =====================
+plugins: repeat-0.7.0, mock-1.10.0
+collected 124 items / 112 deselected
+func/test_api_exceptions.py::test_list_raises[1/2] PASSED [ 8%]
+func/test_api_exceptions.py::test_list_raises[2/2] PASSED [ 16%]
+unit/test_cli.py::test_list_no_args[1/2] PASSED [ 25%]
+unit/test_cli.py::test_list_no_args[2/2] PASSED [ 33%]
+unit/test_cli.py::test_list_print_empty[1/2] PASSED [ 41%]
+unit/test_cli.py::test_list_print_empty[2/2] PASSED [ 50%]
+unit/test_cli.py::test_list_print_many_items[1/2] PASSED [ 58%]
+unit/test_cli.py::test_list_print_many_items[2/2] PASSED [ 66%]
+unit/test_cli.py::test_list_dash_o[1/2] PASSED [ 75%]
+unit/test_cli.py::test_list_dash_o[2/2] PASSED [ 83%]
+unit/test_cli.py::test_list_dash_dash_owner[1/2] PASSED [ 91%]
+unit/test_cli.py::test_list_dash_dash_owner[2/2] PASSED [100%]
+========== 12 passed, 112 deselected in 0.16 seconds ==========
 ```
 
 You can repeat a subset of the tests or just one, and even choose to run it
@@ -92,14 +90,14 @@ Here’s a test that takes at least a second to run, with parametrization such
 that it runs ten times:
 
 ```
-**appendices/xdist/test_parallel.py
-importpytest
-importtime**
+appendices/xdist/test_parallel.py
+import pytest
+import time
 ```
 
 ```
-@pytest.mark.parametrize( _'x'_ , list(range(10)))
-def test_something (x):
+@pytest.mark.parametrize( 'x' , list(range(10)))
+def test_something(x):
 time.sleep(1)
 ```
 
@@ -109,13 +107,11 @@ Notice that it takes over ten seconds to run normally:
 $ pip install pytest-xdist
 $ cd /path/to/code/appendices/xdist
 $ pytest test_parallel.py
-===================testsessionstarts===================
-plugins:xdist-1.23.0,forked-0.2
+=================== test session starts ===================
+plugins: xdist-1.23.0, forked-0.2
 collected 10 items
-
-test_parallel.py.......... [100%]
-
-===============10 passedin 10.06 seconds================
+test_parallel.py .......... [100%]
+=============== 10 passed in 10.06 seconds ================
 ```
 
 With the pytest-xdist plugin, you can use -n numprocesses to run each test in a
@@ -123,13 +119,13 @@ subprocess, and use -n auto to automatically detect the number of CPUs on
 the system. Here’s the same test run on multiple processors:
 
 ```
-$ pytest-n autotest_parallel.py
-===================testsessionstarts===================
-plugins:xdist-1.23.0,forked-0.2
-gw0 [10]/ gw1 [10]/ gw2 [10]/ gw3 [10]
-schedulingtestsvia LoadScheduling
+$ pytest -n auto test_parallel.py
+=================== test session starts ===================
+plugins: xdist-1.23.0, forked-0.2
+gw0 [10] / gw1 [10] / gw2 [10] / gw3 [10]
+scheduling tests via LoadScheduling
 .......... [100%]
-================10 passedin 4.00seconds================
+================ 10 passed in 4.00 seconds ================
 ```
 
 It’s not a silver bullet to speed up your test times by a factor of the number
@@ -163,28 +159,23 @@ a half-second timeout:
 ```
 $ cd /path/to/code/appendices/xdist
 $ pip install pytest-timeout
-$ pytest--timeout=0.5-x test_parallel.py
-===================testsessionstarts===================
-plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
-timeout:0.5s
-timeoutmethod:signal
-timeoutfunc_only:False
-collected10 items
-
-test_parallel.pyF
-
-========================FAILURES=========================
-____________________test_something[0]____________________
-
+$ pytest --timeout=0.5 -x test_parallel.py
+=================== test session starts ===================
+plugins: xdist-1.23.0, timeout-1.3.2, forked-0.2
+timeout: 0.5s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+test_parallel.py F
+======================== FAILURES =========================
+____________________ test_something[0] ____________________
 x = 0
-
-@pytest.mark.parametrize('x',list(range(10)))
+@pytest.mark.parametrize('x', list(range(10)))
 def test_something(x):
-**> time.sleep(1)**
-E Failed:Timeout>0.5s
-
-test_parallel.py:7:Failed
-================1 failedin 0.59seconds=================
+> time.sleep(1)
+E Failed: Timeout >0.5s
+test_parallel.py:7: Failed
+================ 1 failed in 0.59 seconds =================
 ``` 
 
 The -x stops testing after the first failure.
@@ -213,43 +204,36 @@ Here’s a test with normal failures at the end:
 
 ```
 $ cd /path/to/code/appendices/xdist
-$ pytest --timeout=0.5 --tb=line--maxfail=2test_parallel.py
-===================testsessionstarts===================
-plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
-timeout:0.5s
-timeoutmethod:signal
-timeoutfunc_only:False
-collected10 items
-
-test_parallel.pyFF
-
-========================FAILURES=========================
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
-================2 failedin 1.09seconds=================
+$ pytest --timeout=0.5 --tb=line --maxfail=2 test_parallel.py
+=================== test session starts ===================
+plugins: xdist-1.23.0, timeout-1.3.2, forked-0.2
+timeout: 0.5s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+test_parallel.py FF
+======================== FAILURES =========================
+/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+================ 2 failed in 1.09 seconds =================
 ```
 
 Here’s the same test with --instafail:
 
 ```
 $ pip install pytest-instafail
-$ pytest--instafail --timeout=0.5 --tb=line--maxfail=2test_parallel.py
-===================testsessionstarts===================
-plugins:xdist-1.23.0,timeout-1.3.2, instafail-0.4.0,forked-0.2
-timeout:0.5s
-timeoutmethod:signal
-timeoutfunc_only:False
-collected10 items
-
-test_parallel.pyF
-
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
-
-test_parallel.pyF
-
-/path/to/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
-
-================2 failedin 1.10seconds=================
+$ pytest --instafail --timeout=0.5 --tb=line --maxfail=2 test_parallel.py
+=================== test session starts ===================
+plugins: xdist-1.23.0, timeout-1.3.2, instafail-0.4.0, forked-0.2
+timeout: 0.5s
+timeout method: signal
+timeout func_only: False
+collected 10 items
+test_parallel.py F
+/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+test_parallel.py F
+/path/to/code/appendices/xdist/test_parallel.py:7: Failed: Timeout >0.5s
+================ 2 failed in 1.10 seconds =================
 ```
 
 The --instafail functionality is especially useful for long-running test suites when
@@ -310,7 +294,7 @@ that demonstrates how to add hook functions to plugin code.
 
 **pytest-html: Generate HTML Reports for Test Sessions**
 
-The pytest-html plugin^7 is quite useful in conjunction with continuous integra-
+The pytest-html plugin is quite useful in conjunction with continuous integra-
 tion, or in systems with large, long-running test suites. It creates a webpage
 to view the test results for a pytest session. The HTML report created includes
 the ability to filter for type of test result: passed, skipped, failed, errors,
@@ -326,33 +310,27 @@ The pytest-html plugin is really easy to start. Just add --html=report_name.html
 
 ```
 $ cd /path/to/code/appendices/outcomes
-$ pytest--html=report.html**
-======================testsessionstarts======================
-metadata:...
-collected6 items
-
-test_outcomes.py.FxXsE
-
-generatedhtmlfile:/path/to/code/appendices/outcomes/report.html
-============================ERRORS=============================
-_________________ERRORat setupof test_error__________________
-
+$ pytest --html=report.html
+====================== test session starts ======================
+metadata: ...
+collected 6 items
+test_outcomes.py .FxXsE
+generated html file: /path/to/code/appendices/outcomes/report.html
+============================ ERRORS =============================
+_________________ ERROR at setup of test_error __________________
 @pytest.fixture()
 def flaky_fixture():
-**> assert1 == 2**
-E assert1 == 2
-
-test_outcomes.py:24:AssertionError
-===========================FAILURES============================
-___________________________test_fail___________________________
-
+> assert 1 == 2
+E assert 1 == 2
+test_outcomes.py:24: AssertionError
+=========================== FAILURES ============================
+___________________________ test_fail ___________________________
 def test_fail():
-**> assert1 == 2**
-E assert1 == 2
-
-test_outcomes.py:8:AssertionError
-1 failed,1 passed,1 skipped,1 xfailed,1 xpassed,1 errorin 0.08seconds
-$ openreport.html**
+> assert 1 == 2
+E assert 1 == 2
+test_outcomes.py:8: AssertionError
+1 failed, 1 passed, 1 skipped, 1 xfailed, 1 xpassed, 1 error in 0.08 seconds
+$ open report.htm
 ```
 
 This produces a report that includes the information about the test session

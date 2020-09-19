@@ -28,27 +28,27 @@ xUnit fixtures include setup()/teardown() functions for module, function, class,
 and method scope:
 
 ```
-_setup_module()/teardown_module()_
+setup_module()/teardown_module()
 ```
 
 These run at the beginning and end of a module of tests. They run once
 each. The module parameter is optional.
 
 ```
-_setup_function()/teardown_function()_
+setup_function()/teardown_function()
 ```
 These run before and after top-level test functions that are not methods
 of a test class. They run multiple times, once for every test function. The
 function parameter is optional.
 
 ```
-_setup_class()/teardown_class()_
+setup_class()/teardown_class()
 ```
 These run before and after a class of tests. They run only once. The class
 parameter is optional.
 
 ```
-_setup_method()/teardown_method()_
+setup_method()/teardown_method()
 ```
 These run before and after test methods that are part of a test class. They
 run multiple times, once for every test method. The method parameter is
@@ -58,43 +58,34 @@ optional.
 Here is an example of all the xUnit fixtures along with a few test functions:
 
 ```
-**appendices/xunit/test_xUnit_fixtures.py
-def setup_module (module):
-**print (f _'\nsetup_module()for {module.__name__}'_ )
-
-def teardown_module (module):
-**print (f _'teardown_module()for {module.__name__}'_ )
-
-def setup_function (function):
-**print (f _'setup_function()for {function.__name__}'_ )
-
-def teardown_function (function):
-**print (f _'teardown_function()for {function.__name__}'_ )
-
-def test_1 ():
-**print ( _'test_1()'_ )
-
-def test_2 ():
-**print ( _'test_2()'_ )
-
-**class** TestClass:
+appendices/xunit/test_xUnit_fixtures.py
+def setup_module(module):
+print(f'\nsetup_module() for {module.__name__}')
+def teardown_module(module):
+print(f'teardown_module() for {module.__name__}')
+def setup_function(function):
+print(f'setup_function() for {function.__name__}')
+def teardown_function(function):
+print(f'teardown_function() for {function.__name__}')
+def test_1():
+print('test_1()')
+def test_2():
+print('test_2()')
+class TestClass:
 @classmethod
-def setup_class (cls):
-**print (f _'setup_class()for class{cls.__name__}'_ )
-
-
+def setup_class(cls):
+print(f'setup_class() for class {cls.__name__}')
 @classmethod
-def teardown_class (cls):
-print (f 'teardown_class()for {cls.__name__}' )
-
-def setup_method (self,method):
-print (f 'setup_method()for {method.__name__}' )
-def teardown_method (self,method):
-print (f 'teardown_method()for {method.__name__}' )
-def test_3 (self):
-print ( 'test_3()' )
-def test_4 (self):
-print ( 'test_4()' )
+def teardown_class(cls):
+print(f'teardown_class() for {cls.__name__}')
+def setup_method(self, method):
+print(f'setup_method() for {method.__name__}')
+def teardown_method(self, method):
+print(f'teardown_method() for {method.__name__}')
+def test_3(self):
+print('test_3()')
+def test_4(self):
+print('test_4()')
 ```
 
 I used the parameters to the fixture functions to get the name of the module/func-
@@ -106,30 +97,30 @@ Here’s the test session to help visualize the control flow:
 
 ```
 $ cd /path/to/code/appendices/xunit
-$ pytest-s test_xUnit_fixtures.py
-============testsessionstarts=============
-plugins:mock-1.6.0,cov-2.5.1
-collected4 items
+$ pytest -s test_xUnit_fixtures.py
+============ test session starts =============
+plugins: mock-1.6.0, cov-2.5.1
+collected 4 items
 
 test_xUnit_fixtures.py
-setup_module()for test_xUnit_fixtures
-setup_function()for test_1
+setup_module() for test_xUnit_fixtures
+setup_function() for test_1
 test_1()
-.teardown_function()for test_1
-setup_function()for test_2
+.teardown_function() for test_1
+setup_function() for test_2
 test_2()
-.teardown_function()for test_2
-setup_class()for classTestClass
-setup_method()for test_3
+.teardown_function() for test_2
+setup_class() for class TestClass
+setup_method() for test_3
 test_3()
-.teardown_method()for test_3
-setup_method()for test_4
+.teardown_method() for test_3
+setup_method() for test_4
 test_4()
-.teardown_method()for test_4
-teardown_class()for TestClass
-teardown_module()for test_xUnit_fixtures
+.teardown_method() for test_4
+teardown_class() for TestClass
+teardown_module() for test_xUnit_fixtures
 
-==========4 passedin 0.01seconds==========
+========== 4 passed in 0.01 seconds ==========
 ```
 
 ### Mixing pytest Fixtures and xUnit Fixtures
@@ -137,71 +128,71 @@ teardown_module()for test_xUnit_fixtures
 You can mix pytest fixtures and xUnit fixtures:
 
 ```
-**appendices/xunit/test_mixed_fixtures.py
+appendices/xunit/test_mixed_fixtures.py
 import pytest
 
-def setup_module ():
-**print ( _'\nsetup_module()- xUnit'_ )
+def setup_module():
+print('\nsetup_module() - xUnit')
 
-def teardown_module ():
-**print ( _'teardown_module()- xUnit'_ )
+def teardown_module():
+print('teardown_module() - xUnit')
 
-def setup_function ():
-**print ( _'setup_function()- xUnit'_ )
+def setup_function():
+print('setup_function() - xUnit')
 
-def teardown_function ():
-**print ( _'teardown_function()- xUnit\n'_ )
+def teardown_function():
+print('teardown_function() - xUnit\n')
 ```
 
 
 ```
-@pytest.fixture(scope= _'module'_ )
-def module_fixture ():
-**print ( _'module_fixture()setup- pytest'_ )
-**yield
-print ( _'module_fixture()teardown- pytest'_ )
+@pytest.fixture(scope='module')
+def module_fixture():
 
-@pytest.fixture(scope= _'function'_ )
-def function_fixture ():
-**print ( _'function_fixture()setup- pytest'_ )
-**yield
-print ( _'function_fixture()teardown- pytest'_ )
+print('module_fixture() setup - pytest')
+yield
+print('module_fixture() teardown - pytest')
 
-def test_1 (module_fixture,function_fixture):
-**print ( _'test_1()'_ )
+@pytest.fixture(scope='function')
+def function_fixture():
+print('function_fixture() setup - pytest')
+yield
+print('function_fixture() teardown - pytest')
 
-def test_2 (module_fixture,function_fixture):
-**print ( _'test_2()'_ )
+def test_1(module_fixture, function_fixture):
+print('test_1()')
+
+def test_2(module_fixture, function_fixture):
+print('test_2()')
 ```
 
 You _can_ do it. But please don’t. It gets confusing. Take a look at this:
 
 ```
 $ cd /path/to/code/appendices/xunit
-$ pytest-s test_mixed_fixtures.py
-============testsessionstarts=============
-plugins:mock-1.6.0,cov-2.5.1
-collected2 items
+$ pytest -s test_mixed_fixtures.py
+============ test session starts =============
+plugins: mock-1.6.0, cov-2.5.1
+collected 2 items
 
 test_mixed_fixtures.py
-setup_module()- xUnit
-setup_function()- xUnit
-module_fixture()setup- pytest
-function_fixture()setup- pytest
+setup_module() - xUnit
+setup_function() - xUnit
+module_fixture() setup - pytest
+function_fixture() setup - pytest
 test_1()
-.function_fixture()teardown- pytest
-teardown_function()- xUnit
+.function_fixture() teardown - pytest
+teardown_function() - xUnit
 
-setup_function()- xUnit
-function_fixture()setup- pytest
+setup_function() - xUnit
+function_fixture() setup - pytest
 test_2()
-.function_fixture()teardown- pytest
-teardown_function()- xUnit
+.function_fixture() teardown - pytest
+teardown_function() - xUnit
+module_fixture() teardown - pytest
+teardown_module() - xUnit
 
-module_fixture()teardown- pytest
-teardown_module()- xUnit
-
-==========2 passedin 0.01seconds==========
+========== 2 passed in 0.01 seconds ==========
 ```
 
 In this example, I’ve also shown that the module, function, and method parameters

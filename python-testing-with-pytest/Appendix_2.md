@@ -36,8 +36,8 @@ To check the version of pip and which version of Python it’s tied to, use pip 
 version:
 
 ```
-(my_env)$ pip --version
-pip 18.0from/path/to/code/venv/lib/python3.7/site-packages/pip(python3.7)
+(my_env) $ pip --version
+pip 18.0 from /path/to/code/venv/lib/python3.7/site-packages/pip (python 3.7)
 ```
 
 To list the packages you have currently installed with pip, use pip list. If there’s
@@ -46,24 +46,23 @@ something.
 
 ```
 Package Version
------------------
+---------- -------
 pip 18.0
-setuptools39.0.1
-(my_env)$ pip install pytest
+setuptools 39.0.1
+(my_env) $ pip install pytest
 ...
-
-Installingcollectedpackages:six,more-itertools,atomicwrites,
-pluggy,attrs,py, pytest
-Successfullyinstalledatomicwrites-1.2.1attrs-18.2.0
-more-itertools-4.3.0pluggy-0.7.1py-1.6.0pytest-3.8.0six-1.11.0
-(my_env)$ pip list
+Installing collected packages: six, more-itertools, atomicwrites,
+pluggy, attrs, py, pytest
+Successfully installed atomicwrites-1.2.1 attrs-18.2.0
+more-itertools-4.3.0 pluggy-0.7.1 py-1.6.0 pytest-3.8.0 six-1.11.0
+(my_env) $ pip list
 Package Version
----------------------
+-------------- -------
 Package Version
----------------------
+-------------- -------
 atomicwrites 1.2.1
 attrs 18.2.0
-more-itertools4.3.0
+more-itertools 4.3.0
 pip 18.0
 pluggy 0.7.1
 py 1.6.0
@@ -84,14 +83,14 @@ You can use pip to install packages with version numbers from pypi.python.org
 if it’s a release version PyPI knows about:
 
 ```
-$ pip install pytest==3.2.1**
+$ pip install pytest==3.2.1
 ```
 
 You can use pip to install a local package that has a setup.py file in it:
 
 
 ```
-$ pip install /path/to/package**
+$ pip install /path/to/package
 ```
 
 Use ./package_name if you are in the same directory as the package to install it
@@ -99,8 +98,8 @@ locally:
 
 ```
 $ cd /path/just/above/package
-$ pip install my_package** _# pip is lookingin PyPIfor "my_package"_
-$ pip install ./my_package** _# now pip lookslocally_
+$ pip install my_package # pip is looking in PyPI for "my_package"
+$ pip install ./my_package # now pip looks locally
 ```
 
 You can use pip to install packages that have been downloaded as zip files or
@@ -109,10 +108,10 @@ wheels without unpacking them.
 You can also use pip to download a lot of files at once using a requirements.txt file:
 
 ```
-(my_env)$ cat requirements.txt
+(my_env) $ cat requirements.txt
 pytest==3.8.1
 pytest-xdist==1.23.2
-(my_env)$ pip install -r requirements.txt
+(my_env) $ pip install -r requirements.txt
 ...
 
 ```
@@ -125,9 +124,9 @@ tual environments later, even when offline.
 The following downloads pytest and all dependencies:
 
 ```
-(my_env)$ mkdir~/.pipcache
-(my_env)$ pip download-d ~/pipcachepytest
-Collectingpytest
+(my_env) $ mkdir ~/.pipcache
+(my_env) $ pip download -d ~/pipcache pytest
+Collecting pytest
 ...
 
 ```
@@ -138,15 +137,15 @@ more-itertoolssetuptoolspy six attrs
 Later, even if you’re offline, you can install from the cache:
 
 ```
-(my_env)$ pip install --no-index--find-links=~/pipcachepytest
-Lookingin links:/Users/okken/pipcache
-Collectingpytest
+(my_env) $ pip install --no-index --find-links=~/pipcache pytest
+Looking in links: /Users/okken/pipcache
+Collecting pytest
 ...
 
-Installingcollectedpackages:attrs,six,more-itertools,atomicwrites,
-py, pluggy,pytest
-Successfullyinstalledatomicwrites-1.x.yattrs-18.x.y
-more-itertools-4.x.ypluggy-0.x.ypy-1.x.ypytest-3.x.ysix-1.x.y
+Installing collected packages: attrs, six, more-itertools, atomicwrites,
+py, pluggy, pytest
+Successfully installed atomicwrites-1.x.y attrs-18.x.y
+more-itertools-4.x.y pluggy-0.x.y py-1.x.y pytest-3.x.y six-1.x.
 ```
 
 This is great for situations like running tox or continuous integration test

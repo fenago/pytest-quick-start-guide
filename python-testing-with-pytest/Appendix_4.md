@@ -36,21 +36,20 @@ some_module_proj/
 The code we want to share is in some_module.py:
 
 ```
-**appendices/packaging/some_module_proj/some_module.py
-def some_func ():
-    return 42
+appendices/packaging/some_module_proj/some_module.py
+def some_func():
+return 42
 ```
 
 To make it installable with pip, we need a setup.py file. This is about as bare
 bones as you can get:
 
 ```
-**appendices/packaging/some_module_proj/setup.py
-fromsetuptoolsimport** setup
-
+appendices/packaging/some_module_proj/setup.py
+from setuptools import setup
 setup(
-name= _'some_module'_ ,
-py_modules=[ _'some_module'_ ]
+name='some_module',
+py_modules=['some_module']
 )
 ```
 
@@ -59,24 +58,24 @@ lable via pip:
 
 ```
 $ cd /path/to/code/appendices/packaging
-$ pip install ./some_module_proj**
-Processing./some_module_proj
-Installingcollectedpackages:some-module
-Runningsetup.pyinstallfor some-module... done
-Successfullyinstalledsome-module-0.0.0
+$ pip install ./some_module_proj
+Processing ./some_module_proj
+Installing collected packages: some-module
+Running setup.py install for some-module ... done
+Successfully installed some-module-0.0.0
 ```
 
 And we can now use some_module from Python (or from a test):
 
 ```
-$ python**
-Python3.7.0(v3.7.0:1bf9cc5093,Jun 26 2018,23:26:24)
-[Clang6.0 (clang-600.0.57)]on darwin
-Type"help","copyright","credits"or "license"for moreinformation.
-**>>> fromsome_moduleimportsome_func
->>> some_func()**
+$ python
+Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 26 2018, 23:26:24)
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from some_module import some_func
+>>> some_func()
 42
-**>>> exit()**
+>>> exit()
 ```
 
 That’s a minimal setup, but it’s not realistic. If you’re sharing code, odds are
@@ -89,13 +88,13 @@ Let’s make this code a package by adding an __init__.py and putting the __init
 file and module in a directory with a package name:
 
 ```
-$ treesome_package_proj/**
+$ tree some_package_proj/
 some_package_proj/
-├──setup.py
-└──src
-└──some_package
-├──__init__.py
-└──some_module.py
+├── setup.py
+└── src
+└── some_package
+├── __init__.py
+└── some_module.py
 ``` 
 
 
@@ -107,12 +106,12 @@ sections of the Python documentation^1 that cover this topic.
 If we do something like this in __init__.py:
 
 ```
-import some_package.some_module**
+import some_package.some_module
 ```
 the client code will have to specify some_module:
 
 ```
-import some_package**
+import some_package
 some_package.some_module.some_func()
 ```
 However, I’m thinking that some_module.py is really our API for the package,
@@ -120,27 +119,27 @@ and we want everything in it to be exposed to the package level. Therefore,
 we’ll use this form:
 
 ```
-**appendices/packaging/some_package_proj/src/some_package/__init__.py
-fromsome_package.some_moduleimport** *
+appendices/packaging/some_package_proj/src/some_package/__init__.py
+fromsome_package.some_moduleimport *
 ```
 
 Now the client code can do this instead:
 
 ```
-import some_package**
+import some_package
 some_package.some_func()
 ```
 
 We also have to change the setup.py file, but not much:
 
 ```
-**appendices/packaging/some_package_proj/setup.py
-fromsetuptoolsimport** setup,find_packages
+appendices/packaging/some_package_proj/setup.py
+fromsetuptoolsimport setup,find_packages
 
 setup(
-name= _'some_package'_ ,
-packages=find_packages(where= _'src'_ ),
-package_dir={ _''_ : _'src'_ },
+name='some_package',
+packages=find_packages(where='src'),
+package_dir={'': 'src'},
 )
 ```
 
@@ -150,11 +149,11 @@ This is now installable:
 
 ```
 $ cd /path/to/code/appendices/packaging
-$ pip install ./some_package_proj/**
-Processing./some_package_proj
-Installingcollectedpackages:some-package
-Runningsetup.pyinstallfor some-package... done
-Successfullyinstalledsome-package-0.0.0
+$ pip install ./some_package_proj/
+Processing ./some_package_proj
+Installing collected packages: some-package
+Running setup.py install for some-package ... done
+Successfully installed some-package-0.0.0
 ```
 
 1. https://docs.python.org/3/tutorial/modules.html#packages
@@ -163,12 +162,12 @@ Successfullyinstalledsome-package-0.0.0
 and usable:
 
 ```
-$ python**
-Python3.7.0(v3.7.0:1bf9cc5093,Jun 26 2018,23:26:24)
-[Clang6.0 (clang-600.0.57)]on darwin
-Type"help","copyright","credits"or "license"for moreinformation.
-**>>> fromsome_packageimportsome_func
->>> some_func()**
+$ python
+Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 26 2018, 23:26:24)
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from some_package import some_func
+>>> some_func()
 42
 ```
 
@@ -186,24 +185,20 @@ to create a source distribution and a wheel. Let’s try it:
 ```
 $ cd /path/to/code/appendices/packaging/some_package_proj/
 $ pip install wheel
-$ pythonsetup.pysdistbdist_wheel**
-runningsdist
+$ python setup.py sdist bdist_wheel
+running sdist
 ...
-
-warning:sdist:standardfilenot found:
-shouldhaveone of README,README.rst, README.txt,README.md
-
-runningcheck
-warning:check:missingrequiredmeta-data:url
-
-warning:check:missingmeta-data:
-either(authorand author_email)
-or (maintainerand maintainer_email)mustbe supplied
-
-runningbdist_wheel
-**...
-$ ls dist**
-some_package-0.0.0-py3-none-any.whlsome_package-0.0.0.tar.gz
+warning: sdist: standard file not found:
+should have one of README, README.rst, README.txt, README.md
+running check
+warning: check: missing required meta-data: url
+warning: check: missing meta-data:
+either (author and author_email)
+or (maintainer and maintainer_email) must be supplied
+running bdist_wheel
+...
+$ ls dist
+some_package-0.0.0-py3-none-any.whl some_package-0.0.0.tar.gz
 ```
 
 Well, with some warnings, a .whl and a .tar.gz file are created. Let’s get rid of
@@ -237,21 +232,17 @@ a minimal default.
 The setup.py:
 
 ```
-**appendices/packaging/some_package_proj_v2/setup.py
-fromsetuptoolsimport** setup,find_packages
-
+appendices/packaging/some_package_proj_v2/setup.py
+from setuptools import setup, find_packages
 setup(
-name= _'some_package'_ ,
-description= _'Demonstratepackagingand distribution'_ ,
-
-```
-version= '1.0' ,
-author= 'BrianOkken' ,
-author_email= 'brian@pythontesting.net' ,
-url= 'https://pragprog.com/book/bopytest/python-testing-with-pytest' ,
-```
-packages=find_packages(where= _'src'_ ),
-package_dir={ _''_ : _'src'_ },
+name='some_package',
+description='Demonstrate packaging and distribution',
+version='1.0',
+author='Brian Okken',
+author_email='brian@pythontesting.net',
+url='https://pragprog.com/book/bopytest/python-testing-with-pytest',
+packages=find_packages(where='src'),
+package_dir={'': 'src'},
 )
 ```
 
@@ -259,12 +250,10 @@ You should put the terms of the licensing in a LICENSE file. All of the code in
 this book follows the following license:
 
 ```
-**appendices/packaging/some_package_proj_v2/LICENSE**
-Copyright(c) 2017The PragmaticProgrammers,LLC
-
-All rightsreserved.
-
-Copyrightsapplyto thissourcecode.
+appendices/packaging/some_package_proj_v2/LICENSE
+Copyright (c) 2017 The Pragmatic Programmers, LLC
+All rights reserved.
+Copyrights apply to this source code.
 ```
 
 You may use the sourcecodein yourown projects,howeverthe sourcecode
@@ -275,24 +264,18 @@ for any purpose.
 Here’s the README.rst:
 
 ```
-**appendices/packaging/some_package_proj_v2/README.rst**
+appendices/packaging/some_package_proj_v2/README.rst
 ====================================================
-some_package:Demonstratepackagingand distribution
+some_package: Demonstrate packaging and distribution
 ====================================================
-
-``some_package``is the Pythonpackageto demostratehow easyit is
-to createinstallable,maintainable,shareablepackagesand distributions.
-
-It doescontainone function,called``some_func()``.
-
+``some_package`` is the Python package to demostrate how easy it is
+to create installable, maintainable, shareable packages and distributions.
+It does contain one function, called ``some_func()``.
 .. code-block
-
-
->>> importsome_package
+>>> import some_package
 >>> some_package.some_func()
 42
-
-That'sit, really.
+That's it, really.
 ```
 
 
@@ -306,19 +289,15 @@ README.txt or README, but I’m okay with copy/paste/edit in this instance.
 I recommend also adding a change log. Here’s the start of one:
 
 ```
-**appendices/packaging/some_package_proj_v2/CHANGELOG.rst**
+appendices/packaging/some_package_proj_v2/CHANGELOG.rst
 Changelog
 =========
-
 ------------------------------------------------------
-
 1.0
 ---
-
 Changes:
 ~~~~~~~~
-
-- Initialversion.
+- Initial version.
 ```
 
 See [http://keepachangelog.com](http://keepachangelog.com) for some great advice on what to put in your change log. All of the changes to tasks_proj over the course of this book have been logged
@@ -328,24 +307,22 @@ Let’s see if this was enough to remove the warnings:
 
 ```
 $ cd /path/to/code/appendices/packaging/some_package_proj_v2
-$ pythonsetup.pysdistbdist_wheel**
-runningsdist
-runningbuild
+$ python setup.py sdist bdist_wheel
+running sdist
+running build
 ```
 
 2. [http://docutils.sourceforge.net/rst.html](http://docutils.sourceforge.net/rst.html)
 
 
 ```
-runningbuild_py
-creatingbuild
-creatingbuild/lib
-creatingbuild/lib/some_package
+running build_py
+creating build
+creating build/lib
+creating build/lib/some_package
 ...
-
-
-$ ls dist**
-some_package-1.0-py3-none-any.whlsome_package-1.0.tar.gz
+$ ls dist
+some_package-1.0-py3-none-any.whl some_package-1.0.tar.gz
 ```
 
 Yep. No warnings.
@@ -355,17 +332,17 @@ install to our heart’s content:
 
 ```
 $ cd /path/to/code/appendices/packaging/some_package_proj_v2
-$ mkdir~/packages/
-$ cp dist/some_package-1.0-py3-none-any.whl~/packages
-$ cp dist/some_package-1.0.tar.gz~/packages
-$ pip install --no-index--find-links=~/packagessome_package**
-Collectingsome_package
-Installingcollectedpackages:some-package
-Successfullyinstalledsome-package-1.0
-$ pip install --no-index--find-links=./distsome_package==1.0**
-Requirementalreadysatisfied:some_package==1.0in
+$ mkdir ~/packages/
+$ cp dist/some_package-1.0-py3-none-any.whl ~/packages
+$ cp dist/some_package-1.0.tar.gz ~/packages
+$ pip install --no-index --find-links=~/packages some_package
+Collecting some_package
+Installing collected packages: some-package
+Successfully installed some-package-1.0
+$ pip install --no-index --find-links=./dist some_package==1.0
+Requirement already satisfied: some_package==1.0 in
 /path/to/venv/lib/python3.6/site-packages
-$**
+$
 ```
 
 Now you can create your own stash of local project packages from your team,

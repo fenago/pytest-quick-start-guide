@@ -74,7 +74,7 @@ As PyPI is the default location for pip, installing plugins from PyPI is the eas
 method. Let’s install the pytest-cov plugin:
 
 ```
-$ pip install pytest-cov**
+$ pip install pytest-cov
 ```
 
 This installs the latest stable version from PyPI.
@@ -85,7 +85,7 @@ If you want a particular version of a plugin, you can specify the version
 after ‘==‘:
 
 ```
-$ pip install pytest-cov==2.5.1**
+$ pip install pytest-cov==2.5.1
 ```
 
 **Install from a .tar.gz or .whl File**
@@ -102,10 +102,10 @@ or the .whl and install from that.
 You don’t have to unzip or anything; just point pip at it:
 
 ```
-$ pip install pytest-cov-2.5.1.tar.gz**
+$ pip install pytest-cov-2.5.1.tar.gz
 _# or_
 
-$ pip install pytest_cov-2.5.1-py2.py3-none-any.whl**
+$ pip install pytest_cov-2.5.1-py2.py3-none-any.whl
 ```
 
 **Install from a Local Directory**
@@ -132,7 +132,7 @@ versions and specify which version you want by adding == and the version
 number:
 
 ```
-$ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1**
+$ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1
 ```
 
 **Install from a Git Repository**
@@ -140,19 +140,19 @@ $ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1**
 You can install plugins directly from a Git repository—in this case, GitHub:
 
 ```
-$ pip install git+https://github.com/pytest-dev/pytest-cov**
+$ pip install git+https://github.com/pytest-dev/pytest-cov
 ```
 
 You can also specify a version tag:
 
 ```
-$ pip install git+https://github.com/pytest-dev/pytest-cov@v2.5.1**
+$ pip install git+https://github.com/pytest-dev/pytest-cov@v2.5.1
 ```
 
 Or you can specify a branch:
 
 ```
-$ pip install git+https://github.com/pytest-dev/pytest-cov@master**
+$ pip install git+https://github.com/pytest-dev/pytest-cov@master
 ```
 
 Installing from a Git repository is especially useful if you’re storing your own
@@ -206,21 +206,26 @@ Here are a couple more tests:
 
 ```
 **ch5/a/tasks_proj/tests/func/test_api_exceptions.py
-importpytest
-importtasks
-fromtasksimport** Task
 
-@pytest.mark.usefixtures( _'tasks_db'_ )
-**class** TestAdd():
-_"""Testsrelatedto tasks.add()."""_
-def test_missing_summary (self):
-_"""Shouldraisean exceptionif summarymissing."""_
-**with** pytest.raises(ValueError):
-tasks.add(Task(owner= _'bob'_ ))
-def test_done_not_bool (self):
-_"""Shouldraisean exceptionif doneis not a bool."""_
-**with** pytest.raises(ValueError):
-tasks.add(Task(summary= _'summary'_ , done= _'True'_ ))
+"""Test for expected exceptions from using the API wrong."""
+import pytest
+import tasks
+from tasks import Task
+
+
+@pytest.mark.usefixtures('tasks_db')
+class TestAdd():
+    """Tests related to tasks.add()."""
+
+    def test_missing_summary(self):
+        """Should raise an exception if summary missing."""
+        with pytest.raises(ValueError):
+            tasks.add(Task(owner='bob'))
+
+    def test_done_not_bool(self):
+        """Should raise an exception if done is not a bool."""
+        with pytest.raises(ValueError):
+            tasks.add(Task(summary='summary', done='True'))
 ```
 
 Let’s run them to see if they pass:
@@ -228,6 +233,7 @@ Let’s run them to see if they pass:
 ```
 $ cd /path/to/code/ch5/a/tasks_proj
 $ pytest
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected57 items
@@ -264,7 +270,8 @@ there aren’t any other tests with names that contain “TestAdd.”
 
 ```
 $ cd /path/to/code/ch5/a/tasks_proj/tests/func
-$ pytest-v --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --tb=notest_api_exceptions.py-k TestAdd
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -283,9 +290,10 @@ do with a pytest hook called pytest_report_header().
 
 ```
 **ch5/b/tasks_proj/tests/conftest.py
-def pytest_report_header ():
-_"""Thanktesterfor runningtests."""_
-    return _"Thanksfor runningthe tests."_
+
+def pytest_report_header():
+    """Thank tester for running tests."""
+    return "Thanks for running the tests."
 ```
 
 Obviously, printing a thank-you message is rather silly. However, the ability
@@ -299,10 +307,11 @@ shenanigans: pytest_report_teststatus():
 
 ```
 **ch5/b/tasks_proj/tests/conftest.py
-def pytest_report_teststatus (report):
-_"""Turnfailuresintoopportunities."""_
-**if** report.when== _'call'_ **and** report.failed:
-**return (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
+
+def pytest_report_teststatus(report):
+    """Turn failures into opportunities."""
+    if report.when == 'call' and report.failed:
+            return (report.outcome, 'O', 'OPPORTUNITY for improvement')
 ```
 
 And now we have just the output we were looking for. A test session with no
@@ -310,7 +319,8 @@ And now we have just the output we were looking for. A test session with no
 
 ```
 $ cd /path/to/code/ch5/b/tasks_proj/tests/func
-$ pytest--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest --tb=notest_api_exceptions.py-k TestAdd
+
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -329,7 +339,8 @@ test_api_exceptions.py.O
 And the -v or --verbose flag will be nicer also:
 
 ```
-$ pytest-v --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --tb=notest_api_exceptions.py-k TestAdd
+
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -347,22 +358,25 @@ only have our status modifications occur if --nice is passed in:
 
 ```
 **ch5/c/tasks_proj/tests/conftest.py
-def pytest_addoption (parser):
-_"""Turnnicefeatureson with--niceoption."""_
-group= parser.getgroup( _'nice'_ )
-group.addoption( _"--nice"_ , action= _"store_true"_ ,
-help= _"nice:turnfailuresintoopportunities"_ )
 
-def pytest_report_header (config):
-_"""Thanktesterfor runningtests."""_
-**if** config.getoption( _'nice'_ ):
-    return _"Thanksfor running the tests."_
+def pytest_addoption(parser):
+    """Turn nice features on with --nice option."""
+    group = parser.getgroup('nice')
+    group.addoption("--nice", action="store_true",
+                    help="nice: turn failures into opportunities")
 
-def pytest_report_teststatus (report,config):
-_"""Turnfailuresintoopportunities."""_
-**if** report.when== _'call'_ :
-**if** report.failed **and** config.getoption( _'nice'_ ):
-**return (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
+
+def pytest_report_header(config):
+    """Thank tester for running tests."""
+    if config.getoption('nice'):
+        return "Thanks for running the tests."
+
+
+def pytest_report_teststatus(report, config):
+    """Turn failures into opportunities."""
+    if report.when == 'call':
+        if report.failed and config.getoption('nice'):
+            return (report.outcome, 'O', 'OPPORTUNITY for improvement')
 ```
 
 This is a good place to note that for this plugin, we are using just a couple of
@@ -374,7 +388,8 @@ First, with no --nice option, to make sure just the username shows up:
 
 ```
 $ cd /path/to/code/ch5/c/tasks_proj/tests/func
-$ pytest--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest --tb=notest_api_exceptions.py-k TestAdd
+
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -391,7 +406,8 @@ test_api_exceptions.py.F [100%]
 
 Now with --nice:
 
-$ pytest--nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest --nice--tb=notest_api_exceptions.py-k TestAdd
+
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -403,7 +419,8 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
-$ pytest-v --nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --nice--tb=notest_api_exceptions.py-k TestAdd
+
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -457,45 +474,53 @@ to this feature (and take it out of the tasks_proj/tests/conftest.py):
 
 ```
 **ch5/pytest-nice/pytest_nice.py
-_"""Codefor pytest-niceplugin."""_
+
+"""Code for pytest-nice plugin."""
 
 import pytest
 
-def pytest_addoption (parser):
-_"""Turnnicefeatureson with--niceoption."""_
-group= parser.getgroup( _'nice'_ )
-group.addoption( _"--nice"_ , action= _"store_true"_ ,
-help= _"nice:turnFAILEDintoOPPORTUNITYfor improvement"_ )
 
-def pytest_report_header (config):
-_"""Thanktesterfor runningtests."""_
-**if** config.getoption( _'nice'_ ):
-    return _"Thanksfor running the tests."_
+def pytest_addoption(parser):
+    """Turn nice features on with --nice option."""
+    group = parser.getgroup('nice')
+    group.addoption("--nice", action="store_true",
+                    help="nice: turn FAILED into OPPORTUNITY for improvement")
 
-def pytest_report_teststatus (report,config):
-_"""Turnfailuresintoopportunities."""_
-**if** report.when== _'call'_ :
-**if** report.failed **and** config.getoption( _'nice'_ ):
-**return (report.outcome, _'O'_ , _'OPPORTUNITYfor improvement'_ )
+
+def pytest_report_header(config):
+    """Thank tester for running tests."""
+    if config.getoption('nice'):
+        return "Thanks for running the tests."
+
+
+def pytest_report_teststatus(report, config):
+    """Turn failures into opportunities."""
+    if report.when == 'call':
+        if report.failed and config.getoption('nice'):
+            return (report.outcome, 'O', 'OPPORTUNITY for improvement')
+```
+
 
 In setup.py, we need a very minimal call to setup():
 
+```
 **ch5/pytest-nice/setup.py
-_"""Setupfor pytest-niceplugin."""_
 
-**fromsetuptoolsimport** setup
+"""Setup for pytest-nice plugin."""
+
+from setuptools import setup
 
 setup(
-name= _'pytest-nice'_ ,
-version= _'0.1.0'_ ,
-description= _'A pytestpluginto turnFAILUREintoOPPORTUNITY'_ ,
-url= _'https://wherever/you/have/info/on/this/package'_ ,
-author= _'YourName'_ ,
-author_email= _'your_email@somewhere.com'_ ,
-license= _'proprietary'_ ,
-py_modules=[ _'pytest_nice'_ ],
-install_requires=[ _'pytest'_ ],
-entry_points={ _'pytest11'_ : [ _'nice= pytest_nice'_ , ], },
+    name='pytest-nice',
+    version='0.1.0',
+    description='A pytest plugin to turn FAILURE into OPPORTUNITY',
+    url='https://wherever/you/have/info/on/this/package',
+    author='Your Name',
+    author_email='your_email@somewhere.com',
+    license='proprietary',
+    py_modules=['pytest_nice'],
+    install_requires=['pytest'],
+    entry_points={'pytest11': ['nice = pytest_nice', ], },
 )
 ```
 
@@ -544,6 +569,7 @@ pytest-nice:
 
 ```
 **ch5/pytest-nice/README.rst**
+
 pytest-nice: A pytestplugin
 =============================
 
@@ -577,7 +603,7 @@ Usage
 ::
 
 
-$ pytest--nice
+$ pytest --nice
 ```
 
 There are lots of opinions about what should be in a README. This is a rather
@@ -597,8 +623,10 @@ pytester, we need to add just one line to conftest.py:
 
 ```
 **ch5/pytest-nice/tests/conftest.py
-_"""pytesteris neededfor testingplugins."""_
-pytest_plugins= _'pytester'_
+
+"""pytester is needed for testing plugins."""
+pytest_plugins = 'pytester'
+
 ```
 
 This turns on the pytester plugin. We will be using a fixture called testdir that
@@ -617,27 +645,28 @@ Let’s look at one example:
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
-def test_pass_fail (testdir):
 
+def test_pass_fail(testdir):
 
-# createa temporarypytesttestmodule
-testdir.makepyfile( """
-def test_pass():
-assert1 == 1
-def test_fail():
-assert1 == 2
-""" )
+    # create a temporary pytest test module
+    testdir.makepyfile("""
+        def test_pass():
+            assert 1 == 1
 
-# run pytest
-result= testdir.runpytest()
+        def test_fail():
+            assert 1 == 2
+    """)
 
-# fnmatch_linesdoesan assertioninternally
-result.stdout.fnmatch_lines([
-'*.F*' , #. for Pass,F for Fail
-])
+    # run pytest
+    result = testdir.runpytest()
 
-# makesurethatthatwe get a '1' exit codefor the testsuite
-assert result.ret== 1
+    # fnmatch_lines does an assertion internally
+    result.stdout.fnmatch_lines([
+        '*.F*',  # . for Pass, F for Fail
+    ])
+
+    # make sure that that we get a '1' exit code for the testsuite
+    assert result.ret == 1
 ```
 
 The testdir fixture automatically creates a temporary directory for us to put test
@@ -656,14 +685,16 @@ example file for more tests. Instead of duplicating that code, let’s make a fi
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
+
 @pytest.fixture()
-def sample_test (testdir):
-testdir.makepyfile( _"""
-def test_pass():
-assert1 == 1
-def test_fail():
-assert1 == 2
-"""_ )
+def sample_test(testdir):
+    testdir.makepyfile("""
+        def test_pass():
+            assert 1 == 1
+
+        def test_fail():
+            assert 1 == 2
+    """)
     return testdir
 ```
 
@@ -676,37 +707,42 @@ contains our sample test file. Here are the tests for the other option variants:
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
-def test_with_nice (sample_test):
-result= sample_test.runpytest( _'--nice'_ )
-result.stdout.fnmatch_lines([ _'*.O*'_ , ]) _#. for Pass,O for Fail_
-**assert** result.ret== 1
 
-def test_with_nice_verbose (sample_test):
-result= sample_test.runpytest( _'-v'_ , _'--nice'_ )
-result.stdout.fnmatch_lines([
-_'*::test_failOPPORTUNITYfor improvement*'_ ,
-])
-**assert** result.ret== 1
+def test_with_nice(sample_test):
+    result = sample_test.runpytest('--nice')
+    result.stdout.fnmatch_lines(['*.O*', ])  # . for Pass, O for Fail
+    assert result.ret == 1
 
-def test_not_nice_verbose (sample_test):
-result= sample_test.runpytest( _'-v'_ )
-result.stdout.fnmatch_lines([ _'*::test_failFAILED*'_ ])
-**assert** result.ret== 1
-```
+
+def test_with_nice_verbose(sample_test):
+    result = sample_test.runpytest('-v', '--nice')
+    result.stdout.fnmatch_lines([
+        '*::test_fail OPPORTUNITY for improvement*',
+    ])
+    assert result.ret == 1
+
+
+def test_not_nice_verbose(sample_test):
+    result = sample_test.runpytest('-v')
+    result.stdout.fnmatch_lines(['*::test_fail FAILED*'])
+    assert result.ret == 1
+```   
 
 Just a couple more tests to write. Let’s make sure our thank-you message is
 in the header:
 
 ```
 **ch5/pytest-nice/tests/test_nice.py
-def test_header (sample_test):
-result= sample_test.runpytest( _'--nice'_ )
-result.stdout.fnmatch_lines([ _'Thanksfor runningthe tests.'_ ])
 
-def test_header_not_nice (sample_test):
-result= sample_test.runpytest()
-thanks_message= _'Thanksfor running the tests.'_
-**assert** thanks_message **not in** result.stdout.str()
+def test_header(sample_test):
+    result = sample_test.runpytest('--nice')
+    result.stdout.fnmatch_lines(['Thanks for running the tests.'])
+
+
+def test_header_not_nice(sample_test):
+    result = sample_test.runpytest()
+    thanks_message = 'Thanks for running the tests.'
+    assert thanks_message not in result.stdout.str()
 ```
 
 This could have been part of the other tests also, but I like to have it in a
@@ -715,14 +751,16 @@ separate test so that one test checks one thing.
 Finally, let’s check the help text:
 
 ```
-**ch5/pytest-nice/tests/test_nice.py
-def test_help_message (testdir):
-result= testdir.runpytest( _'--help'_ )
-_# fnmatch_linesdoesan assertioninternally_
-result.stdout.fnmatch_lines([
-_'nice:'_ ,
-_'*--nice*nice:turnFAILEDintoOPPORTUNITYfor improvement'_ ,
-])
+**ch5/pytest -nice/tests/test_nice.py
+
+def test_help_message(testdir):
+    result = testdir.runpytest('--help')
+
+    # fnmatch_lines does an assertion internally
+    result.stdout.fnmatch_lines([
+        'nice:',
+        '*--nice*nice: turn FAILED into OPPORTUNITY for improvement',
+    ])
 ```
 
 I think that’s a pretty good check to make sure our plugin works.
@@ -734,9 +772,9 @@ is installed. We do this either by installing the .zip.gz file or installing the
 rent directory in editable mode:
 
 ```
-$ cd /path/to/code/ch5/pytest-nice/
-$ pip install .**
-Processing/path/to/code/ch5/pytest-nice
+$ cd /path/to/code/ch5/pytest -nice/
+$ pip install .
+Processing/path/to/code/ch5/pytest -nice
 ...
 
 Runningsetup.pybdist_wheelfor pytest-nice... done
@@ -750,7 +788,8 @@ Successfullyinstalledpytest-nice-0.1.0
 Now that it’s installed, let’s run the tests:
 
 ```
-$ pytest-v**
+$ pytest -v
+
 ===================testsessionstarts===================
 plugins:nice-0.1.0,cov-2.5.1
 collected7 items
@@ -770,7 +809,7 @@ Yay! All the tests pass. We can uninstall it just like any other Python package
 or pytest plugin:
 
 ```
-$ pip uninstallpytest-nice**
+$ pip uninstallpytest-nice
 Uninstallingpytest-nice-0.1.0:
 ...
 
@@ -787,8 +826,8 @@ Believe it or not, we are almost done with our plugin. From the command
 line, we can use this setup.py file to create a distribution:
 
 ```
-$ cd /path/to/code/ch5/pytest-nice
-$ pythonsetup.pysdist**
+$ cd /path/to/code/ch5/pytest -nice
+$ pythonsetup.pysdist
 runningsdist
 runningegg_info
 ```
@@ -801,10 +840,10 @@ runningcheck
 creatingpytest-nice-0.1.0
 ...
 
-creatingdist
-Creatingtar archive
-**...
-$ ls dist**
+creating dist
+Creating tar archive
+...
+$ ls dist
 pytest-nice-0.1.0.tar.gz
 ```
 
@@ -814,7 +853,7 @@ Within pytest-nice, a dist directory contains a new file called pytest-nice-0.1.
 This file can now be used anywhere to install our plugin, even in place:
 
 ```
-$ pip install dist/pytest-nice-0.1.0.tar.gz**
+$ pip install dist/pytest-nice-0.1.0.tar.gz
 Processing./dist/pytest-nice-0.1.0.tar.gz
 ...
 
@@ -835,7 +874,7 @@ put pytest-nice-0.1.0.tar.gz into a directory called myplugins.
 To install pytest-nice from myplugins:
 
 ```
-$ pip install --no-index--find-linksmypluginspytest-nice**
+$ pip install --no-index--find-linksmypluginspytest-nice
 ```
 
 The --no-index tells pip to not go out to PyPI to look for what you want to install.
@@ -846,7 +885,7 @@ If you’ve done some bug fixes and there are newer versions in myplugins, you
 can upgrade by adding --upgrade:
 
 ```
-$ pip install --upgrade--no-index--find-linksmypluginspytest-nice**
+$ pip install --upgrade--no-index--find-linksmypluginspytest-nice
 ```
 
 This is just like any other use of pip, but with the --no-index --find-linksmyplugins
@@ -865,7 +904,8 @@ using the cookiecutter-pytest-plugin^7 :
 
 ```
 $ pip install cookiecutter
-$ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin**
+
+$ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin
 ```
 
 This project first asks you some questions about your plugin. Then it creates

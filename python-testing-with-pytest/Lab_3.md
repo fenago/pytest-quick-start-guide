@@ -15,16 +15,19 @@ Here’s a simple fixture that returns a number:
 
 ```
 **ch3/test_fixtures.py
+
 import pytest
 
+
 @pytest.fixture()
-def some_data ():
-_"""Returnanswerto ultimatequestion."""_
+def some_data():
+    """Return answer to ultimate question."""
     return 42
 
-def test_some_data (some_data):
-_"""Usefixturereturnvaluein a test."""_
-**assert** some_data== 42
+
+def test_some_data(some_data):
+    """Use fixture return value in a test."""
+    assert some_data == 42
 ```
 
 The @pytest.fixture() decorator is used to tell pytest that a function is a fixture.
@@ -104,19 +107,22 @@ Given those pieces, this fixture works nicely:
 
 ```
 **ch3/a/tasks_proj/tests/conftest.py
-importpytest
-importtasks
-fromtasksimport** Task
+
+import pytest
+import tasks
+from tasks import Task
+
 
 @pytest.fixture()
-def tasks_db (tmpdir):
-_"""Connectto db beforetests,disconnectafter."""
-# Setup: startdb_
-tasks.start_tasks_db(str(tmpdir), _'tiny'_ )
-**yield** _# thisis wherethe testinghappens_
+def tasks_db(tmpdir):
+    """Connect to db before tests, disconnect after."""
+    # Setup : start db
+    tasks.start_tasks_db(str(tmpdir), 'tiny')
 
-# Teardown: stopdb
-tasks.stop_tasks_db()
+    yield  # this is where the testing happens
+
+    # Teardown : stop db
+    tasks.stop_tasks_db()
 ```
 
 The value of tmpdir isn’t a string—it’s an object that represents a directory.
@@ -135,18 +141,20 @@ Let’s change one of our tasks.add() tests to use this fixture:
 
 ```
 **ch3/a/tasks_proj/tests/func/test_add.py
-importpytest
-importtasks
-fromtasksimport** Task
 
-def test_add_returns_valid_id (tasks_db):
-_"""tasks.add(<validtask>)shouldreturnan integer."""
-# GIVENan initializedtasksdb
-# WHENa new taskis added
-# THENreturnedtask_idis of typeint_
-new_task= Task( _'do something'_ )
-task_id= tasks.add(new_task)
-**assert** isinstance(task_id,int)
+import pytest
+import tasks
+from tasks import Task
+
+
+def test_add_returns_valid_id(tasks_db):
+    """tasks.add(<valid task>) should return an integer."""
+    # GIVEN an initialized tasks db
+    # WHEN a new task is added
+    # THEN returned task_id is of type int
+    new_task = Task('do something')
+    task_id = tasks.add(new_task)
+    assert isinstance(task_id, int)
 ```
 
 The main change here is that the extra fixture in the file has been removed,
@@ -169,9 +177,10 @@ are run:
 
 ```
 $ cd /path/to/code/
-$ pip install ./tasks_proj/** _# if not installedyet_
+$ pip install ./tasks_proj/ # if not installed yet
 $ cd /path/to/code/ch3/a/tasks_proj/tests/func
-$ pytest-v test_add.py-k valid_id**
+$ pytest -v test_add.py-k valid_id
+
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
 
@@ -185,7 +194,8 @@ nately, pytest provides a command-line flag, --setup-show, that does just that:
 
 
 ```
-$ pytest--setup-showtest_add.py-k valid_id**
+$ pytest --setup-showtest_add.py-k valid_id
+
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
 
@@ -218,14 +228,16 @@ anything. Here’s a fixture returning a tuple of mixed type:
 
 ```
 **ch3/test_fixtures.py
-@pytest.fixture()
-def a_tuple ():
-_"""Returnsomethingmoreinteresting."""_
-**return (1, _'foo'_ , None,{ _'bar'_ : 23})
 
-def test_a_tuple (a_tuple):
-_"""Demothe a_tuplefixture."""_
-**assert** a_tuple[3][ _'bar'_ ] == 32
+@pytest.fixture()
+def a_tuple():
+    """Return something more interesting."""
+    return (1, 'foo', None, {'bar': 23})
+
+
+def test_a_tuple(a_tuple):
+    """Demo the a_tuple fixture."""
+    assert a_tuple[3]['bar'] == 32
 ```
 
 Since test_a_tuple() should fail (23 != 32), we can see what happens when a test
@@ -233,7 +245,8 @@ with a fixture fails:
 
 ```
 $ cd /path/to/code/ch3
-$ pytesttest_fixtures.py::test_a_tuple**
+$ pytest test_fixtures.py::test_a_tuple
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -265,7 +278,8 @@ What happens if the assert (or any exception) happens in the fixture?
 
 
 ```
-$ pytest-v test_fixtures.py::test_other_data**
+$ pytest -v test_fixtures.py::test_other_data
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -295,37 +309,37 @@ use some data fixtures, perhaps different lists of tasks with various properties
 
 ```
 **ch3/a/tasks_proj/tests/conftest.py
-_# Reminderof Taskconstructorinterface
-# Task(summary=None,owner=None,done=False,id=None)
-# summaryis required
-# ownerand doneare optional
-# id is set by database_
+
+# Reminder of Task constructor interface
+# Task(summary=None, owner=None, done=False, id=None)
+# summary is required
+# owner and done are optional
+# id is set by database
 
 @pytest.fixture()
-def tasks_just_a_few ():
-```
+def tasks_just_a_few():
+    """All summaries and owners are unique."""
+    return (
+        Task('Write some code', 'Brian', True),
+        Task("Code review Brian's code", 'Katie', False),
+        Task('Fix what Brian did', 'Michelle', False))
 
-
-```
-"""Allsummariesand ownersare unique."""
-return (
-Task( 'Writesomecode' , 'Brian' , True),
-Task( "CodereviewBrian'scode" , 'Katie' , False),
-Task( 'FixwhatBriandid' , 'Michelle' , False))
 
 @pytest.fixture()
-def tasks_mult_per_owner ():
-_"""Severalownerswithseveraltaskseach."""_
-**return (
-Task( _'Makea cookie'_ , _'Raphael'_ ),
-Task( _'Usean emoji'_ , _'Raphael'_ ),
-Task( _'Moveto Berlin'_ , _'Raphael'_ ),
-Task( _'Create'_ , _'Michelle'_ ),
-Task( _'Inspire'_ , _'Michelle'_ ),
-Task( _'Encourage'_ , _'Michelle'_ ),
-Task( _'Do a handstand'_ , _'Daniel'_ ),
-Task( _'Writesomebooks'_ , _'Daniel'_ ),
-Task( _'Eatice cream'_ , _'Daniel'_ ))
+def tasks_mult_per_owner():
+    """Several owners with several tasks each."""
+    return (
+        Task('Make a cookie', 'Raphael'),
+        Task('Use an emoji', 'Raphael'),
+        Task('Move to Berlin', 'Raphael'),
+
+        Task('Create', 'Michelle'),
+        Task('Inspire', 'Michelle'),
+        Task('Encourage', 'Michelle'),
+
+        Task('Do a handstand', 'Daniel'),
+        Task('Write some books', 'Daniel'),
+        Task('Eat ice cream', 'Daniel'))
 ```
 
 You can use these directly from tests, or you can use them from other fixtures.
@@ -339,17 +353,19 @@ for non-empty tasks databases:
 
 ```
 **ch3/a/tasks_proj/tests/conftest.py
-@pytest.fixture()
-def db_with_3_tasks (tasks_db,tasks_just_a_few):
-_"""Connecteddb with3 tasks,all unique."""_
-**for** t **in** tasks_just_a_few:
-tasks.add(t)
 
 @pytest.fixture()
-def db_with_multi_per_owner (tasks_db,tasks_mult_per_owner):
-_"""Connecteddb with9 tasks,3 owners,all with3 tasks."""_
-**for** t **in** tasks_mult_per_owner:
-tasks.add(t)
+def db_with_3_tasks(tasks_db, tasks_just_a_few):
+    """Connected db with 3 tasks, all unique."""
+    for t in tasks_just_a_few:
+        tasks.add(t)
+
+
+@pytest.fixture()
+def db_with_multi_per_owner(tasks_db, tasks_mult_per_owner):
+    """Connected db with 9 tasks, 3 owners, all with 3 tasks."""
+    for t in tasks_mult_per_owner:
+        tasks.add(t)
 ```
 
 These fixtures all include two fixtures each in their parameter list: tasks_db
@@ -359,17 +375,15 @@ like this:
 
 ```
 **ch3/a/tasks_proj/tests/func/test_add.py
-def test_add_increases_count (db_with_3_tasks):
-```
 
+def test_add_increases_count(db_with_3_tasks):
+    """Test tasks.add() affect on tasks.count()."""
+    # GIVEN a db with 3 tasks
+    #  WHEN another task is added
+    tasks.add(Task('throw a party'))
 
-```
-"""Testtasks.add()affecton tasks.count()."""
-# GIVENa db with3 tasks
-# WHENanothertaskis added
-tasks.add(Task( 'throwa party' ))
-# THENthe countincreasesby 1
-assert tasks.count()== 4
+    #  THEN the count increases by 1
+    assert tasks.count() == 4
 ```
 
 This also demonstrates one of the great reasons to use fixtures: to focus the
@@ -386,7 +400,8 @@ Let’s trace it and see all the fixtures run:
 
 ```
 $ cd /path/to/code/ch3/a/tasks_proj/tests/func
-$ pytest--setup-showtest_add.py::test_add_increases_count**
+$ pytest --setup-showtest_add.py::test_add_increases_count
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -455,44 +470,48 @@ Here’s how the scope values look in action:
 
 ```
 **ch3/test_scope.py
-_"""Demofixturescope."""_
+
+"""Demo fixture scope."""
 
 import pytest
 
-@pytest.fixture(scope= _'function'_ )
-def func_scope ():
-_"""Afunctionscopefixture."""_
 
-@pytest.fixture(scope= _'module'_ )
-def mod_scope ():
-_"""Amodulescopefixture."""_
+@pytest.fixture(scope='function')
+def func_scope():
+    """A function scope fixture."""
 
-@pytest.fixture(scope= _'session'_ )
-def sess_scope ():
-_"""Asessionscopefixture."""_
 
-@pytest.fixture(scope= _'class'_ )
-def class_scope ():
-_"""Aclassscopefixture."""_
+@pytest.fixture(scope='module')
+def mod_scope():
+    """A module scope fixture."""
 
-def test_1 (sess_scope,mod_scope,func_scope):
-_"""Testusingsession,module,and functionscopefixtures."""_
 
-def test_2 (sess_scope,mod_scope,func_scope):
-_"""Demois morefun withmultiple tests."""_
+@pytest.fixture(scope='session')
+def sess_scope():
+    """A session scope fixture."""
 
-@pytest.mark.usefixtures( _'class_scope'_ )
-```
 
-```
-**class** TestSomething():
-_"""Democlassscopefixtures."""_
+@pytest.fixture(scope='class')
+def class_scope():
+    """A class scope fixture."""
 
-def test_3 (self):
-"""Testusinga classscopefixture."""
 
-def test_4 (self):
-"""Again,multipletestsare morefun."""
+def test_1(sess_scope, mod_scope, func_scope):
+    """Test using session, module, and function scope fixtures."""
+
+
+def test_2(sess_scope, mod_scope, func_scope):
+    """Demo is more fun with multiple tests."""
+
+@pytest.mark.usefixtures('class_scope')
+class TestSomething():
+    """Demo class scope fixtures."""
+
+    def test_3(self):
+        """Test using a class scope fixture."""
+
+    def test_4(self):
+        """Again, multiple tests are more fun."""
 ```
 
 Let’s use --setup-show to demonstrate that the number of times a fixture is called
@@ -500,7 +519,8 @@ and when the setup and teardown are run depend on the scope:
 
 ```
 $ cd /path/to/code/ch3
-$ pytest--setup-showtest_scope.py
+$ pytest --setup-showtest_scope.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -555,22 +575,25 @@ the parameter list):
 
 ```
 **ch3/b/tasks_proj/tests/conftest.py
-importpytest
-importtasks
-fromtasksimport** Task
 
-@pytest.fixture(scope= _'session'_ )
-def tasks_db_session (tmpdir_factory):
-_"""Connectto db beforetests,disconnectafter."""_
-temp_dir= tmpdir_factory.mktemp( _'temp'_ )
-tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
-**yield**
-tasks.stop_tasks_db()
+import pytest
+import tasks
+from tasks import Task
+
+
+@pytest.fixture(scope='session')
+def tasks_db_session(tmpdir_factory):
+    """Connect to db before tests, disconnect after."""
+    temp_dir = tmpdir_factory.mktemp('temp')
+    tasks.start_tasks_db(str(temp_dir), 'tiny')
+    yield
+    tasks.stop_tasks_db()
+
 
 @pytest.fixture()
-def tasks_db (tasks_db_session):
-_"""Anemptytasksdb."""_
-tasks.delete_all()
+def tasks_db(tasks_db_session):
+    """An empty tasks db."""
+    tasks.delete_all()
 ```
 
 Here we changed tasks_db to depend on tasks_db_session, and we deleted all the
@@ -582,35 +605,38 @@ run all the time. Once per session is sufficient:
 
 ```
 **ch3/b/tasks_proj/tests/conftest.py
-_# Reminderof Taskconstructorinterface
-# Task(summary=None,owner=None,done=False,id=None)
-# summaryis required
-# ownerand doneare optional
-# id is set by database_
-```
 
-```
-@pytest.fixture(scope= _'session'_ )
-def tasks_just_a_few ():
-_"""Allsummariesand ownersare unique."""_
-**return (
-Task( _'Writesomecode'_ , _'Brian'_ , True),
-Task( _"CodereviewBrian'scode"_ , _'Katie'_ , False),
-Task( _'FixwhatBriandid'_ , _'Michelle'_ , False))
+# Reminder of Task constructor interface
+# Task(summary=None, owner=None, done=False, id=None)
+# summary is required
+# owner and done are optional
+# id is set by database
 
-@pytest.fixture(scope= _'session'_ )
-def tasks_mult_per_owner ():
-_"""Severalownerswithseveraltaskseach."""_
-**return (
-Task( _'Makea cookie'_ , _'Raphael'_ ),
-Task( _'Usean emoji'_ , _'Raphael'_ ),
-Task( _'Moveto Berlin'_ , _'Raphael'_ ),
-Task( _'Create'_ , _'Michelle'_ ),
-Task( _'Inspire'_ , _'Michelle'_ ),
-Task( _'Encourage'_ , _'Michelle'_ ),
-Task( _'Do a handstand'_ , _'Daniel'_ ),
-Task( _'Writesomebooks'_ , _'Daniel'_ ),
-Task( _'Eatice cream'_ , _'Daniel'_ ))
+
+@pytest.fixture(scope='session')
+def tasks_just_a_few():
+    """All summaries and owners are unique."""
+    return (
+        Task('Write some code', 'Brian', True),
+        Task("Code review Brian's code", 'Katie', False),
+        Task('Fix what Brian did', 'Michelle', False))
+
+
+@pytest.fixture(scope='session')
+def tasks_mult_per_owner():
+    """Several owners with several tasks each."""
+    return (
+        Task('Make a cookie', 'Raphael'),
+        Task('Use an emoji', 'Raphael'),
+        Task('Move to Berlin', 'Raphael'),
+
+        Task('Create', 'Michelle'),
+        Task('Inspire', 'Michelle'),
+        Task('Encourage', 'Michelle'),
+
+        Task('Do a handstand', 'Daniel'),
+        Task('Write some books', 'Daniel'),
+        Task('Eat ice cream', 'Daniel'))
 ```
 
 Now, let’s see if all of these changes work with our tests:
@@ -618,6 +644,7 @@ Now, let’s see if all of these changes work with our tests:
 ```
 $ cd /path/to/code/ch3/b/tasks_proj
 $ pytest
+
 ===================testsessionstarts===================
 collected55 items
 
@@ -636,7 +663,7 @@ Looks like it’s all good. Let’s trace the fixtures for one test file to see 
 different scoping worked as expected:
 
 ```
-$ pytest--setup-showtests/func/test_add.py
+$ pytest --setup-showtests/func/test_add.py
 ===================testsessionstarts===================
 collected3 items
 
@@ -681,14 +708,16 @@ But it does work well for test classes:
 
 ```
 **ch3/test_scope.py
-@pytest.mark.usefixtures( _'class_scope'_ )
-**class** TestSomething():
-_"""Democlassscopefixtures."""_
 
-def test_3 (self):
-"""Testusinga classscopefixture."""
-def test_4 (self):
-"""Again,multipletestsare morefun."""
+@pytest.mark.usefixtures('class_scope')
+class TestSomething():
+    """Demo class scope fixtures."""
+
+    def test_3(self):
+        """Test using a class scope fixture."""
+
+    def test_4(self):
+        """Again, multiple tests are more fun."""
 ```
 
 Using usefixtures is almost the same as specifying the fixture name in the test
@@ -708,36 +737,41 @@ state or data from the fixture. Here’s a rather contrived example:
 
 ```
 **ch3/test_autouse.py
-_"""Demonstrateautousefixtures."""_
+
+"""Demonstrate autouse fixtures."""
 
 import pytest
-importtime**
+import time
 
-@pytest.fixture(autouse=True,scope= _'session'_ )
-def footer_session_scope ():
-_"""Reportthe timeat the end of a session."""_
-**yield**
-now = time.time()
-**print ( _'--'_ )
-**print ( _'finished: {}'_ .format(time.strftime( _'%d %b %X'_ , time.localtime(now))))
-**print ( _'-----------------'_ )
+
+@pytest.fixture(autouse=True, scope='session')
+def footer_session_scope():
+    """Report the time at the end of a session."""
+    yield
+    now = time.time()
+    print('--')
+    print('finished : {}'.format(time.strftime('%d %b %X', time.localtime(now))))
+    print('-----------------')
+
 
 @pytest.fixture(autouse=True)
-def footer_function_scope ():
-_"""Reporttestdurationsafter eachfunction."""_
-start= time.time()
-**yield**
-stop= time.time()
-delta= stop- start
-**print ( _'\ntestduration: {:0.3}seconds'_ .format(delta))
+def footer_function_scope():
+    """Report test durations after each function."""
+    start = time.time()
+    yield
+    stop = time.time()
+    delta = stop - start
+    print('\ntest duration : {:0.3} seconds'.format(delta))
 
-def test_1 ():
-_"""Simulatelong-ishrunningtest."""_
-time.sleep(1)
 
-def test_2 ():
-_"""Simulateslightlylongertest."""_
-time.sleep(1.23)
+def test_1():
+    """Simulate long-ish running test."""
+    time.sleep(1)
+
+
+def test_2():
+    """Simulate slightly longer test."""
+    time.sleep(1.23)
 ```
 
 We want to add test times after each test, and the date and current time at
@@ -745,7 +779,8 @@ the end of the session. Here’s what these look like:
 
 ```
 $ cd /path/to/code/ch3
-$ pytest-v -s test_autouse.py
+$ pytest -v -s test_autouse.py
+
 =====================testsessionstarts======================
 collected2 items
 
@@ -777,25 +812,29 @@ pytest allows you to rename fixtures with a name parameter to @pytest.fixture():
 
 ```
 **ch3/test_rename_fixture.py
-_"""Demonstratefixturerenaming."""_
+
+"""Demonstrate fixture renaming."""
 
 import pytest
 
-@pytest.fixture(name= _'lue'_ )
-def ultimate_answer_to_life_the_universe_and_everything ():
-_"""Returnultimateanswer."""_
+
+@pytest.fixture(name='lue')
+def ultimate_answer_to_life_the_universe_and_everything():
+    """Return ultimate answer."""
     return 42
 
-def test_everything (lue):
-_"""Usethe shortername."""_
-**assert** lue == 42
+
+def test_everything(lue):
+    """Use the shorter name."""
+    assert lue == 42
 ```
 
 Here, lue is now the fixture name, instead of ultimate_answer_to_life_the_uni-
 verse_and_everything. That name even shows up if we run it with --setup-show:
 
 ```
-$ pytest--setup-showtest_rename_fixture.py
+$ pytest --setup-showtest_rename_fixture.py
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -812,7 +851,8 @@ If you need to find out where lue is defined, you can add the pytest option
 for the test, including ones that have been renamed:
 
 ```
-$ pytest--fixturestest_rename_fixture.py
+$ pytest --fixturestest_rename_fixture.py
+
 ===================testsessionstarts===================
 ...
 
@@ -833,7 +873,8 @@ to look up the definition of lue. Let’s use that in the Tasks project:
 
 ```
 $ cd /path/to/code/ch3/b/tasks_proj
-$ pytest--fixturestests/func/test_add.py
+$ pytest --fixturestests/func/test_add.py
+
 ========================testsessionstarts========================
 ...
 
@@ -873,25 +914,27 @@ an equivalence function, just as before:
 
 ```
 **ch3/b/tasks_proj/tests/func/test_add_variety2.py
-importpytest
-importtasks
-fromtasksimport** Task
-```
+
 
 ```
-tasks_to_try= (Task( _'sleep'_ , done=True),
-Task( _'wake'_ , _'brian'_ ),
-Task( _'breathe'_ , _'BRIAN'_ , True),
-Task( _'exercise'_ , _'BrIaN'_ , False))
+import pytest
+import tasks
+from tasks import Task
 
-task_ids= [ _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
-**for** t **in** tasks_to_try]
+tasks_to_try = (Task('sleep', done=True),
+                Task('wake', 'brian'),
+                Task('breathe', 'BRIAN', True),
+                Task('exercise', 'BrIaN', False))
 
-def equivalent (t1,t2):
-_"""Checktwo tasksfor equivalence."""_
-**return ((t1.summary== t2.summary) **and**
-(t1.owner== t2.owner) **and**
-(t1.done== t2.done))
+task_ids = ['Task({},{},{})'.format(t.summary, t.owner, t.done)
+            for t in tasks_to_try]
+
+
+def equivalent(t1, t2):
+    """Check two tasks for equivalence."""
+    return ((t1.summary == t2.summary) and
+            (t1.owner == t2.owner) and
+            (t1.done == t2.done)))
 ```
 
 But now, instead of parametrizing the test, we will parametrize a fixture
@@ -899,16 +942,18 @@ called a_task:
 
 ```
 **ch3/b/tasks_proj/tests/func/test_add_variety2.py
+
 @pytest.fixture(params=tasks_to_try)
-def a_task (request):
-_"""Usingno ids."""_
+def a_task(request):
+    """Using no ids."""
     return request.param
 
-def test_add_a (tasks_db,a_task):
-_"""Usinga_taskfixture(no ids)."""_
-task_id= tasks.add(a_task)
-t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,a_task)
+
+def test_add_a(tasks_db, a_task):
+    """Using a_task fixture (no ids)."""
+    task_id = tasks.add(a_task)
+    t_from_db = tasks.get(task_id)
+    assert equivalent(t_from_db, a_task)
 ```
 
 The request listed in the fixture parameter is another builtin fixture that repre-
@@ -922,7 +967,8 @@ four times, and then the test will get called four times:
 
 ```
 $ cd /path/to/code/ch3/b/tasks_proj/tests/func
-$ pytest-v test_add_variety2.py::test_add_a**
+$ pytest -v test_add_variety2.py::test_add_a
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -943,11 +989,11 @@ we used when we parametrized our tests:
 **ch3/b/tasks_proj/tests/func/test_add_variety2.py
 @pytest.fixture(params=tasks_to_try,ids=task_ids)
 def b_task (request):
-_"""Usinga listof ids."""_
+"""Usinga listof ids."""
     return request.param
 
 def test_add_b (tasks_db,b_task):
-_"""Usingb_taskfixture,withids."""_
+"""Usingb_taskfixture,withids."""
 task_id= tasks.add(b_task)
 t_from_db= tasks.get(task_id)
 **assert** equivalent(t_from_db,b_task)
@@ -956,7 +1002,7 @@ t_from_db= tasks.get(task_id)
 This gives us better identifiers:
 
 ```
-$ pytest-v test_add_variety2.py::test_add_b**
+$ pytest -v test_add_variety2.py::test_add_b**
 ===================testsessionstarts===================
 collected4 items
 
@@ -974,21 +1020,24 @@ identifiers:
 
 ```
 **ch3/b/tasks_proj/tests/func/test_add_variety2.py
-def id_func (fixture_value):
-_"""Afunctionfor generatingids."""_
-t = fixture_value
-    return _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
 
-@pytest.fixture(params=tasks_to_try,ids=id_func)
-def c_task (request):
-_"""Usinga function(id_func)to generateids."""_
+def id_func(fixture_value):
+    """A function for generating ids."""
+    t = fixture_value
+    return 'Task({},{},{})'.format(t.summary, t.owner, t.done)
+
+
+@pytest.fixture(params=tasks_to_try, ids=id_func)
+def c_task(request):
+    """Using a function (id_func) to generate ids."""
     return request.param
 
-def test_add_c (tasks_db,c_task):
-_"""Usefixturewithgeneratedids."""_
-task_id= tasks.add(c_task)
-t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,c_task)
+
+def test_add_c(tasks_db, c_task):
+    """Use fixture with generated ids."""
+    task_id = tasks.add(c_task)
+    t_from_db = tasks.get(task_id)
+    assert equivalent(t_from_db, c_task)
 ```
 
 
@@ -999,7 +1048,8 @@ single Task object to generate the identifier for one Task object at a time. It�
 cleaner than generating a full list ahead of time, and looks the same:
 
 ```
-$ pytest-v test_add_variety2.py::test_add_c**
+$ pytest -v test_add_variety2.py::test_add_c
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -1027,22 +1077,25 @@ start_tasks_db() call in the tasks_db_session fixture:
 
 ```
 **ch3/b/tasks_proj/tests/conftest.py
-importpytest
-importtasks
-fromtasksimport** Task
 
-@pytest.fixture(scope= _'session'_ )
-def tasks_db_session (tmpdir_factory):
-_"""Connectto db beforetests,disconnectafter."""_
-temp_dir= tmpdir_factory.mktemp( _'temp'_ )
-tasks.start_tasks_db(str(temp_dir), _'tiny'_ )
-**yield**
-tasks.stop_tasks_db()
+import pytest
+import tasks
+from tasks import Task
+
+
+@pytest.fixture(scope='session')
+def tasks_db_session(tmpdir_factory):
+    """Connect to db before tests, disconnect after."""
+    temp_dir = tmpdir_factory.mktemp('temp')
+    tasks.start_tasks_db(str(temp_dir), 'tiny')
+    yield
+    tasks.stop_tasks_db()
+
 
 @pytest.fixture()
-def tasks_db (tasks_db_session):
-_"""Anemptytasksdb."""_
-tasks.delete_all()
+def tasks_db(tasks_db_session):
+    """An empty tasks db."""
+    tasks.delete_all()
 ```
 
 
@@ -1054,7 +1107,7 @@ interactions:
 ```
 **tasks_proj/src/tasks/api.py
 def start_tasks_db (db_path,db_type): _# type:(str,str)-> None
-"""ConnectAPI functionsto a db."""_
+"""ConnectAPI functionsto a db."""
 **if not** isinstance(db_path,string_types):
 **raise** TypeError( _'db_pathmustbe a string'_ )
 **global** _tasksdb
@@ -1065,7 +1118,7 @@ _tasksdb= tasks.tasksdb_tinydb.start_tasks_db(db_path)
 import tasks.tasksdb_pymongo**
 _tasksdb= tasks.tasksdb_pymongo.start_tasks_db(db_path)
 **else** :
-**raise** ValueError( _"db_typemustbe a 'tiny'or 'mongo'"_ )
+**raise** ValueError( "db_typemustbe a 'tiny'or 'mongo'" )
 ```
 
 To test MongoDB, we need to run all the tests with db_type set to mongo. A small
@@ -1073,23 +1126,26 @@ change does the trick:
 
 ```
 **ch3/c/tasks_proj/tests/conftest.py
-importpytest
-importtasks
-fromtasksimport** Task
 
-_#@pytest.fixture(scope='session',params=['tiny',])_
-@pytest.fixture(scope= _'session'_ , params=[ _'tiny'_ , _'mongo'_ ])
-def tasks_db_session (tmpdir_factory,request):
-_"""Connectto db beforetests,disconnectafter."""_
-temp_dir= tmpdir_factory.mktemp( _'temp'_ )
-tasks.start_tasks_db(str(temp_dir),request.param)
-**yield** _# thisis wherethe testinghappens_
-tasks.stop_tasks_db()
+import pytest
+import tasks
+from tasks import Task
+
+
+#@pytest.fixture(scope='session', params=['tiny',])
+@pytest.fixture(scope='session', params=['tiny', 'mongo'])
+def tasks_db_session(tmpdir_factory, request):
+    """Connect to db before tests, disconnect after."""
+    temp_dir = tmpdir_factory.mktemp('temp')
+    tasks.start_tasks_db(str(temp_dir), request.param)
+    yield  # this is where the testing happens
+    tasks.stop_tasks_db()
+
 
 @pytest.fixture()
-def tasks_db (tasks_db_session):
-_"""Anemptytasksdb."""_
-tasks.delete_all()
+def tasks_db(tasks_db_session):
+    """An empty tasks db."""
+    tasks.delete_all()
 ```
 
 Here I added params=['tiny','mongo'] to the fixture decorator. I added request to the
@@ -1117,7 +1173,8 @@ Here’s what we have so far:
 ```
 $ cd /path/to/code/ch3/c/tasks_proj
 $ pip install pymongo
-$ pytest-v --tb=no**
+$ pytest -v --tb=no
+
 ===================testsessionstarts===================
 collected96 items
 
@@ -1153,7 +1210,7 @@ return some data. Perhaps a list, or a dictionary, or a tuple.
 4. Write two tests that use the same fixture.
 5. Run pytest --setup-showtest_fixtures.py. Are all the fixtures run before every test?
 6. Add scope='module' to the fixture from Exercise 4.
-7. Re-run pytest--setup-showtest_fixtures.py. What changed?
+7. Re-run pytest --setup-showtest_fixtures.py. What changed?
 8. For the fixture from Exercise 6, change return <data> to yield <data>.
 9. Add print statements before and after the yield.
 10. Run pytest-s -v test_fixtures.py. Does the output make sense?

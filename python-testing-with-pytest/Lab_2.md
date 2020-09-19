@@ -135,38 +135,44 @@ Here is test_task.py:
 
 ```
 **ch2/tasks_proj/tests/unit/test_task.py
-_"""Testthe Taskdatatype."""_
-**fromtasksimport** Task
 
-def test_asdict ():
-_"""_asdict()shouldreturna dictionary."""_
-t_task= Task( _'do something'_ , _'okken'_ , True,21)
-t_dict= t_task._asdict()
-expected= { _'summary'_ : _'do something'_ ,
-_'owner'_ : _'okken'_ ,
-_'done'_ : True,
-_'id'_ : 21}
-**assert** t_dict== expected
+"""Test the Task data type."""
+from tasks import Task
 
-def test_replace ():
-_"""replace()shouldchangepassedin fields."""_
-t_before= Task( _'finishbook'_ , _'brian'_ , False)
-t_after= t_before._replace(id=10,done=True)
-t_expected= Task( _'finishbook'_ , _'brian'_ , True,10)
-**assert** t_after== t_expected
 
-def test_defaults ():
-_"""Usingno parametersshouldinvokedefaults."""_
-t1 = Task()
-t2 = Task(None,None,False,None)
-**assert** t1 == t2
+def test_asdict():
+    """asdict() should return a dictionary."""
+    t_task = Task('do something', 'okken', True, 21)
+    t_dict = t_task._asdict()
+    expected = {'summary': 'do something',
+                'owner': 'okken',
+                'done': True,
+                'id': 21}
+    assert t_dict == expected
 
-def test_member_access ():
-_"""Check.fieldfunctionalityof namedtuple."""_
-t = Task( _'buymilk'_ , _'brian'_ )
-**assert** t.summary== _'buymilk'_
-**assert** t.owner== _'brian'_
-**assert (t.done,t.id)== (False,None)
+
+def test_replace():
+    """replace() should change passed in fields."""
+    t_before = Task('finish book', 'brian', False)
+    t_after = t_before._replace(id=10, done=True)
+    t_expected = Task('finish book', 'brian', True, 10)
+    assert t_after == t_expected
+
+
+def test_defaults():
+    """Using no parameters should invoke defaults."""
+    t1 = Task()
+    t2 = Task(None, None, False, None)
+    assert t1 == t2
+
+
+def test_member_access():
+    """Check .field functionality of namedtuple."""
+    t = Task('buy milk', 'brian')
+    assert t.summary == 'buy milk'
+    assert t.owner == 'brian'
+    assert (t.done, t.id) == (False, None)
+
 ```
 
 The test_task.py file has this import statement:
@@ -228,7 +234,9 @@ Now let’s try running tests:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/unit
-$ pytesttest_task.py
+
+$ pytest test_task.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -271,27 +279,31 @@ failures:
 
 ```
 **ch2/tasks_proj/tests/unit/test_task_fail.py
-_"""Usethe Tasktypeto showtestfailures."""_
-**fromtasksimport** Task
 
-def test_task_equality ():
-_"""Differenttasksshouldnot be equal."""_
-t1 = Task( _'sitthere'_ , _'brian'_ )
-t2 = Task( _'do something'_ , _'okken'_ )
-**assert** t1 == t2
+"""Use the Task type to show test failures."""
+from tasks import Task
 
-def test_dict_equality ():
-_"""Differenttaskscomparedas dicts shouldnot be equal."""_
-t1_dict= Task( _'makesandwich'_ , _'okken'_ )._asdict()
-t2_dict= Task( _'makesandwich'_ , _'okkem'_ )._asdict()
-**assert** t1_dict== t2_dict
+
+def test_task_equality():
+    """Different tasks should not be equal."""
+    t1 = Task('sit there', 'brian')
+    t2 = Task('do something', 'okken')
+    assert t1 == t2
+
+
+def test_dict_equality():
+    """Different tasks compared as dicts should not be equal."""
+    t1_dict = Task('make sandwich', 'okken')._asdict()
+    t2_dict = Task('make sandwich', 'okkem')._asdict()
+    assert t1_dict == t2_dict
 ```
 
 All of these tests fail, but what’s interesting is the traceback information:
 
 ```
-$ cd /path/to/code/ch2/tasks_proj/tests/unit**
-venv)$ pytesttest_task_fail.py
+$ cd /path/to/code/ch2/tasks_proj/tests/unit
+venv)$ pytest test_task_fail.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -342,7 +354,8 @@ shown in the previous code. Let’s try it again with the -v flag, as suggested 
 the error message:
 
 ```
-$ pytest-v test_task_fail.py::test_task_equality**
+$ pytest -v test_task_fail.py::test_task_equality
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -406,13 +419,15 @@ and use with pytest.raises(<expectedexception>), like this:
 
 ```
 **ch2/tasks_proj/tests/func/test_api_exceptions.py
-importpytest
-importtasks**
 
-def test_add_raises ():
-_"""add()shouldraisean exceptionwithwrongtypeparam."""_
-**with** pytest.raises(TypeError):
-tasks.add(task= _'nota Taskobject'_ )
+import pytest
+import tasks
+
+
+def test_add_raises():
+    """add() should raise an exception with wrong type param."""
+    with pytest.raises(TypeError):
+        tasks.add(task='not a Task object')
 ```
 
 In test_add_raises(), the with pytest.raises(TypeError): statement says that whatever is
@@ -429,12 +444,13 @@ check to make sure the exception message is correct by adding as excinfo:
 
 ```
 **ch2/tasks_proj/tests/func/test_api_exceptions.py
-def test_start_tasks_db_raises ():
-_"""Makesureunsupporteddb raisesan exception."""_
-**with** pytest.raises(ValueError) **as** excinfo:
-tasks.start_tasks_db( _'some/great/path'_ , _'mysql'_ )
-exception_msg= excinfo.value.args[0]
-**assert** exception_msg== _"db_typemustbe a 'tiny'or 'mongo'"_
+
+def test_start_tasks_db_raises():
+    """Make sure unsupported db raises an exception."""
+    with pytest.raises(ValueError) as excinfo:
+        tasks.start_tasks_db('some/great/path', 'mysql')
+    exception_msg = excinfo.value.args[0]
+    assert exception_msg == "db_type must be a 'tiny' or 'mongo'"
 ```
 
 This allows us to look at the exception more closely. The variable name you
@@ -464,27 +480,27 @@ that the markers smoke and get aren’t built into pytest; I just made them up):
 
 ```
 **ch2/tasks_proj/tests/func/test_api_exceptions.py
+
 @pytest.mark.smoke
-def test_list_raises ():
-_"""list()shouldraisean exceptionwithwrongtypeparam."""_
-**with** pytest.raises(TypeError):
-tasks.list_tasks(owner=123)
+def test_list_raises():
+    """list() should raise an exception with wrong type param."""
+    with pytest.raises(TypeError):
+        tasks.list_tasks(owner=123)
+
 
 @pytest.mark.get
 @pytest.mark.smoke
-def test_get_raises ():
-_"""get()shouldraisean exceptionwithwrongtypeparam."""_
-```
-
-```
-with pytest.raises(TypeError):
-tasks.get(task_id= '123' )
+def test_get_raises():
+    """get() should raise an exception with wrong type param."""
+    with pytest.raises(TypeError):
+        tasks.get(task_id='123')
 ```
 Now, let’s run just those tests that are marked with -m marker_name:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v -m smoketest_api_exceptions.py
+$ pytest -v -m smoketest_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 5 deselected
 
@@ -493,7 +509,8 @@ test_api_exceptions.py::test_get_raisesPASSED [100%]
 
 =========2 passed,5 deselectedin 0.03seconds==========
 
-$ pytest-v -m get test_api_exceptions.py
+$ pytest -v -m get test_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -511,7 +528,8 @@ It gets better. The expression after -m can use and, or, and not to combine
 multiple markers:
 
 ```
-$ pytest-v -m** _"smokeand get"_ **test_api_exceptions.py
+$ pytest -v -m "smokeand get" test_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -524,7 +542,8 @@ That time we only ran the test that had both smoke and get markers. We can
 use not as well:
 
 ```
-$ pytest-v -m** _"smokeand not get"_ **test_api_exceptions.py
+$ pytest -v -m "smokeand not get" **test_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -548,31 +567,35 @@ part of our smoke test suite:
 
 ```
 **ch2/tasks_proj/tests/func/test_add.py
-importpytest
-importtasks
-fromtasksimport** Task
 
-def test_add_returns_valid_id ():
-_"""tasks.add(<validtask>)shouldreturnan integer."""
-# GIVENan initializedtasksdb
-# WHENa new taskis added
-# THENreturnedtask_idis of typeint_
-new_task= Task( _'do something'_ )
-task_id= tasks.add(new_task)
-**assert** isinstance(task_id,int)
+import pytest
+import tasks
+from tasks import Task
+
+
+def test_add_returns_valid_id():
+    """tasks.add(<valid task>) should return an integer."""
+    # GIVEN an initialized tasks db
+    # WHEN a new task is added
+    # THEN returned task_id is of type int
+    new_task = Task('do something')
+    task_id = tasks.add(new_task)
+    assert isinstance(task_id, int)
+
 
 @pytest.mark.smoke
-def test_added_task_has_id_set ():
-_"""Makesurethe task_idfield is set by tasks.add()."""
-# GIVENan initializedtasksdb
-# AND a new taskis added_
-new_task= Task( _'sitin chair'_ , owner= _'me'_ , done=True)
-task_id= tasks.add(new_task)
+def test_added_task_has_id_set():
+    """Make sure the task_id field is set by tasks.add()."""
+    # GIVEN an initialized tasks db
+    #   AND a new task is added
+    new_task = Task('sit in chair', owner='me', done=True)
+    task_id = tasks.add(new_task)
 
-# WHENtaskis retrieved
-task_from_db= tasks.get(task_id)
-# THENtask_idmatchesid field
-assert task_from_db.id== task_id
+    # WHEN task is retrieved
+    task_from_db = tasks.get(task_id)
+
+    # THEN task_id matches id field
+    assert task_from_db.id == task_id
 ```
 
 Both of these tests have the comment GIVENan initializedtasks db, and yet there
@@ -581,14 +604,17 @@ initialized before the test and cleaned up after the test:
 
 ```
 **ch2/tasks_proj/tests/func/test_add.py
+
 @pytest.fixture(autouse=True)
-def initialized_tasks_db (tmpdir):
-_"""Connectto db beforetesting,disconnectafter."""
-# Setup: startdb_
-tasks.start_tasks_db(str(tmpdir), _'tiny'_ )
-**yield** _# thisis wherethe testinghappens
-# Teardown: stopdb_
-tasks.stop_tasks_db()
+def initialized_tasks_db(tmpdir):
+    """Connect to db before testing, disconnect after."""
+    # Setup : start db
+    tasks.start_tasks_db(str(tmpdir), 'tiny')
+
+    yield  # this is where the testing happens
+
+    # Teardown : stop db
+    tasks.stop_tasks_db()
 ```
 
 The fixture, tmpdir, used in this example is a builtin fixture. You’ll learn all
@@ -610,7 +636,8 @@ run our smoke test suite:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj
-$ pytest-v -m smoke**
+$ pytest -v -m smoke
+
 ===================testsessionstarts===================
 collected56 items/ 53 deselected
 
@@ -640,23 +667,23 @@ it’s just not shown here):
 
 ```
 **ch2/tasks_proj/tests/func/test_unique_id_1.py
-importpytest
-importtasks**
 
-def test_unique_id ():
-```
+import pytest
+import tasks
 
-```
-"""Callingunique_id()twiceshouldreturndifferentnumbers."""
-id_1= tasks.unique_id()
-id_2= tasks.unique_id()
-assert id_1!= id_2
+
+def test_unique_id():
+    """Calling unique_id() twice should return different numbers."""
+    id_1 = tasks.unique_id()
+    id_2 = tasks.unique_id()
+    assert id_1 != id_2
 ```
 Then give it a run:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytesttest_unique_id_1.py
+$ pytest test_unique_id_1.py
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -684,23 +711,24 @@ skipped for now:
 
 ```
 **ch2/tasks_proj/tests/func/test_unique_id_2.py
-@pytest.mark.skip(reason= _'misunderstoodthe API'_ )
-def test_unique_id_1 ():
-_"""Callingunique_id()twiceshouldreturndifferentnumbers."""_
-id_1= tasks.unique_id()
-id_2= tasks.unique_id()
-**assert** id_1!= id_2
 
-def test_unique_id_2 ():
-_"""unique_id()shouldreturnan unusedid."""_
-ids = []
-ids.append(tasks.add(Task( _'one'_ )))
-ids.append(tasks.add(Task( _'two'_ )))
-ids.append(tasks.add(Task( _'three'_ )))
-_# graba uniqueid_
-uid = tasks.unique_id()
-_# makesureit isn'tin the listof existingids_
-**assert** uid **not in** ids
+@pytest.mark.skip(reason='misunderstood the API')
+def test_unique_id_1():
+    """Calling unique_id() twice should return different numbers."""
+    id_1 = tasks.unique_id()
+    id_2 = tasks.unique_id()
+    assert id_1 != id_2
+
+
+def test_unique_id_2():
+    """unique_id() should return an unused id."""
+    ids = []
+    ids.append(tasks.add(Task('one')))
+    ids.append(tasks.add(Task('two')))
+    ids.append(tasks.add(Task('three')))
+    # grab a unique id
+    uid = tasks.unique_id()
+    # make sure it isn't 
 ```
 
 
@@ -710,7 +738,8 @@ the test function.
 Let’s run again:
 
 ```
-$ pytest-v test_unique_id_2.py
+$ pytest -v test_unique_id_2.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -726,13 +755,14 @@ can leave the test in place and use skipif instead:
 
 ```
 **ch2/tasks_proj/tests/func/test_unique_id_3.py
-@pytest.mark.skipif(tasks.__version__< _'0.2.0'_ ,
-reason= _'notsupporteduntilversion0.2.0'_ )
-def test_unique_id_1 ():
-_"""Callingunique_id()twiceshouldreturndifferentnumbers."""_
-id_1= tasks.unique_id()
-id_2= tasks.unique_id()
-**assert** id_1!= id_2
+
+@pytest.mark.skipif(tasks.__version__ < '0.2.0',
+                    reason='not supported until version 0.2.0')
+def test_unique_id_1():
+    """Calling unique_id() twice should return different numbers."""
+    id_1 = tasks.unique_id()
+    id_2 = tasks.unique_id()
+    assert id_1 != id_2
 ```
 
 The expression we pass into skipif() can be any valid Python expression. In this
@@ -744,7 +774,8 @@ required in skipif. I like to include a reason for every skip, skipif, or xfail.
 Here’s the output of the changed code:
 
 ```
-$ pytesttest_unique_id_3.py
+$ pytest test_unique_id_3.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -758,7 +789,8 @@ The s. shows that one test was skipped and one test passed.
 We can see which one with -v:
 
 ```
-$ pytest-v test_unique_id_3.py
+$ pytest -v test_unique_id_3.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -772,7 +804,8 @@ test_unique_id_3.py::test_unique_id_2PASSED [100%]
 But we still don’t know why. We can see those reasons with -rs:
 
 ```
-$ pytest-rs test_unique_id_3.py
+$ pytest -rs test_unique_id_3.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -807,25 +840,28 @@ it to fail. Let’s modify our unique_id() test again to use xfail:
 
 ```
 **ch2/tasks_proj/tests/func/test_unique_id_4.py
-@pytest.mark.xfail(tasks.__version__< _'0.2.0'_ ,
-reason= _'notsupporteduntilversion0.2.0'_ )
-def test_unique_id_1 ():
-_"""Callingunique_id()twiceshouldreturndifferentnumbers."""_
-id_1= tasks.unique_id()
-id_2= tasks.unique_id()
-**assert** id_1!= id_2
+
+@pytest.mark.xfail(tasks.__version__ < '0.2.0',
+                   reason='not supported until version 0.2.0')
+def test_unique_id_1():
+    """Calling unique_id() twice should return different numbers."""
+    id_1 = tasks.unique_id()
+    id_2 = tasks.unique_id()
+    assert id_1 != id_2
+
 
 @pytest.mark.xfail()
-def test_unique_id_is_a_duck ():
-_"""Demonstratexfail."""_
-uid = tasks.unique_id()
-**assert** uid == _'a duck'_
+def test_unique_id_is_a_duck():
+    """Demonstrate xfail."""
+    uid = tasks.unique_id()
+    assert uid == 'a duck'
+
 
 @pytest.mark.xfail()
-def test_unique_id_not_a_duck ():
-_"""Demonstratexpass."""_
-uid = tasks.unique_id()
-**assert** uid != _'a duck'_
+def test_unique_id_not_a_duck():
+    """Demonstrate xpass."""
+    uid = tasks.unique_id()
+    assert uid != 'a duck'
 ```
 
 The first test is the same as before, but with xfail. The next two tests are listed
@@ -835,7 +871,8 @@ Running this shows:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytesttest_unique_id_4.py
+$ pytest test_unique_id_4.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -850,7 +887,8 @@ The x is for XFAIL, which means “expected to fail.” The capital X is for XPA
 --verbose lists longer descriptions:
 
 ```
-$ pytest-v test_unique_id_4.py
+$ pytest -v test_unique_id_4.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -888,7 +926,8 @@ pytest:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj
-$ pytesttests/func--tb=no**
+$ pytest tests/func--tb=no
+
 ===================testsessionstarts===================
 collected50 items
 
@@ -903,11 +942,13 @@ tests/func/test_unique_id_4.pyxxX. [100%]
 
 1 failed,44 passed,2 skipped,2 xfailed,1 xpassedin 0.41seconds
 ```
+
 An important trick to learn is that using -v gives you the syntax for how to
 run a specific directory, class, and test.
 
 ```
-$ pytest-v tests/func--tb=no
+$ pytest -v tests/func--tb=no
+
 ===================testsessionstarts===================
 collected50 items
 
@@ -942,7 +983,8 @@ pytest:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj
-$ pytesttests/func/test_add.py
+$ pytest tests/func/test_add.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -959,7 +1001,8 @@ To run a single test function, add :: and the test function name:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj
-$ pytest-v tests/func/test_add.py::test_add_returns_valid_id**
+$ pytest -v tests/func/test_add.py::test_add_returns_valid_id
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -977,18 +1020,20 @@ Here’s an example:
 
 ```
 **ch2/tasks_proj/tests/func/test_api_exceptions.py
-class** TestUpdate():
-_"""Testexpectedexceptionswithtasks.update()."""_
-def test_bad_id (self):
-_"""Anon-intid shouldraisean excption."""_
-**with** pytest.raises(TypeError):
-tasks.update(task_id={ _'dictinstead'_ : 1},
-task=tasks.Task())
 
-def test_bad_task (self):
-"""Anon-Tasktaskshouldraisean excption."""
-with pytest.raises(TypeError):
-tasks.update(task_id=1,task= 'nota task' )
+class TestUpdate():
+    """Test expected exceptions with tasks.update()."""
+
+    def test_bad_id(self):
+        """A non-int id should raise an excption."""
+        with pytest.raises(TypeError):
+            tasks.update(task_id={'dict instead': 1},
+                         task=tasks.Task())
+
+    def test_bad_task(self):
+        """A non-Task task should raise an excption."""
+        with pytest.raises(TypeError):
+            tasks.update(task_id=1, task='not a task')
 ```
 
 Since these are two related tests that both test the update() function, it’s rea-
@@ -997,7 +1042,8 @@ functions and add ::, then the class name to the file parameter:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj
-$ pytest-v tests/func/test_api_exceptions.py::TestUpdate**
+$ pytest -v tests/func/test_api_exceptions.py::TestUpdate
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -1014,7 +1060,8 @@ another :: and the method name:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj
-$ pytest-v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id**
+$ pytest -v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -1039,7 +1086,8 @@ For example, we can run all of the functions that have _raises in their name:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj
-$ pytest-v -k _raises**
+$ pytest -v -k _raises
+
 ===================testsessionstarts===================
 collected56 items/ 51 deselected
 
@@ -1055,7 +1103,8 @@ tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 We can use and and not to get rid of the test_delete_raises() from the session:
 
 ```
-$ pytest-v -k** _"_raisesand not delete"_
+$ pytest -v -k "raisesand not delete"
+
 ===================testsessionstarts===================
 collected56 items/ 52 deselected
 
@@ -1085,34 +1134,35 @@ take a simple test for add():
 
 ```
 **ch2/tasks_proj/tests/func/test_add_variety.py
-importpytest
-importtasks
-fromtasksimport** Task
 
-def test_add_1 ():
-_"""tasks.get()usingid returnedfromadd()works."""_
-task= Task( _'breathe'_ , _'BRIAN'_ , True)
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-_# everythingbut the id should be the same_
-**assert** equivalent(t_from_db,task)
+import pytest
+import tasks
+from tasks import Task
 
-def equivalent (t1,t2):
-_"""Checktwo tasksfor equivalence."""
-# Compareeverythingbut the id field_
-**return ((t1.summary== t2.summary) **and**
-(t1.owner== t2.owner) **and**
-(t1.done== t2.done))
+
+def test_add_1():
+    """tasks.get() using id returned from add() works."""
+    task = Task('breathe', 'BRIAN', True)
+    task_id = tasks.add(task)
+    t_from_db = tasks.get(task_id)
+    # everything but the id should be the same
+    assert equivalent(t_from_db, task)
+
+
+def equivalent(t1, t2):
+    """Check two tasks for equivalence."""
+    # Compare everything but the id field
+    return ((t1.summary == t2.summary) and
+            (t1.owner == t2.owner) and
+            (t1.done == t2.done))
+
 
 @pytest.fixture(autouse=True)
-def initialized_tasks_db (tmpdir):
-_"""Connectto db beforetesting,disconnectafter."""_
-```
-
-```
-tasks.start_tasks_db(str(tmpdir), 'tiny' )
-yield
-tasks.stop_tasks_db()
+def initialized_tasks_db(tmpdir):
+    """Connect to db before testing, disconnect after."""
+    tasks.start_tasks_db(str(tmpdir), 'tiny')
+    yield
+    tasks.stop_tasks_db()
 ```
 
 When a Task object is created, its id field is set to None. After it’s added and
@@ -1124,7 +1174,8 @@ passes:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::test_add_1**
+$ pytest -v test_add_variety.py::test_add_1
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -1140,16 +1191,17 @@ test, like this:
 
 ```
 **ch2/tasks_proj/tests/func/test_add_variety.py
-@pytest.mark.parametrize( _'task'_ ,
-[Task( _'sleep'_ , done=True),
-Task( _'wake'_ , _'brian'_ ),
-Task( _'breathe'_ , _'BRIAN'_ , True),
-Task( _'exercise'_ , _'BrIaN'_ , False)])
-def test_add_2 (task):
-_"""Demonstrateparametrizewithone parameter."""_
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,task)
+
+@pytest.mark.parametrize('task',
+                         [Task('sleep', done=True),
+                          Task('wake', 'brian'),
+                          Task('breathe', 'BRIAN', True),
+                          Task('exercise', 'BrIaN', False)])
+def test_add_2(task):
+    """Demonstrate parametrize with one parameter."""
+    task_id = tasks.add(task)
+    t_from_db = tasks.get(task_id)
+    assert equivalent(t_from_db, task)
 ```
 
 The first argument to parametrize() is a string with a comma-separated list of
@@ -1159,7 +1211,8 @@ and report each as a separate test:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::test_add_2**
+$ pytest -v test_add_variety.py::test_add_2
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -1177,18 +1230,19 @@ tasks as tuples to see how multiple test parameters would work:
 
 ```
 **ch2/tasks_proj/tests/func/test_add_variety.py
-@pytest.mark.parametrize( _'summary,owner,done'_ ,
-[( _'sleep'_ , None,False),
-( _'wake'_ , _'brian'_ , False),
-( _'breathe'_ , _'BRIAN'_ , True),
-( _'eateggs'_ , _'BrIaN'_ , False),
-])
-def test_add_3 (summary,owner,done):
-_"""Demonstrateparametrizewithmultipleparameters."""_
-task= Task(summary,owner,done)
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,task)
+
+@pytest.mark.parametrize('summary, owner, done',
+                         [('sleep', None, False),
+                          ('wake', 'brian', False),
+                          ('breathe', 'BRIAN', True),
+                          ('eat eggs', 'BrIaN', False),
+                          ])
+def test_add_3(summary, owner, done):
+    """Demonstrate parametrize with multiple parameters."""
+    task = Task(summary, owner, done)
+    task_id = tasks.add(task)
+    t_from_db = tasks.get(task_id)
+    assert equivalent(t_from_db, task)
 ```
 
 When you use types that are easy for pytest to convert into strings, the test
@@ -1196,7 +1250,8 @@ identifier uses the parameter values in the report to make it readable:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::test_add_3**
+$ pytest -v test_add_variety.py::test_add_3
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -1213,7 +1268,8 @@ re-run the test if you want:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::test_add_3[sleep-None-False]**
+$ pytest -v test_add_variety.py::test_add_3[sleep-None-False]
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -1227,7 +1283,8 @@ Be sure to use quotes if there are spaces in the identifier:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v** _"test_add_variety.py::test_add_3[eateggs-BrIaN-False]"_
+$ pytest -v "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -1249,7 +1306,7 @@ Task( _'exercise'_ , _'BrIaN'_ , False))
 
 @pytest.mark.parametrize( _'task'_ , tasks_to_try)
 def test_add_4 (task):
-_"""Slightlydifferenttake."""_
+"""Slightlydifferenttake."""
 task_id= tasks.add(task)
 t_from_db= tasks.get(task_id)
 **assert** equivalent(t_from_db,task)
@@ -1260,7 +1317,8 @@ hard to interpret:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::test_add_4**
+$ pytest -v test_add_variety.py::test_add_4
+
 ===================testsessionstarts===================
 collected5 items
 
@@ -1283,22 +1341,28 @@ can use it to generate ids:
 
 ```
 **ch2/tasks_proj/tests/func/test_add_variety.py
-task_ids= [ _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
-**for** t **in** tasks_to_try]
 
-@pytest.mark.parametrize( _'task'_ , tasks_to_try,ids=task_ids)
-def test_add_5 (task):
-_"""Demonstrateids."""_
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,task)
+tasks_to_try = (Task('sleep', done=True),
+                Task('wake', 'brian'),
+                Task('wake', 'brian'),
+                Task('breathe', 'BRIAN', True),
+                Task('exercise', 'BrIaN', False))
+
+
+@pytest.mark.parametrize('task', tasks_to_try)
+def test_add_4(task):
+    """Slightly different take."""
+    task_id = tasks.add(task)
+    t_from_db = tasks.get(task_id)
+    assert equivalent(t_from_db, task)
 ```
 
 Let’s run that and see how it looks:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::test_add_5**
+$ pytest -v test_add_variety.py::test_add_5
+
 ===================testsessionstarts===================
 collected5 items
 
@@ -1317,7 +1381,8 @@ index to each, 0 and 1. The custom test identifiers can be used to run tests:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v** _"test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"_
+$ pytest -v "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -1334,31 +1399,29 @@ sets will be sent to all test methods in the class:
 
 ```
 **ch2/tasks_proj/tests/func/test_add_variety.py
-@pytest.mark.parametrize( _'task'_ , tasks_to_try,ids=task_ids)
-**class** TestAdd():
-_"""Demonstrateparametrizeand testclasses."""_
-def test_equivalent (self,task):
-_"""Similartest,justwithina class."""_
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-```
 
-```
-**assert** equivalent(t_from_db,task)
-```
+@pytest.mark.parametrize('task', tasks_to_try, ids=task_ids)
+class TestAdd():
+    """Demonstrate parametrize and test classes."""
 
-```
-def test_valid_id (self,task):
-_"""Wecan use the samedatafor multipletests."""_
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-**assert** t_from_db.id== task_id
+    def test_equivalent(self, task):
+        """Similar test, just within a class."""
+        task_id = tasks.add(task)
+        t_from_db = tasks.get(task_id)
+        assert equivalent(t_from_db, task)
+
+    def test_valid_id(self, task):
+        """We can use the same data for multiple tests."""
+        task_id = tasks.add(task)
+        t_from_db = tasks.get(task_id)
+        assert t_from_db.id == task_id
 ```
 Here it is in action:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::TestAdd**
+$ pytest -v test_add_variety.py::TestAdd
+
 ===================testsessionstarts===================
 collected10 items
 
@@ -1382,22 +1445,24 @@ decorator. You do this with pytest.param(<value>,id="something") syntax:
 
 ```
 **ch2/tasks_proj/tests/func/test_add_variety.py
-@pytest.mark.parametrize( _'task'_ , [
-pytest.param(Task( _'create'_ ), id= _'justsummary'_ ),
-pytest.param(Task( _'inspire'_ , _'Michelle'_ ), id= _'summary/owner'_ ),
-pytest.param(Task( _'encourage'_ , _'Michelle'_ , True),id= _'summary/owner/done'_ )])
-def test_add_6 (task):
-_"""Demonstratepytest.paramand id."""_
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,task)
+
+@pytest.mark.parametrize('task', [
+    pytest.param(Task('create'), id='just summary'),
+    pytest.param(Task('inspire', 'Michelle'), id='summary/owner'),
+    pytest.param(Task('encourage', 'Michelle', True), id='summary/owner/done')])
+def test_add_6(task):
+    """Demonstrate pytest.param and id."""
+    task_id = tasks.add(task)
+    t_from_db = tasks.get(task_id)
+    assert equivalent(t_from_db, task)
 ```
 
 In action:
 
 ```
 $ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest-v test_add_variety.py::test_add_6**
+$ pytest -v test_add_variety.py::test_add_6
+
 ===================testsessionstarts===================
 collected3 items
 
