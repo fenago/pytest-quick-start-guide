@@ -418,31 +418,31 @@ Here’s an example session:
 Preface • xii
 
 
-**$ tasksadd** _'do something'_ **--ownerBrian
+$ tasksadd** _'do something'_ **--ownerBrian
 $ tasksadd** _'do somethingelse'_
-**$ taskslist**
+$ taskslist**
 ID owner donesummary
 -- ----- -----------
 1 BrianFalsedo something
 2 Falsedo somethingelse
-**$ tasksupdate2 --ownerBrian
+$ tasksupdate2 --ownerBrian
 $ taskslist**
 ID owner donesummary
 -- ----- -----------
 1 BrianFalsedo something
 2 BrianFalsedo somethingelse
-**$ tasksupdate1 --doneTrue
+$ tasksupdate1 --doneTrue
 $ taskslist**
 ID owner donesummary
 -- ----- -----------
 1 Brian Truedo something
 2 BrianFalsedo somethingelse
-**$ tasksdelete 1
+$ tasksdelete 1
 $ taskslist**
 ID owner donesummary
 -- ----- -----------
 2 BrianFalsedo somethingelse
-**$**
+$**
 
 This isn’t the most sophisticated task-management application, but it’s compli-
 
@@ -687,8 +687,9 @@ def test_passing ():
 
 This is what it looks like when it’s run:
 
-**$ cd /path/to/code/ch
-$ pytest test_one.py**
+$ cd /path/to/code/ch
+$ pytest test_one.py
+
 =====================testsessionstarts======================
 collected1 item
 
@@ -706,7 +707,8 @@ If you have two tests, each would be 50%. If you need more information, you
 
 can use -v or --verbose:
 
-**$ pytest -v test_one.py**
+$ pytest -v test_one.py
+
 =====================testsessionstarts======================
 collected1 item
 
@@ -727,7 +729,8 @@ The way pytest shows you test failures is one of the many reasons developers
 
 love pytest. Let’s watch this fail:
 
-**$ pytest test_two.py**
+$ pytest test_two.py
+
 =====================testsessionstarts======================
 collected1 item
 
@@ -755,7 +758,8 @@ That’s already a lot of information, but there’s a line that says Use -v to 
 
 full diff. Let’s do that:
 
-**$ pytest -v test_two.py**
+$ pytest -v test_two.py
+
 =====================testsessionstarts======================
 collected1 item
 
@@ -900,7 +904,7 @@ C:\>pip install pytest
 ```
 ### Running pytest
 
-**$ pytest --help
+$ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 **...**
 
@@ -919,7 +923,8 @@ For example, let’s create a subdirectory called tasks, and start with this tes
 Lab 1. Getting Started with pytest • 4
 
 
-**ch1/tasks/test_three.py**
+**ch1/tasks/test_three.py
+
 """Testthe Taskdatatype."""
 
 **fromcollectionsimport** namedtuple
@@ -954,7 +959,8 @@ Let’s put a couple more tests into a second file to demonstrate the _asdict() 
 
 _replace() functionality:
 
-**ch1/tasks/test_four.py**
+**ch1/tasks/test_four.py
+
 """Testthe Taskdatatype."""
 
 **fromcollectionsimport** namedtuple
@@ -994,7 +1000,7 @@ _test. From the ch1 directory, if you run pytest with no commands, you’ll run
 
 four files’ worth of tests:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest
 =====================testsessionstarts======================
 collected6 items
@@ -1022,7 +1028,8 @@ you want run, or the directory, or call pytest from the directory where our
 
 tests are:
 
-**$ pytest tasks/test_three.py tasks/test_four.py**
+$ pytest tasks/test_three.py tasks/test_four.py
+
 =====================testsessionstarts======================
 collected4 items
 
@@ -1030,7 +1037,7 @@ tasks/test_three.py.. [ 50%]
 tasks/test_four.py.. [100%]
 
 ===================4 passedin 0.02seconds===================
-**$ pytest tasks**
+$ pytest tasks**
 =====================testsessionstarts======================
 collected4 items
 
@@ -1038,7 +1045,7 @@ tasks/test_four.py.. [ 50%]
 tasks/test_three.py.. [100%]
 
 ===================4 passedin 0.02seconds===================
-**$ cd tasks
+$ cd tasks
 $ pytest
 =====================testsessionstarts======================
 
@@ -1074,8 +1081,9 @@ I’ll cover that in Lab 6, Configuration, on page 115.
 
 Let’s take a closer look at the output of running just one file:
 
-**$ cd /path/to/code/ch1/tasks
-$ pytest test_three.py**
+$ cd /path/to/code/ch1/tasks
+$ pytest test_three.py
+
 =====================testsessionstarts======================
 platformdarwin-- Python3.x.y,pytest-3.x.y,py-1.x.y,pluggy-0.x.y
 rootdir:/path/to/code/ch1,inifile:
@@ -1170,7 +1178,7 @@ run just one. Specify the file directly, and add a ::test_name, like this:
 Running Only One Test • 9
 
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest -v tasks/test_four.py::test_asdict**
 =====================testsessionstarts======================
 collected1 item
@@ -1199,7 +1207,7 @@ ular address some common early desires for controlling how pytest runs when
 
 you’re first getting started.
 
-**$ pytest --help
+$ pytest --help
 ... subsetof the list...**
 -k EXPRESSION onlyrun tests/classes whichmatchthe given
 substringexpression.
@@ -1239,7 +1247,7 @@ directory, you should see all of the test functions you’ve looked at so far in
 
 this lab:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest --collect-only**
 ===================testsessionstarts===================
 collected6 items
@@ -1272,7 +1280,7 @@ suffix in their names. Let’s say you want to run the test_asdict() and test_de
 
 tests. You can test out the filter with --collect-only:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest -k "asdictor defaults" **--collect-only**
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
@@ -1290,7 +1298,7 @@ Yep. That looks like what we want. Now you can run them by removing the
 Using Options • 11
 
 
-**$ pytest -k "asdictor defaults"
+$ pytest -k "asdictor defaults"
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
 
@@ -1303,7 +1311,7 @@ Hmm. Just dots. So they passed. But were they the right tests? One way to
 
 find out is to use -v or --verbose:
 
-**$ pytest -v -k "asdictor defaults"
+$ pytest -v -k "asdictor defaults"
 ===================testsessionstarts===================
 collected6 items/ 4 deselected
 
@@ -1337,7 +1345,7 @@ Then you’d do the same for test_replace(). You can then run all the tests with
 
 the same marker with pytest-m run_these_please:
 
-**$ cd /path/to/code/ch1/tasks
+$ cd /path/to/code/ch1/tasks
 $ pytest-m run_these_please**
 ===================testsessionstarts===================
 collected4 items/ 2 deselected
@@ -1376,7 +1384,7 @@ do. That’s what the -x option does.
 
 Let’s try it on the six tests we have so far:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-x**
 ===================testsessionstarts===================
 collected6 items
@@ -1406,7 +1414,7 @@ also use --tb=no to turn off the stack trace, since you’ve already seen it and
 
 don’t need to see it again:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest --tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -1439,7 +1447,7 @@ but let’s take a look anyway. Since there is only one failure, if we set --max
 
 all of the tests should run, and --maxfail=1 should act just like -x:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest --maxfail=2--tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -1450,7 +1458,7 @@ tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
 ===========1 failed,5 passedin 0.07seconds============
-**$ pytest --maxfail=1--tb=no**
+$ pytest --maxfail=1--tb=no**
 ===================testsessionstarts===================
 collected6 items
 
@@ -1508,7 +1516,7 @@ When one or more tests fails, having a convenient way to run just the failing
 
 tests is helpful for debugging. Just use --lf and you’re ready to debug:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest --lf**
 ===================testsessionstarts===================
 collected6 items/ 5 deselected
@@ -1538,7 +1546,7 @@ The --ff/--failed-first option will do the same as --last-failed, and then run t
 
 of the tests that passed last time:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest --ff--tb=no
 $ pytest --ff--tb=no**
 ===================testsessionstarts===================
@@ -1572,7 +1580,7 @@ We’ve used it quite a bit already, but let’s run it again for fun in conjunc
 
 with --ff and --tb=no:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest -v --ff--tb=no**
 ===================testsessionstarts===================
 collected6 items
@@ -1604,7 +1612,7 @@ Lab 1. Getting Started with pytest • 16
 
 Let’s try -q by itself:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-q**
 .F.... [100%]
 ========================FAILURES=========================
@@ -1651,7 +1659,7 @@ cause a failure. But this is enough to demonstrate the command-line option
 
 --l/--showlocals:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest-l tasks**
 ===================testsessionstarts===================
 collected4 items
@@ -1709,7 +1717,7 @@ ent traceback styles.
 
 --tb=no removes the traceback entirely:
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest --tb=notasks**
 ===================testsessionstarts===================
 collected4 items
@@ -1726,7 +1734,7 @@ failing tests, this option can help to show a pattern in the failures:
 Lab 1. Getting Started with pytest • 18
 
 
-**$ pytest --tb=linetasks**
+$ pytest --tb=linetasks**
 ===================testsessionstarts===================
 collected4 items
 
@@ -1741,7 +1749,7 @@ Task(summary='...e=True,id=11)
 
 The next step up in verbose tracebacks is --tb=short:
 
-**$ pytest --tb=shorttasks**
+$ pytest --tb=shorttasks**
 ===================testsessionstarts===================
 collected4 items
 
@@ -1787,7 +1795,7 @@ which one:
 Using Options • 19
 
 
-**$ cd /path/to/code/ch1
+$ cd /path/to/code/ch1
 $ pytest --durations=3tasks**
 ===================testsessionstarts===================
 collected4 items
@@ -1819,7 +1827,7 @@ The --version option shows the version of pytest and the directory where it’s
 
 installed:
 
-**$ pytest --version**
+$ pytest --version**
 Thisis pytestversion3.x.y,importedfrom
 /path/to/venv/lib/python3.x/site-packages/pytest.py
 
@@ -2126,7 +2134,8 @@ Testing a Package • 25
 
 Here is test_task.py:
 
-**ch2/tasks_proj/tests/unit/test_task.py**
+**ch2/tasks_proj/tests/unit/test_task.py
+
 """Testthe Taskdatatype."""
 **fromtasksimport** Task
 
@@ -2174,7 +2183,7 @@ Install tasks either by running pip install . or pip install -e. from the tasks_
 
 tory. Or you can run pip install -e tasks_proj from one directory up:
 
-**$ cd /path/to/code
+$ cd /path/to/code
 $ pip install ./tasks_proj/**
 Processing./tasks_proj
 Collectingclick(fromtasks==0.1.0)
@@ -2197,7 +2206,7 @@ to be able to modify the source code while tasks is installed, you need to insta
 
 it with the -e option (for “editable”):
 
-**$ pip install -e ./tasks_proj/**
+$ pip install -e ./tasks_proj/**
 Obtainingfile:///path/to/code/tasks_proj
 Requirementalreadysatisfied:clickin
 /path/to/venv/lib/python3.7/site-packages(fromtasks==0.1.0)
@@ -2211,12 +2220,13 @@ Successfullyinstalledtasks
 
 We also need to install pytest (if you haven’t already done so):
 
-**$ pip install pytest**
+$ pip install pytest**
 
 Now let’s try running tests:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/unit
-$ pytest test_task.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/unit
+$ pytest test_task.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -2270,7 +2280,8 @@ tions failed. Let’s see how helpful this rewriting is by looking at a few asse
 
 failures:
 
-**ch2/tasks_proj/tests/unit/test_task_fail.py**
+**ch2/tasks_proj/tests/unit/test_task_fail.py
+
 """Usethe Tasktypeto showtestfailures."""
 **fromtasksimport** Task
 
@@ -2288,7 +2299,7 @@ t2_dict= Task( _'makesandwich'_ , _'okkem'_ )._asdict()
 
 All of these tests fail, but what’s interesting is the traceback information:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/unit**
+$ cd /path/to/code/ch2/tasks_proj/tests/unit**
 venv)$ pytest test_task_fail.py
 ===================testsessionstarts===================
 collected2 items
@@ -2343,7 +2354,7 @@ shown in the previous code. Let’s try it again with the -v flag, as suggested 
 
 the error message:
 
-**$ pytest -v test_task_fail.py::test_task_equality**
+$ pytest -v test_task_fail.py::test_task_equality**
 ===================testsessionstarts===================
 collected1 item
 
@@ -2482,7 +2493,8 @@ to some of the tests. Let’s add it to a couple of tests in test_api_exceptions
 
 that the markers smoke and get aren’t built into pytest; I just made them up):
 
-**ch2/tasks_proj/tests/func/test_api_exceptions.py**
+**ch2/tasks_proj/tests/func/test_api_exceptions.py
+
 @pytest.mark.smoke
 def test_list_raises ():
 """list()shouldraisean exceptionwithwrongtypeparam."""
@@ -2503,8 +2515,9 @@ tasks.get(task_id= '123' )
 ```
 Now, let’s run just those tests that are marked with -m marker_name:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest -v -m smoketest_api_exceptions.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ pytest -v -m smoketest_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 5 deselected
 
@@ -2512,7 +2525,8 @@ test_api_exceptions.py::test_list_raisesPASSED [ 50%]
 test_api_exceptions.py::test_get_raisesPASSED [100%]
 
 =========2 passed,5 deselectedin 0.03seconds==========
-**$ pytest -v -m get test_api_exceptions.py**
+$ pytest -v -m get test_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -2532,7 +2546,8 @@ It gets better. The expression after -m can use and, or, and not to combine
 
 multiple markers:
 
-**$ pytest -v -m** "smokeand get" **test_api_exceptions.py**
+$ pytest -v -m** "smokeand get" **test_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -2544,7 +2559,8 @@ That time we only ran the test that had both smoke and get markers. We can
 
 use not as well:
 
-**$ pytest -v -m** "smokeand not get" **test_api_exceptions.py**
+$ pytest -v -m** "smokeand not get" **test_api_exceptions.py
+
 ===================testsessionstarts===================
 collected7 items/ 6 deselected
 
@@ -2605,7 +2621,8 @@ is no database initialized in the test. We can define a fixture to get the datab
 
 initialized before the test and cleaned up after the test:
 
-**ch2/tasks_proj/tests/func/test_add.py**
+**ch2/tasks_proj/tests/func/test_add.py
+
 @pytest.fixture(autouse=True)
 def initialized_tasks_db (tmpdir):
 """Connectto db beforetesting,disconnectafter."""
@@ -2646,7 +2663,7 @@ Let’s set aside fixture discussion for now and go to the top of the project an
 
 run our smoke test suite:
 
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest -v -m smoke**
 ===================testsessionstarts===================
 collected56 items/ 53 deselected
@@ -2696,8 +2713,9 @@ assert id_1!= id_2
 ```
 Then give it a run:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest test_unique_id_1.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ pytest test_unique_id_1.py
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -2724,7 +2742,8 @@ We could just change the test. But instead, let’s just mark the first one to g
 
 skipped for now:
 
-**ch2/tasks_proj/tests/func/test_unique_id_2.py**
+**ch2/tasks_proj/tests/func/test_unique_id_2.py
+
 @pytest.mark.skip(reason= _'misunderstoodthe API'_ )
 def test_unique_id_1 ():
 """Callingunique_id()twiceshouldreturndifferentnumbers."""
@@ -2752,7 +2771,8 @@ the test function.
 
 Let’s run again:
 
-**$ pytest -v test_unique_id_2.py**
+$ pytest -v test_unique_id_2.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -2767,7 +2787,8 @@ also, and we intend to make that work in version 0.2.0 of the package. We
 
 can leave the test in place and use skipif instead:
 
-**ch2/tasks_proj/tests/func/test_unique_id_3.py**
+**ch2/tasks_proj/tests/func/test_unique_id_3.py
+
 @pytest.mark.skipif(tasks.__version__< _'0.2.0'_ ,
 reason= _'notsupporteduntilversion0.2.0'_ )
 def test_unique_id_1 ():
@@ -2786,7 +2807,8 @@ required in skipif. I like to include a reason for every skip, skipif, or xfail.
 
 Here’s the output of the changed code:
 
-**$ pytest test_unique_id_3.py**
+$ pytest test_unique_id_3.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -2798,7 +2820,8 @@ The s. shows that one test was skipped and one test passed.
 
 We can see which one with -v:
 
-**$ pytest -v test_unique_id_3.py**
+$ pytest -v test_unique_id_3.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -2812,7 +2835,8 @@ Lab 2. Writing Test Functions • 36
 
 But we still don’t know why. We can see those reasons with -rs:
 
-**$ pytest-rs test_unique_id_3.py**
+$ pytest-rs test_unique_id_3.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -2824,7 +2848,7 @@ SKIP[1] test_unique_id_3.py:9:not supporteduntilversion0.2.0
 
 The -r chars option has this help text:
 
-**$ pytest --help
+$ pytest --help
 
 ```
 -r chars
@@ -2846,7 +2870,8 @@ the xfail marker, we are telling pytest to run a test function, but that we expe
 
 it to fail. Let’s modify our unique_id() test again to use xfail:
 
-**ch2/tasks_proj/tests/func/test_unique_id_4.py**
+**ch2/tasks_proj/tests/func/test_unique_id_4.py
+
 @pytest.mark.xfail(tasks.__version__< _'0.2.0'_ ,
 reason= _'notsupporteduntilversion0.2.0'_ )
 def test_unique_id_1 ():
@@ -2876,8 +2901,9 @@ as xfail, and differ only by == vs. !=. So one of them is bound to pass.
 
 Running this shows:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
-$ pytest test_unique_id_4.py**
+$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ pytest test_unique_id_4.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -2891,7 +2917,8 @@ The x is for XFAIL, which means “expected to fail.” The capital X is for XPA
 
 --verbose lists longer descriptions:
 
-**$ pytest -v test_unique_id_4.py**
+$ pytest -v test_unique_id_4.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -2934,7 +2961,7 @@ To run all the tests from one directory, use the directory as a parameter to
 
 pytest:
 
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest tests/func--tb=no**
 ===================testsessionstarts===================
 collected50 items
@@ -2955,7 +2982,7 @@ An important trick to learn is that using -v gives you the syntax for how to
 
 run a specific directory, class, and test.
 
-**$ pytest -v tests/func--tb=no**
+$ pytest -v tests/func--tb=no**
 ===================testsessionstarts===================
 collected50 items
 
@@ -2989,8 +3016,9 @@ To run a file full of tests, list the file with the relative path as a parameter
 
 pytest:
 
-**$ cd /path/to/code/ch2/tasks_proj
-$ pytest tests/func/test_add.py**
+$ cd /path/to/code/ch2/tasks_proj
+$ pytest tests/func/test_add.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -3004,7 +3032,7 @@ We’ve been doing this for a while.
 
 To run a single test function, add :: and the test function name:
 
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest -v tests/func/test_add.py::test_add_returns_valid_id**
 ===================testsessionstarts===================
 collected1 item
@@ -3045,7 +3073,7 @@ functions and add ::, then the class name to the file parameter:
 Lab 2. Writing Test Functions • 40
 
 
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest -v tests/func/test_api_exceptions.py::TestUpdate**
 ===================testsessionstarts===================
 collected2 items
@@ -3061,7 +3089,7 @@ If you don’t want to run all of a test class—just one method—just add
 
 another :: and the method name:
 
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest -v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id**
 ===================testsessionstarts===================
 collected1 item
@@ -3087,7 +3115,7 @@ You can use and, or, and not in your expression to create complex expressions.
 
 For example, we can run all of the functions that have _raises in their name:
 
-**$ cd /path/to/code/ch2/tasks_proj
+$ cd /path/to/code/ch2/tasks_proj
 $ pytest -v -k _raises**
 ===================testsessionstarts===================
 collected56 items/ 51 deselected
@@ -3105,7 +3133,7 @@ We can use and and not to get rid of the test_delete_raises() from the session:
 Running a Subset of Tests • 41
 
 
-**$ pytest -v -k "raisesand not delete"
+$ pytest -v -k "raisesand not delete"
 ===================testsessionstarts===================
 collected56 items/ 52 deselected
 
@@ -3184,7 +3212,7 @@ included to make sure the database is accessible. Let’s make sure the test
 
 passes:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_1**
 ===================testsessionstarts===================
 collected1 item
@@ -3201,7 +3229,8 @@ if we want to test lots of variations of a task? No problem. We can use
 
 test, like this:
 
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
+
 @pytest.mark.parametrize( _'task'_ ,
 [Task( _'sleep'_ , done=True),
 Task( _'wake'_ , _'brian'_ ),
@@ -3221,7 +3250,7 @@ our case is a list of Task objects. pytest will run this test once for each task
 
 and report each as a separate test:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_2**
 ===================testsessionstarts===================
 collected4 items
@@ -3240,7 +3269,8 @@ This use of parametrize() works for our purposes. However, let’s pass in the
 
 tasks as tuples to see how multiple test parameters would work:
 
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
+
 @pytest.mark.parametrize( _'summary,owner,done'_ ,
 [( _'sleep'_ , None,False),
 ( _'wake'_ , _'brian'_ , False),
@@ -3258,7 +3288,7 @@ When you use types that are easy for pytest to convert into strings, the test
 
 identifier uses the parameter values in the report to make it readable:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_3**
 ===================testsessionstarts===================
 collected4 items
@@ -3274,7 +3304,7 @@ You can use that whole test identifier—called a node in pytest terminology—t
 
 re-run the test if you want:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_3[sleep-None-False]**
 ===================testsessionstarts===================
 collected1 item
@@ -3288,7 +3318,7 @@ Be sure to use quotes if there are spaces in the identifier:
 Lab 2. Writing Test Functions • 44
 
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v** "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
 ===================testsessionstarts===================
 collected1 item
@@ -3301,7 +3331,8 @@ Now let’s go back to the list of tasks version, but move the task list to a va
 
 able outside the function:
 
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
+
 tasks_to_try= (Task( _'sleep'_ , done=True),
 Task( _'wake'_ , _'brian'_ ),
 Task( _'wake'_ , _'brian'_ ),
@@ -3319,7 +3350,7 @@ It’s convenient and the code looks nice. But the readability of the output is
 
 hard to interpret:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_4**
 ===================testsessionstarts===================
 collected5 items
@@ -3347,7 +3378,8 @@ can use it to generate ids:
 Parametrized Testing • 45
 
 
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
+
 task_ids= [ _'Task({},{},{})'_ .format(t.summary,t.owner,t.done)
 **for** t **in** tasks_to_try]
 
@@ -3360,7 +3392,7 @@ t_from_db= tasks.get(task_id)
 
 Let’s run that and see how it looks:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_5**
 ===================testsessionstarts===================
 collected5 items
@@ -3379,7 +3411,7 @@ generate the same task id. To be able to tell them apart, pytest added a unique
 
 index to each, 0 and 1. The custom test identifiers can be used to run tests:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v** "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
 ===================testsessionstarts===================
 collected1 item
@@ -3396,7 +3428,8 @@ You can apply parametrize() to classes as well. When you do that, the same data
 
 sets will be sent to all test methods in the class:
 
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
+
 @pytest.mark.parametrize( _'task'_ , tasks_to_try,ids=task_ids)
 **class** TestAdd():
 """Demonstrateparametrizeand testclasses."""
@@ -3421,7 +3454,7 @@ t_from_db= tasks.get(task_id)
 
 Here it is in action:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::TestAdd**
 ===================testsessionstarts===================
 collected10 items
@@ -3445,7 +3478,8 @@ parameter value when passing in a list within the @pytest.mark.parametrize()
 
 decorator. You do this with pytest.param(<value>,id="something") syntax:
 
-**ch2/tasks_proj/tests/func/test_add_variety.py**
+**ch2/tasks_proj/tests/func/test_add_variety.py
+
 @pytest.mark.parametrize( _'task'_ , [
 pytest.param(Task( _'create'_ ), id= _'justsummary'_ ),
 pytest.param(Task( _'inspire'_ , _'Michelle'_ ), id= _'summary/owner'_ ),
@@ -3458,7 +3492,7 @@ t_from_db= tasks.get(task_id)
 
 In action:
 
-**$ cd /path/to/code/ch2/tasks_proj/tests/func
+$ cd /path/to/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_6**
 ===================testsessionstarts===================
 collected3 items
@@ -3760,9 +3794,9 @@ If you run the test from the last section, you don’t get to see what fixtures
 
 are run:
 
-**$ cd /path/to/code/
+$ cd /path/to/code/
 $ pip install ./tasks_proj/** _# if not installedyet_
-**$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /path/to/code/ch3/a/tasks_proj/tests/func
 $ pytest -v test_add.py-k valid_id**
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
@@ -3778,7 +3812,7 @@ nately, pytest provides a command-line flag, --setup-show, that does just that:
 Lab 3. pytest Fixtures • 54
 
 
-**$ pytest --setup-showtest_add.py-k valid_id**
+$ pytest --setup-showtest_add.py-k valid_id**
 ===================testsessionstarts===================
 collected3 items/ 2 deselected
 
@@ -3814,7 +3848,8 @@ Fixtures are a great place to store data to use for testing. You can return
 
 anything. Here’s a fixture returning a tuple of mixed type:
 
-**ch3/test_fixtures.py**
+**ch3/test_fixtures.py
+
 @pytest.fixture()
 def a_tuple ():
 """Returnsomethingmoreinteresting."""
@@ -3828,7 +3863,7 @@ Since test_a_tuple() should fail (23 != 32), we can see what happens when a test
 
 with a fixture fails:
 
-**$ cd /path/to/code/ch3
+$ cd /path/to/code/ch3
 $ pytest test_fixtures.py::test_a_tuple**
 ===================testsessionstarts===================
 collected1 item
@@ -3861,7 +3896,7 @@ trace.
 
 What happens if the assert (or any exception) happens in the fixture?
 
-**$ pytest -v test_fixtures.py::test_other_data**
+$ pytest -v test_fixtures.py::test_other_data**
 ===================testsessionstarts===================
 collected1 item
 
@@ -3892,7 +3927,8 @@ But what about the Tasks project? For the Tasks project, we could probably
 
 use some data fixtures, perhaps different lists of tasks with various properties:
 
-**ch3/a/tasks_proj/tests/conftest.py**
+**ch3/a/tasks_proj/tests/conftest.py
+
 _# Reminderof Taskconstructorinterface
 # Task(summary=None,owner=None,done=False,id=None)
 # summaryis required
@@ -3938,7 +3974,8 @@ tasks_db fixture. Let’s keep the chain going and add some specialized fixtures
 
 for non-empty tasks databases:
 
-**ch3/a/tasks_proj/tests/conftest.py**
+**ch3/a/tasks_proj/tests/conftest.py
+
 @pytest.fixture()
 def db_with_3_tasks (tasks_db,tasks_just_a_few):
 """Connecteddb with3 tasks,all unique."""
@@ -3993,7 +4030,7 @@ test_add_increases_count() to only be possible if add() really failed to alter t
 
 Let’s trace it and see all the fixtures run:
 
-**$ cd /path/to/code/ch3/a/tasks_proj/tests/func
+$ cd /path/to/code/ch3/a/tasks_proj/tests/func
 $ pytest --setup-showtest_add.py::test_add_increases_count**
 ===================testsessionstarts===================
 collected1 item
@@ -4060,7 +4097,8 @@ session scope share one setup and teardown call.
 ```
 Here’s how the scope values look in action:
 
-**ch3/test_scope.py**
+**ch3/test_scope.py
+
 """Demofixturescope."""
 
 import pytest
@@ -4107,8 +4145,9 @@ Let’s use --setup-show to demonstrate that the number of times a fixture is ca
 
 and when the setup and teardown are run depend on the scope:
 
-**$ cd /path/to/code/ch3
-$ pytest --setup-showtest_scope.py**
+$ cd /path/to/code/ch3
+$ pytest --setup-showtest_scope.py
+
 ===================testsessionstarts===================
 collected4 items
 
@@ -4205,7 +4244,8 @@ The data fixtures just return a value, so there really is no reason to have them
 
 run all the time. Once per session is sufficient:
 
-**ch3/b/tasks_proj/tests/conftest.py**
+**ch3/b/tasks_proj/tests/conftest.py
+
 _# Reminderof Taskconstructorinterface
 # Task(summary=None,owner=None,done=False,id=None)
 # summaryis required
@@ -4239,7 +4279,7 @@ Task( _'Eatice cream'_ , _'Daniel'_ ))
 
 Now, let’s see if all of these changes work with our tests:
 
-**$ cd /path/to/code/ch3/b/tasks_proj
+$ cd /path/to/code/ch3/b/tasks_proj
 $ pytest
 ===================testsessionstarts===================
 collected55 items
@@ -4258,7 +4298,8 @@ Looks like it’s all good. Let’s trace the fixtures for one test file to see 
 
 different scoping worked as expected:
 
-**$ pytest --setup-showtests/func/test_add.py**
+$ pytest --setup-showtests/func/test_add.py
+
 ===================testsessionstarts===================
 collected3 items
 
@@ -4306,7 +4347,8 @@ It doesn’t make sense to do this with test functions—it’s just more typing
 
 But it does work well for test classes:
 
-**ch3/test_scope.py**
+**ch3/test_scope.py
+
 @pytest.mark.usefixtures( _'class_scope'_ )
 **class** TestSomething():
 """Democlassscopefixtures."""
@@ -4340,7 +4382,8 @@ want to run at certain times, but tests don’t really depend on any system
 
 state or data from the fixture. Here’s a rather contrived example:
 
-**ch3/test_autouse.py**
+**ch3/test_autouse.py
+
 """Demonstrateautousefixtures."""
 
 import pytest
@@ -4376,8 +4419,9 @@ We want to add test times after each test, and the date and current time at
 
 the end of the session. Here’s what these look like:
 
-**$ cd /path/to/code/ch3
-$ pytest -v -s test_autouse.py**
+$ cd /path/to/code/ch3
+$ pytest -v -s test_autouse.py
+
 =====================testsessionstarts======================
 collected2 items
 
@@ -4416,7 +4460,8 @@ using it, is usually the same as the function name of the fixture. However,
 
 pytest allows you to rename fixtures with a name parameter to @pytest.fixture():
 
-**ch3/test_rename_fixture.py**
+**ch3/test_rename_fixture.py
+
 """Demonstratefixturerenaming."""
 
 import pytest
@@ -4434,7 +4479,8 @@ Here, lue is now the fixture name, instead of ultimate_answer_to_life_the_uni-
 
 verse_and_everything. That name even shows up if we run it with --setup-show:
 
-**$ pytest --setup-showtest_rename_fixture.py**
+$ pytest --setup-showtest_rename_fixture.py
+
 ===================testsessionstarts===================
 collected1 item
 
@@ -4451,7 +4497,8 @@ If you need to find out where lue is defined, you can add the pytest option
 
 for the test, including ones that have been renamed:
 
-**$ pytest --fixturestest_rename_fixture.py**
+$ pytest --fixturestest_rename_fixture.py
+
 ===================testsessionstarts===================
 **...**
 
@@ -4470,8 +4517,9 @@ defined are at the bottom, along with where they are defined. We can use this
 
 to look up the definition of lue. Let’s use that in the Tasks project:
 
-**$ cd /path/to/code/ch3/b/tasks_proj
-$ pytest --fixturestests/func/test_add.py**
+$ cd /path/to/code/ch3/b/tasks_proj
+$ pytest --fixturestests/func/test_add.py
+
 ========================testsessionstarts========================
 **...**
 tmpdir_factory
@@ -4536,7 +4584,8 @@ But now, instead of parametrizing the test, we will parametrize a fixture
 
 called a_task:
 
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py**
+**ch3/b/tasks_proj/tests/func/test_add_variety2.py
+
 @pytest.fixture(params=tasks_to_try)
 def a_task (request):
 """Usingno ids."""
@@ -4562,7 +4611,7 @@ to the test using it. Since our task list has four tasks, the fixture will be ca
 
 four times, and then the test will get called four times:
 
-**$ cd /path/to/code/ch3/b/tasks_proj/tests/func
+$ cd /path/to/code/ch3/b/tasks_proj/tests/func
 $ pytest -v test_add_variety2.py::test_add_a**
 ===================testsessionstarts===================
 collected4 items
@@ -4583,7 +4632,8 @@ number to the name of the fixture. However, we can use the same string list
 
 we used when we parametrized our tests:
 
-**ch3/b/tasks_proj/tests/func/test_add_variety2.py**
+**ch3/b/tasks_proj/tests/func/test_add_variety2.py
+
 @pytest.fixture(params=tasks_to_try,ids=task_ids)
 def b_task (request):
 """Usinga listof ids."""
@@ -4597,7 +4647,7 @@ t_from_db= tasks.get(task_id)
 
 This gives us better identifiers:
 
-**$ pytest -v test_add_variety2.py::test_add_b**
+$ pytest -v test_add_variety2.py::test_add_b**
 ===================testsessionstarts===================
 collected4 items
 
@@ -4644,7 +4694,7 @@ single Task object to generate the identifier for one Task object at a time. It�
 
 cleaner than generating a full list ahead of time, and looks the same:
 
-**$ pytest -v test_add_variety2.py::test_add_c**
+$ pytest -v test_add_variety2.py::test_add_c**
 ===================testsessionstarts===================
 collected4 items
 
@@ -4768,7 +4818,7 @@ this example and in a debugger example in Lab 7.
 ```
 Here’s what we have so far:
 
-**$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /path/to/code/ch3/c/tasks_proj
 $ pip install pymongo
 $ pytest -v --tb=no**
 ===================testsessionstarts===================
@@ -4993,7 +5043,7 @@ the base directory used for this session. The print statement is in the example
 
 so you can see where the directory is on your system. Let’s see where it is:
 
-**$ cd /path/to/code/ch4
+$ cd /path/to/code/ch4
 $ pytest-q -s test_tmpdir.py::test_tmpdir_factory**
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 /T/pytest-of-okken/pytest-732
@@ -5037,7 +5087,8 @@ fixture in either the module itself, or in a conftest.py file that sets up the d
 
 file like this:
 
-**ch4/authors/conftest.py**
+**ch4/authors/conftest.py
+
 """Demonstratetmpdir_factory."""
 
 import json
@@ -5069,7 +5120,8 @@ python_author_data dictionary as json. Because this is a module scope fixture,
 
 the json file will only be created once per module that has a test using it:
 
-**ch4/authors/test_authors.py**
+**ch4/authors/test_authors.py
+
 """Someteststhatuse tempdatafiles."""
 import json**
 
@@ -5142,7 +5194,7 @@ The options --myopt and --foo <value> were added to the previous code, and the
 
 help string was modified, as shown here:
 
-**$ cd /path/to/code/ch4/pytestconfig
+$ cd /path/to/code/ch4/pytestconfig
 $ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 **...**
@@ -5166,17 +5218,17 @@ def test_option (pytestconfig):
 
 Let’s see how this works:
 
-**$ pytest-s -q test_config.py::test_option**
+$ pytest-s -q test_config.py::test_option**
 "foo"set to: bar
 "myopt"set to: False
 .
 1 passedin 0.01seconds
-**$ pytest-s -q --myopttest_config.py::test_option**
+$ pytest-s -q --myopttest_config.py::test_option**
 "foo"set to: bar
 "myopt"set to: True
 .
 1 passedin 0.01seconds
-**$ pytest-s -q --myopt--foobaz test_config.py::test_option**
+$ pytest-s -q --myopt--foobaz test_config.py::test_option**
 "foo"set to: baz
 "myopt"set to: True
 .
@@ -5186,7 +5238,8 @@ Because pytestconfig is a fixture, it can also be accessed from other fixtures.
 
 You can make fixtures for the option names, if you like, like this:
 
-**ch4/pytestconfig/test_config.py**
+**ch4/pytestconfig/test_config.py
+
 @pytest.fixture()
 def foo (pytestconfig):
     return pytestconfig.option.foo
@@ -5256,7 +5309,7 @@ Here’s the help text for the --last-failed and --failed-first options, as well
 
 of cache options:
 
-**$ pytest --help
+$ pytest --help
 ...**
 --lf,--last-failed rerunonlythe teststhatfailedat the lastrun (or
 all if nonefailed)
@@ -5285,8 +5338,9 @@ Let’s run them using --verbose to see the function names, and --tb=no to hide
 
 the stack trace:
 
-**$ cd /path/to/code/ch4/cache
-$ pytest --verbose--tb=notest_pass_fail.py**
+$ cd /path/to/code/ch4/cache
+$ pytest --verbose--tb=notest_pass_fail.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -5299,7 +5353,8 @@ If you run them again with the --ff or --failed-first flag, the tests that faile
 
 ously will be run first, followed by the rest of the session:
 
-**$ pytest --verbose--tb=no--fftest_pass_fail.py**
+$ pytest --verbose--tb=no--fftest_pass_fail.py
+
 ===================testsessionstarts===================
 collected2 items
 run-last-failure:rerunprevious1 failurefirst
@@ -5331,7 +5386,8 @@ Here’s a parametrized test with one failure:
 Lab 4. Builtin Fixtures • 80
 
 
-**ch4/cache/test_few_failures.py**
+**ch4/cache/test_few_failures.py
+
 """Demonstrate-lf and -ff withfailingtests."""
 
 import pytest
@@ -5354,8 +5410,9 @@ sum_= x + y
 
 And the output:
 
-**$ cd /path/to/code/ch4/cache
-$ pytest-q test_few_failures.py**
+$ cd /path/to/code/ch4/cache
+$ pytest-q test_few_failures.py
+
 .F... [100%]
 ========================FAILURES=========================
 _______________test_a[1e+25-1e+23-1.1e+25]_______________
@@ -5381,7 +5438,7 @@ the test again to see the failure again. You can specify the test case on the
 
 command line:
 
-**$ pytest-q** "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
+$ pytest-q** "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
 
 If you don’t want to copy/paste or there are multiple failed cases you’d like
 
@@ -5392,7 +5449,8 @@ another flag that might make things easier is --showlocals, or -l for short:
 Using cache • 81
 
 
-**$ pytest-q --lf-l test_few_failures.py**
+$ pytest-q --lf-l test_few_failures.py
+
 run-last-failure:rerunprevious1 failure
 F [100%]
 ========================FAILURES=========================
@@ -5424,14 +5482,14 @@ test failure information from the last test session. You can see the stored
 
 information with --cache-show:
 
-**$ pytest --cache-show**
+$ pytest --cache-show**
 =====================testsessionstarts======================
 -------------------------cachevalues-------------------------
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 
 =================no testsran in 0.00seconds=================
-**$ pytest --cache-show**
+$ pytest --cache-show**
 ===================testsessionstarts===================
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
@@ -5441,7 +5499,7 @@ cache/lastfailedcontains:
 
 Or you can look in the cache dir:
 
-**$ cat .pytest_cache/v/cache/lastfailed**
+$ cat .pytest_cache/v/cache/lastfailed**
 {
 "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]":true
 }
@@ -5472,7 +5530,8 @@ how it’s represented in the .cache directory.
 
 Here’s our fixture used to time tests:
 
-**ch4/cache/test_slower.py**
+**ch4/cache/test_slower.py
+
 @pytest.fixture(autouse=True)
 def check_duration (request,cache):
 key = _'duration/'_ + request.node.nodeid.replace( _':'_ , _'_'_ )
@@ -5501,7 +5560,8 @@ function; the code after yield happens after the test function.
 
 Now we need some tests that take different amounts of time:
 
-**ch4/cache/test_slower.py**
+**ch4/cache/test_slower.py
+
 @pytest.mark.parametrize( _'i'_ , range(5))
 def test_slow_stuff (i):
 time.sleep(random.random())
@@ -5517,11 +5577,13 @@ random amount of time, all shorter than a second. Let’s see it run a couple
 
 of times:
 
-**$ cd /path/to/code/ch4/cache
-$ pytest-q --tb=linetest_slower.py**
+$ cd /path/to/code/ch4/cache
+$ pytest-q --tb=linetest_slower.py
+
 ..... [100%]
 5 passedin 1.40seconds
-**$ pytest-q --tb=linetest_slower.py**
+$ pytest-q --tb=linetest_slower.py
+
 ..E.E.. [100%]
 =========================ERRORS==========================
 _________ERRORat teardownof test_slow_stuff[1]_________
@@ -5534,7 +5596,7 @@ assert0.28841<= (0.086302* 2)
 
 Well, that was fun. Let’s see what’s in the cache:
 
-**$ pytest-q --cache-show**
+$ pytest-q --cache-show**
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower.py::test_slow_stuff[1]':True,
@@ -5585,7 +5647,8 @@ Using cache • 85
 
 Here’s one possible refactoring of the same functionality:
 
-**ch4/cache/test_slower_2.py**
+**ch4/cache/test_slower_2.py
+
 Duration= namedtuple( _'Duration'_ , [ _'current'_ , _'last'_ ])
 
 @pytest.fixture(scope= _'session'_ )
@@ -5625,13 +5688,15 @@ end of the test session, the collected current dictionary is saved in the cache.
 
 After running it a couple of times, let’s look at the saved cache:
 
-**$ pytest-q --cache-cleartest_slower_2.py**
+$ pytest-q --cache-cleartest_slower_2.py
+
 ..... [100%]
 5 passedin 2.27seconds
-**$ pytest-q --tb=notest_slower_2.py**
+$ pytest-q --tb=notest_slower_2.py
+
 .E.E...E [100%]
 5 passed,3 errorin 3.65seconds
-**$ pytest-q --cache-show**
+$ pytest-q --cache-show**
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower_2.py::test_slow_stuff[0]':True,
@@ -5733,14 +5798,14 @@ def test_capsys_disabled (capsys):
 
 Now, 'alwaysprint this' will always be output:
 
-**$ cd /path/to/code/ch4/cap
+$ cd /path/to/code/ch4/cap
 $ pytest-q test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
 
 . [100%]
 1 passedin 0.02seconds
-**$ pytest-q -s test_capsys.py::test_capsys_disabled**
+$ pytest-q -s test_capsys.py::test_capsys_disabled**
 
 alwaysprintthis
 normalprint,usuallycaptured
@@ -6007,7 +6072,8 @@ everyone understands clearly. So we throw some usage examples in both the
 
 file docstring and the docstrings of the functions:
 
-**ch4/dt/1/unnecessary_math.py**
+**ch4/dt/1/unnecessary_math.py
+
 """
 Thismoduledefinesmultiply(a,b) and divide(a,b)._
 
@@ -6059,8 +6125,9 @@ different test. The import in the top docstring will allow the first part to pas
 
 but the code in the docstrings of the functions will fail:
 
-**$ cd /path/to/code/ch4/dt/1
-$ pytest -v --doctest-modules--tb=shortunnecessary_math.py**
+$ cd /path/to/code/ch4/dt/1
+$ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+
 ===================testsessionstarts===================
 collected3 items
 
@@ -6125,8 +6192,9 @@ Returnsa dividedby b.
 
 This definitely fixes the problem:
 
-**$ cd /path/to/code/ch4/dt/2
-$ pytest -v --doctest-modules--tb=shortunnecessary_math.py**
+$ cd /path/to/code/ch4/dt/2
+$ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+
 ===================testsessionstarts===================
 collected3 items
 
@@ -6354,7 +6422,7 @@ As PyPI is the default location for pip, installing plugins from PyPI is the eas
 
 method. Let’s install the pytest-cov plugin:
 
-**$ pip install pytest-cov**
+$ pip install pytest-cov**
 
 This installs the latest stable version from PyPI.
 
@@ -6364,7 +6432,7 @@ If you want a particular version of a plugin, you can specify the version
 
 after ‘==‘:
 
-**$ pip install pytest-cov==2.5.1**
+$ pip install pytest-cov==2.5.1**
 
 **Install from a .tar.gz or .whl File**
 
@@ -6383,9 +6451,9 @@ or the .whl and install from that.
 
 You don’t have to unzip or anything; just point pip at it:
 
-**$ pip install pytest-cov-2.5.1.tar.gz**
+$ pip install pytest-cov-2.5.1.tar.gz**
 _# or_
-**$ pip install pytest_cov-2.5.1-py2.py3-none-any.whl**
+$ pip install pytest_cov-2.5.1-py2.py3-none-any.whl**
 
 **Install from a Local Directory**
 
@@ -6395,7 +6463,7 @@ or shared directory in .tar.gz or .whl format and use that instead of PyPI for
 
 installing plugins:
 
-**$ mkdirsome_plugins
+$ mkdirsome_plugins
 $ cp pytest_cov-2.5.1-py2.py3-none-any.whlsome_plugins/
 $ pip install --no-index--find-links=./some_plugins/pytest-cov**
 
@@ -6417,21 +6485,21 @@ versions and specify which version you want by adding == and the version
 
 number:
 
-**$ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1**
+$ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1**
 
 **Install from a Git Repository**
 
 You can install plugins directly from a Git repository—in this case, GitHub:
 
-**$ pip install git+https://github.com/pytest-dev/pytest-cov**
+$ pip install git+https://github.com/pytest-dev/pytest-cov**
 
 You can also specify a version tag:
 
-**$ pip install git+https://github.com/pytest-dev/pytest-cov@v2.5.1**
+$ pip install git+https://github.com/pytest-dev/pytest-cov@v2.5.1**
 
 Or you can specify a branch:
 
-**$ pip install git+https://github.com/pytest-dev/pytest-cov@master**
+$ pip install git+https://github.com/pytest-dev/pytest-cov@master**
 
 Installing from a Git repository is especially useful if you’re storing your own
 
@@ -6530,7 +6598,7 @@ tasks.add(Task(summary= _'summary'_ , done= _'True'_ ))
 
 Let’s run them to see if they pass:
 
-**$ cd /path/to/code/ch5/a/tasks_proj
+$ cd /path/to/code/ch5/a/tasks_proj
 $ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -6569,7 +6637,7 @@ And now let’s focus on the new tests with -k TestAdd, which works because
 
 there aren’t any other tests with names that contain “TestAdd.”
 
-**$ cd /path/to/code/ch5/a/tasks_proj/tests/func
+$ cd /path/to/code/ch5/a/tasks_proj/tests/func
 $ pytest -v --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -6617,7 +6685,7 @@ And now we have just the output we were looking for. A test session with no
 
 --verbose flag shows an O for failures, er, improvement opportunities:
 
-**$ cd /path/to/code/ch5/b/tasks_proj/tests/func
+$ cd /path/to/code/ch5/b/tasks_proj/tests/func
 $ pytest --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
@@ -6636,7 +6704,7 @@ Writing Your Own Plugins • 103
 
 And the -v or --verbose flag will be nicer also:
 
-**$ pytest -v --tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6680,7 +6748,7 @@ We can manually test our plugin just by running it against our example file.
 
 First, with no --nice option, to make sure just the username shows up:
 
-**$ cd /path/to/code/ch5/c/tasks_proj/tests/func
+$ cd /path/to/code/ch5/c/tasks_proj/tests/func
 $ pytest --tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -6697,7 +6765,7 @@ Lab 5. Plugins • 104
 
 Now with --nice:
 
-**$ pytest --nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest --nice--tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6709,7 +6777,7 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
-**$ pytest -v --nice--tb=notest_api_exceptions.py-k TestAdd**
+$ pytest -v --nice--tb=notest_api_exceptions.py-k TestAdd**
 ===================testsessionstarts===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6775,7 +6843,8 @@ In pytest_nice.py, we’ll put the exact contents of our conftest.py that were r
 
 to this feature (and take it out of the tasks_proj/tests/conftest.py):
 
-**ch5/pytest-nice/pytest_nice.py**
+**ch5/pytest-nice/pytest_nice.py
+
 """Codefor pytest-niceplugin."""
 
 import pytest
@@ -6799,7 +6868,8 @@ def pytest_report_teststatus (report,config):
 
 In setup.py, we need a very minimal call to setup():
 
-**ch5/pytest-nice/setup.py**
+**ch5/pytest-nice/setup.py
+
 """Setupfor pytest-niceplugin."""
 
 **fromsetuptoolsimport** setup
@@ -6936,7 +7006,8 @@ Our test directory for pytest-nice has two files: conftest.py and test_nice.py. 
 
 pytester, we need to add just one line to conftest.py:
 
-**ch5/pytest-nice/tests/conftest.py**
+**ch5/pytest-nice/tests/conftest.py
+
 """pytesteris neededfor testingplugins."""
 pytest_plugins= _'pytester'_
 
@@ -7007,7 +7078,8 @@ The strings passed into fnmatch_lines can include glob wildcards. We can use our
 
 example file for more tests. Instead of duplicating that code, let’s make a fixture:
 
-**ch5/pytest-nice/tests/test_nice.py**
+**ch5/pytest-nice/tests/test_nice.py
+
 @pytest.fixture()
 def sample_test (testdir):
 testdir.makepyfile( """
@@ -7085,7 +7157,7 @@ is installed. We do this either by installing the .zip.gz file or installing the
 
 rent directory in editable mode:
 
-**$ cd /path/to/code/ch5/pytest-nice/
+$ cd /path/to/code/ch5/pytest-nice/
 $ pip install .**
 Processing/path/to/code/ch5/pytest-nice
 **...**
@@ -7097,7 +7169,7 @@ Successfullyinstalledpytest-nice-0.1.0
 
 Now that it’s installed, let’s run the tests:
 
-**$ pytest -v**
+$ pytest -v**
 ===================testsessionstarts===================
 plugins:nice-0.1.0,cov-2.5.1
 collected7 items
@@ -7116,7 +7188,7 @@ Yay! All the tests pass. We can uninstall it just like any other Python package
 
 or pytest plugin:
 
-**$ pip uninstallpytest-nice**
+$ pip uninstallpytest-nice**
 Uninstallingpytest-nice-0.1.0:
 **...**
 Proceed(y/n)?y
@@ -7132,7 +7204,7 @@ Believe it or not, we are almost done with our plugin. From the command
 
 line, we can use this setup.py file to create a distribution:
 
-**$ cd /path/to/code/ch5/pytest-nice
+$ cd /path/to/code/ch5/pytest-nice
 $ pythonsetup.pysdist**
 runningsdist
 runningegg_info
@@ -7157,7 +7229,7 @@ Within pytest-nice, a dist directory contains a new file called pytest-nice-0.1.
 
 This file can now be used anywhere to install our plugin, even in place:
 
-**$ pip install dist/pytest-nice-0.1.0.tar.gz**
+$ pip install dist/pytest-nice-0.1.0.tar.gz**
 Processing./dist/pytest-nice-0.1.0.tar.gz
 **...**
 Installingcollectedpackages:pytest-nice
@@ -7179,7 +7251,7 @@ put pytest-nice-0.1.0.tar.gz into a directory called myplugins.
 
 To install pytest-nice from myplugins:
 
-**$ pip install --no-index--find-linksmypluginspytest-nice**
+$ pip install --no-index--find-linksmypluginspytest-nice**
 
 The --no-index tells pip to not go out to PyPI to look for what you want to install.
 
@@ -7191,7 +7263,7 @@ If you’ve done some bug fixes and there are newer versions in myplugins, you
 
 can upgrade by adding --upgrade:
 
-**$ pip install --upgrade--no-index--find-linksmypluginspytest-nice**
+$ pip install --upgrade--no-index--find-linksmypluginspytest-nice**
 
 This is just like any other use of pip, but with the --no-index --find-linksmyplugins
 
@@ -7214,7 +7286,7 @@ When you are contributing a pytest plugin, another great place to start is by
 
 using the cookiecutter-pytest-plugin^7 :
 
-**$ pip install cookiecutter
+$ pip install cookiecutter
 $ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin**
 
 This project first asks you some questions about your plugin. Then it creates
@@ -7366,7 +7438,7 @@ a sampling:
 Lab 6. Configuration • 116
 
 
-**$ pytest --help
+$ pytest --help
 ...**
 [pytest]ini-optionsin the firstpytest.ini|tox.ini|setup.cfgfilefound:
 
@@ -7453,7 +7525,7 @@ With these markers registered, you can now also see them with pytest --markers
 
 with their descriptions:
 
-**$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /path/to/code/ch6/b/tasks_proj/tests
 $ pytest --markers**
 @pytest.mark.smoke:Run the smoketesttestfunctions
 
@@ -7475,7 +7547,7 @@ ch6/a/tasks_proj and ch6/b/tasks_proj is the contents of the pytest.ini file. It
 
 in ch6/a. Let’s try running the tests without registering any markers:
 
-**$ cd /path/to/code/ch6/a/tasks_proj/tests
+$ cd /path/to/code/ch6/a/tasks_proj/tests
 $ pytest --strict --tb=line**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7522,7 +7594,7 @@ for the project.
 
 This should allow us to run tests, including the smoke tests:
 
-**$ cd /path/to/code/ch6/b/tasks_proj/tests
+$ cd /path/to/code/ch6/b/tasks_proj/tests
 $ pytest --strict-m smoke**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7788,7 +7860,7 @@ ning them individually will be fine, but running pytest from the dups directory
 
 won’t work:
 
-**$ cd /path/to/code/ch6/dups
+$ cd /path/to/code/ch6/dups
 $ pytesta**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7797,7 +7869,7 @@ collected1 item
 a/test_foo.py. [100%]
 
 ================1 passedin 0.01seconds=================
-**$ pytestb**
+$ pytestb**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item
@@ -7805,7 +7877,7 @@ collected1 item
 b/test_foo.py. [100%]
 
 ================1 passedin 0.01seconds=================
-**$ pytest
+$ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected1 item/ 1 errors
@@ -7844,7 +7916,7 @@ dups_fixed/
 
 Now, let’s try this again from the top level in dups_fixed:
 
-**$ cd /path/to/code/ch6/dups_fixed
+$ cd /path/to/code/ch6/dups_fixed
 $ pytest
 ===================testsessionstarts===================
 plugins:cov-2.5.1
@@ -7935,7 +8007,7 @@ In Parametrizing Fixtures, on page 66, we left the Tasks project with a few
 
 failures:
 
-**$ cd /path/to/code/ch3/c/tasks_proj
+$ cd /path/to/code/ch3/c/tasks_proj
 $ pytest --tb=no-q**
 .........................................FF.FFFFFFF[ 53%]
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
@@ -7974,7 +8046,7 @@ backs, and we didn’t have --verbose turned on. Let’s re-run the failures (at
 
 three of them) with verbose:
 
-**$ pytest --tb=no--verbose--lf--maxfail=3**
+$ pytest --tb=no--verbose--lf--maxfail=3**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -7992,7 +8064,7 @@ Now we know which tests are failing. Let’s look at just one of them by using
 
 ables with -l:
 
-**$ pytest -v --lf-l -x**
+$ pytest -v --lf-l -x**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -8046,7 +8118,7 @@ wasn’t obvious why this test failed. We can have pytest start a debugging
 
 session and start us right at the point of failure with --pdb:
 
-**$ pytest -v --lf-x --pdb**
+$ pytest -v --lf-x --pdb**
 ===================testsessionstarts===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
@@ -8151,7 +8223,7 @@ with some extra pytest options. Since coverage is one of the dependencies of
 
 pytest-cov, it is sufficient to install pytest-cov, as it will pull in coverage.py:
 
-**$ pip install pytest-cov
+$ pip install pytest-cov
 ...**
 Installingcollectedpackages:coverage,pytest-cov
 Successfullyinstalledcoverage-4.5.1 pytest-cov-2.5.1
@@ -8160,19 +8232,19 @@ Let’s run the coverage report on version 2 of Tasks. If you still have the fir
 
 version of the Tasks project installed, uninstall it and install version 2:
 
-**$ pip uninstalltasks**
+$ pip uninstalltasks**
 Uninstallingtasks-0.1.0:
 **...**
 Proceed(y/n)?y
 Successfullyuninstalledtasks-0.1.0
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ pip install -e.**
 Obtainingfile:///path/to/code/ch7/tasks_proj_v2
 **...**
 Installingcollectedpackages:tasks
 Runningsetup.pydevelopfor tasks
 Successfullyinstalledtasks
-**$ pip list
+$ pip list
 ...**
 tasks 0.1.1 /path/to/code/tasks_proj_v2/src
 **...**
@@ -8184,7 +8256,7 @@ Now that the next version of Tasks is installed, we can run our baseline cov-
 
 erage report:
 
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ pytest --cov=src**
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
@@ -8237,7 +8309,7 @@ the best way to do that is to use the HTML reports.
 
 If you run coverage.py again with --cov-report=html, an HTML report is generated:
 
-**$ pytest --cov=src--cov-report=html**
+$ pytest --cov=src--cov-report=html**
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 
@@ -8383,7 +8455,7 @@ Lab 7. Using pytest with Other Tools • 136
 
 Let’s pause and install version 2 of Tasks:
 
-**$ cd /path/to/code/
+$ cd /path/to/code/
 $ pip install -e ch7/tasks_proj_v2
 ...**
 Successfullyinstalledtasks
@@ -8392,11 +8464,11 @@ In the rest of this section, you’ll develop some tests for the “list” func
 
 Let’s see it in action to understand what we’re going to test:
 
-**$ taskslist**
+$ taskslist**
 ID owner donesummary
 -- ----- -----------
-**$ tasksadd** "do somethinggreat"
-**$ tasksadd** "repeat" **-o Brian
+$ tasksadd** "do somethinggreat"
+$ tasksadd** "repeat" **-o Brian
 $ tasksadd** "againand again" **--ownerOkken
 $ taskslist**
 ID owner donesummary
@@ -8404,11 +8476,11 @@ ID owner donesummary
 1 Falsedo somethinggreat
 2 BrianFalserepeat
 3 OkkenFalseagainand again
-**$ taskslist-o Brian**
+$ taskslist-o Brian**
 ID owner donesummary
 -- ----- -----------
 2 BrianFalserepeat
-**$ taskslist--ownerBrian**
+$ taskslist--ownerBrian**
 ID owner donesummary
 -- ----- -----------
 2 BrianFalserepeat
@@ -8431,7 +8503,8 @@ tasks_cli()
 
 That’s just a call to tasks_cli():
 
-**ch7/tasks_proj_v2/src/tasks/cli.py**
+**ch7/tasks_proj_v2/src/tasks/cli.py
+
 @click.group(context_settings={ _'help_option_names'_ : [ _'-h'_ , _'--help'_ ]})
 @click.version_option(version= _'0.1.1'_ )
 def tasks_cli ():
@@ -8445,7 +8518,8 @@ Obvious? No. But hold on, it gets better (or worse, depending on your perspec-
 
 tive). Here’s one of the commands—the list command:
 
-**ch7/tasks_proj_v2/src/tasks/cli.py**
+**ch7/tasks_proj_v2/src/tasks/cli.py
+
 @tasks_cli.command(name= "list" , help= "listtasks" )
 @click.option( _'-o'_ , _'--owner'_ , default=None,
 help= _'listtaskswiththisowner'_ )
@@ -8488,7 +8562,8 @@ deals with the return value correctly.
 
 To stub _tasks_db(), let’s look at the real implementation:
 
-**ch7/tasks_proj_v2/src/tasks/cli.py**
+**ch7/tasks_proj_v2/src/tasks/cli.py
+
 @contextmanager
 def _tasks_db ():
 config= tasks.config.get_config()
@@ -8515,7 +8590,8 @@ functions, we don’t need a connection to an actual database. Therefore, we
 
 can replace the context manager with a simple stub:
 
-**ch7/tasks_proj_v2/tests/unit/test_cli.py**
+**ch7/tasks_proj_v2/tests/unit/test_cli.py
+
 @contextmanager
 def stub_tasks_db ():
 **yield**
@@ -8591,7 +8667,8 @@ which are all listed in the Python documentation.^5
 
 Let’s look at an almost identical test function that checks the output:
 
-**ch7/tasks_proj_v2/tests/unit/test_cli.py**
+**ch7/tasks_proj_v2/tests/unit/test_cli.py
+
 @pytest.fixture()
 def no_db (mocker):
 mocker.patch.object(tasks.cli, _'_tasks_db'_ , new=stub_tasks_db)
@@ -8667,8 +8744,9 @@ tasks.cli.tasks.list_tasks.assert_called_once_with( _'okken'_ )
 
 Let’s make sure they all work:
 
-**$ cd /path/to/code/ch7/tasks_proj_v2
-$ pytest -v tests/unit/test_cli.py**
+$ cd /path/to/code/ch7/tasks_proj_v2
+$ pytest -v tests/unit/test_cli.py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected5 items
@@ -8816,13 +8894,13 @@ the markers are declared.
 
 Before running tox, you have to make sure you install it:
 
-**$ pip install tox**
+$ pip install tox**
 
 This can be done within a virtual environment.
 
 Then to run tox, just run, well, tox:
 
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ tox**
 GLOBsdist-make:/path/to/code/ch7/tasks_proj_v2/setup.py
 py27inst-nodeps:/path/to/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
@@ -9107,8 +9185,9 @@ The actual test is at the bottom, test_delete_decreases_count(). The rest of the
 
 is there for setup and teardown. This test runs fine in unittest:
 
-**$ cd /path/to/code/ch7/unittest
-$ python-m unittest-v test_delete_unittest.py**
+$ cd /path/to/code/ch7/unittest
+$ python-m unittest-v test_delete_unittest.py
+
 test_delete_decreases_count(test_delete_unittest.TestNonEmpty)... ok
 
 ----------------------------------------------------------------------
@@ -9118,7 +9197,8 @@ OK
 
 It also runs fine in pytest:
 
-**$ pytest -v test_delete_unittest.py**
+$ pytest -v test_delete_unittest.py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected1 item
@@ -9162,11 +9242,13 @@ is almost identical.
 
 Both tests pass individually:
 
-**$ pytest-q test_delete_pytest.py**
+$ pytest-q test_delete_pytest.py
+
 
 . [100%]
 1 passedin 0.02seconds
-**$ pytest-q test_delete_unittest.py**
+$ pytest-q test_delete_unittest.py
+
 . [100%]
 1 passedin 0.02seconds
 
@@ -9174,7 +9256,8 @@ You can even run them together if—and only if—you make sure the unittest
 
 version runs first:
 
-**$ pytest -v test_delete_unittest.pytest_delete_pytest.py**
+$ pytest -v test_delete_unittest.pytest_delete_pytest.py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
@@ -9186,7 +9269,8 @@ test_delete_pytest.py::test_delete_decreases_countPASSED[100%]
 
 If you run the pytest version first, something goes haywire:
 
-**$ pytest -v test_delete_pytest.pytest_delete_unittest.py**
+$ pytest -v test_delete_pytest.pytest_delete_unittest.py
+
 ===================testsessionstarts===================
 collected2 items
 
@@ -9219,7 +9303,8 @@ and passed.
 
 Let’s use --setup-show to investigate further:
 
-**$ pytest-q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py**
+$ pytest-q --tb=no--setup-showtest_delete_pytest.pytest_delete_unittest.py
+
 
 SETUP S tmpdir_factory
 SETUP S tasks_db_session(fixturesused:tmpdir_factory)
@@ -9284,7 +9369,8 @@ self.assertEqual(tasks.count(),2)
 
 Now both unittest and pytest can cooperate and not run into each other:
 
-**$ pytest -v test_delete_pytest.pytest_delete_unittest_fix.py**
+$ pytest -v test_delete_pytest.pytest_delete_unittest_fix.py
+
 ===================testsessionstarts===================
 plugins:mock-1.10.0,cov-2.5.1
 collected2 items
@@ -9474,7 +9560,7 @@ instead. Just remember to pip install virtualenv first.
 
 Here’s how to set up a virtual environment in macOS and Linux:
 
-**$ python3-m venvenv_name
+$ python3-m venvenv_name
 $ sourceenv_name/bin/activate**
 (env_name)$
 **... do yourwork...**
@@ -9636,22 +9722,22 @@ You can use pip to install packages with version numbers from pypi.python.org
 
 if it’s a release version PyPI knows about:
 
-**$ pip install pytest==3.2.1**
+$ pip install pytest==3.2.1**
 
 You can use pip to install a local package that has a setup.py file in it:
 
 Appendix 2. pip • 160
 
 
-**$ pip install /path/to/package**
+$ pip install /path/to/package**
 
 Use ./package_name if you are in the same directory as the package to install it
 
 locally:
 
-**$ cd /path/just/above/package
+$ cd /path/just/above/package
 $ pip install my_package** _# pip is lookingin PyPIfor "my_package"
-**$ pip install ./my_package** _# now pip lookslocally_
+$ pip install ./my_package** _# now pip lookslocally_
 
 You can use pip to install packages that have been downloaded as zip files or
 
@@ -9744,7 +9830,7 @@ Following is a normal test run of tests that start with test_list from ch7/tasks
 
 _proj_v2:
 
-**$ cd /path/to/code/ch7/tasks_proj_v2
+$ cd /path/to/code/ch7/tasks_proj_v2
 $ pip install .
 $ pip install pytest-repeat
 $ cd tests
@@ -9768,7 +9854,7 @@ unit/test_cli.py::test_list_dash_dash_ownerPASSED [100%]
 
 With the pytest-repeat plugin, you can use --count to run everything twice:
 
-**$ pytest --count=2-v -k test_list**
+$ pytest --count=2-v -k test_list**
 =====================testsessionstarts=====================
 plugins:repeat-0.7.0,mock-1.10.0
 collected124 items/ 112 deselected
@@ -9827,9 +9913,10 @@ time.sleep(1)
 
 Notice that it takes over ten seconds to run normally:
 
-**$ pip install pytest-xdist
+$ pip install pytest-xdist
 $ cd /path/to/code/appendices/xdist
-$ pytest test_parallel.py**
+$ pytest test_parallel.py
+
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,forked-0.2
 collected10 items
@@ -9844,7 +9931,8 @@ subprocess, and use -n auto to automatically detect the number of CPUs on
 
 the system. Here’s the same test run on multiple processors:
 
-**$ pytest-n autotest_parallel.py**
+$ pytest-n autotest_parallel.py
+
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,forked-0.2
 gw0 [10]/ gw1 [10]/ gw2 [10]/ gw3 [10]
@@ -9892,9 +9980,10 @@ Let’s run the tests from the previous example (with one-second sleeps) with
 
 a half-second timeout:
 
-**$ cd /path/to/code/appendices/xdist
+$ cd /path/to/code/appendices/xdist
 $ pip install pytest-timeout
-$ pytest --timeout=0.5-x test_parallel.py**
+$ pytest --timeout=0.5-x test_parallel.py
+
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
 timeout:0.5s
@@ -9948,8 +10037,9 @@ Appendix 3. Plugin Sampler Pack • 166
 
 Here’s a test with normal failures at the end:
 
-**$ cd /path/to/code/appendices/xdist
-$ pytest --timeout=0.5 --tb=line--maxfail=2test_parallel.py**
+$ cd /path/to/code/appendices/xdist
+$ pytest --timeout=0.5 --tb=line--maxfail=2test_parallel.py
+
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, forked-0.2
 timeout:0.5s
@@ -9966,8 +10056,9 @@ test_parallel.pyFF
 
 Here’s the same test with --instafail:
 
-**$ pip install pytest-instafail
-$ pytest --instafail --timeout=0.5 --tb=line--maxfail=2test_parallel.py**
+$ pip install pytest-instafail
+$ pytest --instafail --timeout=0.5 --tb=line--maxfail=2test_parallel.py
+
 ===================testsessionstarts===================
 plugins:xdist-1.23.0,timeout-1.3.2, instafail-0.4.0,forked-0.2
 timeout:0.5s
@@ -10072,7 +10163,7 @@ Plugins That Alter or Enhance Output • 169
 
 The pytest-html plugin is really easy to start. Just add --html=report_name.html:
 
-**$ cd /path/to/code/appendices/outcomes
+$ cd /path/to/code/appendices/outcomes
 $ pytest --html=report.html**
 ======================testsessionstarts======================
 metadata:...
@@ -10099,7 +10190,7 @@ E assert1 == 2
 
 test_outcomes.py:8:AssertionError
 1 failed,1 passed,1 skipped,1 xfailed,1 xpassed,1 errorin 0.08seconds
-**$ openreport.html**
+$ openreport.html**
 
 This produces a report that includes the information about the test session
 
@@ -10296,7 +10387,7 @@ One directory with one module and a setup.py file is enough to make it instal-
 
 lable via pip:
 
-**$ cd /path/to/code/appendices/packaging
+$ cd /path/to/code/appendices/packaging
 $ pip install ./some_module_proj**
 Processing./some_module_proj
 Installingcollectedpackages:some-module
@@ -10305,7 +10396,7 @@ Successfullyinstalledsome-module-0.0.0
 
 And we can now use some_module from Python (or from a test):
 
-**$ python**
+$ python**
 Python3.7.0(v3.7.0:1bf9cc5093,Jun 26 2018,23:26:24)
 [Clang6.0 (clang-600.0.57)]on darwin
 Type"help","copyright","credits"or "license"for moreinformation.
@@ -10326,7 +10417,7 @@ Let’s make this code a package by adding an __init__.py and putting the __init
 
 file and module in a directory with a package name:
 
-**$ treesome_package_proj/**
+$ treesome_package_proj/**
 some_package_proj/
 ├──setup.py
 └──src
@@ -10383,7 +10474,7 @@ Instead of using py_modules, we specify packages.
 
 This is now installable:
 
-**$ cd /path/to/code/appendices/packaging
+$ cd /path/to/code/appendices/packaging
 $ pip install ./some_package_proj/**
 Processing./some_package_proj
 Installingcollectedpackages:some-package
@@ -10397,7 +10488,7 @@ Creating an Installable Package • 177
 
 and usable:
 
-**$ python**
+$ python**
 Python3.7.0(v3.7.0:1bf9cc5093,Jun 26 2018,23:26:24)
 [Clang6.0 (clang-600.0.57)]on darwin
 Type"help","copyright","credits"or "license"for moreinformation.
@@ -10421,7 +10512,7 @@ For personal use, the configuration shown in the previous section is enough
 
 to create a source distribution and a wheel. Let’s try it:
 
-**$ cd /path/to/code/appendices/packaging/some_package_proj/
+$ cd /path/to/code/appendices/packaging/some_package_proj/
 $ pip install wheel
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
@@ -10572,7 +10663,7 @@ into a CHANGELOG.rst file.
 
 Let’s see if this was enough to remove the warnings:
 
-**$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /path/to/code/appendices/packaging/some_package_proj_v2
 $ pythonsetup.pysdistbdist_wheel**
 runningsdist
 runningbuild
@@ -10588,7 +10679,7 @@ creatingbuild/lib
 creatingbuild/lib/some_package
 **...**
 
-**$ ls dist**
+$ ls dist**
 some_package-1.0-py3-none-any.whlsome_package-1.0.tar.gz
 
 Yep. No warnings.
@@ -10597,7 +10688,7 @@ Now, we can put the .whl and/or .tar.gz files in a local shared directory and pi
 
 install to our heart’s content:
 
-**$ cd /path/to/code/appendices/packaging/some_package_proj_v2
+$ cd /path/to/code/appendices/packaging/some_package_proj_v2
 $ mkdir~/packages/
 $ cp dist/some_package-1.0-py3-none-any.whl~/packages
 $ cp dist/some_package-1.0.tar.gz~/packages
@@ -10605,10 +10696,10 @@ $ pip install --no-index--find-links=~/packagessome_package**
 Collectingsome_package
 Installingcollectedpackages:some-package
 Successfullyinstalledsome-package-1.0
-**$ pip install --no-index--find-links=./distsome_package==1.0**
+$ pip install --no-index--find-links=./distsome_package==1.0**
 Requirementalreadysatisfied:some_package==1.0in
 /path/to/venv/lib/python3.6/site-packages
-**$**
+$**
 
 Now you can create your own stash of local project packages from your team,
 
@@ -10750,8 +10841,9 @@ Appendix 5. xUnit Fixtures • 184
 
 Here’s the test session to help visualize the control flow:
 
-**$ cd /path/to/code/appendices/xunit
-$ pytest-s test_xUnit_fixtures.py**
+$ cd /path/to/code/appendices/xunit
+$ pytest-s test_xUnit_fixtures.py
+
 ============testsessionstarts=============
 plugins:mock-1.6.0,cov-2.5.1
 collected4 items
@@ -10818,8 +10910,9 @@ def test_2 (module_fixture,function_fixture):
 
 You _can_ do it. But please don’t. It gets confusing. Take a look at this:
 
-**$ cd /path/to/code/appendices/xunit
-$ pytest-s test_mixed_fixtures.py**
+$ cd /path/to/code/appendices/xunit
+$ pytest-s test_mixed_fixtures.py
+
 ============testsessionstarts=============
 plugins:mock-1.6.0,cov-2.5.1
 collected2 items

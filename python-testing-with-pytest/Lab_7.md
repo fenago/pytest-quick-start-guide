@@ -441,29 +441,39 @@ In the rest of this section, you’ll develop some tests for the “list” func
 Let’s see it in action to understand what we’re going to test:
 
 ```
-$ taskslist**
-ID owner donesummary
--- ----- -----------
-```
-$ tasksadd** "do somethinggreat"
-$ tasksadd** "repeat" **-o Brian
-$ tasksadd** "againand again" **--ownerOkken
-$ taskslist**
-ID owner donesummary
--- ----- -----------
-1 Falsedo somethinggreat
-2 BrianFalserepeat
-3 OkkenFalseagainand again
-$ taskslist-o Brian**
-ID owner donesummary
--- ----- -----------
-2 BrianFalserepeat
+$ tasks list
 
-$ taskslist--ownerBrian
 
-ID owner donesummary
--- ----- -----------
-2 BrianFalserepeat
+ID owner done summary
+-- ----- ---- -------
+
+
+$ tasks add "do something great"
+$ tasks add "repeat" -o Brian
+$ tasks add "again and again" --owner Okken
+$ tasks list
+
+
+ID owner done summary
+-- ----- ---- -------
+1 False do something great
+2 Brian False repeat
+3 Okken False again and again
+
+
+$ tasks list -o Brian
+
+
+ID owner done summary
+-- ----- ---- -------
+2 Brian False repeat
+
+$ tasks list --owner Brian
+
+
+ID owner done summary
+-- ----- ---- -------
+2 Brian False repeat
 ```
 
 Looks pretty simple. The tasks list command lists all the tasks with a header.
