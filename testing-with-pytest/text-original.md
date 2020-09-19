@@ -1209,9 +1209,9 @@ you’re first getting started.
 
 $ pytest --help
 ... subsetof the list...**
--k EXPRESSION onlyrun tests/classes whichmatchthe given
+ -k EXPRESSION onlyrun tests/classes whichmatchthe given
 substringexpression.
-Example:-k 'test_methodor test_other'matches
+Example: -k 'test_methodor test_other'matches
 all testfunctionsand classeswhosename
 contains'test_method'or 'test_other'.
 -m MARKEXPR onlyrun testsmatchinggivenmarkexpression.
@@ -1269,7 +1269,7 @@ The --collect-only option is helpful to check if other options that select tests
 
 before running the tests. We’ll use it again with -k to show how that works.
 
-**-k EXPRESSION**
+** -k EXPRESSION**
 
 The -k option lets you use an expression to find what test functions to run.
 
@@ -1520,7 +1520,9 @@ When one or more tests fails, having a convenient way to run just the failing
 tests is helpful for debugging. Just use --lf and you’re ready to debug:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --lf**
+$ pytest --lf
+
+
 =================== test session starts ===================
 collected6 items/ 5 deselected
 run-last-failure:rerunprevious1 failure
@@ -1531,10 +1533,10 @@ test_two.pyF [100%]
 ______________________test_failing_______________________
 
 def test_failing():
-**> assert(1,2, 3) == (3,2, 1)**
-E assert(1, 2, 3) == (3, 2, 1)
-E At index0 diff:1 != 3
-E Use -v to get the fulldiff
+> assert(1,2, 3) == (3,2, 1)**
+    E assert(1, 2, 3) == (3, 2, 1)
+    E At index0 diff:1 != 3
+    E Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
 =========1 failed, 5 deselectedin 0.07 seconds==========
@@ -1545,13 +1547,14 @@ and you want to re-run the failures with a different traceback option.
 
 **--ff, --failed-first**
 
-The --ff/--failed-first option will do the same as --last-failed,  and then run the rest
+The --ff --failed-first option will do the same as --last-failed,  and then run the rest
 
 of the tests that passed last time:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --ff--tb=no 
-$ pytest --ff--tb=no **
+$ pytest --ff --tb=no 
+$ pytest --ff --tb=no
+
 =================== test session starts ===================
 collected6 items
 run-last-failure:rerunprevious1 failurefirst
@@ -1584,7 +1587,7 @@ We’ve used it quite a bit already, but let’s run it again for fun in conjunc
 with --ff and --tb=no :
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest -v --ff--tb=no **
+$ pytest -v --ff--tb=no
 =================== test session starts ===================
 collected6 items
 run-last-failure:rerunprevious1 failurefirst
@@ -2997,7 +3000,7 @@ tests/func/test_api_exceptions.py::test_add_raisesPASSED[ 70%]
 tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 72%]
 tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 74%]
 **...**
-tests/func/test_unique_id_1.py::test_unique_id FAILED[ 84%]
+tests/func/test_unique_id_1.py::test_unique_id FAILED [84%]
 tests/func/test_unique_id_2.py::test_unique_id_1SKIPPED[ 86%]
 tests/func/test_unique_id_2.py::test_unique_id_2PASSED[ 88%]
 **...**
@@ -3297,10 +3300,10 @@ $ pytest -v test_add_variety.py::test_add_3**
 =================== test session starts ===================
 collected4 items
 
-test_add_variety.py::test_add_3[sleep-None-False]PASSED[ 25%]
-test_add_variety.py::test_add_3[wake-brian-False]PASSED[ 50%]
-test_add_variety.py::test_add_3[breathe-BRIAN-True]PASSED[ 75%]
-test_add_variety.py::test_add_3[eateggs-BrIaN-False]PASSED[100%]
+test_add_variety.py::test_add_3[sleep-None-False] PASSED[ 25%]
+test_add_variety.py::test_add_3[wake-brian-False] PASSED[ 50%]
+test_add_variety.py::test_add_3[breathe-BRIAN-True] PASSED[ 75%]
+test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
 ================4 passed in 0.05 seconds=================
 
@@ -3313,7 +3316,7 @@ $ pytest -v test_add_variety.py::test_add_3[sleep-None-False]**
 =================== test session starts ===================
 collected1 item
 
-test_add_variety.py::test_add_3[sleep-None-False]PASSED[100%]
+test_add_variety.py::test_add_3[sleep-None-False] PASSED[100%]
 
 ================1 passed in 0.03 seconds=================
 
@@ -3327,7 +3330,7 @@ $ pytest -v** "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
 =================== test session starts ===================
 collected1 item
 
-test_add_variety.py::test_add_3[eateggs-BrIaN-False]PASSED[100%]
+test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
 ================1 passed in 0.03 seconds=================
 
@@ -3401,11 +3404,11 @@ $ pytest -v test_add_variety.py::test_add_5**
 =================== test session starts ===================
 collected5 items
 
-test_add_variety.py::test_add_5[Task(sleep,None,True)]PASSED[ 20%]
-test_add_variety.py::test_add_5[Task(wake,brian,False)0]PASSED[ 40%]
-test_add_variety.py::test_add_5[Task(wake,brian,False)1]PASSED[ 60%]
-test_add_variety.py::test_add_5[Task(breathe,BRIAN,True)]PASSED[ 80%]
-test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety.py::test_add_5[Task(sleep,None,True)] PASSED[ 20%]
+test_add_variety.py::test_add_5[Task(wake,brian,False)0] PASSED[ 40%]
+test_add_variety.py::test_add_5[Task(wake,brian,False)1] PASSED[ 60%]
+test_add_variety.py::test_add_5[Task(breathe,BRIAN,True)] PASSED[ 80%]
+test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================5 passed in 0.06 seconds=================
 
@@ -3420,7 +3423,7 @@ $ pytest -v** "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
 =================== test session starts ===================
 collected1 item
 
-test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================1 passed in 0.05 seconds=================
 
@@ -3463,16 +3466,16 @@ $ pytest -v test_add_variety.py::TestAdd**
 =================== test session starts ===================
 collected10 items
 
-test_add_variety.py::TestAdd::test_equivalent[Task(sleep,None,True)]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)0]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)1]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(breathe,BRIAN,True)]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(exercise,BrIaN,False)]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(sleep,None,True)]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)0]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)1]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(breathe,BRIAN,True)]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(exercise,BrIaN,False)]PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(sleep,None,True)] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)0] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)1] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(breathe,BRIAN,True)] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(exercise,BrIaN,False)] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(sleep,None,True)] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)0] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)1] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(breathe,BRIAN,True)] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(exercise,BrIaN,False)] PASSED
 
 ================10 passed in 0.10 seconds================
 
@@ -3501,9 +3504,9 @@ $ pytest -v test_add_variety.py::test_add_6**
 =================== test session starts ===================
 collected3 items
 
-test_add_variety.py::test_add_6[justsummary]PASSED[ 33%]
-test_add_variety.py::test_add_6[summary/owner]PASSED[ 66%]
-test_add_variety.py::test_add_6[summary/owner/done]PASSED[100%]
+test_add_variety.py::test_add_6[justsummary] PASSED[ 33%]
+test_add_variety.py::test_add_6[summary/owner] PASSED[ 66%]
+test_add_variety.py::test_add_6[summary/owner/done] PASSED[100%]
 
 ================3 passed in 0.06 seconds=================
 
@@ -3801,7 +3804,7 @@ are run:
 $ cd /home/jovyan/work/testing-with-pytest/code/
 $ pip install ./tasks_proj/** _# if not installedyet_
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
-$ pytest -v test_add.py-k valid_id**
+$ pytest -v test_add.py -k valid_id**
 =================== test session starts ===================
 collected3 items/ 2 deselected
 
@@ -3811,12 +3814,14 @@ test_add.py::test_add_returns_valid_id PASSED            [100%]
 
 When I’m developing fixtures, I like to see what’s running and when. Fortu-
 
-nately, pytest provides a command-line flag, --setup-show, that does just that:
+nately, pytest provides a command-line flag, --setup-show , that does just that:
 
 Lab 3. pytest Fixtures • 54
 
 
-$ pytest --setup-showtest_add.py-k valid_id**
+$ pytest --setup-show test_add.py -k valid_id
+
+
 =================== test session starts ===================
 collected3 items/ 2 deselected
 
@@ -4035,7 +4040,7 @@ test_add_increases_count() to only be possible if add() really failed to alter t
 Let’s trace it and see all the fixtures run:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
-$ pytest --setup-showtest_add.py::test_add_increases_count**
+$ pytest --setup-show test_add.py::test_add_increases_count**
 =================== test session starts ===================
 collected1 item
 
@@ -4150,7 +4155,7 @@ Let’s use --setup-show to demonstrate that the number of times a fixture is ca
 and when the setup and teardown are run depend on the scope:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3
-$ pytest --setup-showtest_scope.py
+$ pytest --setup-show test_scope.py
 
 =================== test session starts ===================
 collected4 items
@@ -4302,7 +4307,7 @@ Looks like it’s all good. Let’s trace the fixtures for one test file to see 
 
 different scoping worked as expected:
 
-$ pytest --setup-showtests/func/test_add.py
+$ pytest --setup-show tests/func/test_add.py
 
 =================== test session starts ===================
 collected3 items
@@ -4481,9 +4486,9 @@ def test_everything (lue):
 
 Here, lue is now the fixture name, instead of ultimate_answer_to_life_the_uni-
 
-verse_and_everything. That name even shows up if we run it with --setup-show:
+verse_and_everything. That name even shows up if we run it with --setup-show :
 
-$ pytest --setup-showtest_rename_fixture.py
+$ pytest --setup-show test_rename_fixture.py
 
 =================== test session starts ===================
 collected1 item
@@ -4655,10 +4660,10 @@ $ pytest -v test_add_variety2.py::test_add_b**
 =================== test session starts ===================
 collected4 items
 
-test_add_variety2.py::test_add_b[Task(sleep,None,True)]PASSED[ 25%]
-test_add_variety2.py::test_add_b[Task(wake,brian,False)]PASSED[ 50%]
-test_add_variety2.py::test_add_b[Task(breathe,BRIAN,True)]PASSED[ 75%]
-test_add_variety2.py::test_add_b[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety2.py::test_add_b[Task(sleep,None,True)] PASSED[ 25%]
+test_add_variety2.py::test_add_b[Task(wake,brian,False)] PASSED[ 50%]
+test_add_variety2.py::test_add_b[Task(breathe,BRIAN,True)] PASSED[ 75%]
+test_add_variety2.py::test_add_b[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================4 passed in 0.04 seconds=================
 
@@ -4702,10 +4707,10 @@ $ pytest -v test_add_variety2.py::test_add_c**
 =================== test session starts ===================
 collected4 items
 
-test_add_variety2.py::test_add_c[Task(sleep,None,True)]PASSED[ 25%]
-test_add_variety2.py::test_add_c[Task(wake,brian,False)]PASSED[ 50%]
-test_add_variety2.py::test_add_c[Task(breathe,BRIAN,True)]PASSED[ 75%]
-test_add_variety2.py::test_add_c[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety2.py::test_add_c[Task(sleep,None,True)] PASSED[ 25%]
+test_add_variety2.py::test_add_c[Task(wake,brian,False)] PASSED[ 50%]
+test_add_variety2.py::test_add_c[Task(breathe,BRIAN,True)] PASSED[ 75%]
+test_add_variety2.py::test_add_c[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================4 passed in 0.05 seconds=================
 
@@ -4828,19 +4833,19 @@ $ pytest -v --tb=no **
 =================== test session starts ===================
 collected96 items
 
-tests/func/test_add.py::test_add_returns_valid_id[tiny]PASSED[ 1%]
-tests/func/test_add.py::test_added_task_has_id_set[tiny]PASSED[ 2%]
-tests/func/test_add.py::test_add_increases_count[tiny]PASSED[ 3%]
-tests/func/test_add_variety.py::test_add_1[tiny]PASSED[ 4%]
-tests/func/test_add_variety.py::test_add_2[tiny-task0]PASSED[ 5%]
-tests/func/test_add_variety.py::test_add_2[tiny-task1]PASSED[ 6%]
+tests/func/test_add.py::test_add_returns_valid_id[tiny] PASSED[ 1%]
+tests/func/test_add.py::test_added_task_has_id_set[tiny] PASSED[ 2%]
+tests/func/test_add.py::test_add_increases_count[tiny] PASSED[ 3%]
+tests/func/test_add_variety.py::test_add_1[tiny] PASSED[ 4%]
+tests/func/test_add_variety.py::test_add_2[tiny-task0] PASSED[ 5%]
+tests/func/test_add_variety.py::test_add_2[tiny-task1] PASSED[ 6%]
 **...**
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 43%]
-tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED[ 44%]
-tests/func/test_add.py::test_add_increases_count[mongo]PASSED[ 45%]
-tests/func/test_add_variety.py::test_add_1[mongo] FAILED[ 46%]
-tests/func/test_add_variety.py::test_add_2[mongo-task0] FAILED[ 47%]
-tests/func/test_add_variety.py::test_add_2[mongo-task1] FAILED[ 48%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [43%]
+tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED [44%]
+tests/func/test_add.py::test_add_increases_count[mongo] PASSED[ 45%]
+tests/func/test_add_variety.py::test_add_1[mongo] FAILED [46%]
+tests/func/test_add_variety.py::test_add_2[mongo-task0] FAILED [47%]
+tests/func/test_add_variety.py::test_add_2[mongo-task1] FAILED [48%]
 **...**
 ==========42 failed, 54 passed in 4.85 seconds===========
 
@@ -4859,9 +4864,9 @@ return some data. Perhaps a list, or a dictionary, or a tuple.
 
 3. For each fixture, write at least one test function that uses it.
 4. Write two tests that use the same fixture.
-5. Run pytest --setup-showtest_fixtures.py. Are all the fixtures run before every test?
+5. Run pytest --setup-show test_fixtures.py. Are all the fixtures run before every test?
 6. Add scope='module' to the fixture from Exercise 4.
-7. Re-run pytest --setup-showtest_fixtures.py. What changed?
+7. Re-run pytest --setup-show test_fixtures.py. What changed?
 8. For the fixture from Exercise 6, change return <data> to yield <data>.
 
 Exercises • 71
@@ -5273,7 +5278,7 @@ def test_pytestconfig (pytestconfig):
 **print ( _'inifile :'_ , pytestconfig.inifile)
 **print ( _'invocation_dir :'_ , pytestconfig.invocation_dir)
 **print ( _'rootdir :'_ , pytestconfig.rootdir)
-**print ( _'-k EXPRESSION :'_ , pytestconfig.getoption( _'keyword'_ ))
+**print ( _' -k EXPRESSION :'_ , pytestconfig.getoption( _'keyword'_ ))
 **print ( _'-v,--verbose :'_ , pytestconfig.getoption( _'verbose'_ ))
 **print ( _'-q,--quiet :'_ , pytestconfig.getoption( _'quiet'_ ))
 **print ( _'-l,--showlocals:'_ , pytestconfig.getoption( _'showlocals'_ ))
@@ -6137,7 +6142,7 @@ $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 collected3 items
 
 unnecessary_math.py::unnecessary_math PASSED            [ 33%]
-unnecessary_math.py::unnecessary_math.divide FAILED[ 66%]
+unnecessary_math.py::unnecessary_math.divide FAILED [66%]
 unnecessary_math.py::unnecessary_math.multiply FAILED[100%]
 
 ========================FAILURES=========================
@@ -6643,7 +6648,7 @@ And now let’s focus on the new tests with -k TestAdd, which works because
 there aren’t any other tests with names that contain “TestAdd.”
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
-$ pytest -v --tb=no test_api_exceptions.py-k TestAdd**
+$ pytest -v --tb=no test_api_exceptions.py -k TestAdd**
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -6691,7 +6696,7 @@ And now we have just the output we were looking for. A test session with no
 --verbose flag shows an O for failures, er, improvement opportunities:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
-$ pytest --tb=no test_api_exceptions.py-k TestAdd**
+$ pytest --tb=no test_api_exceptions.py -k TestAdd**
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6709,7 +6714,7 @@ Writing Your Own Plugins • 103
 
 And the -v or --verbose flag will be nicer also:
 
-$ pytest -v --tb=no test_api_exceptions.py-k TestAdd**
+$ pytest -v --tb=no test_api_exceptions.py -k TestAdd**
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6754,7 +6759,7 @@ We can manually test our plugin just by running it against our example file.
 First, with no --nice option, to make sure just the username shows up:
 
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
-$ pytest --tb=no test_api_exceptions.py-k TestAdd**
+$ pytest --tb=no test_api_exceptions.py -k TestAdd**
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected9 items/ 7 deselected
@@ -6770,7 +6775,7 @@ Lab 5. Plugins • 104
 
 Now with --nice:
 
-$ pytest --nice--tb=no test_api_exceptions.py-k TestAdd**
+$ pytest --nice--tb=no test_api_exceptions.py -k TestAdd**
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -6782,7 +6787,7 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
-$ pytest -v --nice--tb=no test_api_exceptions.py-k TestAdd**
+$ pytest -v --nice--tb=no test_api_exceptions.py -k TestAdd**
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
@@ -7289,10 +7294,10 @@ out the thorough instruction found in the Python Packaging User Guide.
 
 When you are contributing a pytest plugin, another great place to start is by
 
-using the cookiecutter -pytest-plugin :
+using the cookiecutter-pytest-plugin :
 
 $ pip install cookiecutter 
-$ cookiecutter https://github.com/pytest-dev/cookiecutter -pytest-plugin**
+$ cookiecutter https://github.com/pytest-dev/cookiecutter-pytest-plugin**
 
 This project first asks you some questions about your plugin. Then it creates
 
@@ -7335,7 +7340,7 @@ run through the different configuration files and learn what you can do there
 to make your testing life easier.
 
 6. https://packaging.python.org/distributing
-7. https://github.com/pytest-dev/cookiecutter -pytest-plugin
+7. https://github.com/pytest-dev/cookiecutter-pytest-plugin
 8. https://pypi.python.org/pypi
 
 Lab 5. Plugins • 114
@@ -7874,7 +7879,7 @@ collected1 item
 a/test_foo.py. [100%]
 
 ================1 passed in 0.01 seconds=================
-$ pytestb**
+$ pytest b**
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected1 item
@@ -8057,9 +8062,9 @@ plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
-tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED[ 4%]
-tests/func/test_add_variety.py::test_add_1[mongo] FAILED[ 7%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
+tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED [4%]
+tests/func/test_add_variety.py::test_add_1[mongo] FAILED [7%]
 
 =========3 failed, 54 deselectedin 3.12 seconds=========
 
@@ -8075,7 +8080,7 @@ plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
 
 ========================FAILURES=========================
 ____________test_add_returns_valid_id[mongo]_____________
@@ -8123,13 +8128,13 @@ wasn’t obvious why this test failed. We can have pytest start a debugging
 
 session and start us right at the point of failure with --pdb:
 
-$ pytest -v --lf-x --pdb**
+$ pytest -v --lf -x --pdb**
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
 **>>>>>>>>>>>>>>>>>>>>>>>>traceback>>>>>>>>>>>>>>>>>>>>>>>>**
 
 tasks_db= None
@@ -9309,7 +9314,7 @@ and passed.
 
 Let’s use --setup-show to investigate further:
 
-$ pytest -q --tb=no --setup-showtest_delete_pytest.pytest_delete_unittest.py
+$ pytest -q --tb=no --setup-show test_delete_pytest.pytest_delete_unittest.py
 
 
 SETUP S tmpdir_factory
@@ -9865,18 +9870,18 @@ $ pytest --count=2-v -k test_list**
 plugins:repeat-0.7.0,mock-1.10.0
 collected124 items/ 112 deselected
 
-func/test_api_exceptions.py::test_list_raises[1/2]PASSED[ 8%]
-func/test_api_exceptions.py::test_list_raises[2/2]PASSED[ 16%]
+func/test_api_exceptions.py::test_list_raises[1/2] PASSED[ 8%]
+func/test_api_exceptions.py::test_list_raises[2/2] PASSED[ 16%]
 unit/test_cli.py::test_list_no_args[1/2] PASSED            [ 25%]
 unit/test_cli.py::test_list_no_args[2/2] PASSED            [ 33%]
 unit/test_cli.py::test_list_print_empty[1/2] PASSED            [ 41%]
 unit/test_cli.py::test_list_print_empty[2/2] PASSED            [ 50%]
-unit/test_cli.py::test_list_print_many_items[1/2]PASSED[ 58%]
-unit/test_cli.py::test_list_print_many_items[2/2]PASSED[ 66%]
+unit/test_cli.py::test_list_print_many_items[1/2] PASSED[ 58%]
+unit/test_cli.py::test_list_print_many_items[2/2] PASSED[ 66%]
 unit/test_cli.py::test_list_dash_o[1/2] PASSED            [ 75%]
 unit/test_cli.py::test_list_dash_o[2/2] PASSED            [ 83%]
-unit/test_cli.py::test_list_dash_dash_owner[1/2]PASSED[ 91%]
-unit/test_cli.py::test_list_dash_dash_owner[2/2]PASSED[100%]
+unit/test_cli.py::test_list_dash_dash_owner[1/2] PASSED[ 91%]
+unit/test_cli.py::test_list_dash_dash_owner[2/2] PASSED[100%]
 
 ==========12 passed,112 deselectedin 0.16 seconds==========
 
@@ -11126,7 +11131,7 @@ with Jenkins, 145 – 149
 Python advantages, xi
 specifying test directories,
 121
-cookiecutter -pytest-plugin, 114
+cookiecutter-pytest-plugin, 114
 --count option, 164
 --cov-report option, 132
 --cov=src option, 132
@@ -11392,7 +11397,7 @@ for test data, 55 – 57
 testdir, 109– 112
 testing plugins, 109 – 112
 tracing execution with
---setup-show, 54, 60, 71,
+--setup-show , 54, 60, 71,
 187
 xUnit, 183 – 187
 --fixtures option, 65
@@ -11523,7 +11528,7 @@ Jenkins CI, 145 – 149 , 154
 ```
 ```
 K
--k option, 10 – 11, 41
+ -k option, 10 – 11, 41
 key names, 83
 ```
 ```
@@ -12466,7 +12471,7 @@ Use coupon code
 # The Pragmatic Bookshelf
 
 The Pragmatic Bookshelf features books written by professional developers for professional
-developers. The titles continue the well-known Pragmatic Programmer style and continue
+developers. The titles continue the well -known Pragmatic Programmer style and continue
 to garner awards and rave reviews. As development gets more and more difficult, the Prag-
 matic Programmers will be there with more titles and products to help you stay on top of
 your game.

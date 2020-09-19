@@ -498,15 +498,13 @@ pytest --html=report.html
 
 This will generate a `report.html` file at the end of the test
 session.
-
 Because pictures speak louder than words, here is an example:
 
 
-![](3_files/e79f3c6e-41c4-4d27-bc8c-ec1c455b913d.png)
+![](./images/e79f3c6e-41c4-4d27-bc8c-ec1c455b913d.png)
 
 
  
-
 The reports can be served in a web server for easier viewing, plus they
 contain nice functionality such as checkboxes to show/hide different
 types of test results, and other
@@ -514,10 +512,9 @@ plugins such as `pytest-selenium`
 are even able to attach screenshots to failed tests, as in the previous
 image.
 
-It\'s definitely worth checking out.
+It's definitely worth checking out.
 
 ### pytest-cpp
-
 
 
 To prove the point that pytest\'s

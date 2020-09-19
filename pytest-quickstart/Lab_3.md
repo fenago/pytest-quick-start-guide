@@ -1270,7 +1270,7 @@ tests/test_formula.py::test_formula_simple[sub]
 
 
 This is also useful because it makes selecting tests significantly
-easier when using the `-k `flag:
+easier when using the `-k` flag:
 
 
 ``` {.programlisting .language-markup}

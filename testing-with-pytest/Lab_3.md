@@ -189,7 +189,7 @@ are run:
 $ cd /home/jovyan/work/testing-with-pytest/code/
 $ pip install ./tasks_proj/ # if not installed yet
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
-$ pytest -v test_add.py-k valid_id
+$ pytest -v test_add.py -k valid_id
 
 =================== test session starts ===================
 collected3 items/ 2 deselected
@@ -200,11 +200,11 @@ test_add.py::test_add_returns_valid_id PASSED            [100%]
 ```
 
 When I’m developing fixtures, I like to see what’s running and when. Fortu-
-nately, pytest provides a command-line flag, --setup-show, that does just that:
+nately, pytest provides a command-line flag, --setup-show , that does just that:
 
 
 ```
-$ pytest --setup-showtest_add.py-k valid_id
+$ pytest --setup-show test_add.py -k valid_id
 
 =================== test session starts ===================
 collected3 items/ 2 deselected
@@ -410,7 +410,7 @@ Let’s trace it and see all the fixtures run:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
-$ pytest --setup-showtest_add.py::test_add_increases_count
+$ pytest --setup-show test_add.py::test_add_increases_count
 
 =================== test session starts ===================
 collected1 item
@@ -529,7 +529,7 @@ and when the setup and teardown are run depend on the scope:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3
-$ pytest --setup-showtest_scope.py
+$ pytest --setup-show test_scope.py
 
 =================== test session starts ===================
 collected4 items
@@ -673,7 +673,7 @@ Looks like it’s all good. Let’s trace the fixtures for one test file to see 
 different scoping worked as expected:
 
 ```
-$ pytest --setup-showtests/func/test_add.py
+$ pytest --setup-show tests/func/test_add.py
 
 =================== test session starts ===================
 collected3 items
@@ -841,10 +841,10 @@ def test_everything(lue):
 ```
 
 Here, lue is now the fixture name, instead of ultimate_answer_to_life_the_uni-
-verse_and_everything. That name even shows up if we run it with --setup-show:
+verse_and_everything. That name even shows up if we run it with --setup-show :
 
 ```
-$ pytest --setup-showtest_rename_fixture.py
+$ pytest --setup-show test_rename_fixture.py
 
 =================== test session starts ===================
 collected1 item
@@ -927,7 +927,6 @@ an equivalence function, just as before:
 ch3/b/tasks_proj/tests/func/test_add_variety2.py
 
 
-```
 import pytest
 import tasks
 from tasks import Task
@@ -976,6 +975,7 @@ The a_task fixture is pretty simple—it just returns the request.param as its v
 to the test using it. Since our task list has four tasks, the fixture will be called
 four times, and then the test will get called four times:
 
+
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
 $ pytest -v test_add_variety2.py::test_add_a
@@ -1017,10 +1017,10 @@ $ pytest -v test_add_variety2.py::test_add_b**
 =================== test session starts ===================
 collected4 items
 
-test_add_variety2.py::test_add_b[Task(sleep,None,True)]PASSED[ 25%]
-test_add_variety2.py::test_add_b[Task(wake,brian,False)]PASSED[ 50%]
-test_add_variety2.py::test_add_b[Task(breathe,BRIAN,True)]PASSED[ 75%]
-test_add_variety2.py::test_add_b[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety2.py::test_add_b[Task(sleep,None,True)] PASSED[ 25%]
+test_add_variety2.py::test_add_b[Task(wake,brian,False)] PASSED[ 50%]
+test_add_variety2.py::test_add_b[Task(breathe,BRIAN,True)] PASSED[ 75%]
+test_add_variety2.py::test_add_b[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================4 passed in 0.04 seconds=================
 ```
@@ -1064,10 +1064,10 @@ $ pytest -v test_add_variety2.py::test_add_c
 =================== test session starts ===================
 collected4 items
 
-test_add_variety2.py::test_add_c[Task(sleep,None,True)]PASSED[ 25%]
-test_add_variety2.py::test_add_c[Task(wake,brian,False)]PASSED[ 50%]
-test_add_variety2.py::test_add_c[Task(breathe,BRIAN,True)]PASSED[ 75%]
-test_add_variety2.py::test_add_c[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety2.py::test_add_c[Task(sleep,None,True)] PASSED[ 25%]
+test_add_variety2.py::test_add_c[Task(wake,brian,False)] PASSED[ 50%]
+test_add_variety2.py::test_add_c[Task(breathe,BRIAN,True)] PASSED[ 75%]
+test_add_variety2.py::test_add_c[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================4 passed in 0.05 seconds=================
 ```
@@ -1116,20 +1116,22 @@ switching which subsystem gets to be responsible for the rest of the database
 interactions:
 
 ```
-**tasks_proj/src/tasks/api.py
-def start_tasks_db (db_path,db_type): _# type:(str,str)-> None
-"""ConnectAPI functionsto a db."""
-**if not** isinstance(db_path,string_types):
-**raise** TypeError( _'db_pathmustbe a string'_ )
-**global** _tasksdb
-**if** db_type== _'tiny'_ :
-import tasks.tasksdb_tinydb**
-_tasksdb= tasks.tasksdb_tinydb.start_tasks_db(db_path)
-**elif** db_type== _'mongo'_ :
-import tasks.tasksdb_pymongo**
-_tasksdb= tasks.tasksdb_pymongo.start_tasks_db(db_path)
-**else** :
-**raise** ValueError( "db_typemustbe a 'tiny'or 'mongo'" )
+tasks_proj/src/tasks/api.py
+
+def start_tasks_db(db_path, db_type):  # type: (str, str) -> None
+    """Connect API functions to a db."""
+    if not isinstance(db_path, string_types):
+        raise TypeError('db_path must be a string')
+    global _tasksdb
+    if db_type == 'tiny':
+        import tasks.tasksdb_tinydb
+        _tasksdb = tasks.tasksdb_tinydb.start_tasks_db(db_path)
+    elif db_type == 'mongo':
+        import tasks.tasksdb_pymongo
+        _tasksdb = tasks.tasksdb_pymongo.start_tasks_db(db_path)
+    else:
+        raise ValueError("db_type must be a 'tiny' or 'mongo'")
+
 ```
 
 To test MongoDB, we need to run all the tests with db_type set to mongo. A small
@@ -1187,25 +1189,25 @@ $ pip install pymongo
 $ pytest -v --tb=no 
 
 =================== test session starts ===================
-collected96 items
+collected 96 items
 
-tests/func/test_add.py::test_add_returns_valid_id[tiny]PASSED[ 1%]
-tests/func/test_add.py::test_added_task_has_id_set[tiny]PASSED[ 2%]
-tests/func/test_add.py::test_add_increases_count[tiny]PASSED[ 3%]
-tests/func/test_add_variety.py::test_add_1[tiny]PASSED[ 4%]
-tests/func/test_add_variety.py::test_add_2[tiny-task0]PASSED[ 5%]
-tests/func/test_add_variety.py::test_add_2[tiny-task1]PASSED[ 6%]
+tests/func/test_add.py::test_add_returns_valid_id[tiny] PASSED[ 1%]
+tests/func/test_add.py::test_added_task_has_id_set[tiny] PASSED[ 2%]
+tests/func/test_add.py::test_add_increases_count[tiny] PASSED[ 3%]
+tests/func/test_add_variety.py::test_add_1[tiny] PASSED[ 4%]
+tests/func/test_add_variety.py::test_add_2[tiny-task0] PASSED[ 5%]
+tests/func/test_add_variety.py::test_add_2[tiny-task1] PASSED[ 6%]
 ...
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 43%]
-tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED[ 44%]
-tests/func/test_add.py::test_add_increases_count[mongo]PASSED[ 45%]
-tests/func/test_add_variety.py::test_add_1[mongo] FAILED[ 46%]
-tests/func/test_add_variety.py::test_add_2[mongo-task0] FAILED[ 47%]
-tests/func/test_add_variety.py::test_add_2[mongo-task1] FAILED[ 48%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [43%]
+tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED [44%]
+tests/func/test_add.py::test_add_increases_count[mongo] PASSED[ 45%]
+tests/func/test_add_variety.py::test_add_1[mongo] FAILED [46%]
+tests/func/test_add_variety.py::test_add_2[mongo-task0] FAILED [47%]
+tests/func/test_add_variety.py::test_add_2[mongo-task1] FAILED [48%]
 ...
 
-==========42 failed, 54 passed in 4.85 seconds===========
+========== 42 failed, 54 passed in 4.85 seconds ===========
 ```
 
 Hmm. Bummer. Looks like we’ll need to do some debugging before we let
@@ -1219,9 +1221,9 @@ Debugging Test Failures Until then, we’ll use the TinyDB version.
 return some data. Perhaps a list, or a dictionary, or a tuple.
 3. For each fixture, write at least one test function that uses it.
 4. Write two tests that use the same fixture.
-5. Run pytest --setup-showtest_fixtures.py. Are all the fixtures run before every test?
+5. Run pytest --setup-show test_fixtures.py. Are all the fixtures run before every test?
 6. Add scope='module' to the fixture from Exercise 4.
-7. Re-run pytest --setup-showtest_fixtures.py. What changed?
+7. Re-run pytest --setup-show test_fixtures.py. What changed?
 8. For the fixture from Exercise 6, change return <data> to yield <data>.
 9. Add print statements before and after the yield.
 10. Run pytest-s -v test_fixtures.py. Does the output make sense?

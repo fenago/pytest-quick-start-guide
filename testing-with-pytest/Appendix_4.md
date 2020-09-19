@@ -59,6 +59,8 @@ lable via pip:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
 $ pip install ./some_module_proj
+
+
 Processing ./some_module_proj
 Installing collected packages: some-module
 Running setup.py install for some-module ... done
@@ -150,6 +152,8 @@ This is now installable:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
 $ pip install ./some_package_proj/
+
+
 Processing ./some_package_proj
 Installing collected packages: some-package
 Running setup.py install for some-package ... done

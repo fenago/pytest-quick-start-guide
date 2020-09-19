@@ -51,33 +51,42 @@ first looked at in Using Options
 - _--pdb_ : Starts an interactive debugging session at the point of failure.
 ```
 
-```
-Installing MongoDB
+
+
+**Installing MongoDB**
+
 As mentioned in Lab 3, pytest Fixtures, running
 the MongoDB tests requires installing MongoDB and pymongo.
 I’ve been testing with the Community Server edition found at
 https://www.mongodb.com/download-center. pymongo is installed with pip:
-pipinstallpymongo. However, this is the last example in the book that
+
+
+```
+pip install pymongo
+```
+
+However, this is the last example in the book that
 uses MongoDB. To try out the debugger without using MongoDB,
 you could run the pytest commands from code/ch2/, as this directory
 also contains a few failing tests.
-```
+
+
 We just ran the tests from code/ch3/c to see that some of them were failing. We
 didn’t see the tracebacks or the test names because --tb=no turns off trace-
 backs, and we didn’t have --verbose turned on. Let’s re-run the failures (at most
 three of them) with verbose:
 
 ```
-$ pytest --tb=no --verbose--lf--maxfail=3
+$ pytest --tb=no --verbose --lf --maxfail=3
 
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
-tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED[ 4%]
-tests/func/test_add_variety.py::test_add_1[mongo] FAILED[ 7%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
+tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED [4%]
+tests/func/test_add_variety.py::test_add_1[mongo] FAILED [7%]
 
 =========3 failed, 54 deselectedin 3.12 seconds=========
 ```
@@ -95,7 +104,7 @@ plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
 
 ========================FAILURES=========================
 ____________test_add_returns_valid_id[mongo]_____________
@@ -137,14 +146,14 @@ wasn’t obvious why this test failed. We can have pytest start a debugging
 session and start us right at the point of failure with --pdb:
 
 ```
-$ pytest -v --lf-x --pdb
+$ pytest -v --lf -x --pdb
 
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED[ 2%]
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
 **>>>>>>>>>>>>>>>>>>>>>>>>traceback>>>>>>>>>>>>>>>>>>>>>>>>**
 
 tasks_db= None
@@ -243,33 +252,37 @@ pytest-cov, it is sufficient to install pytest-cov, as it will pull in coverage.
 
 ```
 $ pip install pytest-cov
+
+
 ...
-Installingcollectedpackages:coverage,pytest-cov
-Successfullyinstalledcoverage-4.5.1 pytest-cov-2.5.1
+Installing collected packages: coverage, pytest-cov
+Successfully installed coverage-4.5.1 pytest-cov-2.5.1
 ```
 
 Let’s run the coverage report on version 2 of Tasks. If you still have the first
 version of the Tasks project installed, uninstall it and install version 2:
 
 ```
-$ pip uninstalltasks
-Uninstallingtasks-0.1.0:
-...
+$ pip uninstall tasks
 
-Proceed(y/n)?y
-Successfullyuninstalledtasks-0.1.0
+
+Uninstalling tasks-0.1.0:
+...
+Proceed (y/n)? y
+Successfully uninstalled tasks-0.1.0
+
+
+
 $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
-$ pip install -e.
-Obtainingfile:///home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
+$ pip install -e .
+
+
+$ pip list
+
+...
+tasks 0.1.1 /path/to/code/tasks_proj_v2/src
 ...
 
-Installingcollectedpackages:tasks
-Runningsetup.pydevelopfor tasks
-Successfullyinstalledtasks
-$ pip list
-...
-tasks 0.1.1 /home/jovyan/work/testing-with-pytest/code/tasks_proj_v2/src
-...
 ```
 
 
@@ -280,6 +293,7 @@ erage report:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 $ pytest --cov=src
+
 
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
@@ -329,12 +343,10 @@ If you run coverage.py again with --cov-report=html, an HTML report is generated
 ```
 $ pytest --cov=src--cov-report=html
 
+
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
-```
 
-
-```
 collected62 items
 
 tests/func/test_add.py... [ 4%]
@@ -933,112 +945,6 @@ tox is much more powerful than what I’m showing here and deserves your
 attention if you are using pytest to test packages intended to be run in multiple
 environments. For more detailed information, check out the tox documentation.
 
-### Jenkins CI: Automating Your Automated Tests
-
-Jenkins is an open source automation server that is frequently used for
-continuous integration. Continuous integration (CI) systems such as Jenkins
-are frequently used to launch test suites after each code commit. pytest
-includes options to generate junit.xml-formatted files required by Jenkins and
-other CI systems to display test results.
-
-In this section, you’ll take a look at how the Tasks project might be set up in
-Jenkins. I’m not going to walk through the Jenkins installation. It’s different
-for every operating system, and instructions are available on the Jenkins
-website.
-
-When using Jenkins for running pytest suites, there are a few Jenkins plugins
-that you may find useful. Here’s one that I find especially useful, and will be
-used in the example:
-
-- _Test Results Analyzer plugin_ : This plugin shows the history of test execu-
-    tion results in a tabular or graphical format.
-
-You can install plugins by going to the top-level Jenkins page, which is local-
-host:8080/manage for me as I’m running it locally, then clicking Manage Jenkins
--> Manage Plugins -> Available. Search for the plugin you want with the filter
-
-8. https://tox.readthedocs.io
-9. https://jenkins.io
-
-
-
-box. Check the box for the plugin you want. I usually select “Install without
-Restart,” and then on the Installing Plugins/Upgrades page, I select the box
-that says, “Restart Jenkins when installation is complete and no jobs are
-running.”
-
-We’ll look at a complete configuration in case you’d like to follow along for
-the Tasks project. The Jenkins project/item is a “Freestyle Project” named
-“tasks,” and the only configuration I’ve changed from the default settings are
-one build step and one post-build action.
-
-After creating the Jenkins project, scroll down to the build steps. On a Mac
-or Unix-like systems, select Add build step->Execute shell. On Windows, select Add
-buildstep->ExecuteWindowsbatchcommand. Since I’m on a Mac, I used an Executeshell
-block, as shown here:
-
-![](./images/146-36.png)
-
-The content of the text box is:
-
-```
-_# yourpathswillbe different_
-venv=/Users/okken/code/venv
-code_path=/Users/okken/code/ch7/tasks_proj_v2
-
-_# run pytestin projectusingvirtualenvironmentinstalledpytest_
-cd ${code_path}
-${venv}/bin/pytest --junitxml=${WORKSPACE}/results.xml
-```
-
-The bottom line has ${venv}/bin/pytest --junit-xml=${WORKSPACE}/results.xml. The --junit-
-xml flag is the only thing needed to produce the junit.xml format results file
-Jenkins needs.
-
-Next, we’ll add a post-build action: Add post-buildaction->PublishJunit test result report.
-Fill in the Test report XMLs with results.xml, as shown in the next screen.
-
-
-![](./images/147-37.png)
-
-That’s it! Now we can run tests through Jenkins. Here are the steps:
-
-1. Click Save.
-2. Click “Build Now”
-3. When it’s done, hover over the number next to the ball in Build History
-and select Console Output jrom the drop-down menu that appears. (Or
-click the build number and select Console Output.)
-4. If the build failed,  try to figure out what went wrong from the console
-output.
-
-Before running the tests a second time, I’ve added a failure to one of the tests.
-After a refresh of the top project view, we see the following overview:
-
-![](./images/148-38.png)
-
-You can zoom in to the failure information by clicking inside the graph or on
-the “Latest Test Result” link to see an overview of the test session. Click on
-“+” icons to expand for test failures.
-
-Clicking on any of the failing test names shows you the individual test failure
-information.
-
-Going back to Jenkins > tasks, you can click on Test Results Analyzer to see
-a table view of test results:
-
-![](./images/148-39.png)
-
-You’ve seen how to run pytest suites with virtual environments from Jenkins,
-but there are quite a few other topics to explore around using pytest and
-Jenkins together. You can test multiple environments with Jenkins by either
-
-
-
-
-setting up separate Jenkins jobs for each environment, or by having Jenkins
-call tox directly. There’s also a nice plugin called Cobertura that is able to
-display coverage data from coverage.py. Check out the Jenkins documentation0
-for more information.
 
 ### unittest: Running Legacy Tests with pytest
 
@@ -1089,11 +995,6 @@ class TestNonEmpty(unittest.TestCase):
 ```
 
 
-10.https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin
-
-unittest: Running Legacy Tests with pytest • 149
-
-
 ```
 self.ids.append(tasks.add(Task( 'Two' , 'StillBrian' , False)))
 self.ids.append(tasks.add(Task( 'Three' , 'NotBrian' , False)))
@@ -1112,6 +1013,8 @@ is there for setup and teardown. This test runs fine in unittest:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch7/unittest
 $ python -m unittest -v test_delete_unittest.py
+
+
 test_delete_decreases_count(test_delete_unittest.TestNonEmpty)... ok
 
 ----------------------------------------------------------------------
@@ -1226,7 +1129,7 @@ and passed.
 Let’s use --setup-show to investigate further:
 
 ```
-$ pytest -q --tb=no --setup-showtest_delete_pytest.pytest_delete_unittest.py
+$ pytest -q --tb=no --setup-show test_delete_pytest.pytest_delete_unittest.py
 
 SETUP S tmpdir_factory
 SETUP S tasks_db_session(fixturesused:tmpdir_factory)

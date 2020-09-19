@@ -165,7 +165,6 @@ $ pip install git+https://github.com/pytest-dev/pytest-cov@master
 
 Installing from a Git repository is especially useful if you’re storing your own
 work within Git, or if the plugin or plugin version you want isn’t on PyPI.
-Installing Plugins • 99
 
 
 ### Writing Your Own Plugins
@@ -278,7 +277,7 @@ there aren’t any other tests with names that contain “TestAdd.”
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
-$ pytest -v --tb=no test_api_exceptions.py-k TestAdd
+$ pytest -v --tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 plugins:cov-2.5.1
@@ -327,7 +326,7 @@ And now we have just the output we were looking for. A test session with no
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
-$ pytest --tb=no test_api_exceptions.py-k TestAdd
+$ pytest --tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 Thanksfor runningthe tests.
@@ -347,7 +346,7 @@ test_api_exceptions.py.O
 And the -v or --verbose flag will be nicer also:
 
 ```
-$ pytest -v --tb=no test_api_exceptions.py-k TestAdd
+$ pytest -v --tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 Thanksfor runningthe tests.
@@ -396,7 +395,7 @@ First, with no --nice option, to make sure just the username shows up:
 
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
-$ pytest --tb=no test_api_exceptions.py-k TestAdd
+$ pytest --tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 plugins:cov-2.5.1
@@ -414,7 +413,7 @@ test_api_exceptions.py.F [100%]
 
 Now with --nice:
 
-$ pytest --nice--tb=no test_api_exceptions.py-k TestAdd
+$ pytest --nice--tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 Thanksfor runningthe tests.
@@ -427,7 +426,7 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
-$ pytest -v --nice--tb=no test_api_exceptions.py-k TestAdd
+$ pytest -v --nice--tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 Thanksfor runningthe tests.
@@ -782,6 +781,8 @@ rent directory in editable mode:
 ```
 $ cd /home/jovyan/work/testing-with-pytest/code/ch5/pytest -nice/
 $ pip install .
+
+
 Processing/home/jovyan/work/testing-with-pytest/code/ch5/pytest -nice
 ...
 
@@ -907,12 +908,12 @@ this course isn’t focused on contributing to open source, I recommend checking
 out the thorough instruction found in the Python Packaging User Guide.
 
 When you are contributing a pytest plugin, another great place to start is by
-using the cookiecutter -pytest-plugin :
+using the cookiecutter-pytest-plugin :
 
 ```
 $ pip install cookiecutter 
 
-$ cookiecutter https://github.com/pytest-dev/cookiecutter -pytest-plugin
+$ cookiecutter https://github.com/pytest-dev/cookiecutter-pytest-plugin
 ```
 
 This project first asks you some questions about your plugin. Then it creates
@@ -943,6 +944,6 @@ run through the different configuration files and learn what you can do there
 to make your testing life easier.
 
 6. https://packaging.python.org/distributing
-7. https://github.com/pytest-dev/cookiecutter -pytest-plugin
+7. https://github.com/pytest-dev/cookiecutter-pytest-plugin
 8. https://pypi.python.org/pypi
 

@@ -203,8 +203,7 @@ $ pip install ./tasks_proj/
 
 Processing ./tasks_proj
 Collecting click (from tasks==0.1.0)
-Chapter 2. Writing Test Functions • 26
-report erratum • discussDownloading ... click-6.7-py2.py3-none-any.whl
+Downloading ... click-6.7-py2.py3-none-any.whl
 Collecting tinydb (from tasks==0.1.0)
 Downloading ... tinydb-3.11.0-py2.py3-none-any.whl
 Requirement already satisfied: six in
@@ -965,7 +964,7 @@ tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 72%]
 tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 74%]
 ...
 
-tests/func/test_unique_id_1.py::test_unique_id FAILED[ 84%]
+tests/func/test_unique_id_1.py::test_unique_id FAILED [84%]
 tests/func/test_unique_id_2.py::test_unique_id_1SKIPPED[ 86%]
 tests/func/test_unique_id_2.py::test_unique_id_2PASSED[ 88%]
 ...
@@ -1259,10 +1258,10 @@ $ pytest -v test_add_variety.py::test_add_3
 =================== test session starts ===================
 collected4 items
 
-test_add_variety.py::test_add_3[sleep-None-False]PASSED[ 25%]
-test_add_variety.py::test_add_3[wake-brian-False]PASSED[ 50%]
-test_add_variety.py::test_add_3[breathe-BRIAN-True]PASSED[ 75%]
-test_add_variety.py::test_add_3[eateggs-BrIaN-False]PASSED[100%]
+test_add_variety.py::test_add_3[sleep-None-False] PASSED[ 25%]
+test_add_variety.py::test_add_3[wake-brian-False] PASSED[ 50%]
+test_add_variety.py::test_add_3[breathe-BRIAN-True] PASSED[ 75%]
+test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
 ================4 passed in 0.05 seconds=================
 ```
@@ -1277,7 +1276,7 @@ $ pytest -v test_add_variety.py::test_add_3[sleep-None-False]
 =================== test session starts ===================
 collected1 item
 
-test_add_variety.py::test_add_3[sleep-None-False]PASSED[100%]
+test_add_variety.py::test_add_3[sleep-None-False] PASSED[100%]
 
 ================1 passed in 0.03 seconds=================
 ```
@@ -1292,7 +1291,7 @@ $ pytest -v "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
 =================== test session starts ===================
 collected1 item
 
-test_add_variety.py::test_add_3[eateggs-BrIaN-False]PASSED[100%]
+test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
 ================1 passed in 0.03 seconds=================
 ```
@@ -1370,11 +1369,11 @@ $ pytest -v test_add_variety.py::test_add_5
 =================== test session starts ===================
 collected5 items
 
-test_add_variety.py::test_add_5[Task(sleep,None,True)]PASSED[ 20%]
-test_add_variety.py::test_add_5[Task(wake,brian,False)0]PASSED[ 40%]
-test_add_variety.py::test_add_5[Task(wake,brian,False)1]PASSED[ 60%]
-test_add_variety.py::test_add_5[Task(breathe,BRIAN,True)]PASSED[ 80%]
-test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety.py::test_add_5[Task(sleep,None,True)] PASSED[ 20%]
+test_add_variety.py::test_add_5[Task(wake,brian,False)0] PASSED[ 40%]
+test_add_variety.py::test_add_5[Task(wake,brian,False)1] PASSED[ 60%]
+test_add_variety.py::test_add_5[Task(breathe,BRIAN,True)] PASSED[ 80%]
+test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================5 passed in 0.06 seconds=================
 ```
@@ -1390,7 +1389,7 @@ $ pytest -v "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
 =================== test session starts ===================
 collected1 item
 
-test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]PASSED[100%]
+test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
 ================1 passed in 0.05 seconds=================
 ```
@@ -1429,16 +1428,16 @@ $ pytest -v test_add_variety.py::TestAdd
 =================== test session starts ===================
 collected10 items
 
-test_add_variety.py::TestAdd::test_equivalent[Task(sleep,None,True)]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)0]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)1]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(breathe,BRIAN,True)]PASSED
-test_add_variety.py::TestAdd::test_equivalent[Task(exercise,BrIaN,False)]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(sleep,None,True)]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)0]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)1]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(breathe,BRIAN,True)]PASSED
-test_add_variety.py::TestAdd::test_valid_id[Task(exercise,BrIaN,False)]PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(sleep,None,True)] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)0] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)1] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(breathe,BRIAN,True)] PASSED
+test_add_variety.py::TestAdd::test_equivalent[Task(exercise,BrIaN,False)] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(sleep,None,True)] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)0] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)1] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(breathe,BRIAN,True)] PASSED
+test_add_variety.py::TestAdd::test_valid_id[Task(exercise,BrIaN,False)] PASSED
 
 ================10 passed in 0.10 seconds================
 ```
@@ -1470,9 +1469,9 @@ $ pytest -v test_add_variety.py::test_add_6
 =================== test session starts ===================
 collected3 items
 
-test_add_variety.py::test_add_6[justsummary]PASSED[ 33%]
-test_add_variety.py::test_add_6[summary/owner]PASSED[ 66%]
-test_add_variety.py::test_add_6[summary/owner/done]PASSED[100%]
+test_add_variety.py::test_add_6[justsummary] PASSED[ 33%]
+test_add_variety.py::test_add_6[summary/owner] PASSED[ 66%]
+test_add_variety.py::test_add_6[summary/owner/done] PASSED[100%]
 
 ================3 passed in 0.06 seconds=================
 ```

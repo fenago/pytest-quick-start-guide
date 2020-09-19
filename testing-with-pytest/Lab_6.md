@@ -485,7 +485,7 @@ collected1 item
 a/test_foo.py. [100%]
 
 ================1 passed in 0.01 seconds=================
-$ pytestb
+$ pytest b
 
 =================== test session starts ===================
 plugins:cov-2.5.1
