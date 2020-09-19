@@ -9,7 +9,7 @@ and extensions, and there are hooks available to allow modifications and
 improvements through plugins.
 
 It might surprise you to know that you’ve already written some plugins if
-you’ve worked through the previous labs in this book. Any time you put
+you’ve worked through the previous labs in this course. Any time you put
 fixtures and/or hook functions into a project’s top-level conftest.py file, you
 created a local conftest plugin. It’s just a little bit of extra work to convert
 these conftest.py files into installable plugins that you can share between
@@ -896,7 +896,7 @@ added.
 
 If you want to share your plugin with the world, there are a few more steps
 we need to do. Actually, there are quite a few more steps. However, because
-this book isn’t focused on contributing to open source, I recommend checking
+this course isn’t focused on contributing to open source, I recommend checking
 out the thorough instruction found in the Python Packaging User Guide.^6
 
 When you are contributing a pytest plugin, another great place to start is by
@@ -910,7 +910,7 @@ $ cookiecutterhttps://github.com/pytest-dev/cookiecutter-pytest-plugin
 
 This project first asks you some questions about your plugin. Then it creates
 a good directory for you to explore and fill in with your code. Walking through
-this is beyond the scope of this book; however, please keep this project in
+this is beyond the scope of this course; however, please keep this project in
 mind. It is supported by core pytest folks, and they will make sure this project
 stays up to date.
 
@@ -930,7 +930,7 @@ a pytest plugin that looks interesting to you.
 
 ### What’s Next
 
-You’ve used conftest.py a lot so far in this book. There are also configuration
+You’ve used conftest.py a lot so far in this course. There are also configuration
 files that affect how pytest runs, such as pytest.ini. In the next lab, you’ll
 run through the different configuration files and learn what you can do there
 to make your testing life easier.

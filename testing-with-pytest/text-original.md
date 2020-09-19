@@ -23,7 +23,7 @@ show that software testing with pytest is easy, natural, and even exciting.
 ➤ Dmitry Zinoviev
 Author of _Data Science Essentials in Python_
 
-This book is the missing lab absent from every comprehensive Python book.
+This course is the missing lab absent from every comprehensive Python book.
 
 ➤ Frank Ruiz
 Principal Site Reliability Engineer, Box, Inc.
@@ -54,20 +54,20 @@ Raleigh, North Carolina
 ```
 
 Many of the designations used by manufacturers and sellers to distinguish their products
-are claimed as trademarks. Where those designations appear in this book, and The Pragmatic
+are claimed as trademarks. Where those designations appear in this course, and The Pragmatic
 Programmers, LLC was aware of a trademark claim, the designations have been printed in
 initial capital letters or in all capitals. The Pragmatic Starter Kit, The Pragmatic Programmer,
 Pragmatic Programming, Pragmatic Bookshelf, PragProg and the linking _g_ device are trade-
 marks of The Pragmatic Programmers, LLC.
 
-Every precaution was taken in the preparation of this book. However, the publisher assumes
+Every precaution was taken in the preparation of this course. However, the publisher assumes
 no responsibility for errors or omissions, or for damages that may result from the use of
 information (including program listings) contained herein.
 
 Our Pragmatic books, screencasts, and audio books can help you and your team create
 better software and have more fun. Visit us at _https://pragprog.com_.
 
-The team that produced this book includes:
+The team that produced this course includes:
 
 Publisher: Andy Hunt
 VP of Operations: Janet Furlow
@@ -215,7 +215,7 @@ I have always been a team, and she has been incredibly supportive of my
 
 crazy ideas to write a blog, start a podcast or two, and now, for the last year
 
-or so, write this book. She has made sure I’ve had time and space for writing.
+or so, write this course. She has made sure I’ve had time and space for writing.
 
 When I’m tired and don’t think I have the energy to write, she tells me to just
 
@@ -266,7 +266,7 @@ maintainers of incredible pytest plugins.
 
 I need to call out Luciano for a special thank you. Partway through the writing
 
-of this book, the first four labs were sent to a handful of reviewers.
+of this course, the first four labs were sent to a handful of reviewers.
 
 Luciano was one of them, and his review was the hardest to read. I don’t think
 
@@ -381,11 +381,11 @@ use the same version of pytest on multiple versions of Python.
 
 How would you like to learn pytest by testing silly examples you’d never run
 
-across in real life? Me neither. We’re not going to do that in this book. Instead,
+across in real life? Me neither. We’re not going to do that in this course. Instead,
 
 we’re going to write tests against an example project that I hope has many of
 
-the same traits of applications you’ll be testing after you read this book.
+the same traits of applications you’ll be testing after you read this course.
 
 **The Tasks Project**
 
@@ -476,10 +476,10 @@ Learn pytest While Testing an Example Application • xiii
     Tasks is a functional test.
 - _Subcutaneous test_ : A test that doesn’t run against the final end-user
     interface, but against an interface just below the surface. Since most of
-    the tests in this book test against the API layer—not the CLI—they qualify
+    the tests in this course test against the API layer—not the CLI—they qualify
     as subcutaneous tests.
 
-### How This Book Is Organized
+### How This Course Is Organized
 
 In Lab 1, Getting Started with pytest, you’ll install pytest
 
@@ -622,7 +622,7 @@ What You Need to Know • xv
 _A command line_
 
 ```
-I wrote this book and captured the example output using bash on a Mac
+I wrote this course and captured the example output using bash on a Mac
 laptop. However, the only commands I use in bash are cd to go to a specific
 directory, and pytest, of course. Since cd exists in Windows cmd.exe and all
 unix shells that I know of, all examples should be runnable on whatever
@@ -634,13 +634,13 @@ automated software tests with pytest.
 
 ### Example Code and Online Resources
 
-The examples in this book were written and tested using Python 3 and pytest
+The examples in this course were written and tested using Python 3 and pytest
 
 3. pytest 3 supports Python 2.7, and Python 3.4+.
 
 The source code for the Tasks project, as well as for all of the tests shown in
 
-this book, is available through a link^1 on the book’s web page at pragprog.com.^2
+this course, is available through a link^1 on the book’s web page at pragprog.com.^2
 
 You don’t need to download the source code to understand the test code; the
 
@@ -662,7 +662,7 @@ that discuss the topic.
 
 I’ve been programming for over twenty-five years, and nothing has made me
 
-love writing test code as much as pytest. I hope you learn a lot from this book,
+love writing test code as much as pytest. I hope you learn a lot from this course,
 
 and I hope that you’ll end up loving test code as much as I do.
 
@@ -1195,7 +1195,7 @@ We’ve used the verbose option, -v or --verbose, a couple of times already, but
 
 there are many more options worth knowing about. We’re not going to use
 
-all of the options in this book, but quite a few. You can see all of them with
+all of the options in this course, but quite a few. You can see all of them with
 
 pytest --help.
 
@@ -1891,7 +1891,7 @@ a project. You’ll learn about conftest.py and ini files such as pytest.ini in 
 ```
 Even if you know you don’t need virtual environments for the project
 you’re working on, humor me and learn enough about them to create one
-for trying out things in this book. I resisted using them for a very long
+for trying out things in this course. I resisted using them for a very long
 time, and now I always use them. Read Appendix 1, Virtual Environments,
 on page 157 if you’re having any difficulty.
 ```
@@ -3628,7 +3628,7 @@ community often uses _fixture_ to mean some initial data that gets loaded into
 
 a database at the start of an application.
 
-Regardless of other meanings, in pytest and in this book, test fixtures refer
+Regardless of other meanings, in pytest and in this course, test fixtures refer
 
 to the mechanism pytest provides to allow the separation of “getting ready
 
@@ -6341,7 +6341,7 @@ improvements through plugins.
 
 It might surprise you to know that you’ve already written some plugins if
 
-you’ve worked through the previous labs in this book. Any time you put
+you’ve worked through the previous labs in this course. Any time you put
 
 fixtures and/or hook functions into a project’s top-level conftest.py file, you
 
@@ -7278,7 +7278,7 @@ If you want to share your plugin with the world, there are a few more steps
 
 we need to do. Actually, there are quite a few more steps. However, because
 
-this book isn’t focused on contributing to open source, I recommend checking
+this course isn’t focused on contributing to open source, I recommend checking
 
 out the thorough instruction found in the Python Packaging User Guide.^6
 
@@ -7293,7 +7293,7 @@ This project first asks you some questions about your plugin. Then it creates
 
 a good directory for you to explore and fill in with your code. Walking through
 
-this is beyond the scope of this book; however, please keep this project in
+this is beyond the scope of this course; however, please keep this project in
 
 mind. It is supported by core pytest folks, and they will make sure this project
 
@@ -7321,7 +7321,7 @@ a pytest plugin that looks interesting to you.
 
 ### What’s Next
 
-You’ve used conftest.py a lot so far in this book. There are also configuration
+You’ve used conftest.py a lot so far in this course. There are also configuration
 
 files that affect how pytest runs, such as pytest.ini. In the next lab, you’ll
 
@@ -7340,7 +7340,7 @@ CHAPTER 6
 
 Configuration
 
-So far in this book, I’ve talked about the various non-test files that affect
+So far in this course, I’ve talked about the various non-test files that affect
 
 pytest mostly in passing, with the exception of conftest.py, which I covered quite
 
@@ -9521,7 +9521,7 @@ Also, keep in touch! Check out the book’s webpage^11 and use the discussion
 
 forum^12 and errata^13 pages to help me keep the book lean, relevant, and easy
 
-to follow. This book is intended to be a living document. I want to keep it up
+to follow. This course is intended to be a living document. I want to keep it up
 
 to date and relevant for every wave of new pytest users.
 
@@ -10591,7 +10591,7 @@ package_dir={ _''_ : _'src'_ },
 
 You should put the terms of the licensing in a LICENSE file. All of the code in
 
-this book follows the following license:
+this course follows the following license:
 
 **appendices/packaging/some_package_proj_v2/LICENSE**
 Copyright(c) 2017The PragmaticProgrammers,LLC
@@ -10657,7 +10657,7 @@ Changes:
 
 See [http://keepachangelog.com](http://keepachangelog.com) for some great advice on what to put in your change
 
-log. All of the changes to tasks_proj over the course of this book have been logged
+log. All of the changes to tasks_proj over the course of this course have been logged
 
 into a CHANGELOG.rst file.
 
@@ -10719,7 +10719,7 @@ PyPI easy and secure. It handles authentication over HTTPS to keep your PyPI
 
 credentials secure, and handles the uploading of packages to PyPI.)
 
-This is now beyond the scope of this book. However, for information about
+This is now beyond the scope of this course. However, for information about
 
 how to start contributing through PyPI, take a look at the Python Packaging
 
@@ -11074,7 +11074,7 @@ Click, 136 – 142
 CliRunner, 140
 cls object, 153
 Cobertura, 148
-code, for this book, xvi
+code, for this course, xvi
 code coverage, 130 – 135 , 154
 --collect-only option, 10 – 11
 color displays, 1, 167
@@ -11910,7 +11910,7 @@ alyzer, 145
 request, 67, 70, 83, 153
 requirements.txt file, 161
 resources
-for this book, xvi, 155
+for this course, xvi, 155
 code coverage, 135
 docstrings, 172
 functions, 100 , 104
@@ -12424,7 +12424,7 @@ Index • 197
 
 Thank you!
 
-How did you enjoy this book? Please let us know. Take a moment and email
+How did you enjoy this course? Please let us know. Take a moment and email
 
 us at support@pragprog.com with your feedback. Tell us your story and you
 
@@ -12467,9 +12467,9 @@ your game.
 
 # Visit Us Online
 
-**This Book’s Home Page**
+**This Course’s Home Page**
 _https://pragprog.com/book/bopytest_
-Source code from this book, errata, and other resources. Come give us feedback, too!
+Source code from this course, errata, and other resources. Come give us feedback, too!
 
 **Keep Up to Date**
 _https://pragprog.com_

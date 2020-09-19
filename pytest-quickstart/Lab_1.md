@@ -13,7 +13,7 @@ same time, it is considered by many to be a boring and repetitive part
 of the job. But that does not have to be the case when you use pytest as
 your testing framework.
 
-This book will introduce you to various key features and will teach how
+This course will introduce you to various key features and will teach how
 to use pytest effectively in your day-to-day coding tasks right from the
 first lab, focusing on making you productive as quickly as possible.
 Writing tests should then become a joy, rather than a boring part of the

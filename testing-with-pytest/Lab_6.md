@@ -3,7 +3,7 @@
 
 ## Configuration
 
-So far in this book, I’ve talked about the various non-test files that affect
+So far in this course, I’ve talked about the various non-test files that affect
 pytest mostly in passing, with the exception of conftest.py, which I covered quite
 thoroughly in Lab 5, Plugins In this lab, we’ll take a
 look at the configuration files that affect pytest, discuss how pytest changes

@@ -247,7 +247,7 @@ package_dir={'': 'src'},
 ```
 
 You should put the terms of the licensing in a LICENSE file. All of the code in
-this book follows the following license:
+this course follows the following license:
 
 ```
 appendices/packaging/some_package_proj_v2/LICENSE
@@ -300,7 +300,7 @@ Changes:
 - Initial version.
 ```
 
-See [http://keepachangelog.com](http://keepachangelog.com) for some great advice on what to put in your change log. All of the changes to tasks_proj over the course of this book have been logged
+See [http://keepachangelog.com](http://keepachangelog.com) for some great advice on what to put in your change log. All of the changes to tasks_proj over the course of this course have been logged
 into a CHANGELOG.rst file.
 
 Let’s see if this was enough to remove the warnings:
@@ -357,7 +357,7 @@ ages to PyPI. (Twine is a collection of utilities to help make interacting with
 PyPI easy and secure. It handles authentication over HTTPS to keep your PyPI
 credentials secure, and handles the uploading of packages to PyPI.)
 
-This is now beyond the scope of this book. However, for information about
+This is now beyond the scope of this course. However, for information about
 how to start contributing through PyPI, take a look at the Python Packaging
 User Guide^4 and the the PyPI^5 section of the Python documentation.
 

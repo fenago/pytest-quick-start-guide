@@ -50,9 +50,9 @@ use the same version of pytest on multiple versions of Python.
 **Learn pytest While Testing an Example Application**
 
 How would you like to learn pytest by testing silly examples you’d never run
-across in real life? Me neither. We’re not going to do that in this book. Instead,
+across in real life? Me neither. We’re not going to do that in this course. Instead,
 we’re going to write tests against an example project that I hope has many of
-the same traits of applications you’ll be testing after you read this book.
+the same traits of applications you’ll be testing after you read this course.
 
 **The Tasks Project**
 
@@ -74,24 +74,39 @@ Here’s an example session:
 $ tasks add 'do something' --owner Brian
 $ tasks add 'do something else'
 $ tasks list
+
+
 ID owner done summary
 -- ----- ---- -------
 1 Brian False do something
 2 False do something else
+
+
 $ tasks update 2 --owner Brian
 $ tasks list
+
+
 ID owner done summary
 -- ----- ---- -------
 1 Brian False do something
 2 Brian False do something else
+
+
+
 $ tasks update 1 --done True
 $ tasks list
+
+
 ID owner done summary
 -- ----- ---- -------
 1 Brian True do something
 2 Brian False do something else
+
+
 $ tasks delete 1
 $ tasks list
+
+
 ID owner done summary
 -- ----- ---- -------
 2 Brian False do something else
@@ -119,10 +134,10 @@ A test that checks how well we add or delete or update a task item in
 Tasks is a functional test.
 - **Subcutaneous test:** A test that doesn’t run against the final end-user
 interface, but against an interface just below the surface. Since most of
-the tests in this book test against the API layer—not the CLI—they qualify
+the tests in this course test against the API layer—not the CLI—they qualify
 as subcutaneous tests.
 
-**How This Book Is Organized**
+**How This Course Is Organized**
 
 In Lab 1, Getting Started with pytest, you’ll install pytest
 and get it ready to use. You’ll then take one piece of the Tasks project—the
@@ -198,10 +213,10 @@ refresher on pip, check out Appendix 2, pip
 
 **Example Code and Online Resources**
 
-The examples in this book were written and tested using Python 3 and pytest 3. pytest 3 supports Python 2.7, and Python 3.4+.
+The examples in this course were written and tested using Python 3 and pytest 3. pytest 3 supports Python 2.7, and Python 3.4+.
 
 The source code for the Tasks project, as well as for all of the tests shown in
-this book, is available through a link1 on the book’s web page at pragprog.com.2
+this course, is available through a link1 on the book’s web page at pragprog.com.2
 You don’t need to download the source code to understand the test code; the
 test code is presented in usable form in the examples. But to follow along
 with the Tasks project, or to adapt the testing examples to test your own

@@ -949,4 +949,4 @@ possible migration strategies that you can take for test suites of
 various sizes.
 
 In the next lab, we will see a quick summary of what we have learned
-in this book, and discuss what else might be in store for us.
+in this course, and discuss what else might be in store for us.

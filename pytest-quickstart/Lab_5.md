@@ -1023,14 +1023,14 @@ interesting. I hope this has given you a taste of what\'s possible in
 pytest, but please explore the vast number of plugins to see whether you
 can find any that are useful.
 
-Creating your own plugins is not a topic that is covered in this book,
+Creating your own plugins is not a topic that is covered in this course,
 but if you are interested, here are some resources to get you started:
 
 
 -   The pytest documentation: writing plugins
     (<https://docs.pytest.org/en/latest/writing_plugins.html>).
 -   Brian Okken\'s wonderful book about pytest Python testing with
-    pytest, which delves deeper than this book does, has an excellent
+    pytest, which delves deeper than this course does, has an excellent
     lab on how to write your own plugins. 
 
 

@@ -52,7 +52,7 @@ with. Sometimes this data is considered a fixture. For example, the Django
 community often uses _fixture_ to mean some initial data that gets loaded into
 a database at the start of an application.
 
-Regardless of other meanings, in pytest and in this book, test fixtures refer
+Regardless of other meanings, in pytest and in this course, test fixtures refer
 to the mechanism pytest provides to allow the separation of “getting ready
 for” and “cleaning up after” code from your test functions.
 

@@ -25,7 +25,7 @@ the following topics:
 Overview of what we have learned 
 -----------------------------------
 
-The following sections will summarize what we have learned in this book.
+The following sections will summarize what we have learned in this course.
 
 
 ### Introduction
@@ -310,7 +310,7 @@ Here are a few ideas of the next steps you can take:
 
 ### Note
 
-Some topics were deliberately left out of this book, as they are
+Some topics were deliberately left out of this course, as they are
 considered a little advanced for a quick start, or because we couldn\'t
 fit them into the book due to space constraints. 
 
@@ -323,7 +323,7 @@ fit them into the book due to space constraints. 
     multiple Python versions and environments. pytest and
     `tox` are brother projects and work extremely well
     together, albeit independent and useful for their own purposes.
--   Plugins: this book does not cover how to extend pytest with plugins,
+-   Plugins: this course does not cover how to extend pytest with plugins,
     so if you are interested, be sure to check the plugins section
     (<https://docs.pytest.org/en/latest/fixture.html>) of the pytest
     documentation and look around for other plugins that can serve as an
@@ -331,7 +331,7 @@ fit them into the book due to space constraints. 
     (<https://docs.pytest.org/en/latest/example/simple.html>) for
     snippets of advanced pytest customization.
 -   Logging and warnings are two Python features that pytest has
-    built-in support for and were not covered in detail in this book,
+    built-in support for and were not covered in detail in this course,
     but they certainly deserve a good look if you use those features
     extensively.
 
@@ -342,7 +342,7 @@ Final summary
 
 
 
-So, we have come to the end of our quick start guide. In this book, we
+So, we have come to the end of our quick start guide. In this course, we
 had a complete overview, from using pytest on the command-line all the
 way to tips and tricks to convert existing test suites to make use of
 the powerful pytest features. You should now be comfortable using pytest

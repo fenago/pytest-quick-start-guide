@@ -475,7 +475,7 @@ Now, let’s take a look at some of the options.
 
 We’ve used the verbose option, -v or --verbose, a couple of times already, but
 there are many more options worth knowing about. We’re not going to use
-all of the options in this book, but quite a few. You can see all of them with
+all of the options in this course, but quite a few. You can see all of them with
 pytest --help.
 
 The following are a handful of options that are quite useful when starting out
@@ -1093,7 +1093,7 @@ a project. You’ll learn about conftest.py and ini files such as pytest.ini in 
 1. Create a new virtual environment using python-m virtualenv or python-m venv.
 Even if you know you don’t need virtual environments for the project
 you’re working on, humor me and learn enough about them to create one
-for trying out things in this book. I resisted using them for a very long
+for trying out things in this course. I resisted using them for a very long
 time, and now I always use them. Read Appendix 1, Virtual Environments,
 on page 157 if you’re having any difficulty.
 
