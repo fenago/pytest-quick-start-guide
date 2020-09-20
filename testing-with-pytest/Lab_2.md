@@ -236,7 +236,7 @@ Successfully installed tasks
 We also need to install pytest (if you haven’t already done so):
 
 ```
-$ pip install pytest**
+$ pip install pytest
 ```
 
 Now let’s try running tests:
@@ -251,7 +251,7 @@ collected4 items
 
 test_task.py.... [100%]
 
-================4 passed in 0.02 seconds=================
+================ 4 passed in 0.02 seconds =================
 ```
 
 The import worked! The rest of our tests can now safely use importtasks. Now
@@ -387,7 +387,7 @@ test_task_fail.py:9: AssertionError
 #### E? +++ ^^^ ^^^ ^^^^
 
 test_task_fail.py:9:AssertionError
-================1 failedin 0.07 seconds=================
+================ 1 failed in 0.07 seconds =================
 ```
 
 Well, I think that’s pretty darned cool. pytest not only found both differences,
@@ -512,7 +512,7 @@ collected7 items/ 5 deselected
 test_api_exceptions.py::test_list_raises PASSED            [ 50%]
 test_api_exceptions.py::test_get_raises PASSED            [100%]
 
-=========2 passed,5 deselectedin 0.03 seconds==========
+========= 2 passed,5 deselected in 0.03 seconds ==========
 
 $ pytest -v -m get test_api_exceptions.py
 
@@ -521,7 +521,7 @@ collected7 items/ 6 deselected
 
 test_api_exceptions.py::test_get_raises PASSED            [100%]
 
-=========1 passed,6 deselectedin 0.02 seconds==========
+========= 1 passed,6 deselected in 0.02 seconds ==========
 ```
 
 Remember that -v is short for --verbose and lets us see the names of the tests
@@ -703,7 +703,7 @@ id_2= tasks.unique_id()
 E   assert1 != 1
 
 test_unique_id_1.py:12:AssertionError
-================1 failedin 0.10 seconds=================
+================ 1 failed in 0.10 seconds =================
 ```
 
 Hmm. Maybe we got that wrong. After looking at the API a bit more, we see
@@ -749,7 +749,7 @@ collected2 items
 test_unique_id_2.py::test_unique_id_1SKIPPED [ 50%]
 test_unique_id_2.py::test_unique_id_2 PASSED            [100%]
 
-===========1 passed,1 skippedin 0.03 seconds===========
+=========== 1 passed,1 skippedin 0.03 seconds ===========
 ```
 
 Now, let’s say that for some reason we decide the first test should be valid
@@ -784,7 +784,7 @@ collected2 items
 
 test_unique_id_3.pys. [100%]
 
-===========1 passed,1 skippedin 0.03 seconds===========
+=========== 1 passed,1 skippedin 0.03 seconds ===========
 ```
 
 The s. shows that one test was skipped and one test passed.
@@ -800,7 +800,7 @@ collected2 items
 test_unique_id_3.py::test_unique_id_1SKIPPED [ 50%]
 test_unique_id_3.py::test_unique_id_2 PASSED            [100%]
 
-===========1 passed,1 skippedin 0.03 seconds===========
+=========== 1 passed,1 skippedin 0.03 seconds ===========
 ```
 
 
@@ -816,7 +816,7 @@ test_unique_id_3.pys. [100%]
 =================shorttestsummaryinfo=================
 SKIP[1] test_unique_id_3.py:9:not supporteduntilversion0.2.0
 
-===========1 passed,1 skippedin 0.04 seconds===========
+=========== 1 passed,1 skippedin 0.04 seconds ===========
 ```
 
 The -r chars option has this help text:
@@ -881,7 +881,7 @@ collected4 items
 
 test_unique_id_4.pyxxX. [100%]
 
-=====1 passed,2 xfailed, 1 xpassed in 0.10 seconds======
+===== 1 passed,2 xfailed, 1 xpassed in 0.10 seconds ======
 ```
 
 The x is for XFAIL, which means “expected to fail.” The capital X is for XPASS or
@@ -900,7 +900,7 @@ test_unique_id_4.py::test_unique_id_is_a_duckxfail[ 50%]
 test_unique_id_4.py::test_unique_id_not_a_duckXPASS[ 75%]
 test_unique_id_4.py::test_unique_id_2 PASSED            [100%]
 
-=====1 passed,2 xfailed, 1 xpassed in 0.10 seconds======
+===== 1 passed,2 xfailed, 1 xpassed in 0.10 seconds ======
 ```
 
 You can configure pytest to report the tests that pass but were marked with
@@ -993,7 +993,7 @@ collected2 items
 
 tests/func/test_add.py.. [100%]
 
-================2 passed in 0.10 seconds=================
+================ 2 passed in 0.10 seconds =================
 ```
 
 We’ve been doing this for a while.
@@ -1011,7 +1011,7 @@ collected1 item
 
 tests/func/test_add.py::test_add_returns_valid_idPASSED[100%]
 
-================1 passed in 0.04 seconds=================
+================ 1 passed in 0.04 seconds =================
 ```
 
 Use -v so you can see which function was run.
@@ -1053,7 +1053,7 @@ collected2 items
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_idPASSED[ 50%]
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_taskPASSED[100%]
 
-================2 passed in 0.02 seconds=================
+================ 2 passed in 0.02 seconds =================
 ```
 
 **A Single Test Method of a Test Class**
@@ -1070,7 +1070,7 @@ collected1 item
 
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_idPASSED[100%]
 
-================1 passed in 0.02 seconds=================
+================ 1 passed in 0.02 seconds =================
 ``` 
 
 **Grouping Syntax Shown by Verbose Listing**
@@ -1100,7 +1100,7 @@ tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 60%]
 tests/func/test_api_exceptions.py::test_delete_raisesPASSED[ 80%]
 tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 
-=========5 passed,51 deselectedin 0.13 seconds=========
+========= 5 passed,51 deselected in 0.13 seconds =========
 ```
 
 We can use and and not to get rid of the test_delete_raises() from the session:
@@ -1116,7 +1116,7 @@ tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 50%]
 tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 75%]
 tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 
-=========4 passed,52 deselectedin 0.12 seconds=========
+========= 4 passed,52 deselected in 0.12 seconds =========
 ```
 
 In this section, you learned how to run specific test files, directories, classes,
@@ -1184,7 +1184,7 @@ collected1 item
 
 test_add_variety.py::test_add_1 PASSED            [100%]
 
-================1 passed in 0.05 seconds=================
+================ 1 passed in 0.05 seconds =================
 ```
 
 The test seems reasonable. However, it’s just testing one example task. What
@@ -1225,7 +1225,7 @@ test_add_variety.py::test_add_2[task2] PASSED            [ 75%]
 test_add_variety.py::test_add_2[task3] PASSED            [100%]
 
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 ```
 
 This use of parametrize() works for our purposes. However, let’s pass in the
@@ -1263,7 +1263,7 @@ test_add_variety.py::test_add_3[wake-brian-False] PASSED[ 50%]
 test_add_variety.py::test_add_3[breathe-BRIAN-True] PASSED[ 75%]
 test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 ```
 
 You can use that whole test identifier—called a node in pytest terminology—to
@@ -1278,7 +1278,7 @@ collected1 item
 
 test_add_variety.py::test_add_3[sleep-None-False] PASSED[100%]
 
-================1 passed in 0.03 seconds=================
+================ 1 passed in 0.03 seconds =================
 ```
 
 Be sure to use quotes if there are spaces in the identifier:
@@ -1293,7 +1293,7 @@ collected1 item
 
 test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
-================1 passed in 0.03 seconds=================
+================ 1 passed in 0.03 seconds =================
 ```
 
 Now let’s go back to the list of tasks version, but move the task list to a vari-
@@ -1331,7 +1331,7 @@ test_add_variety.py::test_add_4[task2] PASSED            [ 60%]
 test_add_variety.py::test_add_4[task3] PASSED            [ 80%]
 test_add_variety.py::test_add_4[task4] PASSED            [100%]
 
-================5 passed in 0.06 seconds=================
+================ 5 passed in 0.06 seconds =================
 ```
 
 The readability of the multiple parameter version is nice, but so is the list of
@@ -1375,7 +1375,7 @@ test_add_variety.py::test_add_5[Task(wake,brian,False)1] PASSED[ 60%]
 test_add_variety.py::test_add_5[Task(breathe,BRIAN,True)] PASSED[ 80%]
 test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================5 passed in 0.06 seconds=================
+================ 5 passed in 0.06 seconds =================
 ```
 
 Note that the second and third tasks are actually duplicates of eachother and
@@ -1391,7 +1391,7 @@ collected1 item
 
 test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================1 passed in 0.05 seconds=================
+================ 1 passed in 0.05 seconds =================
 ```
 
 We definitely need quotes for these identifiers; otherwise, the brackets and
@@ -1439,7 +1439,7 @@ test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)1] PASSED
 test_add_variety.py::TestAdd::test_valid_id[Task(breathe,BRIAN,True)] PASSED
 test_add_variety.py::TestAdd::test_valid_id[Task(exercise,BrIaN,False)] PASSED
 
-================10 passed in 0.10 seconds================
+================ 10 passed in 0.10 seconds ================
 ```
 
 You can also identify parameters by including an id right alongside the
@@ -1473,7 +1473,7 @@ test_add_variety.py::test_add_6[justsummary] PASSED[ 33%]
 test_add_variety.py::test_add_6[summary/owner] PASSED[ 66%]
 test_add_variety.py::test_add_6[summary/owner/done] PASSED[100%]
 
-================3 passed in 0.06 seconds=================
+================ 3 passed in 0.06 seconds =================
 ```
 
 

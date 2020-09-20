@@ -265,7 +265,7 @@ withpytest.raises(ValueError):
 E Failed:DID NOT RAISE<class'ValueError'>
 
 tests/func/test_api_exceptions.py:20:Failed
-===========1 failed, 56 passed in 0.48 seconds===========
+=========== 1 failed, 56 passed in 0.48 seconds ===========
 ```
 
 Let’s run it again with -v for verbose. Since you’ve already seen the traceback,
@@ -286,7 +286,7 @@ collected9 items/ 7 deselected
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py::TestAdd::test_done_not_bool FAILED[100%]
 
-====1 failed, 1 passed,7 deselectedin 0.10 seconds=====
+====1 failed, 1 passed,7 deselected in 0.10 seconds=====
 ```
 
 We could go off and try to fix this test (and we should later), but now we are
@@ -338,7 +338,7 @@ test_api_exceptions.py.O
 
 
 ```
-====`1 failed, 1 passed,7 deselectedin 0.10 seconds=====
+====`1 failed, 1 passed,7 deselected in 0.10 seconds=====
 ```
 
 
@@ -357,7 +357,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed, 1 passed,7 deselectedin 0.11 seconds=====
+====1 failed, 1 passed,7 deselected in 0.11 seconds=====
 ```
 
 The last modification we’ll make is to add a command-line option, --nice, to
@@ -409,7 +409,7 @@ test_api_exceptions.py.F [100%]
 
 
 ```
-====1 failed, 1 passed,7 deselectedin 0.11 seconds=====
+====1 failed, 1 passed,7 deselected in 0.11 seconds=====
 
 Now with --nice:
 
@@ -422,7 +422,7 @@ collected9 items/ 7 deselected
 
 test_api_exceptions.py.O [100%]
 
-====1 failed, 1 passed,7 deselectedin 0.12 seconds=====
+====1 failed, 1 passed,7 deselected in 0.12 seconds=====
 
 And with --nice and --verbose:
 
@@ -437,7 +437,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed, 1 passed,7 deselectedin 0.10 seconds=====
+====1 failed, 1 passed,7 deselected in 0.10 seconds=====
 ```
 
 Great! All of the changes we wanted are done with about a dozen lines of code
@@ -811,7 +811,7 @@ test_nice.py::test_header PASSED            [ 71%]
 test_nice.py::test_header_not_nice PASSED            [ 85%]
 test_nice.py::test_help_message PASSED            [100%]
 
-================7 passed in 0.57 seconds=================
+================ 7 passed in 0.57 seconds =================
 ```
 
 Yay! All the tests pass. We can uninstall it just like any other Python package

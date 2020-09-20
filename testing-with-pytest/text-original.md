@@ -695,7 +695,7 @@ collected1 item
 
 test_one.py.
 
-===================1 passed in 0.01 seconds===================
+=================== 1 passed in 0.01 seconds ===================
 
 The dot after test_one.py means that one test was run and it passed. The [100%]
 
@@ -714,7 +714,7 @@ collected1 item
 
 test_one.py::test_passing PASSED            [100%]
 
-===================1 passed in 0.01 seconds===================
+=================== 1 passed in 0.01 seconds ===================
 
 If you have a color terminal, the PASSED and bottom line are green. It’s nice.
 
@@ -746,7 +746,7 @@ E At index0 diff:1 != 3
 E Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-===================1 failedin 0.10 seconds===================
+=================== 1 failed in 0.10 seconds ===================
 
 Cool. The failing test, test_failing, gets its own section to show us why it failed.
 
@@ -779,7 +779,7 @@ E + (3, 2, 1)
 E? ^ ^
 
 test_two.py:2:AssertionError
-===================1 failedin 0.05 seconds===================
+=================== 1 failed in 0.05 seconds ===================
 
 Wow. pytest adds little carets (^) to show us exactly what’s different.
 
@@ -1020,7 +1020,7 @@ E At index0 diff:1 != 3
 E Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-==============1 failed, 5 passed in 0.17 seconds==============
+============== 1 failed, 5 passed in 0.17 seconds ==============
 
 To get just our new task tests to run, you can give pytest all the filenames
 
@@ -1036,7 +1036,7 @@ collected4 items
 tasks/test_three.py.. [ 50%]
 tasks/test_four.py.. [100%]
 
-===================4 passed in 0.02 seconds===================
+=================== 4 passed in 0.02 seconds ===================
 $ pytest tasks**
 ===================== test session starts ======================
 collected4 items
@@ -1044,7 +1044,7 @@ collected4 items
 tasks/test_four.py.. [ 50%]
 tasks/test_three.py.. [100%]
 
-===================4 passed in 0.02 seconds===================
+=================== 4 passed in 0.02 seconds ===================
 $ cd tasks
 $ pytest
 ===================== test session starts ======================
@@ -1057,7 +1057,7 @@ collected4 items
 test_four.py.. [ 50%]
 test_three.py.. [100%]
 
-===================4 passed in 0.02 seconds===================
+=================== 4 passed in 0.02 seconds ===================
 
 The part of pytest execution where pytest goes off and finds which tests to
 
@@ -1091,7 +1091,7 @@ collected2 items
 
 test_three.py.. [100%]
 
-===================2 passed in 0.01 seconds===================
+=================== 2 passed in 0.01 seconds ===================
 
 The output tells us quite a bit.
 
@@ -1138,7 +1138,7 @@ want to see more than dots for passing tests, use the -v or --verbose option.
 The percentage of completed tests is reported after each test file and based
 on percentage of the number of test cases collected and selected to run.
 ```
-_===================2 passed in 0.01  seconds===================_
+_=================== 2 passed in 0.01  seconds ===================_
 
 ```
 This refers to the number of passing tests and how long the entire test
@@ -1185,7 +1185,7 @@ collected1 item
 
 tasks/test_four.py::test_asdict PASSED            [100%]
 
-===================1 passed in 0.01 seconds===================
+=================== 1 passed in 0.01 seconds ===================
 
 Now, let’s take a look at some of the options.
 
@@ -1263,7 +1263,7 @@ collected6 items
 <Function'test_defaults'>
 <Function'test_member_access'>
 
-==============no tests ran in 0.02 seconds===============
+==============no tests ran in 0.02 seconds ===============
 
 The --collect-only option is helpful to check if other options that select tests are correct
 
@@ -1292,7 +1292,7 @@ collected6 items/ 4 deselected
 <Module'tasks/test_three.py'>
 <Function'test_defaults'>
 
-==============4 deselectedin 0.02 seconds===============
+============== 4 deselected in 0.02 seconds ===============
 
 Yep. That looks like what we want. Now you can run them by removing the
 
@@ -1308,7 +1308,7 @@ collected6 items/ 4 deselected
 tasks/test_four.py. [ 50%]
 tasks/test_three.py. [100%]
 
-=========2 passed,4 deselectedin 0.03 seconds==========
+========= 2 passed,4 deselected in 0.03 seconds ==========
 
 Hmm. Just dots. So they passed. But were they the right tests? One way to
 
@@ -1321,7 +1321,7 @@ collected6 items/ 4 deselected
 tasks/test_four.py::test_asdict PASSED            [ 50%]
 tasks/test_three.py::test_defaults PASSED            [100%]
 
-=========2 passed,4 deselectedin 0.02 seconds==========
+========= 2 passed,4 deselected in 0.02 seconds ==========
 
 Yep. They were the correct tests.
 
@@ -1356,7 +1356,7 @@ collected4 items/ 2 deselected
 test_four.py. [ 50%]
 test_three.py. [100%]
 
-=========2 passed,2 deselectedin 0.02 seconds==========
+========= 2 passed,2 deselected in 0.02 seconds ==========
 
 The marker expression doesn’t have to be a single marker. You can say things
 
@@ -1405,7 +1405,7 @@ E At index0 diff:1 != 3
 E Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-===========1 failed, 1 passed in 0.13 seconds============
+=========== 1 failed, 1 passed in 0.13 seconds ============
 
 Near the top of the output you see that all six tests (or “items”) were collected,
 
@@ -1430,7 +1430,7 @@ tasks/test_three.py.. [100%]
 Using Options • 13
 
 
-===========1 failed, 5 passed in 0.07 seconds============
+=========== 1 failed, 5 passed in 0.07 seconds ============
 
 This demonstrates that without the -x, pytest notes failure in test_two.py and
 
@@ -1460,7 +1460,7 @@ test_two.pyF [ 33%]
 tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
-===========1 failed, 5 passed in 0.07 seconds============
+=========== 1 failed, 5 passed in 0.07 seconds ============
 $ pytest --maxfail=1--tb=no **
 =================== test session starts ===================
 collected6 items
@@ -1468,7 +1468,7 @@ collected6 items
 test_one.py. [ 16%]
 test_two.pyF
 
-===========1 failed, 1 passed in 0.07 seconds============
+=========== 1 failed, 1 passed in 0.07 seconds ============
 
 Again, we used --tb=no to turn off the traceback.
 
@@ -1539,7 +1539,7 @@ def test_failing():
     E Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-=========1 failed, 5 deselectedin 0.07 seconds==========
+========= 1 failed, 5 deselected in 0.07 seconds ==========
 
 This is great if you’ve been using a --tb option that hides some information
 
@@ -1568,7 +1568,7 @@ test_one.py. [ 33%]
 tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
-===========1 failed, 5 passed in 0.09 seconds============
+=========== 1 failed, 5 passed in 0.09 seconds ============
 
 Usually, test_failing() from test_two.py is run after test_one.py. However, because
 
@@ -1599,7 +1599,7 @@ tasks/test_four.py::test_replace PASSED            [ 66%]
 tasks/test_three.py::test_defaults PASSED            [ 83%]
 tasks/test_three.py::test_member_access PASSED            [100%]
 
-===========1 failed, 5 passed in 0.08 seconds============
+=========== 1 failed, 5 passed in 0.08 seconds ============
 
 With color terminals, you’d see red FAILED and green PASSED outcomes in the
 
@@ -1695,7 +1695,7 @@ t_before = Task(summary='finishbook',owner='brian',done=False,id=None)
 t_expected= Task(summary='finishbook',owner='brian',done=True,id=11)
 
 tasks/test_four.py:24:AssertionError
-===========1 failed, 3 passed in 0.07 seconds============
+=========== 1 failed, 3 passed in 0.07 seconds ============
 
 The local variables t_after, t_before, and t_expected are shown after the code
 
@@ -1731,7 +1731,7 @@ collected4 items
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
 
-===========1 failed, 3 passed in 0.06 seconds============
+=========== 1 failed, 3 passed in 0.06 seconds ============
 
 --tb=line in many cases is enough to tell what’s wrong. If you have a ton of
 
@@ -1751,7 +1751,7 @@ tasks/test_three.py.. [100%]
 /home/jovyan/work/testing-with-pytest/code/ch1/tasks/test_four.py:24:
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
-===========1 failed, 3 passed in 0.07 seconds============
+=========== 1 failed, 3 passed in 0.07 seconds ============
 
 The next step up in verbose tracebacks is --tb=short:
 
@@ -1770,7 +1770,7 @@ E AssertionError:assertTask(summary=...e=True,id=10)==
 Task(summary='...e=True,id=11)
 E At index3 diff:10 != 11
 E Use -v to get the fulldiff
-===========1 failed, 3 passed in 0.07 seconds============
+=========== 1 failed, 3 passed in 0.07 seconds ============
 
 That’s definitely enough to tell you what’s going on.
 
@@ -1813,7 +1813,7 @@ tasks/test_three.py.. [100%]
 0.10scall tasks/test_four.py::test_replace
 0.00ssetup tasks/test_three.py::test_defaults
 0.00steardowntasks/test_four.py::test_asdict
-================4 passed in 0.13 seconds=================
+================ 4 passed in 0.13 seconds =================
 
 The slow test with the extra sleep shows up right away with the label call,
 
@@ -2238,7 +2238,7 @@ collected4 items
 
 test_task.py.... [100%]
 
-================4 passed in 0.02 seconds=================
+================ 4 passed in 0.02 seconds =================
 
 The import worked! The rest of our tests can now safely use importtasks. Now
 
@@ -2347,7 +2347,7 @@ E {'owner':'okken'}!= {'owner':'okkem'}
 E Use -v to get the fulldiff
 
 test_task_fail.py:16:AssertionError
-================2 failedin 0.07 seconds=================
+================ 2 failed in 0.07 seconds =================
 
 Wow. That’s a lot of information. For each failing test, the exact line of failure
 
@@ -2389,7 +2389,7 @@ Using assert Statements • 29
 #### E? +++ ^^^ ^^^ ^^^^
 
 test_task_fail.py:9:AssertionError
-================1 failedin 0.07 seconds=================
+================ 1 failed in 0.07 seconds =================
 
 Well, I think that’s pretty darned cool. pytest not only found both differences,
 
@@ -2531,7 +2531,7 @@ collected7 items/ 5 deselected
 test_api_exceptions.py::test_list_raises PASSED            [ 50%]
 test_api_exceptions.py::test_get_raises PASSED            [100%]
 
-=========2 passed,5 deselectedin 0.03 seconds==========
+========= 2 passed,5 deselected in 0.03 seconds ==========
 $ pytest -v -m get test_api_exceptions.py
 
 =================== test session starts ===================
@@ -2539,7 +2539,7 @@ collected7 items/ 6 deselected
 
 test_api_exceptions.py::test_get_raises PASSED            [100%]
 
-=========1 passed,6 deselectedin 0.02 seconds==========
+========= 1 passed,6 deselected in 0.02 seconds ==========
 
 Remember that -v is short for --verbose and lets us see the names of the tests
 
@@ -2560,7 +2560,7 @@ collected7 items/ 6 deselected
 
 test_api_exceptions.py::test_get_raises PASSED            [100%]
 
-=========1 passed,6 deselectedin 0.02 seconds==========
+========= 1 passed,6 deselected in 0.02 seconds ==========
 
 That time we only ran the test that had both smoke and get markers. We can
 
@@ -2573,7 +2573,7 @@ collected7 items/ 6 deselected
 
 test_api_exceptions.py::test_list_raises PASSED            [100%]
 
-=========1 passed,6 deselectedin 0.02 seconds==========
+========= 1 passed,6 deselected in 0.02 seconds ==========
 
 The addition of -m "smoke and not get" selected the test that was marked with
 
@@ -2679,7 +2679,7 @@ tests/func/test_add.py::test_added_task_has_id_setPASSED[ 33%]
 tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 66%]
 tests/func/test_api_exceptions.py::test_get_raisesPASSED[100%]
 
-=========3 passed,53 deselectedin 0.14 seconds=========
+========= 3 passed,53 deselected in 0.14 seconds =========
 
 This shows that marked tests from different files can all run together.
 
@@ -2739,7 +2739,7 @@ id_2= tasks.unique_id()
 E assert1 != 1
 
 test_unique_id_1.py:12:AssertionError
-================1 failedin 0.10 seconds=================
+================ 1 failed in 0.10 seconds =================
 
 Hmm. Maybe we got that wrong. After looking at the API a bit more, we see
 
@@ -2786,7 +2786,7 @@ collected2 items
 test_unique_id_2.py::test_unique_id_1SKIPPED [ 50%]
 test_unique_id_2.py::test_unique_id_2 PASSED            [100%]
 
-===========1 passed,1 skippedin 0.03 seconds===========
+=========== 1 passed,1 skippedin 0.03 seconds ===========
 
 Now, let’s say that for some reason we decide the first test should be valid
 
@@ -2821,7 +2821,7 @@ collected2 items
 
 test_unique_id_3.pys. [100%]
 
-===========1 passed,1 skippedin 0.03 seconds===========
+=========== 1 passed,1 skippedin 0.03 seconds ===========
 
 The s. shows that one test was skipped and one test passed.
 
@@ -2835,7 +2835,7 @@ collected2 items
 test_unique_id_3.py::test_unique_id_1SKIPPED [ 50%]
 test_unique_id_3.py::test_unique_id_2 PASSED            [100%]
 
-===========1 passed,1 skippedin 0.03 seconds===========
+=========== 1 passed,1 skippedin 0.03 seconds ===========
 
 Lab 2. Writing Test Functions • 36
 
@@ -2851,7 +2851,7 @@ test_unique_id_3.pys. [100%]
 =================shorttestsummaryinfo=================
 SKIP[1] test_unique_id_3.py:9:not supporteduntilversion0.2.0
 
-===========1 passed,1 skippedin 0.04 seconds===========
+=========== 1 passed,1 skippedin 0.04 seconds ===========
 
 The -r chars option has this help text:
 
@@ -2916,7 +2916,7 @@ collected4 items
 
 test_unique_id_4.pyxxX. [100%]
 
-=====1 passed,2 xfailed, 1 xpassed in 0.10 seconds======
+===== 1 passed,2 xfailed, 1 xpassed in 0.10 seconds ======
 
 The x is for XFAIL, which means “expected to fail.” The capital X is for XPASS or
 
@@ -2934,7 +2934,7 @@ test_unique_id_4.py::test_unique_id_is_a_duckxfail[ 50%]
 test_unique_id_4.py::test_unique_id_not_a_duckXPASS[ 75%]
 test_unique_id_4.py::test_unique_id_2 PASSED            [100%]
 
-=====1 passed,2 xfailed, 1 xpassed in 0.10 seconds======
+===== 1 passed,2 xfailed, 1 xpassed in 0.10 seconds ======
 
 You can configure pytest to report the tests that pass but were marked with
 
@@ -3031,7 +3031,7 @@ collected2 items
 
 tests/func/test_add.py.. [100%]
 
-================2 passed in 0.10 seconds=================
+================ 2 passed in 0.10 seconds =================
 
 We’ve been doing this for a while.
 
@@ -3046,7 +3046,7 @@ collected1 item
 
 tests/func/test_add.py::test_add_returns_valid_idPASSED[100%]
 
-================1 passed in 0.04 seconds=================
+================ 1 passed in 0.04 seconds =================
 
 Use -v so you can see which function was run.
 
@@ -3088,7 +3088,7 @@ collected2 items
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_idPASSED[ 50%]
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_taskPASSED[100%]
 
-================2 passed in 0.02 seconds=================
+================ 2 passed in 0.02 seconds =================
 
 **A Single Test Method of a Test Class**
 
@@ -3103,7 +3103,7 @@ collected1 item
 
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_idPASSED[100%]
 
-================1 passed in 0.02 seconds=================
+================ 1 passed in 0.02 seconds =================
 
 ```
 Grouping Syntax Shown by Verbose Listing
@@ -3133,7 +3133,7 @@ tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 60%]
 tests/func/test_api_exceptions.py::test_delete_raisesPASSED[ 80%]
 tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 
-=========5 passed,51 deselectedin 0.13 seconds=========
+========= 5 passed,51 deselected in 0.13 seconds =========
 
 We can use and and not to get rid of the test_delete_raises() from the session:
 
@@ -3149,7 +3149,7 @@ tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 50%]
 tests/func/test_api_exceptions.py::test_get_raisesPASSED[ 75%]
 tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 
-=========4 passed,52 deselectedin 0.12 seconds=========
+========= 4 passed,52 deselected in 0.12 seconds =========
 
 In this section, you learned how to run specific test files, directories, classes,
 
@@ -3226,7 +3226,7 @@ collected1 item
 
 test_add_variety.py::test_add_1 PASSED            [100%]
 
-================1 passed in 0.05 seconds=================
+================ 1 passed in 0.05 seconds =================
 
 The test seems reasonable. However, it’s just testing one example task. What
 
@@ -3270,7 +3270,7 @@ test_add_variety.py::test_add_2[task3] PASSED            [100%]
 Parametrized Testing • 43
 
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 
 This use of parametrize() works for our purposes. However, let’s pass in the
 
@@ -3305,7 +3305,7 @@ test_add_variety.py::test_add_3[wake-brian-False] PASSED[ 50%]
 test_add_variety.py::test_add_3[breathe-BRIAN-True] PASSED[ 75%]
 test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 
 You can use that whole test identifier—called a node in pytest terminology—to
 
@@ -3318,7 +3318,7 @@ collected1 item
 
 test_add_variety.py::test_add_3[sleep-None-False] PASSED[100%]
 
-================1 passed in 0.03 seconds=================
+================ 1 passed in 0.03 seconds =================
 
 Be sure to use quotes if there are spaces in the identifier:
 
@@ -3332,7 +3332,7 @@ collected1 item
 
 test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
-================1 passed in 0.03 seconds=================
+================ 1 passed in 0.03 seconds =================
 
 Now let’s go back to the list of tasks version, but move the task list to a vari-
 
@@ -3368,7 +3368,7 @@ test_add_variety.py::test_add_4[task2] PASSED            [ 60%]
 test_add_variety.py::test_add_4[task3] PASSED            [ 80%]
 test_add_variety.py::test_add_4[task4] PASSED            [100%]
 
-================5 passed in 0.06 seconds=================
+================ 5 passed in 0.06 seconds =================
 
 The readability of the multiple parameter version is nice, but so is the list of
 
@@ -3410,7 +3410,7 @@ test_add_variety.py::test_add_5[Task(wake,brian,False)1] PASSED[ 60%]
 test_add_variety.py::test_add_5[Task(breathe,BRIAN,True)] PASSED[ 80%]
 test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================5 passed in 0.06 seconds=================
+================ 5 passed in 0.06 seconds =================
 
 Note that the second and third tasks are actually duplicates of eachother and
 
@@ -3425,7 +3425,7 @@ collected1 item
 
 test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================1 passed in 0.05 seconds=================
+================ 1 passed in 0.05 seconds =================
 
 We definitely need quotes for these identifiers; otherwise, the brackets and
 
@@ -3477,7 +3477,7 @@ test_add_variety.py::TestAdd::test_valid_id[Task(wake,brian,False)1] PASSED
 test_add_variety.py::TestAdd::test_valid_id[Task(breathe,BRIAN,True)] PASSED
 test_add_variety.py::TestAdd::test_valid_id[Task(exercise,BrIaN,False)] PASSED
 
-================10 passed in 0.10 seconds================
+================ 10 passed in 0.10 seconds ================
 
 You can also identify parameters by including an id right alongside the
 
@@ -3508,7 +3508,7 @@ test_add_variety.py::test_add_6[justsummary] PASSED[ 33%]
 test_add_variety.py::test_add_6[summary/owner] PASSED[ 66%]
 test_add_variety.py::test_add_6[summary/owner/done] PASSED[100%]
 
-================3 passed in 0.06 seconds=================
+================ 3 passed in 0.06 seconds =================
 
 Lab 2. Writing Test Functions • 48
 
@@ -3810,7 +3810,7 @@ collected3 items/ 2 deselected
 
 test_add.py::test_add_returns_valid_id PASSED            [100%]
 
-=========1 passed,2 deselectedin 0.04 seconds==========
+========= 1 passed,2 deselected in 0.04 seconds ==========
 
 When I’m developing fixtures, I like to see what’s running and when. Fortu-
 
@@ -3835,7 +3835,7 @@ TEARDOWNF tasks_db
 TEARDOWNF tmpdir
 TEARDOWNS tmpdir_factory
 
-=========1 passed,2 deselectedin 0.03 seconds==========
+========= 1 passed,2 deselected in 0.03 seconds ==========
 
 Our test is in the middle, and pytest designates a SETUP and TEARDOWN portion
 
@@ -3893,7 +3893,7 @@ def test_a_tuple(a_tuple):
 E assert23 == 32
 
 test_fixtures.py:43:AssertionError
-================1 failedin 0.07 seconds=================
+================ 1 failed in 0.07 seconds =================
 
 Along with the stack trace section, pytest reports the value parameters of the
 
@@ -3922,7 +3922,7 @@ x = 43
 E assert43 == 42
 
 test_fixtures.py:24:AssertionError
-=================1 errorin 0.06 seconds=================
+================= 1 error in 0.06 seconds =================
 
 A couple of things happen. The stack trace shows correctly that the assert
 
@@ -4058,7 +4058,7 @@ TEARDOWNF tasks_db
 TEARDOWNF tmpdir
 TEARDOWNS tmpdir_factory
 
-================1 passed in 0.05 seconds=================
+================ 1 passed in 0.05 seconds =================
 
 There are those F’s and S’s for function and session scope again. Let’s learn
 
@@ -4176,7 +4176,7 @@ TEARDOWNC class_scope
 TEARDOWNM mod_scope
 TEARDOWNS sess_scope
 
-================4 passed in 0.02 seconds=================
+================ 4 passed in 0.02 seconds =================
 
 Now you get to see not just F and S for function and session, but also C and
 
@@ -4301,7 +4301,7 @@ tests/func/test_api_exceptions.py....... [ 90%]
 tests/func/test_unique_id.py. [ 92%]
 tests/unit/test_task.py.... [100%]
 
-================55 passed in 0.33 seconds================
+================ 55 passed in 0.33 seconds ================
 
 Looks like it’s all good. Let’s trace the fixtures for one test file to see if the
 
@@ -4338,7 +4338,7 @@ TEARDOWNS tasks_db_session
 TEARDOWNS tmpdir_factory
 TEARDOWNS tasks_just_a_few
 
-================3 passed in 0.04 seconds=================
+================ 3 passed in 0.04 seconds =================
 
 Yep. Looks right. tasks_db_session is called once per session, and the quicker
 
@@ -4442,7 +4442,7 @@ testduration: 1.24seconds
 --
 finished: 25 Jul 16:18:27
 -----------------
-===================2 passed in 2.25 seconds===================
+=================== 2 passed in 2.25 seconds ===================
 
 Lab 3. pytest Fixtures • 64
 
@@ -4498,7 +4498,7 @@ SETUP F lue
 test_rename_fixture.py::test_everything(fixturesused:lue).
 TEARDOWNF lue
 
-================1 passed in 0.01 seconds=================
+================ 1 passed in 0.01 seconds =================
 
 If you need to find out where lue is defined, you can add the pytest option
 
@@ -4518,7 +4518,7 @@ Renaming Fixtures • 65
 lue
 Returnultimateanswer.
 
-==============no tests ran in 0.01 seconds===============
+==============no tests ran in 0.01 seconds ===============
 
 Most of the output is omitted—there’s a lot there. Luckily, the fixtures we
 
@@ -4553,7 +4553,7 @@ Connecteddb with3 tasks,all unique.
 db_with_multi_per_owner
 Connecteddb with9 tasks,3 owners,all with3 tasks.
 
-===================no tests ran in 0.01  seconds====================
+=================== no tests ran in 0.01  seconds ====================
 
 Cool. All of our conftest.py fixtures are there. And at the bottom of the builtin
 
@@ -4630,7 +4630,7 @@ test_add_variety2.py::test_add_a[a_task1] PASSED            [ 50%]
 test_add_variety2.py::test_add_a[a_task2] PASSED            [ 75%]
 test_add_variety2.py::test_add_a[a_task3] PASSED            [100%]
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 
 Parametrizing Fixtures • 67
 
@@ -4665,7 +4665,7 @@ test_add_variety2.py::test_add_b[Task(wake,brian,False)] PASSED[ 50%]
 test_add_variety2.py::test_add_b[Task(breathe,BRIAN,True)] PASSED[ 75%]
 test_add_variety2.py::test_add_b[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================4 passed in 0.04 seconds=================
+================ 4 passed in 0.04 seconds =================
 
 We can also set the ids parameter to a function we write that provides the
 
@@ -4712,7 +4712,7 @@ test_add_variety2.py::test_add_c[Task(wake,brian,False)] PASSED[ 50%]
 test_add_variety2.py::test_add_c[Task(breathe,BRIAN,True)] PASSED[ 75%]
 test_add_variety2.py::test_add_c[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 
 With parametrized functions, you get to run that function multiple times. But
 
@@ -4847,7 +4847,7 @@ tests/func/test_add_variety.py::test_add_1[mongo] FAILED [46%]
 tests/func/test_add_variety.py::test_add_2[mongo-task0] FAILED [47%]
 tests/func/test_add_variety.py::test_add_2[mongo-task1] FAILED [48%]
 **...**
-==========42 failed, 54 passed in 4.85 seconds===========
+========== 42 failed, 54 passed in 4.85 seconds ===========
 
 Hmm. Bummer. Looks like we’ll need to do some debugging before we let
 
@@ -5356,7 +5356,7 @@ collected2 items
 test_pass_fail.py::test_this_passes PASSED            [ 50%]
 test_pass_fail.py::test_this_fails FAILED [100%]
 
-===========1 failed, 1 passed in 0.06 seconds============
+=========== 1 failed, 1 passed in 0.06 seconds ============
 
 If you run them again with the --ff or --failed-first flag, the tests that failed previ-
 
@@ -5371,7 +5371,7 @@ run-last-failure:rerunprevious1 failurefirst
 test_pass_fail.py::test_this_fails FAILED [ 50%]
 test_pass_fail.py::test_this_passes PASSED            [100%]
 
-===========1 failed, 1 passed in 0.06 seconds============
+=========== 1 failed, 1 passed in 0.06 seconds ============
 
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
 
@@ -5383,7 +5383,7 @@ run-last-failure:rerunprevious1 failure
 
 test_pass_fail.py::test_this_fails FAILED [100%]
 
-=========1 failed, 1 deselectedin 0.06 seconds==========
+========= 1 failed, 1 deselected in 0.06 seconds ==========
 
 Before we look at how the failure data is being saved and how you can use
 
@@ -5482,7 +5482,7 @@ x = 1e+25
 y = 1e+23
 
 test_few_failures.py:21:AssertionError
-1 failed, 4 deselectedin 0.06seconds
+1 failed, 4 deselected in 0.06seconds
 
 The reason for the failure should be more obvious now.
 
@@ -5498,14 +5498,14 @@ $ pytest --cache-show**
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 
-=================no tests ran in 0.00 seconds=================
+================= no tests ran in 0.00 seconds =================
 $ pytest --cache-show**
 =================== test session starts ===================
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 **...**
-==============no tests ran in 0.00 seconds===============
+==============no tests ran in 0.00 seconds ===============
 
 Or you can look in the cache dir:
 
@@ -5602,7 +5602,7 @@ assert0.125103<= (0.009833* 2)
 _________ERRORat teardownof test_slow_stuff[2]_________
 E AssertionError:testdurationover2x lastduration
 assert0.28841<= (0.086302* 2)
-5 passed,2 errorin 1.77seconds
+5 passed,2 error in 1.77seconds
 
 Well, that was fun. Let’s see what’s in the cache:
 
@@ -5705,7 +5705,7 @@ $ pytest -q --cache-cleartest_slower_2.py
 $ pytest -q --tb=no test_slower_2.py
 
 .E.E...E [100%]
-5 passed,3 errorin 3.65seconds
+5 passed,3 error in 3.65 seconds
 $ pytest -q --cache-show**
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
@@ -6175,7 +6175,7 @@ File"<doctestunnecessary_math.multiply[0]>",line1, in <module>
 NameError:name'um'is not defined
 
 /home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
-===========2 failed, 1 passed in 0.12 seconds============
+=========== 2 failed, 1 passed in 0.12 seconds ============
 
 One way to fix it is to put the import statement in each docstring:
 
@@ -6212,7 +6212,7 @@ unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.dividePASSED[ 66%]
 unnecessary_math.py::unnecessary_math.multiplyPASSED[100%]
 
-================3 passed in 0.03 seconds=================
+================ 3 passed in 0.03 seconds =================
 
 Lab 4. Builtin Fixtures • 94
 
@@ -6634,7 +6634,7 @@ withpytest.raises(ValueError):
 E Failed:DID NOT RAISE<class'ValueError'>
 
 tests/func/test_api_exceptions.py:20:Failed
-===========1 failed, 56 passed in 0.48 seconds===========
+=========== 1 failed, 56 passed in 0.48 seconds ===========
 
 Let’s run it again with -v for verbose. Since you’ve already seen the traceback,
 
@@ -6656,7 +6656,7 @@ collected9 items/ 7 deselected
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py::TestAdd::test_done_not_bool FAILED[100%]
 
-====1 failed, 1 passed,7 deselectedin 0.10 seconds=====
+====1 failed, 1 passed,7 deselected in 0.10 seconds=====
 
 We could go off and try to fix this test (and we should later), but now we are
 
@@ -6707,7 +6707,7 @@ test_api_exceptions.py.O
 Lab 5. Plugins • 102
 
 
-====1 failed, 1 passed,7 deselectedin 0.10 seconds=====
+====1 failed, 1 passed,7 deselected in 0.10 seconds=====
 
 Writing Your Own Plugins • 103
 
@@ -6724,7 +6724,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed, 1 passed,7 deselectedin 0.11 seconds=====
+====1 failed, 1 passed,7 deselected in 0.11 seconds=====
 
 The last modification we’ll make is to add a command-line option, --nice, to
 
@@ -6771,7 +6771,7 @@ test_api_exceptions.py.F [100%]
 Lab 5. Plugins • 104
 
 
-====1 failed, 1 passed,7 deselectedin 0.11 seconds=====
+====1 failed, 1 passed,7 deselected in 0.11 seconds=====
 
 Now with --nice:
 
@@ -6783,7 +6783,7 @@ collected9 items/ 7 deselected
 
 test_api_exceptions.py.O [100%]
 
-====1 failed, 1 passed,7 deselectedin 0.12 seconds=====
+====1 failed, 1 passed,7 deselected in 0.12 seconds=====
 
 And with --nice and --verbose:
 
@@ -6797,7 +6797,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed, 1 passed,7 deselectedin 0.10 seconds=====
+====1 failed, 1 passed,7 deselected in 0.10 seconds=====
 
 Great! All of the changes we wanted are done with about a dozen lines of code
 
@@ -6863,7 +6863,7 @@ def pytest_addoption (parser):
 """Turnnicefeatureson with--niceoption."""
 group= parser.getgroup( _'nice'_ )
 group.addoption( "--nice" , action= "store_true" ,
-help= "nice:turn FAILEDintoOPPORTUNITYfor improvement" )
+help= "nice:turn failed intoOPPORTUNITYfor improvement" )
 
 def pytest_report_header (config):
 """Thanktesterfor runningtests."""
@@ -7153,7 +7153,7 @@ result= testdir.runpytest( _'--help'_ )
 _# fnmatch_linesdoesan assertioninternally_
 result.stdout.fnmatch_lines([
 _'nice:'_ ,
-_'*--nice*nice:turn FAILEDintoOPPORTUNITYfor improvement'_ ,
+_'*--nice*nice:turn failed intoOPPORTUNITYfor improvement'_ ,
 ])
 
 I think that’s a pretty good check to make sure our plugin works.
@@ -7192,7 +7192,7 @@ test_nice.py::test_header PASSED            [ 71%]
 test_nice.py::test_header_not_nice PASSED            [ 85%]
 test_nice.py::test_help_message PASSED            [100%]
 
-================7 passed in 0.57 seconds=================
+================ 7 passed in 0.57 seconds =================
 
 Yay! All the tests pass. We can uninstall it just like any other Python package
 
@@ -7579,7 +7579,7 @@ Lab 6. Configuration • 118
 
 E AttributeError:'smoke'not a registeredmarker
 !!!!!!!!!Interrupted:2 errorsduringcollection!!!!!!!!!
-=================2 errorin 0.29 seconds=================
+================= 2 error in 0.29 seconds =================
 
 If you use markers in pytest.ini to register your markers, you may as well add
 
@@ -7613,7 +7613,7 @@ collected57 items/ 54 deselected
 func/test_add.py. [ 33%]
 func/test_api_exceptions.py.. [100%]
 
-=========3 passed,54 deselectedin 0.13 seconds=========
+========= 3 passed,54 deselected in 0.13 seconds =========
 
 ### Requiring a Minimum pytest Version
 
@@ -7878,7 +7878,7 @@ collected1 item
 
 a/test_foo.py. [100%]
 
-================1 passed in 0.01 seconds=================
+================ 1 passed in 0.01 seconds =================
 $ pytest b**
 =================== test session starts ===================
 plugins:cov-2.5.1
@@ -7886,7 +7886,7 @@ collected1 item
 
 b/test_foo.py. [100%]
 
-================1 passed in 0.01 seconds=================
+================ 1 passed in 0.01 seconds =================
 $ pytest
 =================== test session starts ===================
 plugins:cov-2.5.1
@@ -7906,7 +7906,7 @@ whichis not the sameas the testfilewe wantto collect:
 HINT:remove__pycache__/ .pycfiles
 and/oruse a uniquebasename for yourtestfilemodules
 !!!!!!!!!Interrupted:1 errorsduringcollection!!!!!!!!!
-=================1 errorin 0.15 seconds=================
+================= 1 error in 0.15 seconds =================
 
 That error message highlights that we have two files named the same, but
 
@@ -7935,7 +7935,7 @@ collected2 items
 a/test_foo.py. [ 50%]
 b/test_foo.py. [100%]
 
-================2 passed in 0.03 seconds=================
+================ 2 passed in 0.03 seconds =================
 
 There, all better. You might say to yourself that you’ll never have duplicate
 
@@ -8066,7 +8066,7 @@ tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
 tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED [4%]
 tests/func/test_add_variety.py::test_add_1[mongo] FAILED [7%]
 
-=========3 failed, 54 deselectedin 3.12 seconds=========
+========= 3 failed, 54 deselected in 3.12 seconds =========
 
 Now we know which tests are failing. Let’s look at just one of them by using
 
@@ -8108,7 +8108,7 @@ task_id = ObjectId('5b8c12dccb02981dc226d897')
 tasks_db = None
 
 tests/func/test_add.py:16:AssertionError
-=========1 failed, 54 deselectedin 2.91 seconds=========
+========= 1 failed, 54 deselected in 2.91 seconds =========
 
 Quite often this is enough to understand the test failure. In this particular
 
@@ -8196,7 +8196,7 @@ Now you can quit the debugger and continue on with testing.
 
 (Pdb)q
 
-========1 failed, 54 deselectedin 87.51 seconds=========
+======== 1 failed, 54 deselected in 87.51 seconds =========
 
 If we hadn’t used -x, pytest would have opened pdb again at the next failed
 
@@ -8293,7 +8293,7 @@ src/tasks/tasksdb_tinydb.py 32 4 88%
 --------------------------------------------------
 TOTAL 250 126 50%
 
-================62 passed in 0.62 seconds================
+================ 62 passed in 0.62 seconds ================
 
 Since the current directory is tasks_proj_v2 and the source code under test is
 
@@ -8340,7 +8340,7 @@ tests/unit/test_task.py.... [100%]
 ----------coverage:platformdarwin,python3.7.0-final-0-----------
 CoverageHTMLwrittento dir htmlcov
 
-================62 passed in 0.70 seconds================
+================ 62 passed in 0.70 seconds ================
 
 You can then open htmlcov/index.html in a browser, which shows the output in
 
@@ -8767,7 +8767,7 @@ tests/unit/test_cli.py::test_list_print_many_itemsPASSED[ 60%]
 tests/unit/test_cli.py::test_list_dash_o PASSED            [ 80%]
 tests/unit/test_cli.py::test_list_dash_dash_ownerPASSED[100%]
 
-================5 passed in 0.07 seconds=================
+================ 5 passed in 0.07 seconds =================
 
 Yay! They pass.
 
@@ -8933,7 +8933,7 @@ tests/func/test_unique_id.py. [ 85%]
 tests/unit/test_cli.py..... [ 93%]
 tests/unit/test_task.py.... [100%]
 
-=====================62 passed in 0.51 seconds=====================
+===================== 62 passed in 0.51 seconds =====================
 py37inst-nodeps:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py37installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,
 more-itertools==4.3.0,pluggy==0.8.0,py==1.7.0,pytest==3.9.1,
@@ -8955,7 +8955,7 @@ tests/unit/test_task.py.... [100%]
 Lab 7. Using pytest with Other Tools • 144
 
 
-=====================62 passed in 0.46 seconds=====================
+===================== 62 passed in 0.46 seconds =====================
 ______________________________summary______________________________
 py27:commandssucceeded
 py37:commandssucceeded
@@ -9215,7 +9215,7 @@ collected1 item
 
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
 
-================1 passed in 0.02 seconds=================
+================ 1 passed in 0.02 seconds =================
 
 This is great if you just want to use pytest as a test runner for unittest.
 
@@ -9276,7 +9276,7 @@ collected2 items
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[ 50%]
 test_delete_pytest.py::test_delete_decreases_countPASSED[100%]
 
-================2 passed in 0.03 seconds=================
+================ 2 passed in 0.03 seconds =================
 
 If you run the pytest version first, something goes haywire:
 
@@ -9303,7 +9303,7 @@ global_tasksdb
 E AttributeError:'NoneType'objecthas no attribute'stop_tasks_db'
 
 ../tasks_proj_v2/src/tasks/api.py:128:AttributeError
-============2 passed,1 errorin 0.14 seconds============
+============ 2 passed,1 error in 0.14 seconds ============
 
 unittest: Running Legacy Tests with pytest • 151
 
@@ -9331,7 +9331,7 @@ TEARDOWNF tasks_db
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_count.
 TEARDOWNS tasks_db_session
 TEARDOWNS tmpdir_factoryE
-2 passed,1 errorin 0.15seconds
+2 passed,1 error in 0.15 seconds
 
 The session scope teardown fixtures are run after all the tests, including the
 
@@ -9389,7 +9389,7 @@ collected2 items
 test_delete_pytest.py::test_delete_decreases_countPASSED[ 50%]
 test_delete_unittest_fix.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
 
-================2 passed in 0.03 seconds=================
+================ 2 passed in 0.03 seconds =================
 
 Note that this is only necessary for session scope resources shared by unittest
 
@@ -9861,7 +9861,7 @@ unit/test_cli.py::test_list_print_many_items PASSED            [ 66%]
 unit/test_cli.py::test_list_dash_o PASSED            [ 83%]
 unit/test_cli.py::test_list_dash_dash_owner PASSED            [100%]
 
-===========6 passed,56 deselectedin 0.13 seconds===========
+=========== 6 passed,56 deselected in 0.13 seconds ===========
 
 With the pytest-repeat plugin, you can use --count to run everything twice:
 
@@ -9883,7 +9883,7 @@ unit/test_cli.py::test_list_dash_o[2/2] PASSED            [ 83%]
 unit/test_cli.py::test_list_dash_dash_owner[1/2] PASSED[ 91%]
 unit/test_cli.py::test_list_dash_dash_owner[2/2] PASSED[100%]
 
-==========12 passed,112 deselectedin 0.16 seconds==========
+========== 12 passed,112 deselected in 0.16 seconds ==========
 
 You can repeat a subset of the tests or just one, and even choose to run it
 
@@ -9934,7 +9934,7 @@ collected10 items
 
 test_parallel.py.......... [100%]
 
-===============10 passed in 10.06  seconds================
+=============== 10 passed in 10.06  seconds ================
 
 With the pytest-xdist plugin, you can use -n numprocesses to run each test in a
 
@@ -9949,7 +9949,7 @@ plugins:xdist-1.23.0,forked-0.2
 gw0 [10]/ gw1 [10]/ gw2 [10]/ gw3 [10]
 schedulingtestsvia LoadScheduling
 .......... [100%]
-================10 passed in 4.00 seconds================
+================ 10 passed in 4.00 seconds ================
 
 It’s not a silver bullet to speed up your test times by a factor of the number
 
@@ -10015,7 +10015,7 @@ def test_something(x):
 E Failed:Timeout>0.5s
 
 test_parallel.py:7:Failed
-================1 failedin 0.59 seconds=================
+================ 1 failed in 0.59 seconds =================
 
 The -x stops testing after the first failure.
 
@@ -10063,7 +10063,7 @@ test_parallel.pyFF
 ========================FAILURES=========================
 /home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
 /home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
-================2 failedin 1.09 seconds=================
+================ 2 failed in 1.09 seconds =================
 
 Here’s the same test with --instafail:
 
@@ -10085,7 +10085,7 @@ test_parallel.pyF
 
 /home/jovyan/work/testing-with-pytest/code/appendices/xdist/test_parallel.py:7:Failed:Timeout>0.5s
 
-================2 failedin 1.10 seconds=================
+================ 2 failed in 1.10 seconds =================
 
 The --instafail functionality is especially useful for long-running test suites when
 
@@ -10200,7 +10200,7 @@ def test_fail():
 E assert1 == 2
 
 test_outcomes.py:8:AssertionError
-1 failed, 1 passed,1 skipped,1 xfailed, 1 xpassed,1 errorin 0.08seconds
+1 failed, 1 passed,1 skipped,1 xfailed, 1 xpassed,1 error in 0.08seconds
 $ openreport.html**
 
 This produces a report that includes the information about the test session
@@ -10494,12 +10494,11 @@ Successfullyinstalledsome-package-0.0.0
 
 1. https://docs.python.org/3/tutorial/modules.html#packages
 
-Creating an Installable Package • 177
-
 
 and usable:
 
-$ python**
+$ python
+
 Python3.7.0(v3.7.0:1bf9cc5093,Jun 26 2018,23:26:24)
 [Clang6.0 (clang-600.0.57)]on darwin
 Type"help","copyright","credits"or "license"for moreinformation.
@@ -10877,7 +10876,7 @@ test_4()
 teardown_class()for TestClass
 teardown_module()for test_xUnit_fixtures
 
-==========4 passed in 0.01 seconds==========
+========== 4 passed in 0.01 seconds ==========
 
 ### Mixing pytest Fixtures and xUnit Fixtures
 
@@ -10946,7 +10945,7 @@ teardown_function()- xUnit
 module_fixture()teardown- pytest
 teardown_module()- xUnit
 
-==========2 passed in 0.01 seconds==========
+========== 2 passed in 0.01 seconds ==========
 
 In this example, I’ve also shown that the module, function, and method parameters
 

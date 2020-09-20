@@ -196,7 +196,7 @@ collected3 items/ 2 deselected
 
 test_add.py::test_add_returns_valid_id PASSED            [100%]
 
-=========1 passed,2 deselectedin 0.04 seconds==========
+========= 1 passed,2 deselected in 0.04 seconds ==========
 ```
 
 When I’m developing fixtures, I like to see what’s running and when. Fortu-
@@ -219,7 +219,7 @@ TEARDOWNF tasks_db
 TEARDOWNF tmpdir
 TEARDOWNS tmpdir_factory
 
-=========1 passed,2 deselectedin 0.03 seconds==========
+========= 1 passed,2 deselected in 0.03 seconds ==========
 ```
 
 Our test is in the middle, and pytest designates a SETUP and TEARDOWN portion
@@ -276,7 +276,7 @@ def test_a_tuple(a_tuple):
 E assert23 == 32
 
 test_fixtures.py:43:AssertionError
-================1 failedin 0.07 seconds=================
+================ 1 failed in 0.07 seconds =================
 ```
 
 Along with the stack trace section, pytest reports the value parameters of the
@@ -306,7 +306,7 @@ x = 43
 E assert43 == 42
 
 test_fixtures.py:24:AssertionError
-=================1 errorin 0.06 seconds=================
+================= 1 error in 0.06 seconds =================
 ```
 
 A couple of things happen. The stack trace shows correctly that the assert
@@ -429,7 +429,7 @@ TEARDOWNF tasks_db
 TEARDOWNF tmpdir
 TEARDOWNS tmpdir_factory
 
-================1 passed in 0.05 seconds=================
+================ 1 passed in 0.05 seconds =================
 ```
 
 There are those F’s and S’s for function and session scope again. Let’s learn
@@ -550,7 +550,7 @@ TEARDOWNC class_scope
 TEARDOWNM mod_scope
 TEARDOWNS sess_scope
 
-================4 passed in 0.02 seconds=================
+================ 4 passed in 0.02 seconds =================
 ``` 
 
 Now you get to see not just F and S for function and session, but also C and
@@ -666,7 +666,7 @@ tests/func/test_api_exceptions.py....... [ 90%]
 tests/func/test_unique_id.py. [ 92%]
 tests/unit/test_task.py.... [100%]
 
-================55 passed in 0.33 seconds================
+================ 55 passed in 0.33 seconds ================
 ```
 
 Looks like it’s all good. Let’s trace the fixtures for one test file to see if the
@@ -703,7 +703,7 @@ TEARDOWNS tasks_db_session
 TEARDOWNS tmpdir_factory
 TEARDOWNS tasks_just_a_few
 
-================3 passed in 0.04 seconds=================
+================ 3 passed in 0.04 seconds =================
 ```
 
 Yep. Looks right. tasks_db_session is called once per session, and the quicker
@@ -803,7 +803,7 @@ testduration: 1.24seconds
 --
 finished: 25 Jul 16:18:27
 -----------------
-===================2 passed in 2.25 seconds===================
+=================== 2 passed in 2.25 seconds ===================
 ```
 
 The autouse feature is good to have around. But it’s more of an exception than
@@ -854,7 +854,7 @@ SETUP F lue
 test_rename_fixture.py::test_everything(fixturesused:lue).
 TEARDOWNF lue
 
-================1 passed in 0.01 seconds=================
+================ 1 passed in 0.01 seconds =================
 ```
 
 If you need to find out where lue is defined, you can add the pytest option
@@ -875,7 +875,7 @@ $ pytest --fixturestest_rename_fixture.py
 lue
 Returnultimateanswer.
 
-==============no tests ran in 0.01 seconds===============
+==============no tests ran in 0.01 seconds ===============
 ```
 
 Most of the output is omitted—there’s a lot there. Luckily, the fixtures we
@@ -911,7 +911,7 @@ Connecteddb with3 tasks,all unique.
 db_with_multi_per_owner
 Connecteddb with9 tasks,3 owners,all with3 tasks.
 
-===================no tests ran in 0.01  seconds====================
+=================== no tests ran in 0.01  seconds ====================
 ```
 
 Cool. All of our conftest.py fixtures are there. And at the bottom of the builtin
@@ -988,7 +988,7 @@ test_add_variety2.py::test_add_a[a_task1] PASSED            [ 50%]
 test_add_variety2.py::test_add_a[a_task2] PASSED            [ 75%]
 test_add_variety2.py::test_add_a[a_task3] PASSED            [100%]
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 ```
 
 
@@ -1022,7 +1022,7 @@ test_add_variety2.py::test_add_b[Task(wake,brian,False)] PASSED[ 50%]
 test_add_variety2.py::test_add_b[Task(breathe,BRIAN,True)] PASSED[ 75%]
 test_add_variety2.py::test_add_b[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================4 passed in 0.04 seconds=================
+================ 4 passed in 0.04 seconds =================
 ```
 
 We can also set the ids parameter to a function we write that provides the
@@ -1069,7 +1069,7 @@ test_add_variety2.py::test_add_c[Task(wake,brian,False)] PASSED[ 50%]
 test_add_variety2.py::test_add_c[Task(breathe,BRIAN,True)] PASSED[ 75%]
 test_add_variety2.py::test_add_c[Task(exercise,BrIaN,False)] PASSED[100%]
 
-================4 passed in 0.05 seconds=================
+================ 4 passed in 0.05 seconds =================
 ```
 
 With parametrized functions, you get to run that function multiple times. But

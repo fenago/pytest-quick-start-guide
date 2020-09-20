@@ -54,6 +54,7 @@ With the pytest-repeat plugin, you can use --count to run everything twice:
 
 ```
 $ pytest --count=2 -v -k test_list
+
 ===================== test session starts =====================
 plugins: repeat-0.7.0, mock-1.10.0
 collected 124 items / 112 deselected

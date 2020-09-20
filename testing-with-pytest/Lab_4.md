@@ -453,7 +453,7 @@ run-last-failure:rerunprevious1 failurefirst
 test_pass_fail.py::test_this_fails FAILED [ 50%]
 test_pass_fail.py::test_this_passes PASSED            [100%]
 
-===========1 failed, 1 passed in 0.06 seconds============
+=========== 1 failed, 1 passed in 0.06 seconds ============
 ```
 
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
@@ -467,7 +467,7 @@ run-last-failure:rerunprevious1 failure
 
 test_pass_fail.py::test_this_fails FAILED [100%]
 
-=========1 failed, 1 deselectedin 0.06 seconds==========
+========= 1 failed, 1 deselected in 0.06 seconds ==========
 ```
 
 Before we look at how the failure data is being saved and how you can use
@@ -566,7 +566,7 @@ x = 1e+25
 y = 1e+23
 
 test_few_failures.py:21:AssertionError
-1 failed, 4 deselectedin 0.06seconds
+1 failed, 4 deselected in 0.06seconds
 ```
 
 The reason for the failure should be more obvious now.
@@ -583,7 +583,7 @@ $ pytest --cache-show
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 
-=================no tests ran in 0.00 seconds=================
+================= no tests ran in 0.00 seconds =================
 
 $ pytest --cache-show
 
@@ -593,7 +593,7 @@ cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 ...
 
-==============no tests ran in 0.00 seconds===============
+==============no tests ran in 0.00 seconds ===============
 ```
 
 Or you can look in the cache dir:
@@ -685,7 +685,7 @@ assert0.125103<= (0.009833* 2)
 _________ERRORat teardownof test_slow_stuff[2]_________
 E AssertionError:testdurationover2x lastduration
 assert0.28841<= (0.086302* 2)
-5 passed,2 errorin 1.77seconds
+5 passed,2 error in 1.77seconds
 ```
 
 Well, that was fun. Let’s see what’s in the cache:
@@ -777,7 +777,7 @@ $ pytest -q --cache-cleartest_slower_2.py
 $ pytest -q --tb=no test_slower_2.py
 
 .E.E...E [100%]
-5 passed,3 errorin 3.65seconds
+5 passed,3 error in 3.65 seconds
 
 $ pytest -q --cache-show
 
@@ -1208,7 +1208,7 @@ NameError:name'um'is not defined
 
 /home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:25:UnexpectedException
 
-===========2 failed, 1 passed in 0.12 seconds============
+=========== 2 failed, 1 passed in 0.12 seconds ============
 ```
 
 One way to fix it is to put the import statement in each docstring:
@@ -1253,7 +1253,7 @@ unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.dividePASSED[ 66%]
 unnecessary_math.py::unnecessary_math.multiplyPASSED[100%]
 
-================3 passed in 0.03 seconds=================
+================ 3 passed in 0.03 seconds =================
 ```
 
 

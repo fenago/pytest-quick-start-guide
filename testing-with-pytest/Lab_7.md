@@ -88,7 +88,7 @@ tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
 tests/func/test_add.py::test_added_task_has_id_set[mongo] FAILED [4%]
 tests/func/test_add_variety.py::test_add_1[mongo] FAILED [7%]
 
-=========3 failed, 54 deselectedin 3.12 seconds=========
+========= 3 failed, 54 deselected in 3.12 seconds =========
 ```
 
 Now we know which tests are failing. Let’s look at just one of them by using
@@ -131,7 +131,7 @@ task_id = ObjectId('5b8c12dccb02981dc226d897')
 tasks_db = None
 
 tests/func/test_add.py:16:AssertionError
-=========1 failed, 54 deselectedin 2.91 seconds=========
+========= 1 failed, 54 deselected in 2.91 seconds =========
 ```
 
 Quite often this is enough to understand the test failure. In this particular
@@ -220,7 +220,7 @@ Now you can quit the debugger and continue on with testing.
 ```
 (Pdb)q
 
-========1 failed, 54 deselectedin 87.51 seconds=========
+======== 1 failed, 54 deselected in 87.51 seconds =========
 ```
 
 If we hadn’t used -x, pytest would have opened pdb again at the next failed
@@ -320,7 +320,7 @@ src/tasks/tasksdb_tinydb.py 32 4 88%
 --------------------------------------------------
 TOTAL 250 126 50%
 
-================62 passed in 0.62 seconds================
+================ 62 passed in 0.62 seconds ================
 ```
 
 Since the current directory is tasks_proj_v2 and the source code under test is
@@ -361,7 +361,7 @@ tests/unit/test_task.py.... [100%]
 ----------coverage:platformdarwin,python3.7.0-final-0-----------
 CoverageHTMLwrittento dir htmlcov
 
-================62 passed in 0.70 seconds================
+================ 62 passed in 0.70 seconds ================
 ```
 
 You can then open htmlcov/index.html in a browser, which shows the output in
@@ -748,7 +748,7 @@ tests/unit/test_cli.py::test_list_print_many_itemsPASSED[ 60%]
 tests/unit/test_cli.py::test_list_dash_o PASSED            [ 80%]
 tests/unit/test_cli.py::test_list_dash_dash_ownerPASSED[100%]
 
-================5 passed in 0.07 seconds=================
+================ 5 passed in 0.07 seconds =================
 ```
 
 Yay! They pass.
@@ -897,7 +897,7 @@ tests/func/test_unique_id.py. [ 85%]
 tests/unit/test_cli.py..... [ 93%]
 tests/unit/test_task.py.... [100%]
 
-=====================62 passed in 0.51 seconds=====================
+===================== 62 passed in 0.51 seconds =====================
 
 py37inst-nodeps:/home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2/.tox/dist/tasks-0.1.1.zip
 py37installed:atomicwrites==1.2.1,attrs==18.2.0,Click==7.0,
@@ -921,7 +921,7 @@ tests/unit/test_task.py.... [100%]
 
 
 ```
-=====================62 passed in 0.46 seconds=====================
+===================== 62 passed in 0.46 seconds =====================
 ______________________________summary______________________________
 py27:commandssucceeded
 py37:commandssucceeded
@@ -1034,7 +1034,7 @@ collected1 item
 
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
 
-================1 passed in 0.02 seconds=================
+================ 1 passed in 0.02 seconds =================
 ```
 
 This is great if you just want to use pytest as a test runner for unittest.
@@ -1089,7 +1089,7 @@ collected2 items
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[ 50%]
 test_delete_pytest .py::test_delete_decreases_countPASSED[100%]
 
-================2 passed in 0.03 seconds=================
+================ 2 passed in 0.03 seconds =================
 ```
 
 If you run the pytest version first, something goes haywire:
@@ -1120,7 +1120,7 @@ global_tasksdb
 E AttributeError:'NoneType'objecthas no attribute'stop_tasks_db'
 
 ../tasks_proj_v2/src/tasks/api.py:128:AttributeError
-============2 passed,1 errorin 0.14 seconds============
+============ 2 passed,1 error in 0.14 seconds ============
 ```
 
 You can see that something goes wrong at the end, after both tests have run
@@ -1145,7 +1145,7 @@ TEARDOWNF tasks_db
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_count.
 TEARDOWNS tasks_db_session
 TEARDOWNS tmpdir_factoryE
-2 passed,1 errorin 0.15seconds
+2 passed,1 error in 0.15 seconds
 ```
 
 The session scope teardown fixtures are run after all the tests, including the
@@ -1202,7 +1202,7 @@ collected2 items
 test_delete_pytest.py::test_delete_decreases_countPASSED[ 50%]
 test_delete_unittest_fix.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
 
-================2 passed in 0.03 seconds=================
+================ 2 passed in 0.03 seconds =================
 ```
 
 Note that this is only necessary for session scope resources shared by unittest

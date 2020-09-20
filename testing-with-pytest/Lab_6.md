@@ -484,7 +484,7 @@ collected1 item
 
 a/test_foo.py. [100%]
 
-================1 passed in 0.01 seconds=================
+================ 1 passed in 0.01 seconds =================
 $ pytest b
 
 =================== test session starts ===================
@@ -493,7 +493,7 @@ collected1 item
 
 b/test_foo.py. [100%]
 
-================1 passed in 0.01 seconds=================
+================ 1 passed in 0.01 seconds =================
 $ pytest
 
 =================== test session starts ===================
@@ -514,7 +514,7 @@ HINT:remove__pycache__/ .pycfiles
 and/oruse a uniquebasename for yourtestfilemodules
 !!!!!!!!!Interrupted:1 errorsduringcollection!!!!!!!!!
 
-=================1 errorin 0.15 seconds=================
+================= 1 error in 0.15 seconds =================
 ```
 
 That error message highlights that we have two files named the same, but
@@ -546,7 +546,7 @@ collected2 items
 a/test_foo.py. [ 50%]
 b/test_foo.py. [100%]
 
-================2 passed in 0.03 seconds=================
+================ 2 passed in 0.03 seconds =================
 ```
 
 There, all better. You might say to yourself that you’ll never have duplicate

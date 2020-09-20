@@ -143,6 +143,7 @@ Later, even if you’re offline, you can install from the cache:
 
 ```
 (my_env) $ pip install --no-index --find-links=~/pipcache pytest
+
 Looking in links: /Users/okken/pipcache
 Collecting pytest
 

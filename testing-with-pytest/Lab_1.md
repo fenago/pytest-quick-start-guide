@@ -25,36 +25,32 @@ def test_passing():
 
 This is what it looks like when it’s run:
 
+
+#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1 
+
+#### $ pytest test_one.py
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest test_one.py
 
 ===================== test session starts ======================
 collected1 item
 
 test_one.py.
 
-===================1 passed in 0.01 seconds===================
+=================== 1 passed in 0.01 seconds ===================
 ```
 
-The dot after test_one.py means that one test was run and it passed. The [100%]
-is a percentage inticator showing how much of the test suite is done so far.
-Since there is just one test in the test session, one test is 100% of the tests.
-If you have two tests, each would be 50%. If you need more information, you
-can use -v or --verbose:
 
+#### $ pytest -v test_one.py
 ```
-$ pytest -v test_one.py
-
 ===================== test session starts ======================
 collected1 item
 
 test_one.py::test_passing PASSED            [100%]
 
-===================1 passed in 0.01 seconds===================
+=================== 1 passed in 0.01 seconds ===================
 ```
 
-If you have a color terminal, the PASSED and bottom line are green. It’s nice.
 This is a failing test:
 
 ```
@@ -65,12 +61,10 @@ def test_passing():
 
 ```
 
-The way pytest shows you test failures is one of the many reasons developers
-love pytest. Let’s watch this fail:
 
+
+#### $ pytest test_two.py
 ```
-$ pytest test_two.py
-
 
 ===================== test session starts ======================
 collected 1 item
@@ -86,15 +80,9 @@ test_two.py:2: AssertionError
 =================== 1 failed in 0.10 seconds ===================
 ```
 
-Cool. The failing test, test_failing, gets its own section to show us why it failed.
-And pytest tells us exactly what the first failure is: index 0 is a mismatch.
-Much of this is in red to make it really stand out (if you’ve got a color terminal).
-That’s already a lot of information, but there’s a line that says Use -v to get the
-full diff. Let’s do that:
 
+#### $ pytest -v test_two.py
 ```
-$ pytest -v test_two.py
-
 ===================== test session starts ======================
 collected1 item
 
@@ -114,82 +102,19 @@ E       + (3, 2, 1)
 E? ^ ^
 
 test_two.py:2:AssertionError
-===================1 failedin 0.05 seconds===================
+=================== 1 failed in 0.05 seconds ===================
 ```
-
-Wow. pytest adds little carets (^) to show us exactly what’s different.
-If you’re already impressed with how easy it is to write, read, and run tests
-with pytest, and how easy it is to read the output to see where the tests fail,
-well, you ain’t seen nothing yet. There’s lots more where that came from. Stick
-
-around and let me show you why I think pytest is the absolute best test
-framework available.
-
-In the rest of this lab, you’ll install pytest, look at different ways to run
-it, and run through some of the most often used command-line options. In
-future labs, you’ll learn how to write test functions that maximize the
-power of pytest, how to pull setup code into setup and teardown sections
-called fixtures, and how to use fixtures and plugins to really supercharge
-your software testing.
-
-But first, I have an apology. I’m sorry that the test, assert(1, 2, 3) == (3, 2, 1), is
-so boring. Snore. No one would write a test like that in real life. Software tests
-are comprised of code that tests other software that you aren’t always positive
-will work. And (1, 2, 3) == (1, 2, 3) will always work. That’s why we won’t use
-overly silly tests like this in the rest of the book. We’ll look at tests for a real
-software project. We’ll use an example project called Tasks that needs some
-test code. Hopefully it’s simple enough to be easy to understand, but not so
-simple as to be boring.
-
-Another great use of software tests is to test your assumptions about how
-the software under test works, which can include testing your understanding
-of third-party modules and packages, and even builtin Python data structures.
-The Tasks project uses a structure called Task, which is based on the named-
-tuple factory method, which is part of the standard library. The Task structure
-is used as a data structure to pass information between the UI and the API.
-For the rest of this lab, I’ll use Task to demonstrate running pytest and
-using some frequently used command-line options.
-
-Here’s Task:
-
-```
-from collections import namedtuple
-Task = namedtuple('Task', ['summary', 'owner', 'done', 'id'])
-```
-
-The namedtuple() factory function has been around since Python 2.6, but I still
-find that many Python developers don’t know how cool it is. At the very least,
-using Task for test examples will be more interesting than (1, 2, 3) == (1, 2, 3)
-or add(1,2) == 3.
-
-Before we jump into the examples, let’s take a step back and talk about how
-to get pytest and install it.
-
 
 ### Getting pytest
 
-The headquarters for pytest is https://docs.pytest.org. That’s the official documen-
-tation. But it’s distributed through PyPI (the Python Package Index) at
-https://pypi.python.org/pypi/pytest.
-
-Like other Python packages distributed through PyPI, use pip to install pytest
-into the virtual environment you’re using for testing:
-
+The headquarters for pytest is https://docs.pytest.org. That’s the official documentation.
 ```
 python3 -m venv venv
 source venv/bin/activate
 pip install pytest
 ```
 
-If you are not familiar with virtualenv or pip, I have got you covered. Check
-out Appendix 1, Virtual Environmentsand Appendix 2, pip,
-on page 159.
-
-**What About Windows, Python 2, and virtualenv?**
-
-The example for venv and pip should work on many POSIX systems, such as Linux
-and macOS, and many versions of Python, including Python 3.4 and later. With
-Python 2.7 and with some distributions of Linux, you will need to use virtualenv:
+Windows
 
 ```
 $ python -m pip install virtualenv
@@ -208,18 +133,12 @@ C:\> pip install pytest
 ```
 ### Running pytest
 
-```
-$ pytest --help
+
+#### $ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 ...
-
 ```
-
-Given no arguments, pytest looks at your current directory and all subdirec-
-tories for test files and runs the test code it finds. If you give pytest a filename,
-a directory name, or a list of those, it looks there instead of the current
-directory. Each directory listed on the command line is recursively traversed
-to look for test code.
+```
 
 For example, let’s create a subdirectory called tasks, and start with this test file:
 
@@ -251,14 +170,8 @@ def test_member_access():
 ```
 
 You can use __new__.__defaults__ to create Task objects without having to specify
-all the fields. The test_defaults() test is there to demonstrate and validate how
-the defaults work.
-
-The test_member_access() test is to demonstrate how to access members by name
-and not by index, which is one of the main reasons to use namedtuples.
-
-Let’s put a couple more tests into a second file to demonstrate the _asdict() and
-_replace() functionality:
+all the fields. 
+Demonstrate the _asdict() and _replace() functionality:
 
 ```
 ch1/tasks/test_four.py
@@ -298,15 +211,14 @@ t_expected= Task( 'finishbook' , 'brian' , True,10)
 assert t_after== t_expected
 ```
 
-To run pytest, you have the option to specify files and directories. If you don’t
-specify any files or directories, pytest will look for tests in the current working
-directory and subdirectories. It looks for files starting with test_ or ending with
-_test. From the ch1 directory, if you run pytest with no commands, you’ll run
-four files’ worth of tests:
+Run pytest
+
+
+#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1 
+
+#### $ pytest
 
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest
 ===================== test session starts ======================
 collected6 items
 
@@ -325,48 +237,45 @@ E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-==============1 failed, 5 passed in 0.17 seconds==============
+============== 1 failed, 5 passed in 0.17 seconds ==============
 ```
 
-To get just our new task tests to run, you can give pytest all the filenames
-you want run, or the directory, or call pytest from the directory where our
-tests are:
+Call pytest from the directory where our tests are:
 
+#### $ pytest tasks/test_three.py tasks/test_four.py
 ```
-$ pytest tasks/test_three.py tasks/test_four.py
-
 ===================== test session starts ======================
 collected4 items
 
 tasks/test_three.py.. [ 50%]
 tasks/test_four.py.. [100%]
 
-===================4 passed in 0.02 seconds===================
+=================== 4 passed in 0.02 seconds ===================
+```
 
-$ pytest tasks
-
+#### $ pytest tasks
+```
 ===================== test session starts ======================
 collected4 items
 
 tasks/test_four.py.. [ 50%]
 tasks/test_three.py.. [100%]
 
-===================4 passed in 0.02 seconds===================
+=================== 4 passed in 0.02 seconds ===================
+```
+#### $ cd tasks
 
-$ cd tasks
-$ pytest
+#### $ pytest
 
-
+```
 ===================== test session starts ======================
-```
 
-```
 collected4 items
 
 test_four.py.. [ 50%]
 test_three.py.. [100%]
 
-===================4 passed in 0.02 seconds===================
+=================== 4 passed in 0.02 seconds ===================
 ```
 
 The part of pytest execution where pytest goes off and finds which tests to
@@ -441,7 +350,7 @@ The percentage of completed tests is reported after each test file and based
 on percentage of the number of test cases collected and selected to run.
 
 ```
-_===================2 passed in 0.01  seconds===================_
+_=================== 2 passed in 0.01  seconds ===================_
 ```
 This refers to the number of passing tests and how long the entire test
 session took. If non-passing tests were present, the number of each cate-
@@ -483,7 +392,7 @@ collected1 item
 
 tasks/test_four.py::test_asdict PASSED            [100%]
 
-===================1 passed in 0.01 seconds===================
+=================== 1 passed in 0.01 seconds ===================
 ```
 
 Now, let’s take a look at some of the options.
@@ -530,7 +439,7 @@ collected6 items
 <Function'test_defaults'>
 <Function'test_member_access'>
 
-==============no tests ran in 0.02 seconds===============
+==============no tests ran in 0.02 seconds ===============
 ```
 
 The --collect-only option is helpful to check if other options that select tests are correct
@@ -555,7 +464,7 @@ collected6 items/ 4 deselected
 <Module'tasks/test_three.py'>
 <Function'test_defaults'>
 
-==============4 deselectedin 0.02 seconds===============
+============== 4 deselected in 0.02 seconds ===============
 ```
 
 Yep. That looks like what we want. Now you can run them by removing the
@@ -572,7 +481,7 @@ collected6 items/ 4 deselected
 tasks/test_four.py. [ 50%]
 tasks/test_three.py. [100%]
 
-=========2 passed,4 deselectedin 0.03 seconds==========
+========= 2 passed,4 deselected in 0.03 seconds ==========
 ```
 
 Hmm. Just dots. So they passed. But were they the right tests? One way to
@@ -588,7 +497,7 @@ collected6 items/ 4 deselected
 tasks/test_four.py::test_asdict PASSED            [ 50%]
 tasks/test_three.py::test_defaults PASSED            [100%]
 
-========= 2 passed, 4 deselectedin 0.02 seconds ==========
+========= 2 passed, 4 deselected in 0.02 seconds ==========
 ```
 
 Yep. They were the correct tests.
@@ -663,7 +572,7 @@ E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-===========1 failed, 1 passed in 0.13 seconds============
+=========== 1 failed, 1 passed in 0.13 seconds ============
 ```
 
 Near the top of the output you see that all six tests (or “items”) were collected,
@@ -684,7 +593,7 @@ test_two.pyF [ 33%]
 tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
-===========1 failed, 5 passed in 0.07 seconds============
+=========== 1 failed, 5 passed in 0.07 seconds ============
 ```
 
 This demonstrates that without the -x, pytest notes failure in test_two.py and
@@ -949,7 +858,7 @@ collected4 items
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
 
-===========1 failed, 3 passed in 0.06 seconds============
+=========== 1 failed, 3 passed in 0.06 seconds ============
 ```
 
 --tb=line in many cases is enough to tell what’s wrong. If you have a ton of
@@ -968,7 +877,7 @@ tasks/test_three.py.. [100%]
 /home/jovyan/work/testing-with-pytest/code/ch1/tasks/test_four.py:24:
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
-===========1 failed, 3 passed in 0.07 seconds============
+=========== 1 failed, 3 passed in 0.07 seconds ============
 
 The next step up in verbose tracebacks is --tb=short:
 
@@ -987,7 +896,7 @@ E       AssertionError:assertTask(summary=...e=True,id=10)==
 Task(summary='...e=True,id=11)
 E       At index3 diff:10 != 11
 E       Use -v to get the fulldiff
-===========1 failed, 3 passed in 0.07 seconds============
+=========== 1 failed, 3 passed in 0.07 seconds ============
 ```
 
 That’s definitely enough to tell you what’s going on.
@@ -1026,7 +935,7 @@ tasks/test_three.py.. [100%]
 0.10scall tasks/test_four.py::test_replace
 0.00ssetup tasks/test_three.py::test_defaults
 0.00steardowntasks/test_four.py::test_asdict
-================4 passed in 0.13 seconds=================
+================ 4 passed in 0.13 seconds =================
 ```
 
 The slow test with the extra sleep shows up right away with the label call,
@@ -1036,13 +945,13 @@ chance for you to add code to get data or the software system under test into
 a precondition state before the test runs, as well as clean up afterwards if
 necessary. I cover fixtures in depth in Lab 3, pytest Fixtures
 
-**-- version
+**--version**
 
 The --version option shows the version of pytest and the directory where it’s
 installed:
 
 ```
-$ pytest -- version
+$ pytest --version
 Thisis pytestversion3.x.y,importedfrom
 /path/to/venv/lib/python3.x/site-packages/pytest.py
 ```
