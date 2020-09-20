@@ -513,6 +513,7 @@ test_two.py F [ 33%]
 tasks/test_four.py .. [ 66%]
 tasks/test_three.py .. [100%]
 =========== 1 failed,  5 passed in 0.07 seconds ============
+```
 
 #### $ pytest --maxfail=1 --tb=no 
     
@@ -703,6 +704,8 @@ tasks/test_three.py.. [100%]
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
 =========== 1 failed, 3 passed in 0.07 seconds============
+```
+
 
 #### $ pytest --tb=shorttasks
     
@@ -733,27 +736,25 @@ E       Use -v to get the fulldiff
 ```
 =================== test session starts ===================
 collected 4 items
-
-tasks/test_four.py.. [ 50%]
-tasks/test_three.py.. [100%]
-
-================slowest 3 test durations=================
-0.10scall tasks/test_four.py::test_replace
-0.00ssetup tasks/test_three.py::test_defaults
-0.00steardowntasks/test_four.py::test_asdict
-================4 passed in 0.13 seconds=================
+tasks/test_four.py .. [ 50%]
+tasks/test_three.py .. [100%]
+================ slowest 3 test durations =================
+0.10s call tasks/test_four.py::test_replace
+0.00s setup tasks/test_three.py::test_defaults
+0.00s teardown tasks/test_four.py::test_asdict
+================ 4 passed in 0.13 seconds =================
 ```
 
-**-- version
+**--version**
 
 The --version option shows the version of pytest and the directory where it’s
 installed:
 
 
-#### $ pytest -- version
+#### $ pytest --version
 
 ```
-Thisis pytestversion3.x.y,importedfrom
+This is pytest version 3.x.y, imported from
 /path/to/venv/lib/python3.x/site-packages/pytest.py
 ```
 
@@ -766,8 +767,7 @@ Thisis pytestversion3.x.y,importedfrom
 Even if you know you don’t need virtual environments for the project
 you’re working on, humor me and learn enough about them to create one
 for trying out things in this course. I resisted using them for a very long
-time, and now I always use them. Read Appendix 1, Virtual Environments,
-on page 157 if you’re having any difficulty.
+time, and now I always use them. Read Appendix 1, Virtual Environments, if you’re having any difficulty.
 
 2. Practice activating and deactivating your virtual environment a few times.
 
