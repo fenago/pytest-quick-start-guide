@@ -26,9 +26,9 @@ def test_passing():
 This is what it looks like when it’s run:
 
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1 
 
-#### $ pytest test_one.py
+##### $ pytest test_one.py
 
 ```
 
@@ -41,7 +41,7 @@ test_one.py.
 ```
 
 
-#### $ pytest -v test_one.py
+##### $ pytest -v test_one.py
 ```
 ===================== test session starts ======================
 collected 1 item
@@ -63,7 +63,7 @@ def test_passing():
 
 
 
-#### $ pytest test_two.py
+##### $ pytest test_two.py
 ```
 
 ===================== test session starts ======================
@@ -81,7 +81,7 @@ test_two.py:2: AssertionError
 ```
 
 
-#### $ pytest -v test_two.py
+##### $ pytest -v test_two.py
 ```
 ===================== test session starts ======================
 collected 1 item
@@ -134,7 +134,7 @@ C:\> pip install pytest
 ### Running pytest
 
 
-#### $ pytest --help
+##### $ pytest --help
 usage:pytest[options][file_or_dir][file_or_dir][...]
 ...
 ```
@@ -214,9 +214,9 @@ assert t_after== t_expected
 Run pytest
 
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1 
 
-#### $ pytest
+##### $ pytest
 
 ```
 ===================== test session starts ======================
@@ -242,7 +242,7 @@ test_two.py:2:AssertionError
 
 Call pytest from the directory where our tests are:
 
-#### $ pytest tasks/test_three.py tasks/test_four.py
+##### $ pytest tasks/test_three.py tasks/test_four.py
 ```
 ===================== test session starts ======================
 collected 4 items
@@ -253,7 +253,7 @@ tasks/test_four.py.. [100%]
 =================== 4 passed in 0.02 seconds ===================
 ```
 
-#### $ pytest tasks
+##### $ pytest tasks
 ```
 ===================== test session starts ======================
 collected 4 items
@@ -263,9 +263,9 @@ tasks/test_three.py.. [100%]
 
 =================== 4 passed in 0.02 seconds ===================
 ```
-#### $ cd tasks
+##### $ cd tasks
 
-#### $ pytest
+##### $ pytest
 
 ```
 ===================== test session starts ======================
@@ -288,9 +288,9 @@ run is called _test discovery_.
 
 
     
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
 
-#### $ pytest test_three.py
+##### $ pytest test_three.py
     
 ```
 
@@ -326,9 +326,9 @@ run just one. Specify the file directly, and add a ::test_name, like this:
 
 
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest -v tasks/test_four.py::test_asdict
+##### $ pytest -v tasks/test_four.py::test_asdict
     
 ```
 ===================== test session starts ======================
@@ -341,7 +341,7 @@ tasks/test_four.py::test_asdict PASSED            [100%]
 
 ### Using Options
 
-#### $ pytest --help
+##### $ pytest --help
 
 ```
 ```
@@ -352,9 +352,9 @@ tasks/test_four.py::test_asdict PASSED            [100%]
 The --collect-only option shows you which tests will be run with the given options
 and configuration. 
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
     
-#### $ pytest --collect-only
+##### $ pytest --collect-only
 
 ```
 =================== test session starts ===================
@@ -378,9 +378,9 @@ before running the tests. We’ll use it again with -k to show how that works.
 
 **-k EXPRESSION**
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
     
-#### $ pytest -k "asdict or defaults" --collect-only
+##### $ pytest -k "asdict or defaults" --collect-only
 
 ```
 =================== test session starts ===================
@@ -393,7 +393,7 @@ collected 6 items/ 4 deselected
 ==============4 deselectedin 0.02 seconds===============
 ```
 
-#### $ pytest -k "asdict or defaults"
+##### $ pytest -k "asdict or defaults"
     
 ```
 
@@ -406,7 +406,7 @@ tasks/test_three.py. [100%]
 ========= 2 passed,4 deselectedin 0.03 seconds==========
 ```
 
-#### $ pytest -v -k "asdict or defaults"
+##### $ pytest -v -k "asdict or defaults"
 
 ```
 
@@ -434,9 +434,9 @@ def test_member_access ():
 
 Do the same for test_replace().
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1/tasks
     
-#### $ pytest -m run_these_please
+##### $ pytest -m run_these_please
 
 ```
 =================== test session starts ===================
@@ -450,9 +450,9 @@ test_three.py . [100%]
 
 Let’s try it on the six tests we have so far:
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
     
-#### $ pytest -x
+##### $ pytest -x
 
 ```
 =================== test session starts ===================
@@ -477,9 +477,9 @@ test_two.py:2:AssertionError
 Near the top of the output you see that all six tests (or “items”) were collected ,
 and in the bottom line you see that one test failed and one passed.
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
     
-#### $ pytest --tb=no 
+##### $ pytest --tb=no 
 
 ```
 =================== test session starts ===================
@@ -501,9 +501,9 @@ continues on with further testing.
 The -x option stops after one test failure. 
 
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
     
-#### $ pytest --maxfail=2 --tb=no
+##### $ pytest --maxfail=2 --tb=no
 
 ```
 =================== test session starts ===================
@@ -515,7 +515,7 @@ tasks/test_three.py .. [100%]
 =========== 1 failed,  5 passed in 0.07 seconds ============
 ```
 
-#### $ pytest --maxfail=1 --tb=no 
+##### $ pytest --maxfail=1 --tb=no 
     
 ```
 =================== test session starts ===================
@@ -531,9 +531,9 @@ test_two.py F
 The -s flag allows print statements—or really any output that normally would
 be printed to stdout—to actually be printed to stdout while the tests are running.
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest --lf
+##### $ pytest --lf
 
 ```
 =================== test session starts ===================
@@ -556,11 +556,11 @@ test_two.py:2: AssertionError
 The --ff/--failed-first option will do the same as --last-failed
     
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest --ff --tb=no 
+##### $ pytest --ff --tb=no 
     
-#### $ pytest --ff --tb=no 
+##### $ pytest --ff --tb=no 
 
 ```
 =================== test session starts ===================
@@ -581,9 +581,9 @@ test_two.py F [ 16%]
 
 The -v/--verbose option reports more information than without it.
     
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest -v --ff --tb=no 
+##### $ pytest -v --ff --tb=no 
 
 ```
 =================== test session starts ===================
@@ -602,9 +602,9 @@ tasks/test_three.py::test_member_access PASSED            [100%]
 
 The -q/--quiet option is the opposite of -v/--verbose
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest -q
+##### $ pytest -q
 
 ```
 .F.... [100%]
@@ -635,9 +635,9 @@ to
 t_expected= Task( 'finishbook' , 'brian' , True,11)
 ```
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest -l tasks
+##### $ pytest -l tasks
 
 ```
 =================== test session starts ===================
@@ -674,9 +674,9 @@ The --tb=style option modifies the way tracebacks for failures are output.
 --tb=no removes the traceback entirely:
 
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest --tb=no tasks
+##### $ pytest --tb=no tasks
 
 ```
 =================== test session starts ===================
@@ -690,7 +690,7 @@ tasks/test_three.py.. [100%]
 
 --tb=line in many cases is enough to tell what’s wrong. 
 
-#### $ pytest --tb=linetasks
+##### $ pytest --tb=linetasks
 
 ```
 =================== test session starts ===================
@@ -707,7 +707,7 @@ Task(summary='...e=True,id=11)
 ```
 
 
-#### $ pytest --tb=shorttasks
+##### $ pytest --tb=shorttasks
     
 ```
 =================== test session starts ===================
@@ -729,9 +729,9 @@ E       Use -v to get the fulldiff
 
 **--durations=N**
 
-#### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 
-#### $ pytest --durations=3 tasks
+##### $ pytest --durations=3 tasks
 
 ```
 =================== test session starts ===================
@@ -751,7 +751,7 @@ The --version option shows the version of pytest and the directory where it’s
 installed:
 
 
-#### $ pytest --version
+##### $ pytest --version
 
 ```
 This is pytest version 3.x.y, imported from
