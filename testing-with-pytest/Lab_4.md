@@ -431,7 +431,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
 $ pytest --verbose --tb=no test_pass_fail.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 test_pass_fail.py::test_this_passes PASSED            [ 50%]
 test_pass_fail.py::test_this_fails FAILED [100%]
@@ -447,7 +447,7 @@ ously will be run first, followed by the rest of the session:
 $ pytest --verbose --tb=no --fftest_pass_fail.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 run-last-failure:rerunprevious1 failurefirst
 
 test_pass_fail.py::test_this_fails FAILED [ 50%]
@@ -462,7 +462,7 @@ Or you can use --lf or --last-failed to just run the tests that failed the last 
 venv)$ pytest --verbose --tb=no --lftest_pass_fail.py
 
 =================== test session starts ===================
-collected2 items/ 1 deselected
+collected 2 items/ 1 deselected
 run-last-failure:rerunprevious1 failure
 
 test_pass_fail.py::test_this_fails FAILED [100%]
@@ -1168,7 +1168,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/1
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 =================== test session starts ===================
-collected3 items
+collected 3 items
 
 unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.divide FAILED[ 66%]
@@ -1247,7 +1247,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/2
 $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 =================== test session starts ===================
-collected3 items
+collected 3 items
 
 unnecessary_math.py::unnecessary_math PASSED            [ 33%]
 unnecessary_math.py::unnecessary_math.dividePASSED[ 66%]

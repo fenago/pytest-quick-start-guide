@@ -243,7 +243,7 @@ $ pytest
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected57 items
+collected 57 items
 
 tests/func/test_add.py... [ 5%]
 tests/func/test_add_variety.py....................[ 40%]
@@ -281,7 +281,7 @@ $ pytest -v --tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected9 items/ 7 deselected
+collected 9 items/ 7 deselected
 
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py::TestAdd::test_done_not_bool FAILED[100%]
@@ -331,7 +331,7 @@ $ pytest --tb=no test_api_exceptions.py -k TestAdd
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
-collected9 items/ 7 deselected
+collected 9 items/ 7 deselected
 
 test_api_exceptions.py.O
 ```
@@ -351,7 +351,7 @@ $ pytest -v --tb=no test_api_exceptions.py -k TestAdd
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
-collected9 items/ 7 deselected
+collected 9 items/ 7 deselected
 
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
@@ -399,7 +399,7 @@ $ pytest --tb=no test_api_exceptions.py -k TestAdd
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected9 items/ 7 deselected
+collected 9 items/ 7 deselected
 
 test_api_exceptions.py.F [100%]
 ```
@@ -418,7 +418,7 @@ $ pytest --nice--tb=no test_api_exceptions.py -k TestAdd
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
-collected9 items/ 7 deselected
+collected 9 items/ 7 deselected
 
 test_api_exceptions.py.O [100%]
 
@@ -431,7 +431,7 @@ $ pytest -v --nice--tb=no test_api_exceptions.py -k TestAdd
 =================== test session starts ===================
 Thanksfor runningthe tests.
 plugins:cov-2.5.1
-collected9 items/ 7 deselected
+collected 9 items/ 7 deselected
 
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
@@ -790,7 +790,7 @@ Runningsetup.pybdist_wheelfor pytest-nice... done
 ...
 
 Successfullybuiltpytest-nice
-Installingcollectedpackages:pytest-nice
+Installingcollected packages:pytest-nice
 Successfullyinstalledpytest-nice-0.1.0
 ```
 
@@ -801,7 +801,7 @@ $ pytest -v
 
 =================== test session starts ===================
 plugins:nice-0.1.0,cov-2.5.1
-collected7 items
+collected 7 items
 
 test_nice.py::test_pass_fail PASSED            [ 14%]
 test_nice.py::test_with_nice PASSED            [ 28%]
@@ -866,7 +866,7 @@ $ pip install dist/pytest-nice-0.1.0.tar.gz
 Processing./dist/pytest-nice-0.1.0.tar.gz
 ...
 
-Installingcollectedpackages:pytest-nice
+Installingcollected packages:pytest-nice
 Successfullyinstalledpytest-nice-0.1.0
 ```
 

@@ -192,7 +192,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest -v test_add.py -k valid_id
 
 =================== test session starts ===================
-collected3 items/ 2 deselected
+collected 3 items/ 2 deselected
 
 test_add.py::test_add_returns_valid_id PASSED            [100%]
 
@@ -207,7 +207,7 @@ nately, pytest provides a command-line flag, --setup-show , that does just that:
 $ pytest --setup-show test_add.py -k valid_id
 
 =================== test session starts ===================
-collected3 items/ 2 deselected
+collected 3 items/ 2 deselected
 
 test_add.py
 SETUP S tmpdir_factory
@@ -258,7 +258,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest test_fixtures.py::test_a_tuple
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_fixtures.pyF [100%]
 
@@ -291,7 +291,7 @@ What happens if the assert (or any exception) happens in the fixture?
 $ pytest -v test_fixtures.py::test_other_data
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_fixtures.py::test_other_dataERROR [100%]
 
@@ -413,7 +413,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
 $ pytest --setup-show test_add.py::test_add_increases_count
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_add.py
 SETUP S tmpdir_factory
@@ -532,7 +532,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest --setup-show test_scope.py
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_scope.py
 SETUP S sess_scope
@@ -656,7 +656,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
 $ pytest
 
 =================== test session starts ===================
-collected55 items
+collected 55 items
 
 tests/func/test_add.py... [ 5%]
 tests/func/test_add_variety.py....................[ 41%]
@@ -676,7 +676,7 @@ different scoping worked as expected:
 $ pytest --setup-show tests/func/test_add.py
 
 =================== test session starts ===================
-collected3 items
+collected 3 items
 
 tests/func/test_add.py
 SETUP S tmpdir_factory
@@ -793,7 +793,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3
 $ pytest -v -s test_autouse.py
 
 ===================== test session starts ======================
-collected2 items
+collected 2 items
 
 test_autouse.py::test_1PASSED
 testduration: 1.0 seconds
@@ -847,7 +847,7 @@ verse_and_everything. That name even shows up if we run it with --setup-show :
 $ pytest --setup-show test_rename_fixture.py
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_rename_fixture.py
 SETUP F lue
@@ -981,7 +981,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
 $ pytest -v test_add_variety2.py::test_add_a
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_add_variety2.py::test_add_a[a_task0] PASSED            [ 25%]
 test_add_variety2.py::test_add_a[a_task1] PASSED            [ 50%]
@@ -1013,9 +1013,9 @@ t_from_db= tasks.get(task_id)
 This gives us better identifiers:
 
 ```
-$ pytest -v test_add_variety2.py::test_add_b**
+$ pytest -v test_add_variety2.py::test_add_b
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_add_variety2.py::test_add_b[Task(sleep,None,True)] PASSED[ 25%]
 test_add_variety2.py::test_add_b[Task(wake,brian,False)] PASSED[ 50%]
@@ -1062,7 +1062,7 @@ cleaner than generating a full list ahead of time, and looks the same:
 $ pytest -v test_add_variety2.py::test_add_c
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_add_variety2.py::test_add_c[Task(sleep,None,True)] PASSED[ 25%]
 test_add_variety2.py::test_add_c[Task(wake,brian,False)] PASSED[ 50%]

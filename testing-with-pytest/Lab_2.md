@@ -247,7 +247,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit
 $ pytest test_task.py
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_task.py.... [100%]
 
@@ -507,7 +507,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v -m smoketest_api_exceptions.py
 
 =================== test session starts ===================
-collected7 items/ 5 deselected
+collected 7 items/ 5 deselected
 
 test_api_exceptions.py::test_list_raises PASSED            [ 50%]
 test_api_exceptions.py::test_get_raises PASSED            [100%]
@@ -517,7 +517,7 @@ test_api_exceptions.py::test_get_raises PASSED            [100%]
 $ pytest -v -m get test_api_exceptions.py
 
 =================== test session starts ===================
-collected7 items/ 6 deselected
+collected 7 items/ 6 deselected
 
 test_api_exceptions.py::test_get_raises PASSED            [100%]
 
@@ -688,7 +688,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest test_unique_id_1.py
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_unique_id_1.pyF [100%]
 
@@ -744,7 +744,7 @@ Let’s run again:
 $ pytest -v test_unique_id_2.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 test_unique_id_2.py::test_unique_id_1SKIPPED [ 50%]
 test_unique_id_2.py::test_unique_id_2 PASSED            [100%]
@@ -780,7 +780,7 @@ Here’s the output of the changed code:
 $ pytest test_unique_id_3.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 test_unique_id_3.pys. [100%]
 
@@ -795,7 +795,7 @@ We can see which one with -v:
 $ pytest -v test_unique_id_3.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 test_unique_id_3.py::test_unique_id_1SKIPPED [ 50%]
 test_unique_id_3.py::test_unique_id_2 PASSED            [100%]
@@ -810,7 +810,7 @@ But we still don’t know why. We can see those reasons with -rs:
 $ pytest -rs test_unique_id_3.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 test_unique_id_3.pys. [100%]
 =================shorttestsummaryinfo=================
@@ -877,7 +877,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest test_unique_id_4.py
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_unique_id_4.pyxxX. [100%]
 
@@ -893,7 +893,7 @@ The x is for XFAIL, which means “expected to fail.” The capital X is for XPA
 $ pytest -v test_unique_id_4.py
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_unique_id_4.py::test_unique_id_1xfail [ 25%]
 test_unique_id_4.py::test_unique_id_is_a_duckxfail[ 50%]
@@ -932,7 +932,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest tests/func--tb=no 
 
 =================== test session starts ===================
-collected50 items
+collected 50 items
 
 tests/func/test_add.py.. [ 4%]
 tests/func/test_add_variety.py....................[ 44%]
@@ -953,7 +953,7 @@ run a specific directory, class, and test.
 $ pytest -v tests/func--tb=no 
 
 =================== test session starts ===================
-collected50 items
+collected 50 items
 
 tests/func/test_add.py::test_add_returns_valid_idPASSED[ 2%]
 tests/func/test_add.py::test_added_task_has_id_setPASSED[ 4%]
@@ -989,7 +989,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest tests/func/test_add.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 tests/func/test_add.py.. [100%]
 
@@ -1007,7 +1007,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v tests/func/test_add.py::test_add_returns_valid_id
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 tests/func/test_add.py::test_add_returns_valid_idPASSED[100%]
 
@@ -1048,7 +1048,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v tests/func/test_api_exceptions.py::TestUpdate
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_idPASSED[ 50%]
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_taskPASSED[100%]
@@ -1066,7 +1066,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 tests/func/test_api_exceptions.py::TestUpdate::test_bad_idPASSED[100%]
 
@@ -1092,7 +1092,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
 $ pytest -v -k _raises
 
 =================== test session starts ===================
-collected56 items/ 51 deselected
+collected 56 items/ 51 deselected
 
 tests/func/test_api_exceptions.py::test_add_raisesPASSED[ 20%]
 tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 40%]
@@ -1109,7 +1109,7 @@ We can use and and not to get rid of the test_delete_raises() from the session:
 $ pytest -v -k "raisesand not delete"
 
 =================== test session starts ===================
-collected56 items/ 52 deselected
+collected 56 items/ 52 deselected
 
 tests/func/test_api_exceptions.py::test_add_raisesPASSED[ 25%]
 tests/func/test_api_exceptions.py::test_list_raisesPASSED[ 50%]
@@ -1180,7 +1180,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_1
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_add_variety.py::test_add_1 PASSED            [100%]
 
@@ -1217,7 +1217,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_2
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_add_variety.py::test_add_2[task0] PASSED            [ 25%]
 test_add_variety.py::test_add_2[task1] PASSED            [ 50%]
@@ -1256,7 +1256,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_3
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 test_add_variety.py::test_add_3[sleep-None-False] PASSED[ 25%]
 test_add_variety.py::test_add_3[wake-brian-False] PASSED[ 50%]
@@ -1274,7 +1274,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_3[sleep-None-False]
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_add_variety.py::test_add_3[sleep-None-False] PASSED[100%]
 
@@ -1289,7 +1289,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 
@@ -1323,7 +1323,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_4
 
 =================== test session starts ===================
-collected5 items
+collected 5 items
 
 test_add_variety.py::test_add_4[task0] PASSED            [ 20%]
 test_add_variety.py::test_add_4[task1] PASSED            [ 40%]
@@ -1367,7 +1367,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_5
 
 =================== test session starts ===================
-collected5 items
+collected 5 items
 
 test_add_variety.py::test_add_5[Task(sleep,None,True)] PASSED[ 20%]
 test_add_variety.py::test_add_5[Task(wake,brian,False)0] PASSED[ 40%]
@@ -1387,7 +1387,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
 
 =================== test session starts ===================
-collected1 item
+collected 1 item
 
 test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)] PASSED[100%]
 
@@ -1426,7 +1426,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::TestAdd
 
 =================== test session starts ===================
-collected10 items
+collected 10 items
 
 test_add_variety.py::TestAdd::test_equivalent[Task(sleep,None,True)] PASSED
 test_add_variety.py::TestAdd::test_equivalent[Task(wake,brian,False)0] PASSED
@@ -1467,7 +1467,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
 $ pytest -v test_add_variety.py::test_add_6
 
 =================== test session starts ===================
-collected3 items
+collected 3 items
 
 test_add_variety.py::test_add_6[justsummary] PASSED[ 33%]
 test_add_variety.py::test_add_6[summary/owner] PASSED[ 66%]

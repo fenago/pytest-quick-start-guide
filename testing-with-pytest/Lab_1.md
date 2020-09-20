@@ -33,7 +33,7 @@ This is what it looks like when it’s run:
 ```
 
 ===================== test session starts ======================
-collected1 item
+collected 1 item
 
 test_one.py.
 
@@ -44,7 +44,7 @@ test_one.py.
 #### $ pytest -v test_one.py
 ```
 ===================== test session starts ======================
-collected1 item
+collected 1 item
 
 test_one.py::test_passing PASSED            [100%]
 
@@ -84,7 +84,7 @@ test_two.py:2: AssertionError
 #### $ pytest -v test_two.py
 ```
 ===================== test session starts ======================
-collected1 item
+collected 1 item
 
 test_two.py::test_failing FAILED [100%]
 
@@ -220,7 +220,7 @@ Run pytest
 
 ```
 ===================== test session starts ======================
-collected6 items
+collected 6 items
 
 test_one.py. [ 16%]
 test_two.pyF [ 33%]
@@ -245,7 +245,7 @@ Call pytest from the directory where our tests are:
 #### $ pytest tasks/test_three.py tasks/test_four.py
 ```
 ===================== test session starts ======================
-collected4 items
+collected 4 items
 
 tasks/test_three.py.. [ 50%]
 tasks/test_four.py.. [100%]
@@ -256,7 +256,7 @@ tasks/test_four.py.. [100%]
 #### $ pytest tasks
 ```
 ===================== test session starts ======================
-collected4 items
+collected 4 items
 
 tasks/test_four.py.. [ 50%]
 tasks/test_three.py.. [100%]
@@ -270,7 +270,7 @@ tasks/test_three.py.. [100%]
 ```
 ===================== test session starts ======================
 
-collected4 items
+collected 4 items
 
 test_four.py.. [ 50%]
 test_three.py.. [100%]
@@ -331,7 +331,7 @@ used. Configuration files could be pytest.ini, tox.ini, or setup.cfg. You’ll l
 configuration files in more detail in Lab 6, Configuration
 
 ```
-_collected2 items_
+_collected 2 items_
 ```
 
 These are the two test functions in the file.
@@ -388,7 +388,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -v tasks/test_four.py::test_asdict
 
 ===================== test session starts ======================
-collected1 item
+collected 1 item
 
 tasks/test_four.py::test_asdict PASSED            [100%]
 
@@ -427,7 +427,7 @@ this lab:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --collect-only
 =================== test session starts ===================
-collected6 items
+collected 6 items
 <Module'test_one.py'>
 <Function'test_passing'>
 <Module'test_two.py'>
@@ -458,7 +458,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -k "asdict or defaults" --collect-only
 
 =================== test session starts ===================
-collected6 items/ 4 deselected
+collected 6 items/ 4 deselected
 <Module'tasks/test_four.py'>
 <Function'test_asdict'>
 <Module'tasks/test_three.py'>
@@ -476,7 +476,7 @@ $ pytest -k "asdict or defaults"
 
 
 =================== test session starts ===================
-collected6 items/ 4 deselected
+collected 6 items/ 4 deselected
 
 tasks/test_four.py. [ 50%]
 tasks/test_three.py. [100%]
@@ -492,7 +492,7 @@ $ pytest -v -k "asdict or defaults"
 
 
 =================== test session starts ===================
-collected6 items/ 4 deselected
+collected 6 items/ 4 deselected
 
 tasks/test_four.py::test_asdict PASSED            [ 50%]
 tasks/test_three.py::test_defaults PASSED            [100%]
@@ -557,7 +557,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest -x
 
 =================== test session starts ===================
-collected6 items
+collected 6 items
 
 test_one.py. [ 16%]
 test_two.pyF
@@ -586,7 +586,7 @@ don’t need to see it again:
 $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=no 
 =================== test session starts ===================
-collected6 items
+collected 6 items
 
 test_one.py. [ 16%]
 test_two.pyF [ 33%]
@@ -853,7 +853,7 @@ $ cd /home/jovyan/work/testing-with-pytest/code/ch1
 $ pytest --tb=no tasks
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
@@ -868,7 +868,7 @@ failing tests, this option can help to show a pattern in the failures:
 ```
 $ pytest --tb=linetasks
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
@@ -883,7 +883,7 @@ The next step up in verbose tracebacks is --tb=short:
 
 $ pytest --tb=shorttasks
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
@@ -926,7 +926,7 @@ $ pytest --durations=3 tasks
 
 
 =================== test session starts ===================
-collected4 items
+collected 4 items
 
 tasks/test_four.py.. [ 50%]
 tasks/test_three.py.. [100%]

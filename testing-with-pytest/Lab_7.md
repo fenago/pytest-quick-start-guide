@@ -81,7 +81,7 @@ $ pytest --tb=no --verbose --lf --maxfail=3
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected96 items/ 54 deselected
+collected 96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
 tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
@@ -101,7 +101,7 @@ $ pytest -v --lf -l -x
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected96 items/ 54 deselected
+collected 96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
 tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
@@ -150,7 +150,7 @@ $ pytest -v --lf -x --pdb
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected96 items/ 54 deselected
+collected 96 items/ 54 deselected
 run-last-failure:rerunprevious42 failures
 
 tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
@@ -297,7 +297,7 @@ $ pytest --cov=src
 
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
-collected62 items
+collected 62 items
 
 tests/func/test_add.py... [ 4%]
 tests/func/test_add_variety.py....................[ 37%]
@@ -347,7 +347,7 @@ $ pytest --cov=src--cov-report=html
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
 
-collected62 items
+collected 62 items
 
 tests/func/test_add.py... [ 4%]
 tests/func/test_add_variety.py....................[ 37%]
@@ -740,7 +740,7 @@ $ pytest -v tests/unit/test_cli.py
 
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
-collected5 items
+collected 5 items
 
 tests/unit/test_cli.py::test_list_no_args PASSED            [ 20%]
 tests/unit/test_cli.py::test_list_print_emptyPASSED[ 40%]
@@ -887,7 +887,7 @@ py27runtests:commands[0]| pytest
 
 ======================== test session starts ========================
 plugins:mock-1.10.0
-collected62 items
+collected 62 items
 
 tests/func/test_add.py... [ 4%]
 tests/func/test_add_variety.py............................ [ 50%]
@@ -908,7 +908,7 @@ py37runtests:commands[0]| pytest
 
 ======================== test session starts ========================
 plugins:mock-1.10.0
-collected62 items
+collected 62 items
 
 tests/func/test_add.py... [ 4%]
 tests/func/test_add_variety.py............................ [ 50%]
@@ -1030,7 +1030,7 @@ $ pytest -v test_delete_unittest.py
 
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
-collected1 item
+collected 1 item
 
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
 
@@ -1084,7 +1084,7 @@ $ pytest -v test_delete_unittest.pytest_delete_pytest .py
 
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
-collected2 items
+collected 2 items
 
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[ 50%]
 test_delete_pytest .py::test_delete_decreases_countPASSED[100%]
@@ -1099,7 +1099,7 @@ If you run the pytest version first, something goes haywire:
 $ pytest -v test_delete_pytest.pytest_delete_unittest.py
 
 =================== test session starts ===================
-collected2 items
+collected 2 items
 
 test_delete_pytest.py::test_delete_decreases_countPASSED[ 50%]
 test_delete_unittest.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]
@@ -1197,7 +1197,7 @@ $ pytest -v test_delete_pytest.pytest_delete_unittest_fix.py
 
 =================== test session starts ===================
 plugins:mock-1.10.0,cov-2.5.1
-collected2 items
+collected 2 items
 
 test_delete_pytest.py::test_delete_decreases_countPASSED[ 50%]
 test_delete_unittest_fix.py::TestNonEmpty::test_delete_decreases_countPASSED[100%]

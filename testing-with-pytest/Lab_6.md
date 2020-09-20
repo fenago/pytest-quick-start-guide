@@ -480,7 +480,7 @@ $ pytest a
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected1 item
+collected 1 item
 
 a/test_foo.py. [100%]
 
@@ -489,7 +489,7 @@ $ pytest b
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected1 item
+collected 1 item
 
 b/test_foo.py. [100%]
 
@@ -498,7 +498,7 @@ $ pytest
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected1 item/ 1 errors
+collected 1 item/ 1 errors
 
 =========================ERRORS==========================
 _____________ERRORcollectingb/test_foo.py______________
@@ -541,7 +541,7 @@ $ pytest
 
 =================== test session starts ===================
 plugins:cov-2.5.1
-collected2 items
+collected 2 items
 
 a/test_foo.py. [ 50%]
 b/test_foo.py. [100%]
