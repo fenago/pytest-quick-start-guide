@@ -33,6 +33,7 @@ $ pip install pytest-repeat
 $ cd tests
 $ pytest -v -k test_list
 $ pytest -v -k test_list
+
 ===================== test session starts =====================
 plugins: repeat-0.7.0, mock-1.10.0
 collected 62 items / 56 deselected
@@ -399,6 +400,8 @@ pytest plugins help make it easier.
 Selenium is a project that is used to automate control of a web browser. The
 pytest-selenium plugin7 is the Python binding for it. With it, you can launch a
 web browser and use it to open URLs, exercise web applications, and fill out
+forms. You can also programmatically control the browser to test a web site
+or web application.
 
 8. https://www.python.org/dev/peps/pep-0008
 9. https://pypi.python.org/pypi/pycodestyle
@@ -413,9 +416,6 @@ web browser and use it to open URLs, exercise web applications, and fill out
 
 
 
-
-forms. You can also programmatically control the browser to test a web site
-or web application.
 
 **pytest-django: Test Django Applications**
 

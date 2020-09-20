@@ -1014,6 +1014,7 @@ This gives us better identifiers:
 
 ```
 $ pytest -v test_add_variety2.py::test_add_b
+
 =================== test session starts ===================
 collected 4 items
 

@@ -21,7 +21,8 @@ Here’s how to set up a virtual environment in macOS and Linux:
 
 ```
 $ python3 -m venv env_name
-$ source env_name/bin/activate**
+$ source env_name/bin/activate
+
 (env_name)$
 ... do yourwork...
 (env_name) $ deactivate
