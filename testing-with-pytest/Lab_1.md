@@ -94,7 +94,7 @@ test_two.py::test_failing FAILED [100%]
 _________________________test_failing_________________________
 
 def test_failing():
-> assert(1,2, 3) == (3,2, 1)**
+> assert(1,2, 3) == (3,2, 1)
 E       assert(1, 2, 3) == (3, 2, 1)
 E       At index0 diff:1 != 3
 E       Fulldiff:
@@ -230,7 +230,7 @@ tasks/test_three.py.. [100%]
 _________________________test_failing_________________________
 
 def test_failing():
-> assert(1,2, 3) == (3,2, 1)**
+> assert(1,2, 3) == (3,2, 1)
 E       assert(1, 2, 3) == (3, 2, 1)
 E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
@@ -343,7 +343,7 @@ collected 1 item
 
 tasks/test_four.py::test_asdict PASSED            [100%]
 
-=================== 1 passed in 0.01 seconds===================
+=================== 1 passed in 0.01 seconds ===================
 ```
 
 ### Using Options
@@ -381,7 +381,7 @@ collected 6 items
 <Function'test_defaults'>
 <Function'test_member_access'>
 
-==============no tests ran in 0.02 seconds===============
+==============no tests ran in 0.02 seconds ===============
 ```
 
 The --collect-only option is helpful to check if other options that select tests are correct
@@ -403,7 +403,7 @@ collected 6 items/ 4 deselected
 <Module'tasks/test_three.py'>
 <Function'test_defaults'>
 
-==============4 deselectedin 0.02 seconds===============
+==============4 deselectedin 0.02 seconds ===============
 ```
 
 ##### Step 14 
@@ -418,7 +418,7 @@ collected 6 items/ 4 deselected
 tasks/test_four.py. [ 50%]
 tasks/test_three.py. [100%]
 
-========= 2 passed,4 deselectedin 0.03 seconds==========
+========= 2 passed,4 deselectedin 0.03 seconds ==========
 ```
 
 ##### Step 15 
@@ -485,13 +485,13 @@ test_two.pyF
 ______________________test_failing_______________________
 
 def test_failing():
-> assert(1,2, 3) == (3,2, 1)**
+> assert(1,2, 3) == (3,2, 1)
 E       assert(1, 2, 3) == (3, 2, 1)
 E       At index0 diff:1 != 3
 E       Use -v to get the fulldiff
 
 test_two.py:2:AssertionError
-=========== 1 failed, 1 passed in 0.13 seconds============
+=========== 1 failed, 1 passed in 0.13 seconds ============
 ```
 
 Near the top of the output you see that all six tests (or “items”) were collected ,
@@ -512,7 +512,7 @@ test_two.pyF [ 33%]
 tasks/test_four.py.. [ 66%]
 tasks/test_three.py.. [100%]
 
-=========== 1 failed, 5 passed in 0.07 seconds============
+=========== 1 failed, 5 passed in 0.07 seconds ============
 ```
 
 This demonstrates that without the -x, pytest notes failure in test_two.py and
@@ -726,7 +726,7 @@ collected 4 items
 tasks/test_four.py.F [ 50%]
 tasks/test_three.py.. [100%]
 
-=========== 1 failed, 3 passed in 0.06 seconds============
+=========== 1 failed, 3 passed in 0.06 seconds ============
 ```
 
 --tb=line in many cases is enough to tell what’s wrong. 
@@ -746,7 +746,7 @@ tasks/test_three.py.. [100%]
 /home/jovyan/work/testing-with-pytest/code/ch1/tasks/test_four.py:24:
 AssertionError:assertTask(summary=...e=True, id=10)==
 Task(summary='...e=True,id=11)
-=========== 1 failed, 3 passed in 0.07 seconds============
+=========== 1 failed, 3 passed in 0.07 seconds ============
 ```
 
 ##### Step 29
@@ -768,7 +768,7 @@ E       AssertionError:assertTask(summary=...e=True,id=10)==
 Task(summary='...e=True,id=11)
 E       At index3 diff:10 != 11
 E       Use -v to get the fulldiff
-=========== 1 failed, 3 passed in 0.07 seconds============
+=========== 1 failed, 3 passed in 0.07 seconds ============
 ```
 
 **--durations=N**
@@ -826,8 +826,7 @@ On Windows:
 - C:\Users\okken\sandbox>venv\scripts\activate.bat
 - C:\Users\okken\sandbox>deactivate
 
-3. Install pytest in your new virtual environment. See Appendix 2, pip, on
-page 159 if you have any trouble. Even if you thought you already had
+3. Install pytest in your new virtual environment. See pip if you have any trouble. Even if you thought you already had
 pytest installed, you’ll need to install it into the virtual environment you
 just created.
 

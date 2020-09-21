@@ -267,8 +267,6 @@ The pytest-sugar plugin lets you see status not just as characters, but also in
 color. It also shows failure and error tracebacks during execution, and has
 a cool progress bar to the right of the shell.
 
-A test without sugar is shownon page 168.
-
 5. https://pypi.python.org/pypi/pytest-sugar
 
 ![](./images/168-25.png)

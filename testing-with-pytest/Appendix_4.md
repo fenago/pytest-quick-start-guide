@@ -13,11 +13,8 @@ tools. And while the topic is bigger than what I cover here, it needn’t be
 intimidating. All I’m talking about is how to share code in a way that is more
 traceable and consistent than emailing zipped directories of modules.
 
-This appendix is intended to give you a comfortable understanding of how to
-set up a project so that it is installable with pip, how to create a source distri-
-bution, and how to create a wheel. This is enough for you to be able to share
-your code locally with a small team. To share it further through PyPI, I’ll refer
-you to some other resources. Let’s see how it’s done.
+This lab is intended to give you a comfortable understanding of how to
+set up a project so that it is installable with pip, how to create a source distribution, and how to create a wheel. This is enough for you to be able to share your code locally with a small team.
 
 ### Creating an Installable Module
 
@@ -37,8 +34,9 @@ The code we want to share is in some_module.py:
 
 ```
 appendices/packaging/some_module_proj/some_module.py
+
 def some_func():
-return 42
+    return 42
 ```
 
 To make it installable with pip, we need a setup.py file. This is about as bare
@@ -46,11 +44,12 @@ bones as you can get:
 
 ```
 appendices/packaging/some_module_proj/setup.py
-from setuptools import setup
-setup(
-name='some_module',
-py_modules=['some_module']
-)
+
+    from setuptools import setup
+    setup(
+    name='some_module',
+    py_modules=['some_module']
+    )
 ```
 
 One directory with one module and a setup.py file is enough to make it instal-
@@ -78,6 +77,7 @@ And we can now use some_module from Python (or from a test):
 Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 26 2018, 23:26:24)
 [Clang 6.0 (clang-600.0.57)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
+
 >>> from some_module import some_func
 >>> some_func()
 42
@@ -90,8 +90,7 @@ file for a package.
 
 ### Creating an Installable Package
 
-Let’s make this code a package by adding an __init__.py and putting the __init__.py
-file and module in a directory with a package name:
+Let’s make this code a package by adding an `__init__.py` and putting the `__init__.py` file and module in a directory with a package name:
 
 ##### Step 3
 
@@ -107,12 +106,12 @@ some_package_proj/
 ``` 
 
 
-The content of some_module.py doesn’t change. The __init__.py needs to be written
+The content of some_module.py doesn’t change. The `__init__.py` needs to be written
 to expose the module functionality to the outside world through the package
 namespace. There are lots of choices for this. I recommend skimming the two
 sections of the Python documentation that cover this topic.
 
-If we do something like this in __init__.py:
+If we do something like this in `__init__.py`:
 
 ```
 import some_package.some_module
@@ -123,13 +122,15 @@ the client code will have to specify some_module:
 import some_package
 some_package.some_module.some_func()
 ```
+
 However, I’m thinking that some_module.py is really our API for the package,
 and we want everything in it to be exposed to the package level. Therefore,
 we’ll use this form:
 
 ```
 appendices/packaging/some_package_proj/src/some_package/__init__.py
-fromsome_package.some_moduleimport *
+
+from some_package.some_module import *
 ```
 
 Now the client code can do this instead:
@@ -153,7 +154,6 @@ package_dir={'': 'src'},
 ```
 
 Instead of using py_modules, we specify packages.
-
 This is now installable:
 
 ##### Step 4
@@ -386,13 +386,3 @@ distribute on PyPI. You also need to use a tool such as Twine to push pack-
 ages to PyPI. (Twine is a collection of utilities to help make interacting with
 PyPI easy and secure. It handles authentication over HTTPS to keep your PyPI
 credentials secure, and handles the uploading of packages to PyPI.)
-
-This is now beyond the scope of this course. However, for information about
-how to start contributing through PyPI, take a look at the Python Packaging
-User Guide and the the PyPI section of the Python documentation.
-
-3. https://pypi.python.org/pypi/twine
-4. https://python-packaging-user-guide.readthedocs.io
-5. https://docs.python.org/3/distutils/packageindex.html
-
-

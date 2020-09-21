@@ -5,8 +5,7 @@
 
 ### xUnit Fixtures
 
-In addition to the fixture model described in Lab 3, pytest Fixtures, on
-page 51, pytest also supports xUnit style fixtures, which are similar to jUnit
+In addition to the fixture model described in Lab 3, pytest Fixtures, pytest also supports xUnit style fixtures, which are similar to jUnit
 for Java, cppUnit for C++, and so on.
 
 Generally, xUnit frameworks use a flow of control that looks something
@@ -213,18 +212,13 @@ Following are a few of the limitations of xUnit fixtures:
 - xUnit fixtures don’t show up in -setup-show and -setup-plan. This might seem
     like a small thing, but when you start writing a bunch of fixtures and
     debugging them, you’ll love these flags.
-
 - There are no session scope xUnit fixtures. The largest scope is module.
-
 - Picking and choosing which fixtures a test needs is more difficult with
     xUnit fixtures. If a test is in a class that has fixtures defined, the test will
     use them, even if it doesn’t need to.
-
 - Nesting is at most three levels: module, class, and method.
-
 - The only way to optimize fixture usage is to create modules and classes
     with common fixture requirements for all the tests in them.
-
 - No parametrization is supported at the fixture level. You can still use
     parametrized tests, but xUnit fixtures cannot be parametrized.
 

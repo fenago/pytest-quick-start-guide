@@ -19,19 +19,6 @@ and your system.
 4. Install something into the site-packages directory of your Python installation
 that was used to call pip. 
 
-This is a gross understatement of what pip does—it also does cool stuff like
-setting up scripts defined by the package, wheel caching, and more.
-
-As mentioned, each installation of Python has its own version of pip tied to it.
-If you’re using virtual environments, pip and python are automatically linked
-to whichever Python version you specified when creating the virtual environ-
-ment. If you aren’t using virtual environments, and you have multiple Python
-versions installed, such as python3.5 and python3.6, you will probably want to
-use python3.5-m pip or python3.6-m pip instead of pip directly. It works just the
-same. (For the examples in this appendix, I assume you are using virtual
-environments so that pip works just fine as-is.)
-
-
 To check the version of pip and which version of Python it’s tied to, use pip --
 version:
 
@@ -86,7 +73,7 @@ setuptools 39.0.1
 six 1.11.0
 ```
 
-As shown in this example, pip install s the package you want and also any
+As shown in this example, pip installs the package you want and also any
 dependencies that aren’t already installed.
 
 pip is pretty flexible. It can install things from other places, such as GitHub,
@@ -137,7 +124,7 @@ pytest-xdist==1.23.2
 
 #### (my_env) $ pip install -r requirements.txt
 
-Successfullyinstalledapipkg-1.5execnet-1.5.0pytest-3.8.1pytest-xdist-1.23.2
+
 You can use pip to download a bunch of various versions into a local cache
 of packages, and then point pip there instead of PyPI to install them into vir-
 tual environments later, even when offline.

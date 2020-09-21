@@ -38,22 +38,12 @@ failures:
 
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFF........... [100%]
 42 failed, 54 passed in 5.51seconds
-
-Before we look at how pdb can help us debug this test, let’s take a look at the
-
-pytest options available to help speed up debugging test failures, which we
-
-first looked at in Using Options
-
-- _--tb=[auto/long/short/line/native/no]_ : Controls the traceback style.
-- _-v / --verbose_ : Displays all the test names, passing or failing.
-- _-l / --showlocals_ : Displays local variables alongside the stacktrace.
-- _-lf / --last-failed_ : Runs just the tests that failed last.
-- _-x / --exitfirst_ : Stops the tests session with the first failure.
-- _--pdb_ : Starts an interactive debugging session at the point of failure.
 ```
 
+Before we look at how pdb can help us debug this test, let’s take a look at the
+pytest options available to help speed up debugging test failures
 
+![](./images/3.png)
 
 **Installing MongoDB**
 
@@ -67,11 +57,10 @@ https://www.mongodb.com/download-center. pymongo is installed with pip:
 pip install pymongo
 ```
 
-However, this is the last example in the book that
+However, this is the last example in the course that
 uses MongoDB. To try out the debugger without using MongoDB,
 you could run the pytest commands from code/ch2/, as this directory
 also contains a few failing tests.
-
 
 We just ran the tests from code/ch3/c to see that some of them were failing. We
 didn’t see the tracebacks or the test names because --tb=no turns off trace-
@@ -126,7 +115,7 @@ task_id= tasks.add(new_task)
 
 
 ```
-**> assertisinstance(task_id,int)**
+> assertisinstance(task_id,int)
 E AssertionError:assertFalse
 E + whereFalse= isinstance(ObjectId('5b8c12dccb02981dc226d897'),int)
 
@@ -141,13 +130,8 @@ tests/func/test_add.py:16:AssertionError
 Quite often this is enough to understand the test failure. In this particular
 case, it’s pretty clear that task_id is not an integer—it’s an instance of ObjectId.
 ObjectId is a type used by MongoDB for object identifiers within the database.
-My intention with the tasksdb_pymongo.py layer was to hide particular details of
-the MongoDB implementation from the rest of the system. Clearly, in this
-case, it didn’t work.
 
-However, we want to see how to use pdb with pytest, so let’s pretend that it
-wasn’t obvious why this test failed. We can have pytest start a debugging
-session and start us right at the point of failure with --pdb:
+We can have pytest start a debugging session and start us right at the point of failure with --pdb:
 
 ##### Step 4
 
@@ -155,31 +139,28 @@ session and start us right at the point of failure with --pdb:
 
 ```
 =================== test session starts ===================
-plugins:cov-2.5.1
-collected 96 items/ 54 deselected
-run-last-failure:rerunprevious42 failures
-
-tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [2%]
-**>>>>>>>>>>>>>>>>>>>>>>>>traceback>>>>>>>>>>>>>>>>>>>>>>>>**
-
-tasks_db= None
-
+plugins: cov-2.5.1
+collected 96 items / 54 deselected
+run-last-failure: rerun previous 42 failures
+tests/func/test_add.py::test_add_returns_valid_id[mongo] FAILED [ 2%]
+>>>>>>>>>>>>>>>>>>>>>>>> traceback >>>>>>>>>>>>>>>>>>>>>>>>
+tasks_db = None
 def test_add_returns_valid_id(tasks_db):
-"""tasks.add(<validtask>)shouldreturnan integer."""
-_# GIVENan initializedtasksdb
-# WHENa new taskis added
-# THENreturnedtask_idis of typeint_
-new_task= Task('dosomething')
-task_id= tasks.add(new_task)
-**> assertisinstance(task_id,int)**
-E AssertionError:assertFalse
-E + whereFalse= isinstance(ObjectId('5b8c1316cb02981dc91fccd1'),int)
+"""tasks.add(<valid task>) should return an integer."""
+# GIVEN an initialized tasks db
+# WHEN a new task is added
+# THEN returned task_id is of type int
+new_task = Task('do something')
+task_id = tasks.add(new_task)
+> assert isinstance(task_id, int)
+E AssertionError: assert False
+E + where False = isinstance(ObjectId('5b8c1316cb02981dc91fccd1'), int)
+tests/func/test_add.py:16: AssertionError
 
-tests/func/test_add.py:16:AssertionError
-**>>>>>>>>>>>>>>>>>>>>>>enteringPDB >>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>> entering PDB >>>>>>>>>>>>>>>>>>>>>>>
 > /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj/tests/func/test_add.py(16)
 > test_add_returns_valid_id()
--> assertisinstance(task_id,int)**
+-> assert isinstance(task_id, int)
 (Pdb)
 ```
 
@@ -286,19 +267,20 @@ Successfully uninstalled tasks-0.1.0
 ##### $ pip install -e .
 
 ```
-Obtaining file:///path/to/code/ch7/tasks_proj_v2
+Obtaining file:///home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
 ...
 Installing collected packages: tasks
 Running setup.py develop for tasks
 Successfully installed tasks
 ```
+
 ##### Step 7
 
 ##### $ pip list
 
 ```
 ...
-tasks 0.1.1 /path/to/code/tasks_proj_v2/src
+tasks 0.1.1 /home/jovyan/work/testing-with-pytest/code/tasks_proj_v2/src
 ...
 
 ```
@@ -343,16 +325,6 @@ TOTAL 250 126 50%
 Since the current directory is tasks_proj_v2 and the source code under test is
 all within src, adding the option --cov=src generates a coverage report for that
 specific directory under test only.
-
-As you can see, some of the files have pretty low, to even 0%, coverage. These
-are good reminders: tasksdb_pymongo.py is at 0% because we’ve turned off testing
-for MongoDB in this version. Some of the others are pretty low. The project
-will definitely have to put tests in place for all of these areas before it’s ready
-for prime time.
-
-A couple of files I thought would have a higher coverage percentage are api.py
-and tasksdb_tinydb.py. Let’s look at tasksdb_tinydb.py and see what’s missing. I find
-the best way to do that is to use the HTML reports.
 
 If you run coverage.py again with --cov-report=html, an HTML report is generated:
 
@@ -404,18 +376,12 @@ tell us that:
 2. We’re not testing update() or delete().
 3. We may not be testing unique_id() thoroughly enough.
 
-Great. We can put those on our testing to-do list, along with testing the config
-system.
-
 While code coverage tools are extremely useful, striving for 100% coverage
 can be dangerous. When you see code that isn’t tested, it might mean a test
 is needed. But it also might mean that there’s some functionality of the system
 that isn’t needed and could be removed. Like all software development tools,
 code coverage analysis does not replace thinking.
 
-Quite a few more options and features of both coverage.py and pytest-cov are
-available. More information can be found in the coverage.py and pytest-cov
-documentation.
 
 2. https://coverage.readthedocs.io
 3. https://pytest-cov.readthedocs.io
@@ -429,20 +395,7 @@ called test doubles, spies, fakes, or stubs. Between pytest’s own monkeypatch
 fixture (covered in Using monkeypatch and mock, you should
 have all the test double functionality you need.
 
-```
-Mocks Are Weird
-If this is the first time you’ve encountered test doubles like mocks,
-stubs, and spies, it’s gonna get real weird real fast. It’s fun though,
-and quite powerful.
-```
-
-The mock package is shipped as part of the Python standard library as
-unittest.mock as of Python 3.3. In earlier versions, it’s available as a separate
-PyPI-installable package as a rolling backport. What that means is that you
-can use the PyPI version of mock with Python 2.6 through the latest Python
-version and get the same functionality as the latest Python mock. However,
-for use with pytest, a plugin called pytest-mock has some conveniences that
-make it my preferred interface to the mock system.
+**Mocks Are Weird**
 
 For the Tasks project, we’ll use mock to help us test the command-line interface.
 In Coverage.py: Determining How Much Code Is Tested, you saw
@@ -466,8 +419,6 @@ obvious.
 4. [http://click.pocoo.org](http://click.pocoo.org)
 
 
-
-
 Let’s pause and install version 2 of Tasks:
 
 ##### Step 10
@@ -477,7 +428,7 @@ Let’s pause and install version 2 of Tasks:
 
 ```
 ...
-Successfullyinstalledtasks
+Successfully installed tasks
 ```
 
 In the rest of this section, you’ll develop some tests for the “list” functionality.
@@ -664,23 +615,16 @@ def test_list_no_args(mocker):
 ```
 
 The mocker fixture is provided by pytest-mock as a convenience interface to
-unittest.mock. The first line, mocker.patch.object(tasks.cli,'_tasks_db',new=stub_tasks_db),
+unittest.mock. 
+
+- The first line, mocker.patch.object(tasks.cli,'_tasks_db',new=stub_tasks_db),
 replaces the _tasks_db() context manager with our stub that does nothing.
-
-
-The second line, mocker.patch.object(tasks.cli.tasks,'list_tasks',return_value=[]), replaces
+- The second line, mocker.patch.object(tasks.cli.tasks,'list_tasks',return_value=[]), replaces
 any calls to tasks.list_tasks() from within tasks.cli to a default MagicMock object with
-a return value of an empty list. We can use this object later to see if it was
-called correctly. The MagicMock class is a flexible subclass of unittest.Mock with
-reasonable default behavior and the ability to specify a return value, which
-is what we are using in this example. The Mock and MagicMock classes (and
-others) are used to mimic the interface of other code with introspection
-methods built in to allow you to ask them how they were called.
-
-The third and fourth lines of test_list_no_args() use the Click CliRunner to do the
+a return value of an empty list.
+- The third and fourth lines of test_list_no_args() use the Click CliRunner to do the
 same thing as calling tasks list on the command line.
-
-The final line uses the mock object to make sure the API call was called cor-
+- The final line uses the mock object to make sure the API call was called cor-
 rectly. The assert_called_once_with() method is part of unittest.mock.Mock objects,
 which are all listed in the Python documentation.
 
@@ -708,17 +652,6 @@ can reuse it more easily in future tests. The mocking of tasks.list_tasks() is
 the same as before. This time, however, we are also checking the output
 of the command-line action through result.output and asserting equality to
 expected_output.
-
-This assert could have been put in the first test, test_list_no_args, and we could
-have eliminated the need for two tests. However, I have less faith in my ability
-to get CLI code correct than other code, so separating the questions of “Is the
-API getting called correctly?” and “Is the action printing the right thing?” into
-two tests seems appropriate.
-
-5. https://docs.python.org/dev/library/unittest.mock.html
-
-
-
 
 The rest of the tests for the tasks list functionality don’t add any new concepts,
 but perhaps looking at several of these makes the code easier to understand:
@@ -793,11 +726,7 @@ pypi.python.org.
 ### tox: Testing Multiple Configurations
 
 tox is a command-line tool that allows you to run your complete suite of tests
-in multiple environments. We’re going to use it to test the Tasks project in
-multiple versions of Python. However, tox is not limited to just Python versions.
-You can use it to test with different dependency configurations and different
-configurations for different operating systems.
-
+in multiple environments.
 In gross generalities, here’s a mental model for how tox works:
 
 tox uses the setup.py file for the package under test to create an installable
@@ -812,15 +741,6 @@ and then for each environment...
 After all of the environments are tested, tox reports a summary of how they
 all did.
 
-This makes a lot more sense when you see it in action, so let’s look at how
-to modify the Tasks project to use tox to test Python 2.7 and 3.6. I chose
-versions 2.7 and 3.6 because they are both already installed on my system.
-If you have different versions installed, go ahead and change the envlist line
-to match whichever version you have or are willing to install.
-
-The first thing we need to do to the Tasks project is add a tox.ini file at the
-same level as setup.py—the top project directory. I’m also going to move anything
-that’s in pytest.ini into tox.ini.
 
 Here’s the abbreviated code layout:
 
@@ -885,12 +805,6 @@ Under [pytest], we can put whatever we normally would want to put into pytest.in
 to configure pytest, as discussed in Lab 6, Configuration In
 this case, addopts is used to turn on extra summary information for skips,
 xfails, and xpasses (-rsxX) and turn on showing local variables in stack traces
-
-
-
-(-l). It also defaults to shortened stack traces (--tb=short) and makes sure all
-markers used in tests are declared first (--strict). The markers section is where
-the markers are declared.
 
 Before running tox, you have to make sure you install it:
 
@@ -985,16 +899,7 @@ environments. For more detailed information, check out the tox documentation.
 unittest is the test framework built into the Python standard library. Its
 purpose is to test Python itself, but it is often used for project testing, too.
 pytest works as a unittest runner, and can run both pytest and unittest tests
-in the same session.
-
-Let’s pretend that when the Tasks project started, it used unittest instead of
-pytest for testing. And perhaps there are a lot of tests already written. Fortunate-
-ly, you can use pytest to run unittest-based tests. This might be a reasonable
-option if you are migrating your testing effort from unittest to pytest. You can
-leave all the old tests as unittest, and write new ones in pytest. You can also
-gradually migrate older tests as you have time, or as changes are needed. There
-are a couple of issues that might trip you up in the migration, however, and I’ll
-address some of those here. First, let’s look at a test written for unittest:
+in the same session. First, let’s look at a test written for unittest:
 
 ```
 ch7/unittest/test_delete_unittest.py
@@ -1165,7 +1070,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 def stop_tasks_db(): _# type:() -> None_
 """DisconnectAPI functionsfromdb."""
 global_tasksdb
-**> _tasksdb.stop_tasks_db()**
+> _tasksdb.stop_tasks_db()
 E AttributeError:'NoneType'objecthas no attribute'stop_tasks_db'
 
 ../tasks_proj_v2/src/tasks/api.py:128:AttributeError
@@ -1293,7 +1198,7 @@ def tasks_db_non_empty(tasks_db_session, request):
     request.cls.ids = ids
 
 @pytest.mark.usefixtures( _'tasks_db_non_empty'_ )
-**class** TestNonEmpty(unittest.TestCase):
+class TestNonEmpty(unittest.TestCase):
 
 def test_delete_decreases_count (self):
 # GIVEN3 items
@@ -1306,17 +1211,11 @@ self.assertEqual(tasks.count(),2)
 
 The test accesses the ids list through self.ids, just like before.
 
-The ability to use marks has a limitation: you cannot use parametrized fixtures
-with unittest-based tests. However, when looking at the last example with
-unittest using pytest fixtures, it’s not that far from rewriting it in pytest form.
-Remove the unittest.TestCase base class and change the self.assertEqual() calls to
-straight assert calls, and you’d be there.
-
-Another limitation with running unittest with pytest is that unittest subtests
+- The ability to use marks has a limitation: you cannot use parametrized fixtures
+with unittest-based tests.
+- Another limitation with running unittest with pytest is that unittest subtests
 will stop at the first failure, while unittest will run each subtest, regardless
-of failures. When all subtests pass, pytest runs all of them. Because you won’t
-see any false-positive results because of this limitation, I consider this a minor
-difference.
+of failures.
 
 ### Exercises
 

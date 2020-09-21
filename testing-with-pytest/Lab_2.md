@@ -4,23 +4,15 @@
 
 ### Writing Test Functions
 
-In the last lab, you got pytest up and running. You saw how to run i
-against files and directories and how many of the options worked. In this
-lab, you’ll learn how to write test functions in the context of testing a
+In this lab, you’ll learn how to write test functions in the context of testing a
 Python package. If you’re using pytest to test something other than a Python
 package, most of this lab still applies.
 
-We’re going to write tests for the Tasks package. Before we do that, I’ll talk
-about the structure of a distributable Python package and the tests for it,
-and how to get the tests able to see the package under test. Then I’ll show
-you how to use assert in tests, how tests handle unexpected exceptions, and
-testing for expected exceptions.
-
-Eventually, we’ll have a lot of tests. Therefore, you’ll learn how to organize
-tests into classes, modules, and directories. I’ll then show you how to use
-markers to mark which tests you want to run and discuss how builtin markers
-can help you skip tests and mark tests as expecting to fail. Finally, I’ll cover
-parametrizing tests, which allows tests to get called with different data.
+- We’re going to write tests for the Tasks package. 
+- How to use assert in tests, how tests handle unexpected exceptions, and testing for expected exceptions.
+- How to organize tests into classes, modules, and directories.
+- How to use markers to mark which tests you want to run.
+- Parametrizing tests, which allows tests to get called with different data.
 
 #### Pre-reqs:
 - Google Chrome (Recommended)
@@ -33,15 +25,9 @@ All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 ### Testing a Package
 
-We’ll use the sample project, Tasks, as discussed in The Tasks Project, on
-page xii, to see how to write test functions for a Python package. Tasks is a
+We’ll use the sample project, Tasks, as discussed in The Tasks Project, to see how to write test functions for a Python package. Tasks is a
 Python package that includes a command-line tool of the same name, tasks.
 
-Appendix 4, Packaging and Distributing Python Projects includes
-an explanation of how to distribute your projects locally within a small team
-or globally through PyPI, so I won’t go into detail of how to do that here;
-however, let’s take a quick look at what’s in the Tasks project and how the
-different files fit into the story of testing this project.
 
 
 Following is the file structure for the Tasks project:
@@ -74,19 +60,10 @@ tasks_proj/
 └──...
 ```
 
-I included the complete listing of the project (with the exception of the full
-list of test files) to point out how the tests fit in with the rest of the project,
-and to point out a few files that are of key importance to testing, namely con-
-ftest.py, pytest.ini, the various __init__.py files, and setup.py.
 
 All of the tests are kept in tests and separate from the package source files in
 src. This isn’t a requirement of pytest, but it’s a best practice.
 
-All of the top-level files, CHANGELOG.rst, LICENSE, README.rst, MANIFEST.in, and setup.py,
-are discussed in more detail in Appendix 4, Packaging and Distributing Python
-Projects Although setup.py is important for building a distribution
-out of a package, it’s also crucial for being able to install a package locally so
-that the package is available for import.
 
 Functional and unit tests are separated into their own directories. This is an
 arbitrary decision and not required. However, organizing test files into multiple
@@ -95,50 +72,21 @@ and unit tests separate because functional tests should only break if we are
 intentionally changing functionality of the system, whereas unit tests could
 break during a refactoring or an implementation change.
 
-
-The project contains two types of __init__.py files: those found under the src/
-directory and those found under tests/. The src/tasks/__init__.py file tells Python
-that the directory is a package. It also acts as the main interface to the
-package when someone uses importtasks. It contains code to import specific
-functions from api.py so that cli.py and our test files can access package func-
-tionality like tasks.add() instead of having to do tasks.api.add().
-
-The tests/func/__init__.py and tests/unit/__init__.py files are empty. They are optional,
-but do allow you to have duplicate test file names in multiple test directories.
-This is discussed in full in Avoiding Filename Collisions
-
-The pytest.ini file is optional. It contains project-wide pytest configuration. There
-should be at most only one of these in your project. It can contain directives
-that change the behavior of pytest, such as setting up a list of options that
-will always be used. You’ll learn all about pytest.ini in Lab 6, Configuration,
-on page 115.
-
-The conftest.py file is also optional. It is considered by pytest as a “local plugin”
+- The project contains two types of `__init__.py` files: those found under the src/
+directory and those found under tests/. The `src/tasks/__init__.py` file tells Python
+that the directory is a package.
+- The `tests/func/__init__.py` and tests/unit/`__init__.py` files are empty. They allow you to have duplicate test file names in multiple test directories.
+- The pytest.ini file is optional. It contains project-wide pytest configuration.
+- The conftest.py file is also optional. It is considered by pytest as a “local plugin”
 and can contain hook functions and fixtures. Hook functions are a way to
 insert code into part of the pytest execution process to alter how pytest works.
-Fixtures are setup and teardown functions that run before and after test
-functions, and can be used to represent resources and data used by the
-tests. (Fixtures are discussed in Lab 3, pytest Fixturesand
-Lab 4, Builtin Fixtures, and hook functions are discussed
-in Lab 5, Plugins) Hook functions and fixtures that are used
-by tests in multiple subdirectories should be contained in tests/conftest.py. You
-can have multiple conftest.py files; for example, you can have one at tests and
-one for each subdirectory under tests.
-
-If you haven’t already done so, you can download a copy of the source code
-for this project on the book’s website. Alternatively, you can work on your
-own project with a similar structure.
 
 **Installing a Package Locally**
 
 The test file, tests/unit/test_task.py, contains the tests we worked on in Running
 pytest, in files test_three.py and test_four.py. I’ve just renamed it here
 to something that makes more sense for what it’s testing and copied everything
-into one file. I also removed the definition of the Task data structure, because
-that really belongs in api.py.
-
-1. https://github.com/fenago/test-automation-with-python/tree/master/testing-with-pytest
-
+into one file.
 
 Here is test_task.py:
 
@@ -273,9 +221,7 @@ is brilliant. It’s what drives a lot of developers to use pytest over other
 frameworks.
 
 
-
-If you’ve used any other testing framework, you’ve probably seen various assert
-helper functions. For example, the following is a list of a few of the assert forms
+The following is a list of a few of the assert forms
 and assert helper functions:
 
 ```
@@ -286,7 +232,7 @@ assert a <= b assertLessEqual(a, b)
 … …
 ```
 
-With pytest, you can use assert<expression> with any expression. If the expres-
+With pytest, you can use assert `<expression>` with any expression. If the expres-
 sion would evaluate to False if converted to a bool, the test would fail.
 
 pytest includes a feature called assert rewriting that intercepts assert calls and
@@ -477,18 +423,6 @@ exception matches a string.
 
 ### Marking Test Functions
 
-pytest provides a cool mechanism to let you put markers on test functions.
-A test can have more than one marker, and a marker can be on multiple
-
-tests.
-
-Markers make sense after you see them in action. Let’s say we want to run
-a subset of our tests as a quick “smoke test” to get a sense for whether or not
-there is some major break in the system. Smoke tests are by convention not
-all-inclusive, thorough test suites, but a select subset that can be run
-quickly and give a developer a decent idea of the health of all parts of the
-system.
-
 To add a smoke test suite to the Tasks project, we can add @pytest.mark.smoke
 to some of the tests. Let’s add it to a couple of tests in test_api_exceptions.py (note
 that the markers smoke and get aren’t built into pytest; I just made them up):
@@ -543,8 +477,7 @@ that are run. Using -m 'smoke' runs both tests marked with @pytest.mark.smoke.
 Using -m 'get' runs the one test marked with @pytest.mark.get. Pretty straight-
 forward.
 
-It gets better. The expression after -m can use and, or, and not to combine
-multiple markers:
+The expression after -m can use and, or, and not to combine multiple markers:
 
 ##### Step 8
 
@@ -641,14 +574,6 @@ about builtin fixtures in Lab 4, Builtin Fixtures, and you’ll
 learn about writing your own fixtures and how they work in Lab 3, pytest
 Fixtures, including the autouse parameter used here.
 
-autouse as used in our test indicates that all tests in this file will use the fixture.
-The code before the yield runs before each test; the code after the yield runs
-after the test. The yield can return data to the test if desired. You’ll look at all
-that and more in later labs, but here we need some way to set up the
-database for testing, so I couldn’t wait any longer to show you a fixture. (pytest
-also supports old-fashioned setup and teardown functions, like what is used
-in unittest and nose, but they are not nearly as fun. However, if you are
-curious, they are described in Appendix 5, xUnit Fixtures.)
 
 Let’s set aside fixture discussion for now and go to the top of the project and
 run our smoke test suite:
@@ -672,10 +597,8 @@ This shows that marked tests from different files can all run together.
 
 ### Skipping Tests
 
-While the markers discussed in Marking Test Functionswere
-names of your own choosing, pytest includes a few helpful builtin markers:
-skip, skipif, and xfail. I’ll discuss skip and skipif in this section, and xfail in the next.
-
+pytest includes a few helpful builtin markers:
+skip, skipif, and xfail.
 The skip and skipif markers enable you to skip tests you don’t want to run. For
 example, let’s say we weren’t sure how tasks.unique_id() was supposed to work.
 Does each call to it return a different number? Or is it just a number that
@@ -718,8 +641,8 @@ def test_unique_id():
 """Callingunique_id()twiceshouldreturndifferentnumbers."""
 id_1= tasks.unique_id()
 id_2= tasks.unique_id()
-**> assertid_1!= id_2**
-E   assert1 != 1
+>       assertid_1!= id_2
+E       assert1 != 1
 
 test_unique_id_1.py:12:AssertionError
 ================ 1 failed in 0.10 seconds =================
@@ -949,13 +872,6 @@ I’ll discuss pytest.ini more in Lab 6, Configuration
 
 ### Running a Subset of Tests
 
-I’ve talked about how you can place markers on tests and run tests based on
-markers. You can run a subset of tests in several other ways. You can run
-all of the tests, or you can select a single directory, file, class within a file, or
-an individual test in a file or class. You haven’t seen test classes used yet, so
-you’ll look at one in this section. You can also use an expression to match
-test names. Let’s take a look at these.
-
 **A Single Directory**
 
 To run all the tests from one directory, use the directory as a parameter to
@@ -1172,17 +1088,11 @@ tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 
 In this section, you learned how to run specific test files, directories, classes,
 and functions, and how to use expressions with -k to run specific sets of tests.
-In the next section, you’ll learn how one test function can turn into many test
-cases by allowing the test to run multiple times with different test data.
 
 ### Parametrized Testing
 
-Sending some values through a function and checking the output to make sure
-it’s correct is a common pattern in software testing. However, calling a function
-once with one set of values and one check for correctness isn’t enough to fully
-test most functions. Parametrized testing is a way to send multiple sets of data
+Parametrized testing is a way to send multiple sets of data
 through the same test and have pytest report if any of the sets failed.
-
 To help understand the problem parametrized testing is trying to solve, let’s
 take a simple test for add():
 
@@ -1369,10 +1279,10 @@ Task( _'exercise'_ , _'BrIaN'_ , False))
 
 @pytest.mark.parametrize( _'task'_ , tasks_to_try)
 def test_add_4 (task):
-"""Slightlydifferenttake."""
-task_id= tasks.add(task)
-t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,task)
+    """Slightlydifferenttake."""
+    task_id= tasks.add(task)
+    t_from_db= tasks.get(task_id)
+    assertequivalent(t_from_db,task)
 ```
 
 It’s convenient and the code looks nice. But the readability of the output is
@@ -1569,10 +1479,4 @@ the missing exceptions. (It’s okay to look at api.py for this exercise.)
 
 ### What’s Next
 
-You’ve run through a lot of the power of pytest in this lab. Even with just
-what’s covered here, you can start supercharging your test suites. In many
-of the examples, you used a fixture called initialized_tasks_db. Fixtures can sepa-
-rate retrieving and/or generating test data from the real guts of a test function.
-They can also separate common code so that multiple test functions can use
-the same setup. In the next lab, you’ll take a deep dive into the wonderful
-world of pytest fixtures.
+In the next lab, you’ll take a deep dive into the wonderful world of pytest fixtures.

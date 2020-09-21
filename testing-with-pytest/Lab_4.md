@@ -34,7 +34,6 @@ Al labs are ready to run. All packages have been installed. There is no requirem
 All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 
-
 ### Using tmpdir and tmpdir_factory
 
 The tmpdir and tmpdir_factory builtin fixtures are used to create a temporary file
@@ -43,16 +42,6 @@ test is finished. In the Tasks project, we needed a directory to store the tem-
 porary database files used by MongoDB and TinyDB. However, because we
 want to test with temporary databases that don’t survive past a test session,
 we used tmpdir and tmpdir_factory to do the directory creation and cleanup for us.
-
-
-If you’re testing something that reads, writes, or modifies files, you can use
-tmpdir to create files or directories used by a single test, and you can use
-tmpdir_factory when you want to set up a directory for many tests.
-
-The tmpdir fixture has function scope, and the tmpdir_factory fixture has session
-scope. Any individual test that needs a temporary directory or file just for the
-single test can use tmpdir. This is also true for a fixture that is setting up a
-directory or file that should be recreated for each test function.
 
 Here’s a simple example using tmpdir:
 
@@ -88,13 +77,6 @@ gotcha. Because the tmpdir fixture is defined as function scope, you can’t use
 tmpdir to create folders or files that should stay in place longer than one test
 function. For fixtures with scope other than function (class, module, session),
 tmpdir_factory is available.
-
-The tmpdir_factory fixture is a lot like tmpdir, but it has a different interface. As
-discussed in Specifying Fixture Scope, function scope fixtures
-run once per test function, module scope fixtures run once per module, class
-scope fixtures run once per class, and test scope fixtures run once per session.
-Therefore, resources created in session scope fixtures have a lifetime of the
-entire session.
 
 1. [http://py.readthedocs.io/en/latest/path.html](http://py.readthedocs.io/en/latest/path.html)
 
@@ -162,13 +144,8 @@ basetemp=mydir.
 
 **Using Temporary Directories for Other Scopes**
 
-We get session scope temporary directories and files from the tmpdir_factory
-fixture, and function scope directories and files from the tmpdir fixture. But
-what about other scopes? What if we need a module or a class scope temporary
-directory? To do this, we create another fixture of the scope we want and have
-it use tmpdir_factory.
 
-For example, suppose we have a module full of tests, and many of them need
+Suppose we have a module full of tests, and many of them need
 to be able to read some data from a json file. We could put a module scope
 fixture in either the module itself, or in a conftest.py file that sets up the data
 file like this:
@@ -532,7 +509,7 @@ x = 1e+25,y = 1e+23,expected= 1.1e+25
 def test_a(x,y, expected):
 """Demoapprox()."""
 sum_= x + y
-**> assertsum_== approx(expected)**
+> assertsum_== approx(expected)
 E assert1.01e+25== 1.1e+25± 1.1e+19
 E + where1.1e+25± 1.1e+19= approx(1.1e+25)
 
@@ -571,7 +548,8 @@ x = 1e+25,y = 1e+23,expected= 1.1e+25
 def test_a(x,y, expected):
 """Demoapprox()."""
 sum_= x + y
-**> assertsum_== approx(expected)**
+
+> assertsum_== approx(expected)
 E assert1.01e+25== 1.1e+25± 1.1e+19
 E + where1.1e+25± 1.1e+19= approx(1.1e+25)
 
@@ -642,10 +620,6 @@ cache.get(key,default)
 cache.set(key,value)
 ```
 
-By convention, key names start with the name of your application or plugin,
-followed by a /, and continuing to separate sections of the key name with /’s.
-The value you store can be anything that is convertible to json, since that’s
-how it’s represented in the .cache directory.
 
 Here’s our fixture used to time tests:
 
@@ -669,11 +643,6 @@ def check_duration(request, cache):
         assert this_duration <= last_duration * 2, errorstring
 ```
 
-The fixture is autouse, so it doesn’t need to be referenced from the test. The
-request object is used to grab the nodeid for use in the key. The nodeid is a unique
-identifier that works even with parametrized tests. We prepend the key with
-'duration/' to be good cache citizens. The code above yield runs before the test
-function; the code after yield happens after the test function.
 
 Now we need some tests that take different amounts of time:
 
@@ -685,7 +654,7 @@ def test_slow_stuff(i):
     time.sleep(random.random())
 ```
 
-Because you probably don’t want to write a bunch of tests for this, I used
+We are using
 random and parametrization to easily generate some tests that sleep for a
 random amount of time, all shorter than a second. Let’s see it run a couple
 of times:
@@ -743,12 +712,6 @@ duration/test_slower.py__test_slow_stuff[4]contains:
 no tests ran in 0.01seconds
 ```
 
-You can easily see the duration data separate from the cache data due to the
-prefixing of cache data names. However, it’s interesting that the lastfailed
-functionality is able to operate with one cache entry. Our duration data is taking
-up one cache entry per test. Let’s follow the lead of lastfailed and fit our data
-into one entry.
-
 We are reading and writing to the cache for every test. We could split up the
 fixture into a function scope fixture to measure durations and a session scope
 fixture to read and write to the cache. However, if we do this, we can’t use
@@ -791,7 +754,7 @@ dictionary if there is no previous cached data, before any tests are run. In the
 previous code, we saved both the retrieved dictionary and an empty one in a
 namedtuple called Duration with accessors current and last. We then passed that
 namedtuple to the check_duration fixture, which is function scope and runs for every
-test function. As the test runs, the same namedtuple is passed to each test, and
+test function. As the test runs, the same named tuple is passed to each test, and
 the times for the current test runs are stored in the d.current dictionary. At the
 end of the test session, the collected current dictionary is saved in the cache.
 
@@ -908,13 +871,15 @@ Here’s an example:
 
 ```
 ch4/cap/test_capsys.py
-def test_capsys_disabled (capsys):
-**with** capsys.disabled():
-**print ( _'\nalwaysprintthis'_ )
-**print ( _'normalprint,usuallycaptured'_ )
+
+def test_capsys_disabled(capsys):
+    with capsys.disabled():
+    print('\nalways print this')
+    print('normal print, usually captured')
+
 ```
 
-Now, 'alwaysprint this' will always be output:
+Now, 'always print this' will always be output:
 
 ##### Step  17
 
@@ -928,13 +893,14 @@ alwaysprintthis
 1 passed in 0.02seconds
 ```
 
-##### $ pytest -q -s test_capsys.py::test_capsys_disabled**
+##### $ pytest -q -s test_capsys.py::test_capsys_disabled
 
 ```
-alwaysprintthis
-normalprint,usuallycaptured
-.
-1 passed in 0.01seconds
+
+always print this
+normal print, usually captured
+
+1 passed in 0.01 seconds
 ```
 
 As you can see, alwaysprintthis shows up with or without output capturing, since
@@ -957,8 +923,8 @@ looking at the API, we’ll look at how monkeypatch is used in test code.
 
 The monkeypatch fixture provides the following functions:
 
-- setattr(target, name,value=<notset>,raising=True): Set an attribute.
-- delattr(target, name=<notset>,raising=True): Delete an attribute.
+- setattr(target, name,value=`<notset>`,raising=True): Set an attribute.
+- delattr(target, name=`<notset>`,raising=True): Delete an attribute.
 - setitem(dic,name,value): Set a dictionary entry.
 - delitem(dic,name,raising=True): Delete a dictionary entry.
 - setenv(name,value,prepend=None): Set an environmental variable.
@@ -967,10 +933,6 @@ The monkeypatch fixture provides the following functions:
     locations.
 - chdir(path): Change the current working directory.
 
-The raising parameter tells pytest whether or not to raise an exception if the
-item doesn’t already exist. The prepend parameter to setenv() can be a character.
-If it is set, the value of the environmental variable will be changed to value +
-prepend + <old value>.
 
 To see monkeypatch in action, let’s look at code that writes a dot configuration
 file. The behavior of some programs can be changed with preferences and
@@ -1045,17 +1007,6 @@ def test_def_prefs_change_home(tmpdir, monkeypatch):
     assert expected == actual
 ```
 
-This is a pretty good test, but relying on HOME seems a little operating-system
-dependent. And a peek into the documentation online for expanduser() has some
-troubling information, including “On Windows, HOME and USERPROFILE
-will be used if set, otherwise a combination of....” Dang. That may not be
-good for someone running the test on Windows. Maybe we should take a dif-
-ferent approach.
-
-3. https://docs.python.org/3.6/library/os.path.html#os.path.expanduser
-
-
-
 Instead of patching the HOME environmental variable, let’s patch expanduser:
 
 ```
@@ -1071,10 +1022,6 @@ def test_def_prefs_change_expanduser(tmpdir, monkeypatch):
     assert expected == actual
 ```
 
-During the test, anything in the cheese module that calls os.path.expanduser() gets
-our lambda expression instead. The lambda expression replaces ~ with our
-new temporary directory. Now we’ve used setenv() and setattr() to do patching
-of environmental variables and attributes. Next up, setitem().
 
 Let’s say we’re worried about what happens if the file already exists. We want
 to be sure it gets overwritten with the defaults when write_default_cheese_prefer-
@@ -1111,39 +1058,11 @@ dictionary items just for the duration of the test.
 
 We’ve used setenv(), setattr(), and setitem(). The del forms are pretty similar. They
 just delete an environmental variable, attribute, or dictionary item instead of
-setting something. The last two monkeypatch methods pertain to paths.
-
-
-
-
-syspath_prepend(path) prepends a path to sys.path, which has the effect of putting
-your new path at the head of the line for module import directories. One use
-for this would be to replace a system-wide module or package with a stub
-version. You can then use monkeypatch.syspath_prepend() to prepend the directory
-of your stub version and the code under test will find the stub version first.
-
-chdir(path) changes the current working directory during the test. This would
-be useful for testing command-line scripts and other utilities that depend on
-what the current working directory is. You could set up a temporary directory
-with whatever contents make sense for your script, and then use monkey-
-patch.chdir(the_tmpdir).
-
+setting something.
 You can also use the monkeypatch fixture functions in conjunction with
-unittest.mock to temporarily replace attributes with mock objects. You’ll look at
-that in Lab 7, Using pytest with Other Tools
+unittest.mock to temporarily replace attributes with mock objects.
 
 ### Using doctest_namespace
-
-The doctest module is part of the standard Python library and allows you to
-put little code examples inside docstrings for a function and test them to
-make sure they work. You can have pytest look for and run doctest tests
-within your Python code by using the --doctest-modules flag. With the
-doctest_namespace builtin fixture, you can build autouse fixtures to add symbols
-to the namespace pytest uses while running doctest tests. This allows doc-
-strings to be much more readable. doctest_namespace is commonly used to add
-module imports into the namespace, especially when Python convention is
-to shorten the module or package name. For instance, numpy is often
-imported with importnumpyas np.
 
 Let’s play with an example. Let’s say we have a module named unneces-
 sary_math.py with multiply() and divide() methods that we really want to make sure
@@ -1196,13 +1115,9 @@ def divide(a, b):
 ```
 
 Since the name unnecessary_math is long, we decide to use um instead by using
-importunnecessary_mathas um in the top docstring. The code in the docstrings of
+import unnecessary_math as um in the top docstring. The code in the docstrings of
 the functions doesn’t include the import statement, but continue with the um
-convention. The problem is that pytest treats each docstring with code as a
-different test. The import in the top docstring will allow the first part to pass,
-but the code in the docstrings of the functions will fail:
-
-pytest usually captures the output 16
+convention.
 
 ##### Step 18
 
@@ -1228,10 +1143,7 @@ Traceback(mostrecentcalllast):
 ...
 
 File"<doctestunnecessary_math.divide[0]>", line1, in <module>
-```
 
-
-```
 NameError:name'um'is not defined
 
 /home/jovyan/work/testing-with-pytest/code/ch4/dt/1/unnecessary_math.py:37:UnexpectedException
@@ -1253,6 +1165,7 @@ NameError:name'um'is not defined
 
 =========== 2 failed, 1 passed in 0.12 seconds ============
 ```
+
 
 One way to fix it is to put the import statement in each docstring:
 
@@ -1305,7 +1218,6 @@ unnecessary_math.py::unnecessary_math.multiplyPASSED[100%]
 
 However, it also clutters the docstrings, and doesn’t add any real value to
 readers of the code.
-
 The builtin fixture doctest_namespace, used in an autouse fixture at a top-level
 conftest.py file, will fix the problem without changing the source code:
 
@@ -1325,9 +1237,6 @@ This tells pytest to add the um name to the doctest_namespace and have it
 be the value of the imported unnecessary_math module. With this in place in the
 conftest.py file, any doctests found within the scope of this conftest.py file will
 have the um symbol defined.
-
-I’ll cover running doctest from pytest more in Lab 7, Using pytest with
-Other Tools
 
 ### Using recwarn
 
@@ -1367,11 +1276,6 @@ def test_lame_function(recwarn):
 The recwarn value acts like a list of warnings, and each warning in the list has
 a category, message, filename, and lineno defined, as shown in the code.
 
-The warnings are collected at the beginning of the test. If that is inconvenient
-because the portion of the test where you care about warnings is near the
-end, you can use recwarn.clear() to clear out the list before the chunk of the test
-where you do care about collecting warnings.
-
 In addition to recwarn, pytest can check for warnings with pytest.warns():
 
 ```
@@ -1404,6 +1308,5 @@ it into ch3/tasks_proj/tests/conftest.py.
 ### What’s Next
 
 In this lab, you looked at many of pytest’s builtin fixtures. Next, you’ll
-take a closer look at plugins. The nuance of writing large plugins could be a
-book in itself; however, small custom plugins are a regular part of the pytest
+take a closer look at plugins. Small custom plugins are a regular part of the pytest
 ecosystem.

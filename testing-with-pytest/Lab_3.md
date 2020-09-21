@@ -5,11 +5,7 @@
 
 Now that you’ve seen the basics of pytest, let’s turn our attention to fixtures,
 which are essential to structuring test code for almost any non-trivial software
-system. Fixtures are functions that are run by pytest before (and sometimes
-after) the actual test functions. The code in the fixture can do whatever you
-want it to. You can use fixtures to get a data set for the tests to work on. You
-can use fixtures to get a system into a known state before running a test.
-Fixtures are also used to get data ready for multiple tests.
+system.
 
 Here’s a simple fixture that returns a number:
 
@@ -40,31 +36,6 @@ pytest will see this and look for a fixture with this name. Naming is significan
 in pytest. pytest will look in the module of the test for a fixture of that name.
 It will also look in conftest.py files if it doesn’t find it in this file.
 
-
-Before we start our exploration of fixtures (and the conftest.py file), I need to
-address the fact that the term _fixture_ has many meanings in the programming
-and test community, and even in the Python community. I use “fixture,”
-“fixture function,” and “fixture method” interchangeably to refer to the
-@pytest.fixture() decorated functions discussed in this lab. _Fixture_ can also
-be used to refer to the resource that is being set up by the fixture functions.
-Fixture functions often set up or retrieve some data that the test can work
-with. Sometimes this data is considered a fixture. For example, the Django
-community often uses _fixture_ to mean some initial data that gets loaded into
-a database at the start of an application.
-
-Regardless of other meanings, in pytest and in this course, test fixtures refer
-to the mechanism pytest provides to allow the separation of “getting ready
-for” and “cleaning up after” code from your test functions.
-
-pytest fixtures are one of the unique core features that make pytest stand
-out above other test frameworks, and are the reason why many people switch
-to and stay with pytest. However, fixtures in pytest are different than fixtures
-in Django and different than the setup and teardown procedures found in
-unittest and nose. There are a lot of features and nuances about fixtures.
-Once you get a good mental model of how they work, they will seem easy to
-you. However, you have to play with them a while to get there, so let’s get
-started.
-
 #### Pre-reqs:
 - Google Chrome (Recommended)
 
@@ -92,7 +63,7 @@ Therefore, putting all of our fixtures in the conftest.py file at the test root,
 tasks_proj/tests, makes the most sense.
 
 Although conftest.py is a Python module, it should not be imported by test files.
-Don’t importconftest from anywhere. The conftest.py file gets read by pytest, and
+Don’t import conftest from anywhere. The conftest.py file gets read by pytest, and
 is considered a local _plugin_ , which will make sense once we start talking about
 plugins in Lab 5, Plugins For now, think of tests/conftest.py as
 a place where we can put fixtures used by all tests under the tests directory.
@@ -109,9 +80,7 @@ just need to call them at the right time, and we need a temporary directory.
 
 Fortunately, pytest includes a cool fixture called tmpdir that we can use for
 testing and don’t have to worry about cleaning up. It’s not magic, just good
-coding by the pytest folks. (Don’t worry; we look at tmpdir and it’s session-
-scoped relative tmpdir_factory in more depth in Using tmpdir and tmpdir_factory,
-on page 73.)
+coding by the pytest folks.
 
 Given those pieces, this fixture works nicely:
 
@@ -174,12 +143,14 @@ isn’t obvious from the code what’s going on. I think it’s helpful in this 
 Hopefully, GIVENan initializedtasks db helps to clarify why tasks_db is used as a fix-
 ture for the test.
 
-```
-Make Sure Tasks Is Installed
+
+**Make Sure Tasks Is Installed**
+
 We’re still writing tests to be run against the Tasks project in this
 lab, which was first installed in Lab 2. If you skipped that
 lab, be sure to install tasks with cd code; pip install ./tasks_proj/.
-```
+
+
 ### Tracing Fixture Execution with –setup-show
 
 If you run the test from the last section, you don’t get to see what fixtures
@@ -232,8 +203,7 @@ before the test. And before that, tmpdir_factory. Apparently, tmpdir uses it as 
 fixture.
 
 The F and S in front of the fixture names indicate scope. F for function scope,
-and S for session scope. I’ll talk about scope in Specifying Fixture Scope, on
-page 58.
+and S for session scope.
 
 ### Using Fixtures for Test Data
 
@@ -266,22 +236,19 @@ with a fixture fails:
 =================== test session starts ===================
 collected 1 item
 
-test_fixtures.pyF [100%]
+test_fixtures.py F [100%]
 
 ========================FAILURES=========================
 ______________________test_a_tuple_______________________
-```
 
-
-```
-a_tuple= (1, 'foo',None,{'bar':23})
+a_tuple = (1, 'foo', None, {'bar': 23})
 
 def test_a_tuple(a_tuple):
-"""Demothe a_tuplefixture."""
-**> asserta_tuple[3][** _'bar'_ **] == 32**
-E assert23 == 32
+    """Demo the a_tuple fixture."""
+>   assert a_tuple[3]['bar'] == 32
+E   assert 23 == 32
+test_fixtures.py:43: AssertionError
 
-test_fixtures.py:43:AssertionError
 ================ 1 failed in 0.07 seconds =================
 ```
 
@@ -308,10 +275,10 @@ ____________ERRORat setupof test_other_data____________
 
 @pytest.fixture()
 def some_other_data():
-"""Raisean exceptionfromfixture."""
-x = 43
-**> assertx == 42**
-E assert43 == 42
+    """Raisean exception from fixture."""
+    x = 43
+>       assertx == 42
+E       assert43 == 42
 
 test_fixtures.py:24:AssertionError
 ================= 1 error in 0.06 seconds =================
@@ -319,10 +286,9 @@ test_fixtures.py:24:AssertionError
 
 A couple of things happen. The stack trace shows correctly that the assert
 happened in the fixture function. Also, test_other_data is reported not as FAIL,
-but as ERROR. This distinction is great. If a test ever fails, you know the failure
-happened in the test proper, and not in any fixture it depends on.
+but as ERROR. 
 
-But what about the Tasks project? For the Tasks project, we could probably
+For the Tasks project, we could probably
 use some data fixtures, perhaps different lists of tasks with various properties:
 
 ```
@@ -1033,7 +999,7 @@ def test_add_b (tasks_db,b_task):
 """Usingb_taskfixture,withids."""
 task_id= tasks.add(b_task)
 t_from_db= tasks.get(task_id)
-**assert** equivalent(t_from_db,b_task)
+assertequivalent(t_from_db,b_task)
 ```
 
 This gives us better identifiers:
@@ -1257,17 +1223,11 @@ return some data. Perhaps a list, or a dictionary, or a tuple.
 5. Run pytest --setup-show test_fixtures.py. Are all the fixtures run before every test?
 6. Add scope='module' to the fixture from Exercise 4.
 7. Re-run pytest --setup-show test_fixtures.py. What changed?
-8. For the fixture from Exercise 6, change return <data> to yield <data>.
+8. For the fixture from Exercise 6, change return `<data>` to yield `<data>`.
 9. Add print statements before and after the yield.
 10. Run pytest-s -v test_fixtures.py. Does the output make sense?
 
 ### What’s Next
-
-The pytest fixture implementation is flexible enough to use fixtures like
-building blocks to build up test setup and teardown, and to swap in and out
-different chunks of the system (like swapping in Mongo for TinyDB). Because
-fixtures are so flexible, I use them heavily to push as much of the setup of
-my tests into fixtures as I can.
 
 In this lab, you looked at pytest fixtures you write yourself, as well as a
 couple of builtin fixtures, tmpdir and tmpdir_factory. You’ll take a closer look at

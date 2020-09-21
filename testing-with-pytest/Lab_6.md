@@ -27,39 +27,25 @@ all of the non-test files in pytest and specifically who should care about them.
 Everyone should know about these:
 
 - _pytest.ini_ : This is the primary pytest configuration file that allows you to
-    change default behavior. Since there are quite a few configuration changes
-    you can make, a big chunk of this lab is about the settings you can
-    make in pytest.ini.
+    change default behavior.
 
 - _conftest.py_ : This is a local plugin to allow hook functions and fixtures for
-    the directory where the conftest.py file exists and all subdirectories. conftest.py
-    files are covered Lab 5, Plugins
+    the directory where the conftest.py file exists and all subdirectories.
 
 - ___init__.py_ : When put into every test subdirectory, this file allows you to
-    have identical test filenames in multiple test directories. We’ll look at an
-    example of what can go wrong without __init__.py files in test directories in
-    Avoiding Filename Collisions
+    have identical test filenames in multiple test directories.
 
 If you use tox, you’ll be interested in:
 
 - _tox.ini_ : This file is similar to pytest.ini, but for tox. However, you can put your
     pytest configuration here instead of having both a tox.ini and a pytest.ini file,
 
-
-
-saving you one configuration file. Tox is covered in Lab 7, Using pytest
-with Other Tools
-
 If you want to distribute a Python package (like Tasks), this file will be of
-
 interest:
 
 - _setup.cfg_ : This is a file that’s also in ini file format and affects the behavior
-    of setup.py. It’s possible to add a couple of lines to setup.py to allow you to
-    run pythonsetup.pytest and have it run all of your pytest tests. If you are
-    distributing a package, you may already have a setup.cfg file, and you can
-    use that file to store pytest configuration. You’ll see how in Appendix 4,
-    Packaging and Distributing Python Projects
+of setup.py. It’s possible to add a couple of lines to setup.py to allow you to
+run python setup.py test and have it run all of your pytest tests
 
 Regardless of which file you put your pytest configuration in, the format will
 mostly be the same.
@@ -79,7 +65,7 @@ For tox.ini:
 
 ```
 
-ch6/format/tox.ini**
+ch6/format/tox.ini
 
 ;... tox specific stuff ...
 
@@ -92,7 +78,7 @@ xfail_strict = true
 For setup.cfg:
 
 ```
-ch6/format/setup.cfg**
+ch6/format/setup.cfg
 
 ;... packaging specific stuff ...
 
@@ -152,9 +138,7 @@ aren’t registered in a config file. You’ll see how to do that in the next se
 
 ### Registering Markers to Avoid Marker Typos
 
-Custom markers, as discussed in Marking Test Functions, are
-great for allowing you to mark a subset of tests to run with a specific marker.
-However, it’s too easy to misspell a marker and end up having some tests
+It’s too easy to misspell a Custom markers and end up having some tests
 marked with @pytest.mark.smoke and some marked with @pytest.mark.somke. By
 default, this isn’t an error. pytest just thinks you created two markers. This
 can be fixed, however, by registering markers in pytest.ini, like this:
@@ -256,10 +240,7 @@ func/test_api_exceptions.py .. [100%]
 ### Requiring a Minimum pytest Version
 
 The minversion setting enables you to specify a minimum pytest version you
-expect for your tests. For instance, I like to use approx() when testing floating
-point numbers for “close enough” equality in tests. But this feature didn’t get
-introduced into pytest until version 3.0. To avoid confusion, I add the following
-to projects that use approx():
+expect for your tests.
 
 ```
 [pytest]
@@ -277,11 +258,6 @@ twice? Well, no. But, it does mean to traverse subdirectories. In the case of
 pytest, test discovery traverses many directories recursively. But there are
 some directories you just know you don’t want pytest looking in.
 
-The default setting for norecurse is '.* build dist CVS _darcs {arch} and *.egg. Having '.*'
-is a good reason to name your virtual environment '.venv', because all directo-
-ries starting with a dot will not be traversed. However, I have a habit of
-naming it venv, so I could add that to norecursedirs.
-
 In the case of the Tasks project, you could list src in there also, because having
 pytest look for test files there would just be a waste of time.
 
@@ -289,12 +265,6 @@ pytest look for test files there would just be a waste of time.
 [pytest]
 norecursedirs = .* venv src *.egg dist build
 ```
-
-When overriding a setting that already has a useful value, like this setting,
-it’s a good idea to know what the defaults are and put the ones back you care
-about, as I did in the previous code with *.egg dist build.
-
-The norecursedirs is kind of a corollary to testpaths, so let’s look at that next.
 
 ### Specifying Test Directory Locations
 
@@ -335,42 +305,22 @@ testpaths= tests
 ```
 
 Now, as long as you start pytest from the tasks_proj directory, pytest will only
-look in tasks_proj/tests. My problem with this is that I often bounce around a
-test directory during test development and debugging, so I can easily test a
-subdirectory or file without typing out the whole path. Therefore, for me, this
-setting doesn’t help much with interactive testing.
+look in tasks_proj/tests.
 
-However, it’s great for tests launched from a continuous integration server
-or from tox. In those cases, you know that the root directory is going to be
-fixed, and you can list directories relative to that fixed root. These are also
-the cases where you really want to squeeze your test times, so shaving a bit
-off of test discovery is awesome.
-
-At first glance, it might seem silly to use both testpaths and norecursedirs at the
-same time. However, as you’ve seen, testspaths doesn’t help much with interac-
-tive testing from different parts of the file system. In those cases, norecursedirs
-can help. Also, if you have directories with tests that don’t contain tests, you
-could use norecursedirs to avoid those. But really, what would be the point of
-putting extra directories in tests that don’t have tests?
 
 ### Changing Test Discovery Rules
 
 pytest finds tests to run based on certain test discovery rules. The standard
-
 test discovery rules are:
 
 - Start at one or more directory. You can specify filenames or directory
     names on the command line. If you don’t specify anything, the current
     directory is used.
-
 - Look in the directory and all subdirectories recursively for test modules.
-
 - A test module is a file with a name that looks like test_*.py or *_test.py.
-
 - Look in test modules for functions that start with test_.
-
 - Look for classes that start with Test. Look for methods in those classes
-    that start with test_ but don’t have an __init__ method.
+    that start with test_ but don’t have an `__init__` method.
 
 These are the standard discovery rules; however, you can change them.
 
@@ -379,23 +329,24 @@ These are the standard discovery rules; however, you can change them.
 **python_classes**
 
 The usual test discovery rule for pytest and classes is to consider a class a
-potential test class if it starts with Test*. The class also can’t have an __init__()
-function. But what if we want to name our test classes <something>Test or
-<something>Suite? That’s where python_classes comes in:
+potential test class if it starts with Test*. The class also can’t have an `__init__()`
+function. But what if we want to name our test classes `<something>Test` or
+`<something>Suite`? That’s where python_classes comes in:
 
 ```
 [pytest]
-python_classes= _*TestTest**Suite_
+python_classes = *Test Test* *Suite
 ```
 
 
 ```
-**class** DeleteSuite():
-def test_delete_1 ():
-...
-def test_delete_2 ():
-...
+class DeleteSuite():
+    def test_delete_1():
+        ...
+    def test_delete_2():
+        ...
 ....
+
 ```
 
 
@@ -410,7 +361,7 @@ your files, just add a line to pytest.ini like this:
 
 ```
 [pytest]
-python_files= _test_**_testcheck_*_
+python_files = test_* *_test check_*
 ```
 
 Easy peasy. Now you can migrate your naming convention gradually if you
@@ -423,30 +374,20 @@ method names. The default is test_*. To add check_*—you guessed it—do this:
 
 ```
 [pytest]
-python_functions= _test_*check_*_
+python_functions = test_* check_*
 ```
 
-Now the pytest naming conventions don’t seem that restrictive, do they? If you
-don’t like the default naming convention, just change it. However, I encourage
-you to have a better reason. Migrating hundreds of test files is definitely a
-good reason.
 
 ### Disallowing XPASS
 
-Setting xfail_strict= true causes tests marked with @pytest.mark.xfail that don’t fail to
-be reported as an error. I think this should always be set. For more information
-on the xfail marker, go to Marking Tests as Expecting to Fail
+Setting `xfail_strict = true` causes tests marked with @pytest.mark.xfail that don’t fail to
+be reported as an error. This should always be set.
 
 ### Avoiding Filename Collisions
 
-The utility of having __init__.py files in every test subdirectory of a project con-
-fused me for a long time. However, the difference between having these and
-
-
-
-not having these is simple. If you have __init__.py files in all of your test subdi-
+If you have `__init__.py` files in all of your test subdi-
 rectories, you can have the same test filename show up in multiple directories.
-If you don’t, you can’t. That’s it. That’s the effect on you.
+If you don’t, you can’t.
 
 Here’s an example. Directory a and b both have the file, test_foo.py. It doesn’t
 matter what these files have in them, but for this example, they look like this:
@@ -534,8 +475,8 @@ and/oruse a uniquebasename for yourtestfilemodules
 That error message highlights that we have two files named the same, but
 doesn’t tell us how to fix it.
 
-To fix this test, just add empty __init__.py files in the subdirectories. Here, the
-example directory dups_fixed is the same as dups, but with __init__.py files added:
+To fix this test, just add empty `__init__.py` files in the subdirectories. Here, the
+example directory dups_fixed is the same as dups, but with `__init__.py` files added:
 
 ```
 dups_fixed/
@@ -565,11 +506,6 @@ b/test_foo.py. [100%]
 ================ 2 passed in 0.03 seconds =================
 ```
 
-There, all better. You might say to yourself that you’ll never have duplicate
-filenames, so it doesn’t matter. That’s fine. But projects grow and test direc-
-tories grow, and do you really want to wait until it happens to you before you
-fix it? I say just put those files in there as a habit and don’t worry about it
-again.
 
 ### Exercises
 

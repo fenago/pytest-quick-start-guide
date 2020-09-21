@@ -171,19 +171,6 @@ work within Git, or if the plugin or plugin version you want isn’t on PyPI.
 
 Many third-party plugins contain quite a bit of code. That’s one of the reasons
 we use them—to save us the time to develop all of that code ourselves.
-However, for your specific coding domain, you’ll undoubtedly come up with
-special fixtures and modifications that help you test. Even a handful of fix-
-tures that you want to share between a couple of projects can be shared
-easily by creating a plugin. You can share those changes with multiple
-projects—and possibly the rest of the world—by developing and distributing
-your own plugins. It’s pretty easy to do so. In this section, we’ll develop a
-small modification to pytest behavior, package it as a plugin, test it, and look
-into how to distribute it.
-
-Plugins can include hook functions that alter pytest’s behavior. Because
-pytest was developed with the intent to allow plugins to change quite a bit
-about the way pytest behaves, a lot of hook functions are available. The hook
-functions for pytest are specified on the pytest documentation site.
 
 For our example, we’ll create a plugin that changes the way the test status
 looks. We’ll also include a command-line option to turn on this new behavior.
@@ -192,13 +179,6 @@ change all of the FAILED status indicators to “OPPORTUNITY for improve-
 ment,” change F to O, and add “Thanks for running the tests” to the header.
 We’ll use the --nice option to turn the behavior on.
 
-To keep the behavior changes separate from the discussion of plugin
-mechanics, we’ll make our changes in conftest.py before turning it into a dis-
-tributable plugin. You don’t have to start plugins this way. But frequently,
-changes you only intended to use on one project will become useful enough
-to share and grow into a plugin. Therefore, we’ll start by adding functionality
-to a conftest.py file, then, after we get things working in conftest.py, we’ll move
-the code to a package.
 
 Let’s go back to the Tasks project. In Expecting Exceptions, we
 wrote some tests that made sure exceptions were raised if someone called an
@@ -206,7 +186,6 @@ API function incorrectly. Looks like we missed at least a few possible error
 conditions.
 
 1. https://docs.pytest.org/en/latest/reference.html#hooks
-
 
 
 Here are a couple more tests:
@@ -244,29 +223,26 @@ Let’s run them to see if they pass:
 
 ```
 =================== test session starts ===================
-plugins:cov-2.5.1
+plugins: cov-2.5.1
 collected 57 items
-
-tests/func/test_add.py... [ 5%]
-tests/func/test_add_variety.py....................[ 40%]
+tests/func/test_add.py ... [ 5%]
+tests/func/test_add_variety.py .................... [ 40%]
 ........ [ 54%]
-tests/func/test_add_variety2.py............ [ 75%]
-tests/func/test_api_exceptions.py.F....... [ 91%]
-tests/func/test_unique_id.py. [ 92%]
-tests/unit/test_task.py.... [100%]
+tests/func/test_add_variety2.py ............ [ 75%]
+tests/func/test_api_exceptions.py .F....... [ 91%]
+tests/func/test_unique_id.py . [ 92%]
+tests/unit/test_task.py .... [100%]
 
-========================FAILURES=========================
-_______________TestAdd.test_done_not_bool________________
+======================== FAILURES =========================
+_______________ TestAdd.test_done_not_bool ________________
+self = <func.test_api_exceptions.TestAdd object at 0x103d82860>
+    def test_done_not_bool(self):
+        """Should raise an exception if done is not a bool."""
+        with pytest.raises(ValueError):
+>             tasks.add(Task(summary='summary', done='True'))
+E             Failed: DID NOT RAISE <class 'ValueError'>
+tests/func/test_api_exceptions.py:20: Failed
 
-self= <func.test_api_exceptions.TestAddobjectat 0x103d82860>
-
-def test_done_not_bool(self):
-"""Shouldraisean exceptionif doneis not a bool."""
-withpytest.raises(ValueError):
-**> tasks.add(Task(summary=** _'summary'_ **, done=** _'True'_ **))**
-E Failed:DID NOT RAISE<class'ValueError'>
-
-tests/func/test_api_exceptions.py:20:Failed
 =========== 1 failed, 56 passed in 0.48 seconds ===========
 ```
 
@@ -290,7 +266,7 @@ collected 9 items/ 7 deselected
 test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py::TestAdd::test_done_not_bool FAILED[100%]
 
-====1 failed, 1 passed,7 deselected in 0.10 seconds=====
+==== 1 failed, 1 passed,7 deselected in 0.10 seconds =====
 ```
 
 We could go off and try to fix this test (and we should later), but now we are
@@ -307,13 +283,8 @@ def pytest_report_header():
     return "Thanks for running the tests."
 ```
 
-Obviously, printing a thank-you message is rather silly. However, the ability
-to add information to the header can be extended to add a username and
-specify hardware used and versions under test. Really, anything you can
-convert to a string, you can stuff into the test header.
-
 Next, we’ll change the status reporting for tests to change F to O and FAILED to
-OPPORTUNITYfor improvement. There’s a hook function that allows for this type of
+OPPORTUNITY for improvement. There’s a hook function that allows for this type of
 shenanigans: pytest_report_teststatus():
 
 ```
@@ -344,7 +315,7 @@ test_api_exceptions.py.O
 
 
 ```
-====`1 failed, 1 passed,7 deselected in 0.10 seconds=====
+====`1 failed, 1 passed,7 deselected in 0.10 seconds =====
 ```
 
 
@@ -364,7 +335,7 @@ test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
 test_api_exceptions.py
 ::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
 
-====1 failed, 1 passed,7 deselected in 0.11 seconds=====
+==== 1 failed, 1 passed,7 deselected in 0.11 seconds =====
 ```
 
 The last modification we’ll make is to add a command-line option, --nice, to
@@ -417,7 +388,7 @@ test_api_exceptions.py.F [100%]
 
 
 ```
-====1 failed, 1 passed,7 deselected in 0.11 seconds=====
+==== 1 failed, 1 passed,7 deselected in 0.11 seconds =====
 ```
 
 Now with --nice:
@@ -433,7 +404,7 @@ collected 9 items/ 7 deselected
 
 test_api_exceptions.py.O [100%]
 
-====1 failed, 1 passed,7 deselected in 0.12 seconds=====
+==== 1 failed, 1 passed,7 deselected in 0.12 seconds =====
 ```
 
 And with --nice and --verbose:
@@ -444,15 +415,14 @@ And with --nice and --verbose:
 
 ```
 =================== test session starts ===================
-Thanksfor runningthe tests.
-plugins:cov-2.5.1
-collected 9 items/ 7 deselected
-
-test_api_exceptions.py::TestAdd::test_missing_summaryPASSED[ 50%]
+Thanks for running the tests.
+plugins: cov-2.5.1
+collected 9 items / 7 deselected
+test_api_exceptions.py::TestAdd::test_missing_summary PASSED [ 50%]
 test_api_exceptions.py
-::TestAdd::test_done_not_boolOPPORTUNITYfor improvement[100%]
+::TestAdd::test_done_not_bool OPPORTUNITY for improvement [100%]
+==== 1 failed, 1 passed, 7 deselected in 0.10 seconds =====
 
-====1 failed, 1 passed,7 deselected in 0.10 seconds=====
 ```
 
 Great! All of the changes we wanted are done with about a dozen lines of code
@@ -460,21 +430,11 @@ in a conftest.py file. Next, we’ll move this code into a plugin structure.
 
 ### Creating an Installable Plugin
 
-The process for sharing plugins with others is well-defined. Even if you never
-put your own plugin up on PyPI, by walking through the process, you’ll have
-an easier time reading the code from open source plugins and be better
-equipped to judge if they will help you or not.
-
-It would be overkill to fully cover Python packaging and distribution in this
-book, as the topic is well documented elsewhere.3,4 However, it’s a small task
-to go from the local config plugin we created in the previous section to some-
-thing pip-installable.
-
+The process for sharing plugins with others is well-defined.
 First, we need to create a new directory to put our plugin code. It does not
 matter what you call it, but since we are making a plugin for the “nice” flag,
 let’s call it pytest-nice. We will have two files in this new directory: pytest_nice.py
-and setup.py. (The tests directory will be discussed in Testing Plugins, on
-page 109 .)
+and setup.py.
 
 3. [http://python-packaging.readthedocs.io](http://python-packaging.readthedocs.io)
 4. https://www.pypa.io
@@ -546,20 +506,6 @@ setup(
 )
 ```
 
-You’ll want more information in your setup if you’re going to distribute to a
-wide audience or online. However, for a small team or just for yourself, this
-will suffice.
-
-You can include many more parameters to setup(); we only have the required
-fields. The version field is the version of this plugin. And it’s up to you when
-you bump the version. The url field is required. You can leave it out, but you
-get a warning if you do. The author and author_email fields can be replaced with
-maintainer and maintainer_email, but one of those pairs needs to be there. The
-license field is a short text field. It can be one of the many open source licenses,
-your name or company, or whatever is appropriate for you. The py_modules
-entry lists pytest_nice as our one and only module for this plugin. Although it’s
-a list and you could include more than one module, if I had more than one,
-I’d use packages instead and put all the modules inside a directory.
 
 So far, all of the parameters to setup() are standard and used for all Python
 installers. The piece that is different for pytest plugins is the entry_points
@@ -570,7 +516,8 @@ of our plugin, and pytest_nice is the name of the module where our plugin lives.
 If we had used a package, our entry here would be:
 
 ```
-entry_points={ _'pytest11'_ : [ _'name_of_plugin= myproject.pluginmodule'_ ,], },
+entry_points={'pytest11': ['name_of_plugin = myproject.pluginmodule',], },
+
 ```
 
 I haven’t talked about the README.rst file yet. Some form of README is a
@@ -578,9 +525,8 @@ requirement by setuptools. If you leave it out, you’ll get this:
 
 ```
 ...
-
-warning:sdist:standardfilenot found:shouldhaveone of README,
-README.rst,README.txt,README.md
+warning: sdist: standard file not found: should have one of README,
+README.rst, README.txt, README.md
 ...
 
 ```
@@ -934,14 +880,7 @@ can upgrade by adding --upgrade:
 
 This is just like any other use of pip, but with the ---no-index --find-links myplugins added.
 
-
 **Distributing Plugins Through PyPI**
-
-If you want to share your plugin with the world, there are a few more steps
-we need to do. Actually, there are quite a few more steps. However, because
-this course isn’t focused on contributing to open source, I recommend checking
-out the thorough instruction found in the Python Packaging User Guide.
-
 When you are contributing a pytest plugin, another great place to start is by
 using the cookiecutter-pytest-plugin :
 
@@ -952,11 +891,6 @@ using the cookiecutter-pytest-plugin :
 ##### $ cookiecutter https://github.com/pytest-dev/cookiecutter-pytest-plugin
 
 
-This project first asks you some questions about your plugin. Then it creates
-a good directory for you to explore and fill in with your code. Walking through
-this is beyond the scope of this course; however, please keep this project in
-mind. It is supported by core pytest folks, and they will make sure this project
-stays up to date.
 
 ### Exercises
 
@@ -964,8 +898,7 @@ In ch4/cache/test_slower.py, there is an autouse fixture called check_duration()
 used it in the Lab 4 exercises as well. Now, let’s make a plugin out of it.
 
 1. Create a directory named pytest-slower that will hold the code for the new
-plugin, similar to the directory described in Creating an Installable Plugin,
-on page 105.
+plugin, similar to the directory described in Creating an Installable Plugin.
 2. Fill out all the files of the directory to make pytest-slower an installable plugin.
 3. Write some test code for the plugin.
 4. Take a look at the Python Package Index and search for “pytest-.” Find
