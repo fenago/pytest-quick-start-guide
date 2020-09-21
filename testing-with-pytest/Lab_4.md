@@ -3,19 +3,6 @@
 
 ### Builtin Fixtures
 
-In the previous lab, you looked at what fixtures are, how to write them, and
-how to use them for test data as well as setup and teardown code. You also
-used conftest.py for sharing fixtures between tests in multiple test files. By the
-end of Lab 3, pytest Fixtures, the Tasks project had these fix-
-tures: tasks_db_session, tasks_just_a_few, tasks_mult_per_owner, tasks_db, db_with_3_tasks, and
-db_with_multi_per_owner defined in conftest.py to be used by any test function in the
-Tasks project that needed them.
-
-Reusing common fixtures is such a good idea that the pytest developers
-included some commonly needed fixtures with pytest. You’ve already seen tmpdir
-and tmpdir_factory in use by the Tasks project in Changing Scope for Tasks Project
-Fixtures You’ll take a look at them in more detail in this lab.
-
 The builtin fixtures that come prepackaged with pytest can help you do some
 pretty useful things in your tests easily and consistently. For example, in
 addition to handling temporary files, pytest includes builtin fixtures to access

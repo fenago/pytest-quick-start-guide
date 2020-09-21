@@ -63,14 +63,8 @@ tasks_proj/
 
 All of the tests are kept in tests and separate from the package source files in
 src. This isn’t a requirement of pytest, but it’s a best practice.
-
-
 Functional and unit tests are separated into their own directories. This is an
-arbitrary decision and not required. However, organizing test files into multiple
-directories allows you to easily run a subset of tests. I like to keep functional
-and unit tests separate because functional tests should only break if we are
-intentionally changing functionality of the system, whereas unit tests could
-break during a refactoring or an implementation change.
+arbitrary decision and not required.
 
 - The project contains two types of `__init__.py` files: those found under the src/
 directory and those found under tests/. The `src/tasks/__init__.py` file tells Python
@@ -84,9 +78,7 @@ insert code into part of the pytest execution process to alter how pytest works.
 **Installing a Package Locally**
 
 The test file, tests/unit/test_task.py, contains the tests we worked on in Running
-pytest, in files test_three.py and test_four.py. I’ve just renamed it here
-to something that makes more sense for what it’s testing and copied everything
-into one file.
+pytest, in files test_three.py and test_four.py.
 
 Here is test_task.py:
 
