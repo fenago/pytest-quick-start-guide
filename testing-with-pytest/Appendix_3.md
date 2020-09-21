@@ -26,13 +26,20 @@ plugin is useful if you have an intermittent failure in a test.
 Following is a normal test run of tests that start with test_list from ch7/tasks
 _proj_v2:
 
+
 ##### Step 1
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
+
 ##### $ pip install .
+
 ##### $ pip install pytest-repeat
+
 ##### $ cd tests
+
 ##### $ pytest -v -k test_list
+
 ##### $ pytest -v -k test_list
 
 ```
@@ -55,7 +62,9 @@ unit/test_cli.py::test_list_dash_dash_owner PASSED            [100%]
 
 With the pytest-repeat plugin, you can use --count to run everything twice:
 
+
 ##### Step 2
+
 
 ##### $ pytest --count=2 -v -k test_list
 
@@ -109,10 +118,14 @@ time.sleep(1)
 
 Notice that it takes over ten seconds to run normally:
 
+
 ##### Step 3
 
+
 ##### $ pip install pytest-xdist
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
+
 ##### $ pytest test_parallel.py
 
 ```
@@ -127,7 +140,9 @@ With the pytest-xdist plugin, you can use -n numprocesses to run each test in a
 subprocess, and use -n auto to automatically detect the number of CPUs on
 the system. Here’s the same test run on multiple processors:
 
+
 ##### Step 4
+
 
 ##### $ pytest -n auto test_parallel.py
 
@@ -168,10 +183,14 @@ longer or shorter than the timeout limit.
 Let’s run the tests from the previous example (with one-second sleeps) with
 a half-second timeout:
 
+
 ##### Step 5
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
+
 ##### $ pip install pytest-timeout
+
 ##### $ pytest --timeout=0.5 -x test_parallel.py
 
 ```
@@ -217,9 +236,12 @@ appear right away.
 
 Here’s a test with normal failures at the end:
 
+
 ##### Step 6
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xdist
+
 ##### $ pytest --timeout=0.5 --tb=line --maxfail=2 test_parallel.py
 
 ```
@@ -238,9 +260,12 @@ test_parallel.py FF
 
 Here’s the same test with --instafail:
 
+
 ##### Step 7
 
+
 ##### $ pip install pytest-instafail
+
 ##### $ pytest --instafail --timeout=0.5 --tb=line --maxfail=2 test_parallel.py
 
 ```
@@ -327,9 +352,12 @@ pass vs. fail, be sure to try out pytest-html.
 
 The pytest-html plugin is really easy to start. Just add --html=report_name.html:
 
+
 ##### Step 8
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/outcomes
+
 ##### $ pytest --html=report.html
 
 
@@ -355,7 +383,9 @@ test_outcomes.py:8: AssertionError
 1 failed,  1 passed, 1 skipped, 1 xfailed,  1 xpassed, 1 error in 0.08 seconds
 ```
 
+
 ##### Step 9
+
 
 ##### $ open report.htm
 

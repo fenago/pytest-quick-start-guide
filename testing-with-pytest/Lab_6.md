@@ -97,7 +97,9 @@ You can get a list of all the valid settings for pytest.ini from pytest --help. 
 a sampling:
 
 
+
 ##### Step 1
+
 ##### $ pytest --help
 
 
@@ -153,9 +155,12 @@ markers =
 With these markers registered, you can now also see them with pytest --markers
 with their descriptions:
 
+
 ##### Step 2
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
+
 ##### $ pytest --markers
 
 ```
@@ -177,8 +182,11 @@ unregistered markers show up as an error. The only difference between
 ch6/a/tasks_proj and ch6/b/tasks_proj is the contents of the pytest.ini file. It’s empty
 in ch6/a. Let’s try running the tests without registering any markers:
 
+
 ##### Step 3
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/a/tasks_proj/tests
+
 ##### $ pytest --strict --tb=line
 
 ```
@@ -224,8 +232,11 @@ for the project.
 
 This should allow us to run tests, including the smoke tests:
 
+
 ##### Step 4
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
+
 ##### $ pytest --strict -m smoke
 
 ```
@@ -420,8 +431,11 @@ These files don’t even have the same content, but it’s still mucked up. Run-
 ning them individually will be fine, but running pytest from the dups directory
 won’t work:
 
+
 ##### Step 5
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups
+
 ##### $ pytest a
 
 ```
@@ -434,7 +448,9 @@ a/test_foo.py. [100%]
 ================ 1 passed in 0.01 seconds =================
 ```
 
+
 ##### Step 6
+
 ##### $ pytest b
 
 ```
@@ -447,7 +463,9 @@ b/test_foo.py. [100%]
 ================ 1 passed in 0.01 seconds =================
 ```
 
+
 ##### Step 7
+
 ##### $ pytest
 
 ```
@@ -490,8 +508,11 @@ dups_fixed/
 
 Now, let’s try this again from the top level in dups_fixed:
 
+
 ##### Step 8
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups_fixed
+
 ##### $ pytest
 
 

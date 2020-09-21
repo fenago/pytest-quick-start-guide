@@ -81,7 +81,9 @@ you can use pip in several different ways to install plugins.
 As PyPI is the default location for pip, installing plugins from PyPI is the easiest
 method. Let’s install the pytest-cov plugin:
 
+
 ##### Step 1
+
 
 ##### $ pip install pytest-cov
 
@@ -92,7 +94,9 @@ This installs the latest stable version from PyPI.
 If you want a particular version of a plugin, you can specify the version
 after ‘==‘:
 
+
 ##### Step 2
+
 ##### $ pip install pytest-cov==2.5.1
 
 **Install from a .tar.gz or .whl File**
@@ -108,10 +112,13 @@ or the .whl and install from that.
 
 You don’t have to unzip or anything; just point pip at it:
 
+
 ##### Step 3
+
 ##### $ pip install pytest-cov-2.5.1.tar.gz
 
 _# or_
+
 
 ##### $ pip install pytest_cov-2.5.1-py2.py3-none-any.whl
 
@@ -122,10 +129,14 @@ You can keep a local stash of plugins (and other Python packages) in a local
 or shared directory in .tar.gz or .whl format and use that instead of PyPI for
 installing plugins:
 
+
 ##### Step 4
 
+
 ##### $ mkdirsome_plugins
+
 ##### $ cp pytest_cov-2.5.1-py2.py3-none-any.whlsome_plugins/
+
 ##### $ pip install --no-index--find-links=./some_plugins/pytest-cov**
 
 
@@ -140,7 +151,9 @@ Note that with the local directory install method, you can install multiple
 versions and specify which version you want by adding == and the version
 number:
 
+
 ##### Step  5
+
 ##### $ pip install --no-index--find-links=./some_plugins/pytest-cov==2.5.1
 
 
@@ -148,18 +161,24 @@ number:
 
 You can install plugins directly from a Git repository—in this case, GitHub:
 
+
 ##### Step 6
+
 ##### $ pip install git+https://github.com/pytest-dev/pytest-cov
 
 You can also specify a version tag:
 
+
 ##### Step 7
+
 ##### $ pip install git+https://github.com/pytest-dev/pytest-cov@v2.5.1
 
 
 Or you can specify a branch:
 
+
 ##### Step 8
+
 ##### $ pip install git+https://github.com/pytest-dev/pytest-cov@master
 
 
@@ -216,9 +235,12 @@ class TestAdd():
 
 Let’s run them to see if they pass:
 
+
 ##### Step  9
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj
+
 ##### $ pytest
 
 ```
@@ -253,9 +275,12 @@ you can turn that off with --tb=no .
 And now let’s focus on the new tests with -k TestAdd, which works because
 there aren’t any other tests with names that contain “TestAdd.”
 
+
 ##### Step 10
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch5/a/tasks_proj/tests/func
+
 ##### $ pytest -v --tb=no test_api_exceptions.py -k TestAdd
 
 ```
@@ -299,9 +324,12 @@ def pytest_report_teststatus(report):
 And now we have just the output we were looking for. A test session with no
 --verbose flag shows an O for failures, er, improvement opportunities:
 
+
 ##### Step 11
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch5/b/tasks_proj/tests/func
+
 ##### $ pytest --tb=no test_api_exceptions.py -k TestAdd
 
 ```
@@ -322,7 +350,9 @@ test_api_exceptions.py.O
 
 And the -v or --verbose flag will be nicer also:
 
+
 ##### Step 12
+
 ##### $ pytest -v --tb=no test_api_exceptions.py -k TestAdd
 
 ```
@@ -371,8 +401,11 @@ documentation site.
 We can manually test our plugin just by running it against our example file.
 First, with no --nice option, to make sure just the username shows up:
 
+
 ##### Step 13
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch5/c/tasks_proj/tests/func
+
 ##### $ pytest --tb=no test_api_exceptions.py -k TestAdd
 
 ```
@@ -393,7 +426,9 @@ test_api_exceptions.py.F [100%]
 
 Now with --nice:
 
+
 ##### Step 14
+
 ##### $ pytest --nice--tb=no test_api_exceptions.py -k TestAdd
 
 ```
@@ -409,7 +444,9 @@ test_api_exceptions.py.O [100%]
 
 And with --nice and --verbose:
 
+
 ##### Step 15
+
 
 ##### $ pytest -v --nice--tb=no test_api_exceptions.py -k TestAdd
 
@@ -562,9 +599,12 @@ shareddirectoryPATH,theninstalllikethis:
 ::
 ```
 
+
 ##### Step 16
 
+
 ##### $ pip install PATH/pytest-nice-0.1.0.tar.gz
+
 ##### $ pip install --no-index--find-linksPATHpytest-nice
 
 ```
@@ -574,7 +614,9 @@ Usage
 ::
 ```
 
+
 ##### Step 17
+
 ##### $ pytest --nice
 
 
@@ -743,9 +785,12 @@ To run the tests, let’s start in our pytest-nice directory and make sure our p
 is installed. We do this either by installing the .zip.gz file or installing the cur-
 rent directory in editable mode:
 
+
 ##### Step 18
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch5/pytest -nice/
+
 ##### $ pip install .
 
 ```
@@ -762,7 +807,9 @@ Successfullyinstalledpytest-nice-0.1.0
 
 Now that it’s installed, let’s run the tests:
 
+
 ##### Step 19
+
 ##### $ pytest -v
 
 ```
@@ -784,7 +831,9 @@ test_nice.py::test_help_message PASSED            [100%]
 Yay! All the tests pass. We can uninstall it just like any other Python package
 or pytest plugin:
 
+
 ##### Step 20
+
 ##### $ pip uninstallpytest-nice
 
 ```
@@ -803,9 +852,12 @@ in other pytest plugins available through PyPI.
 Believe it or not, we are almost done with our plugin. From the command
 line, we can use this setup.py file to create a distribution:
 
+
 ##### Step 21
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch5/pytest -nice
+
 ##### $ pythonsetup.pysdist
 
 ```
@@ -826,7 +878,9 @@ Creating tar archive
 ...
 ```
 
+
 ##### Step 22
+
 
 ##### $ ls dist
 
@@ -839,7 +893,9 @@ pytest-nice-0.1.0.tar.gz
 Within pytest-nice, a dist directory contains a new file called pytest-nice-0.1.0.tar.gz.
 This file can now be used anywhere to install our plugin, even in place:
 
+
 ##### Step 23
+
 
 ##### $ pip install dist/pytest-nice-0.1.0.tar.gz
 
@@ -863,7 +919,9 @@ put pytest-nice-0.1.0.tar.gz into a directory called myplugins.
 
 To install pytest-nice from myplugins:
 
+
 ##### Step 24
+
 ##### $ pip install --no-index --find-links myplugins pytest-nice
 
 
@@ -874,7 +932,9 @@ of course, pytest-nice is what we want to install.
 If you’ve done some bug fixes and there are newer versions in myplugins, you
 can upgrade by adding --upgrade:
 
+
 ##### Step 25
+
 ##### $ pip install --upgrade --no-index --find-links myplugins pytest-nice
 
 
@@ -884,9 +944,12 @@ This is just like any other use of pip, but with the ---no-index --find-links my
 When you are contributing a pytest plugin, another great place to start is by
 using the cookiecutter-pytest-plugin :
 
+
 ##### Step 26
 
+
 ##### $ pip install cookiecutter 
+
 
 ##### $ cookiecutter https://github.com/pytest-dev/cookiecutter-pytest-plugin
 

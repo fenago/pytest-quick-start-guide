@@ -38,12 +38,7 @@ All exercises are present in `~/work/testing-with-pytest/code` folder.
 
 The tmpdir and tmpdir_factory builtin fixtures are used to create a temporary file
 system directory before your test runs, and remove the directory when your
-test is finished. In the Tasks project, we needed a directory to store the tem-
-porary database files used by MongoDB and TinyDB. However, because we
-want to test with temporary databases that don’t survive past a test session,
-we used tmpdir and tmpdir_factory to do the directory creation and cleanup for us.
-
-Here’s a simple example using tmpdir:
+test is finished. Here’s a simple example using tmpdir:
 
 ```
 ch4/test_tmpdir.py
@@ -71,15 +66,10 @@ def test_tmpdir(tmpdir):
     assert another_file.read() == 'something different'
 ```
 
-The value returned from tmpdir is an object of type py.path.local. This seems like
-everything we need for temporary directories and files. However, there’s one
-gotcha. Because the tmpdir fixture is defined as function scope, you can’t use
+The value returned from tmpdir is an object of type py.path.local. Because the tmpdir fixture is defined as function scope, you can’t use
 tmpdir to create folders or files that should stay in place longer than one test
 function. For fixtures with scope other than function (class, module, session),
 tmpdir_factory is available.
-
-1. [http://py.readthedocs.io/en/latest/path.html](http://py.readthedocs.io/en/latest/path.html)
-
 
 To see how similar tmpdir and tmpdir_factory are, I’ll modify the tmpdir example
 just enough to use tmpdir_factory instead:
@@ -120,9 +110,12 @@ In the second line of the tmpdir_factory example, the getbasetemp() function ret
 the base directory used for this session. The print statement is in the example
 so you can see where the directory is on your system. Let’s see where it is:
 
+
 ##### Step 1
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4
+
 ##### $ pytest -q -s test_tmpdir.py::test_tmpdir_factory
 
 ```
@@ -132,15 +125,8 @@ base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 1 passed in 0.04seconds
 ```
 
-This base directory is system- and user-dependent, and pytest-NUM changes
-with an incremented NUM for every session. The base directory is left alone
-after a session, but pytest cleans them up and only the most recent few
-temporary base directories are left on the system, which is great if you need
-to inspect the files after a test run.
-
 You can also specify your own base directory if you need to with pytest --
-basetemp=mydir.
-
+`basetemp=mydir`.
 
 **Using Temporary Directories for Other Scopes**
 
@@ -244,9 +230,12 @@ shouldn’t do it in a test subdirectory.
 The options --myopt and --foo <value> were added to the previous code, and the
 help string was modified, as shown here:
 
+
 ##### Step 2
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/pytestconfig
+
 ##### $ pytest --help
 
 ```
@@ -275,7 +264,9 @@ def test_option(pytestconfig):
 
 Let’s see how this works:
 
+
 ##### Step 3
+
 
 ##### $ pytest-s -q test_config.py::test_option
 
@@ -286,6 +277,7 @@ Let’s see how this works:
 1 passed in 0.01seconds
 ```
 
+
 ##### $ pytest-s -q --myopttest_config.py::test_option
 
 ```
@@ -294,6 +286,7 @@ Let’s see how this works:
 .
 1 passed in 0.01seconds
 ```
+
 
 ##### $ pytest-s -q --myopt--foobaz test_config.py::test_option
 
@@ -372,7 +365,9 @@ the data for these flags is stored using cache.
 Here’s the help text for the --last-failed and --failed-first options, as well as a couple
 of cache options:
 
+
 ##### Step 4
+
 
 ##### $ pytest --help
 
@@ -407,9 +402,12 @@ def test_this_fails():
 Let’s run them using --verbose to see the function names, and --tb=no to hide
 the stack trace:
 
+
 ##### Step 5
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
+
 ##### $ pytest --verbose --tb=no test_pass_fail.py
 
 ```
@@ -425,7 +423,9 @@ test_pass_fail.py::test_this_fails FAILED [100%]
 If you run them again with the --ff or --failed-first flag, the tests that failed previ-
 ously will be run first, followed by the rest of the session:
 
+
 ##### Step 6
+
 
 ##### $ pytest --verbose --tb=no --fftest_pass_fail.py
 
@@ -441,6 +441,7 @@ test_pass_fail.py::test_this_passes PASSED            [100%]
 ```
 
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
+
 
 ##### Step 7
 
@@ -492,9 +493,12 @@ def test_a(x, y, expected):
 
 And the output:
 
+
 ##### Step 8
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
+
 ##### $ pytest -q test_few_failures.py
 
 ```
@@ -522,7 +526,9 @@ is longer and more complicated, and it’s not obvious what’s wrong. Let’s r
 the test again to see the failure again. You can specify the test case on the
 command line:
 
+
 ##### Step 9
+
 
 ##### $ pytest -q "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
 
@@ -531,7 +537,9 @@ If you don’t want to copy/paste or there are multiple failed cases you’d lik
 to rerun, --lf is much easier. And if you’re really debugging a test failure,
 another flag that might make things easier is --showlocals, or -l for short:
 
+
 ##### Step 10
+
 
 ##### $ pytest -q --lf -l test_few_failures.py
 
@@ -568,7 +576,9 @@ To pull off the trick of remembering what test failed last time, pytest stores
 test failure information from the last test session. You can see the stored
 information with --cache-show:
 
+
 ##### Step 11
+
 
 ##### $ pytest --cache-show
 
@@ -580,6 +590,7 @@ cache/lastfailedcontains:
 
 ================= no tests ran in 0.00 seconds =================
 ```
+
 
 ##### $ pytest --cache-show
 
@@ -595,7 +606,9 @@ cache/lastfailedcontains:
 
 Or you can look in the cache dir:
 
+
 ##### Step 12
+
 
 ##### $ cat .pytest_cache/v/cache/lastfailed
 
@@ -659,9 +672,12 @@ random and parametrization to easily generate some tests that sleep for a
 random amount of time, all shorter than a second. Let’s see it run a couple
 of times:
 
+
 ##### Step 13
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
+
 ##### $ pytest -q --tb=linetest_slower.py
 
 ```
@@ -669,7 +685,9 @@ of times:
 5 passed in 1.40seconds
 ```
 
+
 ##### Step 14
+
 ##### $ pytest -q --tb=linetest_slower.py
 
 ```
@@ -687,7 +705,9 @@ assert0.28841<= (0.086302* 2)
 
 Well, that was fun. Let’s see what’s in the cache:
 
+
 ##### Step 15
+
 
 ##### $ pytest -q --cache-show
 
@@ -760,7 +780,9 @@ end of the test session, the collected current dictionary is saved in the cache.
 
 After running it a couple of times, let’s look at the saved cache:
 
+
 ##### Step 16
+
 
 ##### $ pytest -q --cache-cleartest_slower_2.py
 
@@ -769,12 +791,14 @@ After running it a couple of times, let’s look at the saved cache:
 5 passed in 2.27seconds
 ```
 
+
 ##### $ pytest -q --tb=no test_slower_2.py
 
 ```
 .E.E...E [100%]
 5 passed,3 error in 3.65 seconds
 ```
+
 
 ##### $ pytest -q --cache-show
 
@@ -860,12 +884,7 @@ def test_yikes(capsys):
 pytest usually captures the output from your tests and the code under test.
 This includes print statements. The captured output is displayed for failing
 tests only after the full test session is complete. The -s option turns off this
-feature, and output is sent to stdout while the tests are running. Usually this
-works great, as it’s the output from the failed tests you need to see in order
-to debug the failures. However, you may want to allow some output to make
-it through the default pytest output capture, to print some things without
-printing everything. You can do this with capsys. You can use capsys.disabled()
-to temporarily let output get past the capture mechanism.
+feature, and output is sent to stdout while the tests are running. You can use capsys.disabled() to temporarily let output get past the capture mechanism.
 
 Here’s an example:
 
@@ -881,9 +900,12 @@ def test_capsys_disabled(capsys):
 
 Now, 'always print this' will always be output:
 
+
 ##### Step  17
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cap
+
 ##### $ pytest -q test_capsys.py::test_capsys_disabled
 
 ```
@@ -892,6 +914,7 @@ alwaysprintthis
 . [100%]
 1 passed in 0.02seconds
 ```
+
 
 ##### $ pytest -q -s test_capsys.py::test_capsys_disabled
 
@@ -916,10 +939,7 @@ runtime. During testing, “monkey patching” is a convenient way to take over
 part of the runtime environment of the code under test and replace either
 input dependencies or output dependencies with objects or functions that
 are more convenient for testing. The monkeypatch builtin fixture allows you to
-do this in the context of a single test. And when the test ends, regardless of
-pass or fail, the original unpatched is restored, undoing everything changed
-by the patch. It’s all very hand-wavy until we jump into some examples. After
-looking at the API, we’ll look at how monkeypatch is used in test code.
+do this in the context of a single test.
 
 The monkeypatch fixture provides the following functions:
 
@@ -1119,9 +1139,12 @@ import unnecessary_math as um in the top docstring. The code in the docstrings o
 the functions doesn’t include the import statement, but continue with the um
 convention.
 
+
 ##### Step 18
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/1
+
 ##### $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 ```
@@ -1198,9 +1221,12 @@ def divide(a, b):
 
 This definitely fixes the problem:
 
+
 ##### Step 19
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/2
+
 ##### $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
 
 ```

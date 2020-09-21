@@ -22,6 +22,7 @@ that was used to call pip.
 To check the version of pip and which version of Python it’s tied to, use pip --
 version:
 
+
 ##### Step 1
 
 #### (my_env) $ pip --version
@@ -41,6 +42,7 @@ pip 18.0
 setuptools 39.0.1
 ```
 
+
 ##### Step 2
 
 #### (my_env) $ pip install pytest
@@ -52,6 +54,7 @@ pluggy, attrs, py, pytest
 Successfully installed atomicwrites-1.2.1 attrs-18.2.0
 more-itertools-4.3.0 pluggy-0.7.1 py-1.6.0 pytest-3.8.0 six-1.11.0
 ```
+
 
 ##### Step 3
 
@@ -84,14 +87,18 @@ Python virtual environments.
 You can use pip to install packages with version numbers from pypi.python.org
 if it’s a release version PyPI knows about:
 
+
 ##### Step 4
+
 
 ##### $ pip install pytest==3.2.1
 
 
 You can use pip to install a local package that has a setup.py file in it:
 
+
 ##### Step  5
+
 
 ##### $ pip install /path/to/package
 
@@ -99,10 +106,14 @@ You can use pip to install a local package that has a setup.py file in it:
 Use ./package_name if you are in the same directory as the package to install it
 locally:
 
+
 ##### Step 6
 
+
 ##### $ cd /path/just/above/package
+
 ##### $ pip install my_package # pip is looking in PyPI for "my_package"
+
 ##### $ pip install ./my_package # now pip looks locally
 
 
@@ -110,6 +121,7 @@ You can use pip to install packages that have been downloaded as zip files or
 wheels without unpacking them.
 
 You can also use pip to download a lot of files at once using a requirements.txt file:
+
 
 ##### Step 7
 
@@ -119,6 +131,7 @@ You can also use pip to download a lot of files at once using a requirements.txt
 pytest==3.8.1
 pytest-xdist==1.23.2
 ```
+
 
 ##### Step 8
 
@@ -130,6 +143,7 @@ of packages, and then point pip there instead of PyPI to install them into vir-
 tual environments later, even when offline.
 
 The following downloads pytest and all dependencies:
+
 
 ##### Step 9
 
@@ -144,6 +158,7 @@ more-itertools setuptools py six attrs
 ```
 
 Later, even if you’re offline, you can install from the cache:
+
 
 ##### Step 10
 

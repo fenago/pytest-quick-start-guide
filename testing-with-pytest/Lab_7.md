@@ -28,9 +28,12 @@ pdb in action in the context of the Tasks project.
 In Parametrizing Fixtures, we left the Tasks project with a few
 failures:
 
+
 ##### Step 1
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
+
 ##### $ pytest --tb=no -q
 
 ```
@@ -67,7 +70,9 @@ didn’t see the tracebacks or the test names because --tb=no turns off trace-
 backs, and we didn’t have --verbose turned on. Let’s re-run the failures (at most
 three of them) with verbose:
 
+
 ##### Step 2
+
 ##### $ pytest --tb=no --verbose --lf --maxfail=3
 
 ```
@@ -87,7 +92,9 @@ Now we know which tests are failing. Let’s look at just one of them by using
 -x, including the traceback by not using --tb=no , and showing the local vari-
 ables with -l:
 
+
 ##### Step 3
+
 
 ##### $ pytest -v --lf -l -x
 
@@ -133,7 +140,9 @@ ObjectId is a type used by MongoDB for object identifiers within the database.
 
 We can have pytest start a debugging session and start us right at the point of failure with --pdb:
 
+
 ##### Step 4
+
 
 ##### $ pytest -v --lf -x --pdb
 
@@ -237,7 +246,9 @@ with some extra pytest options. Since coverage is one of the dependencies of
 pytest-cov, it is sufficient to install pytest-cov, as it will pull in coverage.py:
 
 
+
 ##### Step 4
+
 
 ##### $ pip install pytest-cov
 
@@ -250,7 +261,9 @@ Successfully installed coverage-4.5.1 pytest-cov-2.5.1
 Let’s run the coverage report on version 2 of Tasks. If you still have the first
 version of the Tasks project installed, uninstall it and install version 2:
 
+
 ##### Step 5 
+
 
 ##### $ pip uninstall tasks
 
@@ -261,9 +274,12 @@ Proceed (y/n)? y
 Successfully uninstalled tasks-0.1.0
 ```
 
+
 ##### Step 6
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
+
 ##### $ pip install -e .
 
 ```
@@ -274,7 +290,9 @@ Running setup.py develop for tasks
 Successfully installed tasks
 ```
 
+
 ##### Step 7
+
 
 ##### $ pip list
 
@@ -288,9 +306,12 @@ tasks 0.1.1 /home/jovyan/work/testing-with-pytest/code/tasks_proj_v2/src
 Now that the next version of Tasks is installed, we can run our baseline cov-
 erage report:
 
+
 ##### Step  8
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
+
 ##### $ pytest --cov=src
 
 ```
@@ -329,7 +350,9 @@ specific directory under test only.
 If you run coverage.py again with --cov-report=html, an HTML report is generated:
 
 
+
 ##### Step 9
+
 
 ##### $ pytest --cov=src--cov-report=html
 
@@ -421,9 +444,12 @@ obvious.
 
 Let’s pause and install version 2 of Tasks:
 
+
 ##### Step 10
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/
+
 ##### $ pip install -e ch7/tasks_proj_v2
 
 ```
@@ -434,7 +460,9 @@ Successfully installed tasks
 In the rest of this section, you’ll develop some tests for the “list” functionality.
 Let’s see it in action to understand what we’re going to test:
 
+
 ##### Step 11
+
 
 ##### $ tasks list
 
@@ -443,11 +471,16 @@ ID owner done summary
 -- ----- ---- -------
 ```
 
+
 ##### Step 12
 
+
 ##### $ tasks add "do something great"
+
 ##### $ tasks add "repeat" -o Brian
+
 ##### $ tasks add "again and again" --owner Okken
+
 ##### $ tasks list
 
 ```
@@ -458,7 +491,9 @@ ID owner done summary
 3 Okken False again and again
 ```
 
+
 ##### Step 13
+
 
 ##### $ tasks list -o Brian
 
@@ -468,7 +503,9 @@ ID owner done summary
 2 Brian False repeat
 ```
 
+
 ##### Step 14
+
 
 ##### $ tasks list --owner Brian
 
@@ -696,9 +733,12 @@ def test_list_dash_dash_owner(no_db, mocker):
 
 Let’s make sure they all work:
 
+
 ##### Step 15
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
+
 ##### $ pytest -v tests/unit/test_cli.py
 
 ```
@@ -808,7 +848,9 @@ xfails, and xpasses (-rsxX) and turn on showing local variables in stack traces
 
 Before running tox, you have to make sure you install it:
 
+
 ##### Step 16
+
 
 ##### $ pip install tox
 
@@ -817,9 +859,12 @@ This can be done within a virtual environment.
 
 Then to run tox, just run, well, tox:
 
+
 ##### Step 17
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch7/tasks_proj_v2
+
 ##### $ tox
 
 ```
@@ -949,9 +994,12 @@ self.assertEqual(tasks.count(),2)
 The actual test is at the bottom, test_delete_decreases_count(). The rest of the code
 is there for setup and teardown. This test runs fine in unittest:
 
+
 ##### Step 18
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch7/unittest
+
 ##### $ python -m unittest -v test_delete_unittest.py
 
 ```
@@ -965,7 +1013,9 @@ OK
 
 It also runs fine in pytest:
 
+
 ##### Step 19
+
 
 ##### $ pytest -v test_delete_unittest.py
 
@@ -1008,7 +1058,9 @@ is almost identical.
 
 Both tests pass individually:
 
+
 ##### Step  20
+
 
 ##### $ pytest -q test_delete_pytest.py
 
@@ -1018,7 +1070,9 @@ Both tests pass individually:
 1 passed in 0.02seconds
 ```
 
+
 ##### Step 21
+
 
 ##### $ pytest -q test_delete_unittest.py
 
@@ -1030,7 +1084,9 @@ Both tests pass individually:
 You can even run them together if—and only if—you make sure the unittest
 version runs first:
 
+
 ##### Step 22
+
 
 ##### $ pytest -v test_delete_unittest.pytest_delete_pytest .py
 
@@ -1047,7 +1103,9 @@ test_delete_pytest .py::test_delete_decreases_countPASSED[100%]
 
 If you run the pytest version first, something goes haywire:
 
+
 ##### Step 23
+
 
 ##### $ pytest -v test_delete_pytest.pytest_delete_unittest.py
 
@@ -1082,7 +1140,9 @@ and passed.
 
 Let’s use --setup-show to investigate further:
 
+
 ##### Step 24
+
 
 ##### $ pytest -q --tb=no --setup-show test_delete_pytest.pytest_delete_unittest.py
 
@@ -1148,7 +1208,9 @@ self.assertEqual(tasks.count(),2)
 
 Now both unittest and pytest can cooperate and not run into each other:
 
+
 ##### Step 25
+
 
 ##### $ pytest -v test_delete_pytest.pytest_delete_unittest_fix.py
 

@@ -94,9 +94,12 @@ parameter names module, function, cls, and method, but that’s the convention.
 
 Here’s the test session to help visualize the control flow:
 
+
 ##### Step 1
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xunit
+
 ##### $ pytest -s test_xUnit_fixtures.py
 
 ```
@@ -170,9 +173,12 @@ print('test_2()')
 
 You _can_ do it. But please don’t. It gets confusing. Take a look at this:
 
+
 ##### Step 2
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/xunit
+
 ##### $ pytest -s test_mixed_fixtures.py
 
 ```

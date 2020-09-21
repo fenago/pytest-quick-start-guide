@@ -26,15 +26,9 @@ def test_some_data(some_data):
     assert some_data == 42
 ```
 
-The @pytest.fixture() decorator is used to tell pytest that a function is a fixture.
-When you include the fixture name in the parameter list of a test function,
-pytest knows to run it before running the test. Fixtures can do work, and can
-also return data to the test function.
-
-The test test_some_data() has the name of the fixture, some_data, as a parameter.
-pytest will see this and look for a fixture with this name. Naming is significant
-in pytest. pytest will look in the module of the test for a fixture of that name.
-It will also look in conftest.py files if it doesn’t find it in this file.
+- The @pytest.fixture() decorator is used to tell pytest that a function is a fixture.
+=
+- The test test_some_data() has the name of the fixture, some_data, as a parameter. pytest will see this and look for a fixture with this name. 
 
 #### Pre-reqs:
 - Google Chrome (Recommended)
@@ -52,22 +46,13 @@ You can put fixtures into individual test files, but to share fixtures among
 multiple test files, you need to use a conftest.py file somewhere centrally located
 for all of the tests. For the Tasks project, all of the fixtures will be in
 tasks_proj/tests/conftest.py.
-
 From there, the fixtures can be shared by any test. You can put fixtures in
 individual test files if you want the fixture to only be used by tests in that
-file. Likewise, you can have other conftest.py files in subdirectories of the top
-tests directory. If you do, fixtures defined in these lower-level conftest.py files
-will be available to tests in that directory and subdirectories. So far, however,
-the fixtures in the Tasks project are intended to be available to any test.
-Therefore, putting all of our fixtures in the conftest.py file at the test root,
-tasks_proj/tests, makes the most sense.
+file. 
 
 Although conftest.py is a Python module, it should not be imported by test files.
 Don’t import conftest from anywhere. The conftest.py file gets read by pytest, and
-is considered a local _plugin_ , which will make sense once we start talking about
-plugins in Lab 5, Plugins For now, think of tests/conftest.py as
-a place where we can put fixtures used by all tests under the tests directory.
-Next, let’s rework some of our tests for tasks_proj to properly use fixtures.
+is considered a local _plugin_.
 
 ### Using Fixtures for Setup and Teardown
 
@@ -75,7 +60,7 @@ Most of the tests in the Tasks project will assume that the Tasks database is
 already set up and running and ready. And we should clean things up at the
 end if there is any cleanup needed. And maybe also disconnect from the
 database. Luckily, most of this is taken care of within the tasks code with
-tasks.start_tasks_db(<directoryto store db>, 'tiny' or 'mongo') and tasks.stop_tasks_db(); we
+`tasks.start_tasks_db(<directoryto store db>, 'tiny' or 'mongo')` and tasks.stop_tasks_db(); we
 just need to call them at the right time, and we need a temporary directory.
 
 Fortunately, pytest includes a cool fixture called tmpdir that we can use for
@@ -108,13 +93,6 @@ The value of tmpdir isn’t a string—it’s an object that represents a direct
 However, it implements __str__, so we can use str() to get a string to pass to
 start_tasks_db(). We’re still using 'tiny' for TinyDB, for now.
 
-A fixture function runs before the tests that use it. However, if there is a yield
-in the function, it stops there, passes control to the tests, and picks up on
-next line after the tests are done. Therefore, think of the code above the
-yield as “setup” and the code after yield as “teardown.” The code after the yield,
-the “teardown,” is guaranteed to run regardless of what happens during the
-tests. We’re not returning any data with the yield in this fixture. But you can.
-
 
 Let’s change one of our tasks.add() tests to use this fixture:
 
@@ -140,8 +118,7 @@ The main change here is that the extra fixture in the file has been removed,
 and we’ve added tasks_db to the parameter list of the test. I like to structure
 tests in a GIVEN/WHEN/THEN format using comments, especially when it
 isn’t obvious from the code what’s going on. I think it’s helpful in this case.
-Hopefully, GIVENan initializedtasks db helps to clarify why tasks_db is used as a fix-
-ture for the test.
+Hopefully, GIVENan initializedtasks db helps to clarify why tasks_db is used as a fixture for the test.
 
 
 **Make Sure Tasks Is Installed**
@@ -156,11 +133,16 @@ lab, be sure to install tasks with cd code; pip install ./tasks_proj/.
 If you run the test from the last section, you don’t get to see what fixtures
 are run:
 
+
 ##### Step 1
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/
+
 ##### $ pip install ./tasks_proj/ # if not installed yet
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
+
 ##### $ pytest -v test_add.py -k valid_id
 
 ```
@@ -176,7 +158,9 @@ When I’m developing fixtures, I like to see what’s running and when. Fortu-
 nately, pytest provides a command-line flag, --setup-show , that does just that:
 
 
+
 ##### Step 2
+
 
 ##### $ pytest --setup-show test_add.py -k valid_id
 
@@ -227,9 +211,12 @@ def test_a_tuple(a_tuple):
 Since test_a_tuple() should fail (23 != 32), we can see what happens when a test
 with a fixture fails:
 
+
 ##### Step 3
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3
+
 ##### $ pytest test_fixtures.py::test_a_tuple
 
 ```
@@ -260,7 +247,9 @@ trace.
 What happens if the assert (or any exception) happens in the fixture?
 
 
+
 ##### Step 4
+
 
 ##### $ pytest -v test_fixtures.py::test_other_data
 
@@ -382,9 +371,12 @@ test_add_increases_count() to only be possible if add() really failed to alter t
 
 Let’s trace it and see all the fixtures run:
 
+
 ##### Step 5
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
+
 ##### $ pytest --setup-show test_add.py::test_add_increases_count
 
 ```
@@ -503,9 +495,12 @@ class TestSomething():
 Let’s use --setup-show to demonstrate that the number of times a fixture is called
 and when the setup and teardown are run depend on the scope:
 
+
 ##### Step 6
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3
+
 ##### $ pytest --setup-show test_scope.py
 
 ```
@@ -629,9 +624,12 @@ def tasks_mult_per_owner():
 
 Now, let’s see if all of these changes work with our tests:
 
+
 ##### Step 7
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
+
 ##### $ pytest
 
 ```
@@ -652,7 +650,9 @@ tests/unit/test_task.py.... [100%]
 Looks like it’s all good. Let’s trace the fixtures for one test file to see if the
 different scoping worked as expected:
 
+
 ##### Step 8
+
 
 ##### $ pytest --setup-show tests/func/test_add.py
 
@@ -770,9 +770,12 @@ def test_2():
 We want to add test times after each test, and the date and current time at
 the end of the session. Here’s what these look like:
 
+
 ##### Step 9
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3
+
 ##### $ pytest -v -s test_autouse.py
 
 ```
@@ -827,7 +830,9 @@ def test_everything(lue):
 Here, lue is now the fixture name, instead of ultimate_answer_to_life_the_uni-
 verse_and_everything. That name even shows up if we run it with --setup-show :
 
+
 ##### Step  10
+
 
 ##### $ pytest --setup-show test_rename_fixture.py
 
@@ -847,7 +852,9 @@ If you need to find out where lue is defined, you can add the pytest option
 --fixtures and give it the filename for the test. It lists all the fixtures available
 for the test, including ones that have been renamed:
 
+
 ##### Step 11
+
 
 ##### $ pytest --fixturestest_rename_fixture.py
 
@@ -870,9 +877,12 @@ Most of the output is omitted—there’s a lot there. Luckily, the fixtures we
 defined are at the bottom, along with where they are defined. We can use this
 to look up the definition of lue. Let’s use that in the Tasks project:
 
+
 ##### Step 12
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
+
 ##### $ pytest --fixturestests/func/test_add.py
 
 ```
@@ -966,9 +976,12 @@ to the test using it. Since our task list has four tasks, the fixture will be ca
 four times, and then the test will get called four times:
 
 
+
 ##### Step 13
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
+
 ##### $ pytest -v test_add_variety2.py::test_add_a
 
 ```
@@ -1004,7 +1017,9 @@ assertequivalent(t_from_db,b_task)
 
 This gives us better identifiers:
 
+
 ##### Step 14
+
 
 ##### $ pytest -v test_add_variety2.py::test_add_b
 
@@ -1053,7 +1068,9 @@ Task object, which allows us to use the namedtuple accessor methods to access a
 single Task object to generate the identifier for one Task object at a time. It’s a bit
 cleaner than generating a full list ahead of time, and looks the same:
 
+
 ##### Step  15
+
 
 ##### $ pytest -v test_add_variety2.py::test_add_c
 
@@ -1180,10 +1197,14 @@ this example and in a debugger example in Lab 7.
 
 Here’s what we have so far:
 
+
 ##### Step 16
 
+
 ##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
+
 ##### $ pip install pymongo
+
 ##### $ pytest -v --tb=no 
 
 ```
