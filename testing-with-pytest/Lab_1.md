@@ -567,9 +567,16 @@ The --ff/--failed-first option will do the same as --last-failed
 collected 6 items
 run-last-failure: rerun previous 1 failure first
 test_two.py F [ 16%]
-$ cd /home/jovyan/work/testing-with-pytest/code/ch1
-$ pytest --ff --tb=no 
-$ pytest --ff --tb=no 
+```
+
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch1
+
+##### $ pytest --ff --tb=no 
+
+##### $ pytest --ff --tb=no 
+
+```
 =================== test session starts ===================
 collected 6 items
 run-last-failure: rerun previous 1 failure first
@@ -772,7 +779,6 @@ time, and now I always use them. Read Appendix 1, Virtual Environments, if youâ€
 2. Practice activating and deactivating your virtual environment a few times.
 
     - $ source venv/bin/activate
-
     - $ deactivate
 
 On Windows:
