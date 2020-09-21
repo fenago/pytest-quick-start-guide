@@ -111,9 +111,9 @@ You can get a list of all the valid settings for pytest.ini from pytest --help. 
 a sampling:
 
 
-```
-$ pytest --help
-```
+##### Step 1
+##### $ pytest --help
+
 
 ![](./images/1.png)
 
@@ -164,13 +164,17 @@ can be fixed, however, by registering markers in pytest.ini, like this:
 markers =
     smoke: Run the smoke test functions for tasks project
     get: Run the test functions that test tasks.get()
+```
 
 With these markers registered, you can now also see them with pytest --markers
 with their descriptions:
 
-$ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
-$ pytest --markers
+##### Step 2
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
+##### $ pytest --markers
+
+```
 @pytest.mark.smoke: Run the smoke test test functions
 
 @pytest.mark.get: Run the test functions that test tasks.get()
@@ -189,11 +193,11 @@ unregistered markers show up as an error. The only difference between
 ch6/a/tasks_proj and ch6/b/tasks_proj is the contents of the pytest.ini file. It’s empty
 in ch6/a. Let’s try running the tests without registering any markers:
 
+##### Step 3
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/a/tasks_proj/tests
+##### $ pytest --strict --tb=line
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch6/a/tasks_proj/tests
-$ pytest --strict --tb=line
-
-
 =================== test session starts ===================
 plugins: cov-2.5.1
 collected 45 items / 2 errors
@@ -236,10 +240,11 @@ for the project.
 
 This should allow us to run tests, including the smoke tests:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
-$ pytest --strict -m smoke
+##### Step 4
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/b/tasks_proj/tests
+##### $ pytest --strict -m smoke
 
+```
 =================== test session starts ===================
 plugins: cov-2.5.1
 collected 57 items / 54 deselected
@@ -474,10 +479,11 @@ These files don’t even have the same content, but it’s still mucked up. Run-
 ning them individually will be fine, but running pytest from the dups directory
 won’t work:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups
-$ pytest a
+##### Step 5
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups
+##### $ pytest a
 
+```
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected 1 item
@@ -485,8 +491,12 @@ collected 1 item
 a/test_foo.py. [100%]
 
 ================ 1 passed in 0.01 seconds =================
-$ pytest b
+```
 
+##### Step 6
+##### $ pytest b
+
+```
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected 1 item
@@ -494,8 +504,12 @@ collected 1 item
 b/test_foo.py. [100%]
 
 ================ 1 passed in 0.01 seconds =================
-$ pytest
+```
 
+##### Step 7
+##### $ pytest
+
+```
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected 1 item/ 1 errors
@@ -535,10 +549,12 @@ dups_fixed/
 
 Now, let’s try this again from the top level in dups_fixed:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups_fixed
-$ pytest
+##### Step 8
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch6/dups_fixed
+##### $ pytest
 
+
+```
 =================== test session starts ===================
 plugins:cov-2.5.1
 collected 2 items

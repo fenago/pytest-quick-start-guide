@@ -19,14 +19,18 @@ instead. Just remember to pip install virtualenv first.
 
 Here’s how to set up a virtual environment in macOS and Linux:
 
-```
-$ python3 -m venv env_name
-$ source env_name/bin/activate
+##### Step 1
 
+##### $ python3 -m venv env_name
+##### $ source env_name/bin/activate
+
+```
 (env_name)$
 ... do yourwork...
-(env_name) $ deactivate
 ```
+
+##### Step 2
+#### (env_name) $ deactivate
 
 In Windows, there’s a change to the activate line:
 

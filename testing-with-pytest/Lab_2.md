@@ -197,10 +197,13 @@ file present to direct pip.
 Install tasks either by running pip install . or pip install -e. from the tasks_proj direc-
 tory. Or you can run pip install -e tasks_proj from one directory up:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code
-$ pip install ./tasks_proj/
+##### Step 1
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code
+
+##### $ pip install ./tasks_proj/
+
+```
 Processing ./tasks_proj
 Collecting click (from tasks==0.1.0)
 Downloading ... click-6.7-py2.py3-none-any.whl
@@ -217,10 +220,11 @@ If you only want to run tests against tasks, this command is fine. If you want
 to be able to modify the source code while tasks is installed, you need to install
 it with the -e option (for “editable”):
 
+##### Step 2
+
+##### $ pip install -e ./tasks_proj/
+
 ```
-$ pip install -e ./tasks_proj/
-
-
 Obtaining file:///path/to/code/tasks_proj
 Requirement already satisfied: click in
 /path/to/venv/lib/python3.7/site-packages (from tasks==0.1.0)
@@ -235,17 +239,21 @@ Successfully installed tasks
 
 We also need to install pytest (if you haven’t already done so):
 
-```
-$ pip install pytest
-```
+##### Step 3
+
+##### $ pip install pytest
+
 
 Now let’s try running tests:
 
+##### Step 4
+
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit
+
+##### $ pytest test_task.py
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit
-
-$ pytest test_task.py
-
 =================== test session starts ===================
 collected 4 items
 
@@ -309,11 +317,12 @@ def test_dict_equality():
 
 All of these tests fail, but what’s interesting is the traceback information:
 
+##### Step 5
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit
+##### $ pytest test_task_fail.py
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/unit
-$ pytest test_task_fail.py
-
-
 =================== test session starts ===================
 collected 2 items
 test_task_fail.py FF [100%]
@@ -357,9 +366,11 @@ I intentionally put two mismatches in test_task_equality(), but only the first w
 shown in the previous code. Let’s try it again with the -v flag, as suggested in
 the error message:
 
-```
-$ pytest -v test_task_fail.py::test_task_equality
+##### Step 6
 
+##### $ pytest -v test_task_fail.py::test_task_equality
+
+```
 =================== test session starts ===================
 collected 1 item
 test_task_fail.py::test_task_equality FAILED [100%]
@@ -380,7 +391,6 @@ E   + Task(summary='do something', owner='okken', done=False, id=None)
 E   ? +++ ^^^ ^^^ ^^^^
 test_task_fail.py:9: AssertionError
 ================ 1 failed in 0.07 seconds =================
-
 ```
 
 ```
@@ -502,10 +512,12 @@ def test_get_raises():
 ```
 Now, let’s run just those tests that are marked with -m marker_name:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v -m smoketest_api_exceptions.py
+##### Step 7 
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v -m smoketest_api_exceptions.py
+
+```
 =================== test session starts ===================
 collected 7 items/ 5 deselected
 
@@ -513,9 +525,11 @@ test_api_exceptions.py::test_list_raises PASSED            [ 50%]
 test_api_exceptions.py::test_get_raises PASSED            [100%]
 
 ========= 2 passed,5 deselected in 0.03 seconds ==========
+```
 
-$ pytest -v -m get test_api_exceptions.py
+##### $ pytest -v -m get test_api_exceptions.py
 
+```
 =================== test session starts ===================
 collected 7 items/ 6 deselected
 
@@ -532,28 +546,29 @@ forward.
 It gets better. The expression after -m can use and, or, and not to combine
 multiple markers:
 
-```
-$ pytest -v -m "smoke and get" test_api_exceptions.py
+##### Step 8
 
+##### $ pytest -v -m "smoke and get" test_api_exceptions.py
+
+```
 =================== test session starts ===================
 collected 7 items / 6 deselected
 test_api_exceptions.py::test_get_raises PASSED [100%]
 ========= 1 passed, 6 deselected in 0.02 seconds ==========
-
 ```
 
 That time we only ran the test that had both smoke and get markers. We can
 use not as well:
 
+##### Step 9
+
+##### $ pytest -v -m "smoke and not get" test_api_exceptions.py
+
 ```
-$ pytest -v -m "smoke and not get" test_api_exceptions.py
-
-
 =================== test session starts ===================
 collected 7 items / 6 deselected
 test_api_exceptions.py::test_list_raises PASSED [100%]
 ========= 1 passed, 6 deselected in 0.02 seconds ==========
-
 ```
 
 The addition of -m "smoke and not get" selected the test that was marked with
@@ -638,10 +653,12 @@ curious, they are described in Appendix 5, xUnit Fixtures.)
 Let’s set aside fixture discussion for now and go to the top of the project and
 run our smoke test suite:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest -v -m smoke
+##### Step 10
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
+##### $ pytest -v -m smoke
+
+```
 =================== test session starts ===================
 collected 56 items / 53 deselected
 tests/func/test_add.py::test_added_task_has_id_set PASSED [ 33%]
@@ -683,10 +700,12 @@ def test_unique_id():
 ```
 Then give it a run:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest test_unique_id_1.py
+##### Step 11
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest test_unique_id_1.py
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -740,9 +759,11 @@ the test function.
 
 Let’s run again:
 
-```
-$ pytest -v test_unique_id_2.py
+##### Step 12
 
+##### $ pytest -v test_unique_id_2.py
+
+```
 =================== test session starts ===================
 collected 2 items
 
@@ -776,9 +797,11 @@ required in skipif. I like to include a reason for every skip, skipif, or xfail.
 
 Here’s the output of the changed code:
 
-```
-$ pytest test_unique_id_3.py
+##### Step 13
 
+##### $ pytest test_unique_id_3.py
+
+```
 =================== test session starts ===================
 collected 2 items
 
@@ -791,9 +814,11 @@ The s. shows that one test was skipped and one test passed.
 
 We can see which one with -v:
 
-```
-$ pytest -v test_unique_id_3.py
+##### Step  14 
 
+##### $ pytest -v test_unique_id_3.py
+
+```
 =================== test session starts ===================
 collected 2 items
 
@@ -806,9 +831,11 @@ test_unique_id_3.py::test_unique_id_2 PASSED            [100%]
 
 But we still don’t know why. We can see those reasons with -rs:
 
-```
-$ pytest -rs test_unique_id_3.py
+##### Step 15
 
+##### $ pytest -rs test_unique_id_3.py
+
+```
 =================== test session starts ===================
 collected 2 items
 
@@ -821,8 +848,11 @@ SKIP[1] test_unique_id_3.py:9:not supporteduntilversion0.2.0
 
 The -r chars option has this help text:
 
+##### Step 16
+
+##### $ pytest --help
+
 ```
-$ pytest --help
 ...
 
 -r chars
@@ -872,26 +902,30 @@ as xfail, and differ only by == vs. !=. So one of them is bound to pass.
 
 Running this shows:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest test_unique_id_4.py
+##### Step 17
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest test_unique_id_4.py
+
+```
 =================== test session starts ===================
 collected 4 items
 
 test_unique_id_4.pyxxX. [100%]
 
 ===== 1 passed,2 xfailed, 1 xpassed in 0.10 seconds ======
-```
 
 The x is for XFAIL, which means “expected to fail.” The capital X is for XPASS or
 “expected to fail but passed.”
 
 --verbose lists longer descriptions:
+```
+
+##### Step 18
+
+##### $ pytest -v test_unique_id_4.py
 
 ```
-$ pytest -v test_unique_id_4.py
-
 =================== test session starts ===================
 collected 4 items
 
@@ -927,10 +961,12 @@ test names. Let’s take a look at these.
 To run all the tests from one directory, use the directory as a parameter to
 pytest:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest tests/func--tb=no 
+##### Step 19 
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
+##### $ pytest tests/func--tb=no 
+
+```
 =================== test session starts ===================
 collected 50 items
 
@@ -949,9 +985,11 @@ tests/func/test_unique_id_4.pyxxX. [100%]
 An important trick to learn is that using -v gives you the syntax for how to
 run a specific directory, class, and test.
 
-```
-$ pytest -v tests/func--tb=no 
+##### Step 20
 
+##### $ pytest -v tests/func--tb=no 
+
+```
 =================== test session starts ===================
 collected 50 items
 
@@ -976,6 +1014,7 @@ tests/func/test_unique_id_4.py::test_unique_id_2PASSED[100%]
 
 1 failed, 44 passed,2 skipped,2 xfailed, 1 xpassed in 0.48seconds
 ```
+
 You’ll see the syntax listed here in the next few examples.
 
 
@@ -984,10 +1023,12 @@ You’ll see the syntax listed here in the next few examples.
 To run a file full of tests, list the file with the relative path as a parameter to
 pytest:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest tests/func/test_add.py
+##### Step 21
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
+##### $ pytest tests/func/test_add.py
+
+```
 =================== test session starts ===================
 collected 2 items
 
@@ -1002,10 +1043,12 @@ We’ve been doing this for a while.
 
 To run a single test function, add :: and the test function name:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest -v tests/func/test_add.py::test_add_returns_valid_id
+##### Step 22 
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
+##### $ pytest -v tests/func/test_add.py::test_add_returns_valid_id
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -1043,10 +1086,12 @@ Since these are two related tests that both test the update() function, it’s r
 sonable to group them in a class. To run just this class, do like we did with
 functions and add ::, then the class name to the file parameter:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest -v tests/func/test_api_exceptions.py::TestUpdate
+##### Step 23
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
+##### $ pytest -v tests/func/test_api_exceptions.py::TestUpdate
+
+```
 =================== test session starts ===================
 collected 2 items
 
@@ -1061,10 +1106,12 @@ tests/func/test_api_exceptions.py::TestUpdate::test_bad_taskPASSED[100%]
 If you don’t want to run all of a test class—just one method—just add
 another :: and the method name:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest -v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id
+##### Step 24
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
+##### $ pytest -v tests/func/test_api_exceptions.py::TestUpdate::test_bad_id
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -1087,10 +1134,12 @@ You can use and, or, and not in your expression to create complex expressions.
 
 For example, we can run all of the functions that have _raises in their name:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
-$ pytest -v -k _raises
+##### Step 25 
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj
+##### $ pytest -v -k _raises
+
+```
 =================== test session starts ===================
 collected 56 items/ 51 deselected
 
@@ -1105,9 +1154,11 @@ tests/func/test_api_exceptions.py::test_start_tasks_db_raisesPASSED[100%]
 
 We can use and and not to get rid of the test_delete_raises() from the session:
 
-```
-$ pytest -v -k "raisesand not delete"
+##### Step 26
 
+##### $ pytest -v -k "raisesand not delete"
+
+```
 =================== test session starts ===================
 collected 56 items/ 52 deselected
 
@@ -1175,10 +1226,12 @@ equivalent() helper function checks all but the id field. The autouse fixture is
 included to make sure the database is accessible. Let’s make sure the test
 passes:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::test_add_1
+##### Step 27
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::test_add_1
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -1212,10 +1265,12 @@ names—'task', in our case. The second argument is a list of values, which in
 our case is a list of Task objects. pytest will run this test once for each task
 and report each as a separate test:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::test_add_2
+##### Step  28
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::test_add_2
+
+```
 =================== test session starts ===================
 collected 4 items
 
@@ -1251,10 +1306,12 @@ def test_add_3(summary, owner, done):
 When you use types that are easy for pytest to convert into strings, the test
 identifier uses the parameter values in the report to make it readable:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::test_add_3
+##### Step 29
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::test_add_3
+
+```
 =================== test session starts ===================
 collected 4 items
 
@@ -1269,10 +1326,12 @@ test_add_variety.py::test_add_3[eateggs-BrIaN-False] PASSED[100%]
 You can use that whole test identifier—called a node in pytest terminology—to
 re-run the test if you want:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::test_add_3[sleep-None-False]
+##### Step  30
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::test_add_3[sleep-None-False]
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -1283,11 +1342,12 @@ test_add_variety.py::test_add_3[sleep-None-False] PASSED[100%]
 
 Be sure to use quotes if there are spaces in the identifier:
 
+##### Step 31
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
 
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v "test_add_variety.py::test_add_3[eateggs-BrIaN-False]"
-
 =================== test session starts ===================
 collected 1 item
 
@@ -1318,10 +1378,12 @@ t_from_db= tasks.get(task_id)
 It’s convenient and the code looks nice. But the readability of the output is
 hard to interpret:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::test_add_4
+##### Step  32
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::test_add_4
+
+```
 =================== test session starts ===================
 collected 5 items
 
@@ -1362,10 +1424,12 @@ def test_add_4(task):
 
 Let’s run that and see how it looks:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::test_add_5
+##### Step 33
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::test_add_5
+
+```
 =================== test session starts ===================
 collected 5 items
 
@@ -1382,10 +1446,12 @@ Note that the second and third tasks are actually duplicates of eachother and
 generate the same task id. To be able to tell them apart, pytest added a unique
 index to each, 0 and 1. The custom test identifiers can be used to run tests:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
+##### Step 34
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v "test_add_variety.py::test_add_5[Task(exercise,BrIaN,False)]"
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -1421,10 +1487,12 @@ class TestAdd():
 ```
 Here it is in action:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::TestAdd
+##### Step  35
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::TestAdd
+
+```
 =================== test session starts ===================
 collected 10 items
 
@@ -1462,10 +1530,12 @@ def test_add_6(task):
 
 In action:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
-$ pytest -v test_add_variety.py::test_add_6
+##### Step 36
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch2/tasks_proj/tests/func
+##### $ pytest -v test_add_variety.py::test_add_6
+
+```
 =================== test session starts ===================
 collected 3 items
 

@@ -35,9 +35,11 @@ environments so that pip works just fine as-is.)
 To check the version of pip and which version of Python it’s tied to, use pip --
 version:
 
-```
-(my_env) $ pip --version
+##### Step 1
 
+#### (my_env) $ pip --version
+
+```
 pip 18.0 from /home/jovyan/work/testing-with-pytest/code/venv/lib/python3.7/site-packages/pip (python 3.7)
 ```
 
@@ -50,16 +52,25 @@ Package Version
 ---------- -------
 pip 18.0
 setuptools 39.0.1
+```
 
+##### Step 2
 
-(my_env) $ pip install pytest
+#### (my_env) $ pip install pytest
+
+```
 ...
 Installing collected packages: six, more-itertools, atomicwrites,
 pluggy, attrs, py, pytest
 Successfully installed atomicwrites-1.2.1 attrs-18.2.0
 more-itertools-4.3.0 pluggy-0.7.1 py-1.6.0 pytest-3.8.0 six-1.11.0
+```
 
-(my_env) $ pip list
+##### Step 3
+
+#### (my_env) $ pip list
+
+```
 Package Version
 -------------- -------
 Package Version
@@ -86,41 +97,45 @@ Python virtual environments.
 You can use pip to install packages with version numbers from pypi.python.org
 if it’s a release version PyPI knows about:
 
-```
-$ pip install pytest==3.2.1
-```
+##### Step 4
+
+##### $ pip install pytest==3.2.1
+
 
 You can use pip to install a local package that has a setup.py file in it:
 
+##### Step  5
 
-```
-$ pip install /path/to/package
-```
+##### $ pip install /path/to/package
+
 
 Use ./package_name if you are in the same directory as the package to install it
 locally:
 
-```
-$ cd /path/just/above/package
-$ pip install my_package # pip is looking in PyPI for "my_package"
-$ pip install ./my_package # now pip looks locally
-```
+##### Step 6
+
+##### $ cd /path/just/above/package
+##### $ pip install my_package # pip is looking in PyPI for "my_package"
+##### $ pip install ./my_package # now pip looks locally
+
 
 You can use pip to install packages that have been downloaded as zip files or
 wheels without unpacking them.
 
 You can also use pip to download a lot of files at once using a requirements.txt file:
 
-```
-(my_env) $ cat requirements.txt
+##### Step 7
 
+#### (my_env) $ cat requirements.txt
+
+```
 pytest==3.8.1
 pytest-xdist==1.23.2
-
-(my_env) $ pip install -r requirements.txt
-...
-
 ```
+
+##### Step 8
+
+#### (my_env) $ pip install -r requirements.txt
 
 Successfullyinstalledapipkg-1.5execnet-1.5.0pytest-3.8.1pytest-xdist-1.23.2
 You can use pip to download a bunch of various versions into a local cache
@@ -129,11 +144,12 @@ tual environments later, even when offline.
 
 The following downloads pytest and all dependencies:
 
+##### Step 9
+
+#### (my_env) $ mkdir ~/.pipcache
+#### (my_env) $ pip download -d ~/pipcache pytest
+
 ```
-(my_env) $ mkdir ~/.pipcache
-(my_env) $ pip download -d ~/pipcache pytest
-
-
 Collecting pytest
 ...
 Successfully downloaded pytest atomicwrites pluggy
@@ -142,9 +158,11 @@ more-itertools setuptools py six attrs
 
 Later, even if you’re offline, you can install from the cache:
 
-```
-(my_env) $ pip install --no-index --find-links=~/pipcache pytest
+##### Step 10
 
+#### (my_env) $ pip install --no-index --find-links=~/pipcache pytest
+
+```
 Looking in links: /Users/okken/pipcache
 Collecting pytest
 

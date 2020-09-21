@@ -185,12 +185,14 @@ lab, be sure to install tasks with cd code; pip install ./tasks_proj/.
 If you run the test from the last section, you don’t get to see what fixtures
 are run:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/
-$ pip install ./tasks_proj/ # if not installed yet
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
-$ pytest -v test_add.py -k valid_id
+##### Step 1
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/
+##### $ pip install ./tasks_proj/ # if not installed yet
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
+##### $ pytest -v test_add.py -k valid_id
+
+```
 =================== test session starts ===================
 collected 3 items/ 2 deselected
 
@@ -203,9 +205,11 @@ When I’m developing fixtures, I like to see what’s running and when. Fortu-
 nately, pytest provides a command-line flag, --setup-show , that does just that:
 
 
-```
-$ pytest --setup-show test_add.py -k valid_id
+##### Step 2
 
+##### $ pytest --setup-show test_add.py -k valid_id
+
+```
 =================== test session starts ===================
 collected 3 items/ 2 deselected
 
@@ -253,10 +257,12 @@ def test_a_tuple(a_tuple):
 Since test_a_tuple() should fail (23 != 32), we can see what happens when a test
 with a fixture fails:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3
-$ pytest test_fixtures.py::test_a_tuple
+##### Step 3
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3
+##### $ pytest test_fixtures.py::test_a_tuple
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -287,9 +293,11 @@ trace.
 What happens if the assert (or any exception) happens in the fixture?
 
 
-```
-$ pytest -v test_fixtures.py::test_other_data
+##### Step 4
 
+##### $ pytest -v test_fixtures.py::test_other_data
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -408,10 +416,12 @@ test_add_increases_count() to only be possible if add() really failed to alter t
 
 Let’s trace it and see all the fixtures run:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
-$ pytest --setup-show test_add.py::test_add_increases_count
+##### Step 5
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/a/tasks_proj/tests/func
+##### $ pytest --setup-show test_add.py::test_add_increases_count
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -527,10 +537,12 @@ class TestSomething():
 Let’s use --setup-show to demonstrate that the number of times a fixture is called
 and when the setup and teardown are run depend on the scope:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3
-$ pytest --setup-show test_scope.py
+##### Step 6
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3
+##### $ pytest --setup-show test_scope.py
+
+```
 =================== test session starts ===================
 collected 4 items
 
@@ -651,10 +663,12 @@ def tasks_mult_per_owner():
 
 Now, let’s see if all of these changes work with our tests:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
-$ pytest
+##### Step 7
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
+##### $ pytest
+
+```
 =================== test session starts ===================
 collected 55 items
 
@@ -672,9 +686,11 @@ tests/unit/test_task.py.... [100%]
 Looks like it’s all good. Let’s trace the fixtures for one test file to see if the
 different scoping worked as expected:
 
-```
-$ pytest --setup-show tests/func/test_add.py
+##### Step 8
 
+##### $ pytest --setup-show tests/func/test_add.py
+
+```
 =================== test session starts ===================
 collected 3 items
 
@@ -788,10 +804,12 @@ def test_2():
 We want to add test times after each test, and the date and current time at
 the end of the session. Here’s what these look like:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3
-$ pytest -v -s test_autouse.py
+##### Step 9
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3
+##### $ pytest -v -s test_autouse.py
+
+```
 ===================== test session starts ======================
 collected 2 items
 
@@ -843,9 +861,11 @@ def test_everything(lue):
 Here, lue is now the fixture name, instead of ultimate_answer_to_life_the_uni-
 verse_and_everything. That name even shows up if we run it with --setup-show :
 
-```
-$ pytest --setup-show test_rename_fixture.py
+##### Step  10
 
+##### $ pytest --setup-show test_rename_fixture.py
+
+```
 =================== test session starts ===================
 collected 1 item
 
@@ -861,9 +881,11 @@ If you need to find out where lue is defined, you can add the pytest option
 --fixtures and give it the filename for the test. It lists all the fixtures available
 for the test, including ones that have been renamed:
 
-```
-$ pytest --fixturestest_rename_fixture.py
+##### Step 11
 
+##### $ pytest --fixturestest_rename_fixture.py
+
+```
 =================== test session starts ===================
 ...
 
@@ -882,10 +904,12 @@ Most of the output is omitted—there’s a lot there. Luckily, the fixtures we
 defined are at the bottom, along with where they are defined. We can use this
 to look up the definition of lue. Let’s use that in the Tasks project:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
-$ pytest --fixturestests/func/test_add.py
+##### Step 12
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj
+##### $ pytest --fixturestests/func/test_add.py
+
+```
 ======================== test session starts ========================
 ...
 
@@ -976,10 +1000,12 @@ to the test using it. Since our task list has four tasks, the fixture will be ca
 four times, and then the test will get called four times:
 
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
-$ pytest -v test_add_variety2.py::test_add_a
+##### Step 13
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/b/tasks_proj/tests/func
+##### $ pytest -v test_add_variety2.py::test_add_a
+
+```
 =================== test session starts ===================
 collected 4 items
 
@@ -1012,9 +1038,11 @@ t_from_db= tasks.get(task_id)
 
 This gives us better identifiers:
 
-```
-$ pytest -v test_add_variety2.py::test_add_b
+##### Step 14
 
+##### $ pytest -v test_add_variety2.py::test_add_b
+
+```
 =================== test session starts ===================
 collected 4 items
 
@@ -1059,9 +1087,11 @@ Task object, which allows us to use the namedtuple accessor methods to access a
 single Task object to generate the identifier for one Task object at a time. It’s a bit
 cleaner than generating a full list ahead of time, and looks the same:
 
-```
-$ pytest -v test_add_variety2.py::test_add_c
+##### Step  15
 
+##### $ pytest -v test_add_variety2.py::test_add_c
+
+```
 =================== test session starts ===================
 collected 4 items
 
@@ -1184,11 +1214,13 @@ this example and in a debugger example in Lab 7.
 
 Here’s what we have so far:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
-$ pip install pymongo
-$ pytest -v --tb=no 
+##### Step 16
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch3/c/tasks_proj
+##### $ pip install pymongo
+##### $ pytest -v --tb=no 
+
+```
 =================== test session starts ===================
 collected 96 items
 

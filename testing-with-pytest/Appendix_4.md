@@ -56,11 +56,12 @@ py_modules=['some_module']
 One directory with one module and a setup.py file is enough to make it instal-
 lable via pip:
 
+##### Step 1
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
+##### $ pip install ./some_module_proj
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
-$ pip install ./some_module_proj
-
-
 Processing ./some_module_proj
 Installing collected packages: some-module
 Running setup.py install for some-module ... done
@@ -69,8 +70,11 @@ Successfully installed some-module-0.0.0
 
 And we can now use some_module from Python (or from a test):
 
+##### Step 2
+
+##### $ python
+
 ```
-$ python
 Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 26 2018, 23:26:24)
 [Clang 6.0 (clang-600.0.57)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
@@ -89,8 +93,11 @@ file for a package.
 Let’s make this code a package by adding an __init__.py and putting the __init__.py
 file and module in a directory with a package name:
 
+##### Step 3
+
+##### $ tree some_package_proj/
+
 ```
-$ tree some_package_proj/
 some_package_proj/
 ├── setup.py
 └── src
@@ -149,11 +156,12 @@ Instead of using py_modules, we specify packages.
 
 This is now installable:
 
+##### Step 4
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
+##### $ pip install ./some_package_proj/
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging
-$ pip install ./some_package_proj/
-
-
 Processing ./some_package_proj
 Installing collected packages: some-package
 Running setup.py install for some-package ... done
@@ -165,8 +173,11 @@ Successfully installed some-package-0.0.0
 
 and usable:
 
+##### Step 5
+
+##### $ python
+
 ```
-$ python
 Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 26 2018, 23:26:24)
 [Clang 6.0 (clang-600.0.57)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
@@ -186,10 +197,13 @@ that possible.
 For personal use, the configuration shown in the previous section is enough
 to create a source distribution and a wheel. Let’s try it:
 
+##### Step 6
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj/
+##### $ pip install wheel
+##### $ python setup.py sdist bdist_wheel
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj/
-$ pip install wheel
-$ python setup.py sdist bdist_wheel
 running sdist
 ...
 warning: sdist: standard file not found:
@@ -200,8 +214,12 @@ warning: check: missing meta-data:
 either (author and author_email)
 or (maintainer and maintainer_email) must be supplied
 running bdist_wheel
-...
-$ ls dist
+```
+##### Step 7
+
+##### $ ls dist
+
+```
 some_package-0.0.0-py3-none-any.whl some_package-0.0.0.tar.gz
 ```
 
@@ -301,10 +319,12 @@ into a CHANGELOG.rst file.
 
 Let’s see if this was enough to remove the warnings:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
-$ python setup.py sdist bdist_wheel
+##### Step 8
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
+##### $ python setup.py sdist bdist_wheel
+
+```
 running sdist
 running build
 ```
@@ -318,7 +338,12 @@ creating build
 creating build/lib
 creating build/lib/some_package
 ...
-$ ls dist
+```
+##### Step 9
+
+##### $ ls dist
+
+```
 some_package-1.0-py3-none-any.whl some_package-1.0.tar.gz
 ```
 
@@ -327,22 +352,25 @@ Yep. No warnings.
 Now, we can put the .whl and/or .tar.gz files in a local shared directory and pip
 install to our heart’s content:
 
+##### Step 10
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
+##### $ mkdir ~/packages/
+##### $ cp dist/some_package-1.0-py3-none-any.whl ~/packages
+##### $ cp dist/some_package-1.0.tar.gz ~/packages
+##### $ pip install --no-index --find-links=~/packages some_package
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/appendices/packaging/some_package_proj_v2
-$ mkdir ~/packages/
-$ cp dist/some_package-1.0-py3-none-any.whl ~/packages
-$ cp dist/some_package-1.0.tar.gz ~/packages
-$ pip install --no-index --find-links=~/packages some_package
-
-
 Collecting some_package
 Installing collected packages: some-package
 Successfully installed some-package-1.0
+```
 
+##### Step 11
 
-$ pip install --no-index --find-links=./dist some_package==1.0
+##### $ pip install --no-index --find-links=./dist some_package==1.0
 
-
+```
 Requirement already satisfied: some_package==1.0 in
 /path/to/venv/lib/python3.6/site-packages
 ```

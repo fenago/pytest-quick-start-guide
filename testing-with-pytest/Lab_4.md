@@ -138,10 +138,12 @@ In the second line of the tmpdir_factory example, the getbasetemp() function ret
 the base directory used for this session. The print statement is in the example
 so you can see where the directory is on your system. Let’s see where it is:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4
-$ pytest -q -s test_tmpdir.py::test_tmpdir_factory
+##### Step 1
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4
+##### $ pytest -q -s test_tmpdir.py::test_tmpdir_factory
+
+```
 base:/private/var/folders/53/zv4j_zc506x2xq25l31qxvxm0000gn\
 /T/pytest-of-okken/pytest-732
 .
@@ -265,17 +267,15 @@ shouldn’t do it in a test subdirectory.
 The options --myopt and --foo <value> were added to the previous code, and the
 help string was modified, as shown here:
 
+##### Step 2
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/pytestconfig
+##### $ pytest --help
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4/pytestconfig
-$ pytest --help
-
-
 usage:pytest[options][file_or_dir][file_or_dir][...]
 ...
 
-```
-
-```
 customoptions:
 --myopt somebooleanoption
 --foo=FOO foo:bar or baz
@@ -298,27 +298,29 @@ def test_option(pytestconfig):
 
 Let’s see how this works:
 
+##### Step 3
+
+##### $ pytest-s -q test_config.py::test_option
+
 ```
-$ pytest-s -q test_config.py::test_option
-
-
 "foo"set to: bar
 "myopt"set to: False
 .
 1 passed in 0.01seconds
+```
 
+##### $ pytest-s -q --myopttest_config.py::test_option
 
-$ pytest-s -q --myopttest_config.py::test_option
-
-
+```
 "foo"set to: bar
 "myopt"set to: True
 .
 1 passed in 0.01seconds
+```
 
-$ pytest-s -q --myopt--foobaz test_config.py::test_option
+##### $ pytest-s -q --myopt--foobaz test_config.py::test_option
 
-
+```
 "foo"set to: baz
 "myopt"set to: True
 .
@@ -393,9 +395,11 @@ the data for these flags is stored using cache.
 Here’s the help text for the --last-failed and --failed-first options, as well as a couple
 of cache options:
 
-```
-$ pytest --help
+##### Step 4
 
+##### $ pytest --help
+
+```
 ...
 --lf, --last-failed rerun only the tests that failed at the last run (or
 all if none failed)
@@ -426,10 +430,12 @@ def test_this_fails():
 Let’s run them using --verbose to see the function names, and --tb=no to hide
 the stack trace:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
-$ pytest --verbose --tb=no test_pass_fail.py
+##### Step 5
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
+##### $ pytest --verbose --tb=no test_pass_fail.py
+
+```
 =================== test session starts ===================
 collected 2 items
 
@@ -442,10 +448,11 @@ test_pass_fail.py::test_this_fails FAILED [100%]
 If you run them again with the --ff or --failed-first flag, the tests that failed previ-
 ously will be run first, followed by the rest of the session:
 
+##### Step 6
+
+##### $ pytest --verbose --tb=no --fftest_pass_fail.py
 
 ```
-$ pytest --verbose --tb=no --fftest_pass_fail.py
-
 =================== test session starts ===================
 collected 2 items
 run-last-failure:rerunprevious1 failurefirst
@@ -458,9 +465,11 @@ test_pass_fail.py::test_this_passes PASSED            [100%]
 
 Or you can use --lf or --last-failed to just run the tests that failed the last time:
 
-```
-venv)$ pytest --verbose --tb=no --lftest_pass_fail.py
+##### Step 7
 
+#### venv) $ pytest --verbose --tb=no --lf test_pass_fail.py
+
+```
 =================== test session starts ===================
 collected 2 items/ 1 deselected
 run-last-failure:rerunprevious1 failure
@@ -506,9 +515,12 @@ def test_a(x, y, expected):
 
 And the output:
 
+##### Step 8
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
+##### $ pytest -q test_few_failures.py
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
-$ pytest -q test_few_failures.py
 .F... [100%]
 
 ========================FAILURES=========================
@@ -533,17 +545,20 @@ is longer and more complicated, and it’s not obvious what’s wrong. Let’s r
 the test again to see the failure again. You can specify the test case on the
 command line:
 
-```
-$ pytest -q "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
-```
+##### Step 9
+
+##### $ pytest -q "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]"
+
 
 If you don’t want to copy/paste or there are multiple failed cases you’d like
 to rerun, --lf is much easier. And if you’re really debugging a test failure,
 another flag that might make things easier is --showlocals, or -l for short:
 
+##### Step 10
+
+##### $ pytest -q --lf -l test_few_failures.py
 
 ```
-$ pytest -q --lf -l test_few_failures.py
 run-last-failure:rerunprevious1 failure
 F [100%]
 
@@ -575,18 +590,22 @@ To pull off the trick of remembering what test failed last time, pytest stores
 test failure information from the last test session. You can see the stored
 information with --cache-show:
 
-```
-$ pytest --cache-show
+##### Step 11
 
+##### $ pytest --cache-show
+
+```
 ===================== test session starts ======================
 -------------------------cachevalues-------------------------
 cache/lastfailedcontains:
 {'test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]':True}
 
 ================= no tests ran in 0.00 seconds =================
+```
 
-$ pytest --cache-show
+##### $ pytest --cache-show
 
+```
 =================== test session starts ===================
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
@@ -598,8 +617,11 @@ cache/lastfailedcontains:
 
 Or you can look in the cache dir:
 
+##### Step 12
+
+##### $ cat .pytest_cache/v/cache/lastfailed
+
 ```
-$ cat .pytest_cache/v/cache/lastfailed**
 {
 "test_few_failures.py::test_a[1e+25-1e+23-1.1e+25]":true
 }
@@ -668,14 +690,20 @@ random and parametrization to easily generate some tests that sleep for a
 random amount of time, all shorter than a second. Let’s see it run a couple
 of times:
 
+##### Step 13
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
+##### $ pytest -q --tb=linetest_slower.py
+
 ```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cache
-$ pytest -q --tb=linetest_slower.py
-
-
 ..... [100%]
 5 passed in 1.40seconds
-$ pytest -q --tb=linetest_slower.py
+```
+
+##### Step 14
+##### $ pytest -q --tb=linetest_slower.py
+
+```
 ..E.E.. [100%]
 
 =========================ERRORS==========================
@@ -690,9 +718,11 @@ assert0.28841<= (0.086302* 2)
 
 Well, that was fun. Let’s see what’s in the cache:
 
-```
-$ pytest -q --cache-show
+##### Step 15
 
+##### $ pytest -q --cache-show
+
+```
 ----------------------cachevalues-----------------------
 cache/lastfailedcontains:
 {'test_slower.py::test_slow_stuff[1]':True,
@@ -767,20 +797,25 @@ end of the test session, the collected current dictionary is saved in the cache.
 
 After running it a couple of times, let’s look at the saved cache:
 
-```
-$ pytest -q --cache-cleartest_slower_2.py
+##### Step 16
 
+##### $ pytest -q --cache-cleartest_slower_2.py
+
+```
 ..... [100%]
 5 passed in 2.27seconds
+```
 
+##### $ pytest -q --tb=no test_slower_2.py
 
-$ pytest -q --tb=no test_slower_2.py
-
+```
 .E.E...E [100%]
 5 passed,3 error in 3.65 seconds
+```
 
-$ pytest -q --cache-show
+##### $ pytest -q --cache-show
 
+```
 ---------------------- cache values -----------------------
 cache/lastfailedcontains:
 {'test_slower_2.py::test_slow_stuff[0]':True,
@@ -881,17 +916,21 @@ def test_capsys_disabled (capsys):
 
 Now, 'alwaysprint this' will always be output:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4/cap
-$ pytest -q test_capsys.py::test_capsys_disabled
+##### Step  17
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/cap
+##### $ pytest -q test_capsys.py::test_capsys_disabled
+
+```
 alwaysprintthis
 
 . [100%]
 1 passed in 0.02seconds
+```
 
-$ pytest -q -s test_capsys.py::test_capsys_disabled**
+##### $ pytest -q -s test_capsys.py::test_capsys_disabled**
 
+```
 alwaysprintthis
 normalprint,usuallycaptured
 .
@@ -1163,10 +1202,14 @@ convention. The problem is that pytest treats each docstring with code as a
 different test. The import in the top docstring will allow the first part to pass,
 but the code in the docstrings of the functions will fail:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/1
-$ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+pytest usually captures the output 16
 
+##### Step 18
+
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/1
+##### $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+
+```
 =================== test session starts ===================
 collected 3 items
 
@@ -1242,10 +1285,12 @@ def divide(a, b):
 
 This definitely fixes the problem:
 
-```
-$ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/2
-$ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+##### Step 19
 
+##### $ cd /home/jovyan/work/testing-with-pytest/code/ch4/dt/2
+##### $ pytest -v --doctest-modules--tb=shortunnecessary_math.py
+
+```
 =================== test session starts ===================
 collected 3 items
 
@@ -1362,6 +1407,3 @@ In this lab, you looked at many of pytest’s builtin fixtures. Next, you’ll
 take a closer look at plugins. The nuance of writing large plugins could be a
 book in itself; however, small custom plugins are a regular part of the pytest
 ecosystem.
-
-
-
